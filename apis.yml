@@ -1,0 +1,124 @@
+name: Oracle Enterprise Manager
+description: Oracle Enterprise Manager (OEM) provides a comprehensive management platform for managing Oracle IT infrastructure and applications. The APIs enable programmatic access to monitoring, administration, and automation capabilities.
+image: https://www.oracle.com/a/ocom/img/oracle-enterprise-manager.jpg
+url: https://www.oracle.com/enterprise-manager/
+created: '2024'
+modified: '2024'
+specificationVersion: '0.18'
+tags:
+- Enterprise Management
+- Monitoring
+- Oracle
+- Database Management
+- Infrastructure Management
+- Cloud Management
+apis:
+- name: Oracle Enterprise Manager Cloud Control REST API
+  description: REST API for Oracle Enterprise Manager Cloud Control providing access to monitoring, configuration, and administration capabilities
+  image: https://www.oracle.com/a/ocom/img/oracle-enterprise-manager.jpg
+  humanURL: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcli/
+  baseURL: https://<em-host>:<port>/em/websvcs/restful/emws
+  tags:
+  - REST API
+  - Cloud Control
+  - Monitoring
+  - Administration
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcli/
+  - type: OpenAPI
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/
+  - type: Authentication
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcli/emcli-security.html
+  contact:
+  - FN: Oracle Support
+    email: support@oracle.com
+    url: https://www.oracle.com/support/
+- name: Enterprise Manager Command Line Interface (EM CLI)
+  description: Command-line interface providing scriptable access to Enterprise Manager functionality
+  image: https://www.oracle.com/a/ocom/img/oracle-enterprise-manager.jpg
+  humanURL: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcli/
+  baseURL: https://<em-host>:<port>/em
+  tags:
+  - CLI
+  - Command Line
+  - Automation
+  - Scripting
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcli/
+  - type: Getting Started
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcli/getting-started-em-cli.html
+  - type: Command Reference
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcli/em-cli-verbs.html
+- name: Enterprise Manager Job System API
+  description: API for creating, managing, and monitoring Enterprise Manager jobs and tasks
+  image: https://www.oracle.com/a/ocom/img/oracle-enterprise-manager.jpg
+  humanURL: https://docs.oracle.com/en/enterprise-manager/
+  baseURL: https://<em-host>:<port>/em/websvcs/restful/emws/job
+  tags:
+  - Jobs
+  - Automation
+  - Scheduling
+  - Task Management
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/
+  - type: API Reference
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcli/
+- name: Enterprise Manager Metric and Monitoring API
+  description: API for accessing performance metrics, monitoring data, and alerting information
+  image: https://www.oracle.com/a/ocom/img/oracle-enterprise-manager.jpg
+  humanURL: https://docs.oracle.com/en/enterprise-manager/
+  baseURL: https://<em-host>:<port>/em/websvcs/restful/emws/metric
+  tags:
+  - Metrics
+  - Monitoring
+  - Performance
+  - Alerts
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/
+- name: Enterprise Manager Target Management API
+  description: API for managing monitored targets including discovery, configuration, and lifecycle operations
+  image: https://www.oracle.com/a/ocom/img/oracle-enterprise-manager.jpg
+  humanURL: https://docs.oracle.com/en/enterprise-manager/
+  baseURL: https://<em-host>:<port>/em/websvcs/restful/emws/target
+  tags:
+  - Target Management
+  - Configuration
+  - Discovery
+  - Lifecycle
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/
+maintainers:
+- FN: Oracle Corporation
+  email: enterprise-manager_us@oracle.com
+  url: https://www.oracle.com/enterprise-manager/
+common:
+- type: Portal
+  url: https://www.oracle.com/enterprise-manager/
+- type: Documentation
+  url: https://docs.oracle.com/en/enterprise-manager/
+- type: Downloads
+  url: https://www.oracle.com/enterprise-manager/downloads/
+- type: Support
+  url: https://www.oracle.com/support/
+- type: Community
+  url: https://community.oracle.com/customerconnect/categories/enterprise-manager
+- type: Pricing
+  url: https://www.oracle.com/enterprise-manager/pricing.html
+- type: Blog
+  url: https://blogs.oracle.com/oem/
+- type: Training
+  url: https://education.oracle.com/enterprise-manager
+- type: Terms of Service
+  url: https://www.oracle.com/legal/terms.html
+- type: Privacy Policy
+  url: https://www.oracle.com/legal/privacy/
+include:
+- name: Oracle Cloud Infrastructure APIs
+  url: https://docs.oracle.com/en-us/iaas/api/
+- name: Oracle Database APIs
+  url: https://docs.oracle.com/en/database/
