@@ -1,0 +1,270 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://oracle.com/schemas/enterprise-manager/target.json",
+  "title": "Oracle Enterprise Manager Target",
+  "description": "Schema for a monitored target in Oracle Enterprise Manager Cloud Control. A target represents any managed entity such as an Oracle Database, host server, middleware instance, application, or composite system monitored through the Enterprise Manager platform.",
+  "type": "object",
+  "required": [
+    "targetName",
+    "targetType"
+  ],
+  "properties": {
+    "targetId": {
+      "type": "string",
+      "description": "Unique identifier assigned by Enterprise Manager when the target is registered."
+    },
+    "targetName": {
+      "type": "string",
+      "description": "Display name of the target. Must be unique within the combination of target name and target type.",
+      "maxLength": 256
+    },
+    "targetType": {
+      "type": "string",
+      "description": "The type of the target, defining its monitoring template, available metrics, and configuration properties.",
+      "examples": [
+        "oracle_database",
+        "host",
+        "weblogic_j2eeserver",
+        "oracle_pdb",
+        "rac_database",
+        "oracle_listener",
+        "oracle_emd",
+        "oracle_oms",
+        "j2ee_application",
+        "oracle_ias",
+        "oracle_apache",
+        "osm_instance",
+        "has",
+        "oracle_home"
+      ]
+    },
+    "targetDisplayType": {
+      "type": "string",
+      "description": "Human-readable display name for the target type.",
+      "examples": [
+        "Oracle Database",
+        "Host",
+        "Oracle WebLogic Server",
+        "Oracle Pluggable Database",
+        "Cluster Database",
+        "Oracle Listener",
+        "Oracle Management Agent",
+        "Oracle Management Service"
+      ]
+    },
+    "hostName": {
+      "type": "string",
+      "description": "Fully qualified hostname or IP address where the target resides.",
+      "maxLength": 256
+    },
+    "lifecycleStatus": {
+      "type": "string",
+      "description": "Current lifecycle management status of the target within Enterprise Manager.",
+      "enum": [
+        "MONITORED",
+        "BLACKOUT",
+        "PENDING",
+        "DELETED"
+      ]
+    },
+    "availabilityStatus": {
+      "type": "string",
+      "description": "Current availability status as reported by the monitoring agent. Indicates whether the target is reachable and operational.",
+      "enum": [
+        "UP",
+        "DOWN",
+        "UNKNOWN",
+        "UNREACHABLE",
+        "BLACKOUT",
+        "NOT_MONITORED",
+        "ERROR",
+        "AGENT_UNREACHABLE",
+        "PENDING"
+      ]
+    },
+    "agentUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the Oracle Management Agent responsible for monitoring this target."
+    },
+    "oracleHome": {
+      "type": "string",
+      "description": "Oracle home directory path on the target host. Applicable to Oracle software targets such as databases and middleware.",
+      "examples": [
+        "/u01/app/oracle/product/19.0.0/dbhome_1",
+        "/u01/app/oracle/middleware"
+      ]
+    },
+    "machineName": {
+      "type": "string",
+      "description": "Machine name where the target is deployed, which may differ from the hostname."
+    },
+    "installLocation": {
+      "type": "string",
+      "description": "Installation directory path for the target software."
+    },
+    "timezone": {
+      "type": "string",
+      "description": "Time zone of the target in standard timezone identifier format.",
+      "examples": [
+        "America/New_York",
+        "UTC",
+        "Europe/London"
+      ]
+    },
+    "owner": {
+      "type": "string",
+      "description": "Enterprise Manager username that owns this target and is responsible for its management."
+    },
+    "timeCreated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the target was first added to Enterprise Manager."
+    },
+    "timeUpdated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the most recent target configuration change."
+    },
+    "properties": {
+      "type": "object",
+      "description": "Target-type-specific configuration and instance properties. The available properties vary based on the target type. Common examples include SID, port, service name, and version.",
+      "properties": {
+        "SID": {
+          "type": "string",
+          "description": "Oracle System Identifier for database targets."
+        },
+        "Port": {
+          "type": "string",
+          "description": "Listener or connection port number."
+        },
+        "ServiceName": {
+          "type": "string",
+          "description": "Oracle database service name."
+        },
+        "Version": {
+          "type": "string",
+          "description": "Software version of the target.",
+          "examples": [
+            "19.0.0.0.0",
+            "21.0.0.0.0",
+            "14.1.1.0.0"
+          ]
+        },
+        "Protocol": {
+          "type": "string",
+          "description": "Connection protocol used for monitoring.",
+          "enum": [
+            "TCP",
+            "TCPS",
+            "HTTP",
+            "HTTPS"
+          ]
+        },
+        "OracleHome": {
+          "type": "string",
+          "description": "Oracle home path as a target instance property."
+        },
+        "MachineName": {
+          "type": "string",
+          "description": "Machine name as a target instance property."
+        },
+        "RACOption": {
+          "type": "string",
+          "description": "Whether RAC is enabled for a database target.",
+          "enum": [
+            "YES",
+            "NO"
+          ]
+        },
+        "RoleSeparated": {
+          "type": "string",
+          "description": "Whether the Oracle installation uses role separation.",
+          "enum": [
+            "YES",
+            "NO"
+          ]
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "globalProperties": {
+      "type": "object",
+      "description": "Global target properties used for classification, grouping, and organizational metadata.",
+      "properties": {
+        "orcl_gtp_lifecycle_status": {
+          "type": "string",
+          "description": "Lifecycle stage of the target.",
+          "examples": [
+            "Production",
+            "Development",
+            "Staging",
+            "Test"
+          ]
+        },
+        "orcl_gtp_line_of_bus": {
+          "type": "string",
+          "description": "Line of business associated with the target."
+        },
+        "orcl_gtp_cost_center": {
+          "type": "string",
+          "description": "Cost center associated with the target."
+        },
+        "orcl_gtp_department": {
+          "type": "string",
+          "description": "Department responsible for the target."
+        },
+        "orcl_gtp_location": {
+          "type": "string",
+          "description": "Physical or logical location of the target."
+        },
+        "orcl_gtp_contact": {
+          "type": "string",
+          "description": "Contact person for the target."
+        },
+        "orcl_gtp_comment": {
+          "type": "string",
+          "description": "Free-form comment about the target."
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "associations": {
+      "type": "array",
+      "description": "List of associations linking this target to other targets, such as cluster membership or composite relationships.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "associationType": {
+            "type": "string",
+            "description": "Type of association.",
+            "examples": [
+              "contains",
+              "hosted_by",
+              "runs_on",
+              "member_of",
+              "monitored_by"
+            ]
+          },
+          "targetName": {
+            "type": "string",
+            "description": "Name of the associated target."
+          },
+          "targetType": {
+            "type": "string",
+            "description": "Type of the associated target."
+          }
+        }
+      }
+    },
+    "canonicalLink": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical REST API URI for accessing this target resource."
+    }
+  }
+}

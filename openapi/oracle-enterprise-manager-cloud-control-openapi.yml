@@ -1,0 +1,2044 @@
+openapi: 3.1.0
+info:
+  title: Oracle Enterprise Manager Cloud Control REST API
+  description: >-
+    REST API for Oracle Enterprise Manager Cloud Control providing programmatic
+    access to monitoring, configuration, and administration capabilities. This
+    specification covers core resources including targets, metrics, incidents,
+    and blackouts for managing Oracle IT infrastructure and applications.
+  version: 13.5.0.23
+  contact:
+    name: Oracle Support
+    url: https://www.oracle.com/support/
+    email: support@oracle.com
+  license:
+    name: Oracle Technology Network License
+    url: https://www.oracle.com/legal/terms.html
+  x-logo:
+    url: https://www.oracle.com/a/ocom/img/oracle-enterprise-manager.jpg
+externalDocs:
+  description: Oracle Enterprise Manager Cloud Control REST API Documentation
+  url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/APIOverview.html
+servers:
+  - url: https://{emHost}:{emPort}/em/api
+    description: Enterprise Manager Cloud Control server
+    variables:
+      emHost:
+        default: localhost
+        description: Enterprise Manager OMS hostname
+      emPort:
+        default: '7803'
+        description: Enterprise Manager HTTPS console port
+security:
+  - basicAuth: []
+tags:
+  - name: Targets
+    description: >-
+      Manage monitored targets in Enterprise Manager including discovery,
+      configuration, lifecycle operations, and property management. Targets
+      represent any managed entity such as databases, hosts, middleware, and
+      applications.
+    externalDocs:
+      url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
+  - name: Metrics
+    description: >-
+      Query metric data and metadata for monitored targets. Access time-series
+      performance data, latest metric values, and metric group definitions.
+    externalDocs:
+      url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
+  - name: Incidents
+    description: >-
+      Search, view, and manage incidents and events. Incidents represent
+      actionable issues detected by Enterprise Manager monitoring, with
+      operations for clearing, suppressing, and annotating.
+    externalDocs:
+      url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
+  - name: Events
+    description: >-
+      Access individual event details. Events are the underlying occurrences
+      that are correlated into incidents.
+    externalDocs:
+      url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
+  - name: Blackouts
+    description: >-
+      Manage blackout windows for maintenance activities. Blackouts suppress
+      monitoring and alerting during scheduled maintenance periods, preventing
+      false alerts.
+    externalDocs:
+      url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
+  - name: Global Target Properties
+    description: >-
+      Manage global properties that can be applied across targets for
+      classification, grouping, and reporting purposes.
+    externalDocs:
+      url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
+paths:
+  /targets:
+    get:
+      operationId: listTargets
+      summary: List targets
+      description: >-
+        Returns a list of monitored targets in Enterprise Manager. Supports
+        filtering by target name, target type, and lifecycle status. Results
+        are paginated.
+      tags:
+        - Targets
+      parameters:
+        - $ref: '#/components/parameters/targetNameQuery'
+        - $ref: '#/components/parameters/targetTypeQuery'
+        - $ref: '#/components/parameters/lifecycleStatusQuery'
+        - $ref: '#/components/parameters/limitQuery'
+        - $ref: '#/components/parameters/offsetQuery'
+      responses:
+        '200':
+          description: A paginated list of targets.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TargetCollection'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: createTarget
+      summary: Create a target
+      description: >-
+        Creates a new monitored target in Enterprise Manager. Requires target
+        name, target type, and host information. Additional properties can be
+        specified depending on the target type.
+      tags:
+        - Targets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TargetCreateRequest'
+      responses:
+        '201':
+          description: Target created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Target'
+          headers:
+            Location:
+              description: URI of the newly created target resource.
+              schema:
+                type: string
+                format: uri
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /targets/{targetId}:
+    get:
+      operationId: getTarget
+      summary: Get target details
+      description: >-
+        Returns detailed information about a specific target including its
+        configuration properties, monitoring status, and associated metadata.
+      tags:
+        - Targets
+      parameters:
+        - $ref: '#/components/parameters/targetIdPath'
+      responses:
+        '200':
+          description: Target details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Target'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      operationId: updateTarget
+      summary: Update a target
+      description: >-
+        Updates properties of an existing target. Only the specified fields
+        are modified; unspecified fields remain unchanged.
+      tags:
+        - Targets
+      parameters:
+        - $ref: '#/components/parameters/targetIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TargetUpdateRequest'
+      responses:
+        '200':
+          description: Target updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Target'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      operationId: deleteTarget
+      summary: Delete a target
+      description: >-
+        Removes a monitored target from Enterprise Manager. This stops all
+        monitoring, removes collected data associations, and deletes the
+        target configuration.
+      tags:
+        - Targets
+      parameters:
+        - $ref: '#/components/parameters/targetIdPath'
+      responses:
+        '204':
+          description: Target deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /targets/{targetId}/properties:
+    get:
+      operationId: getTargetProperties
+      summary: Get target properties
+      description: >-
+        Returns the configuration and monitoring properties of a specific
+        target, including instance properties, dynamic properties, and any
+        custom properties defined for the target type.
+      tags:
+        - Targets
+      parameters:
+        - $ref: '#/components/parameters/targetIdPath'
+      responses:
+        '200':
+          description: Target properties.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TargetPropertyCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /targets/{targetId}/actions/bulkUpdateProperties:
+    post:
+      operationId: bulkUpdateTargetProperties
+      summary: Bulk update target properties
+      description: >-
+        Updates multiple properties of a target in a single request. Useful
+        for batch configuration changes.
+      tags:
+        - Targets
+      parameters:
+        - $ref: '#/components/parameters/targetIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkPropertyUpdateRequest'
+      responses:
+        '200':
+          description: Properties updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TargetPropertyCollection'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /targets/{targetId}/metricGroups:
+    get:
+      operationId: listMetricGroups
+      summary: List metric groups for a target
+      description: >-
+        Returns a list of all metric groups available for a specific target.
+        Metric groups organize related metrics and define the collection
+        schedule and columns.
+      tags:
+        - Metrics
+      parameters:
+        - $ref: '#/components/parameters/targetIdPath'
+      responses:
+        '200':
+          description: A list of metric groups.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricGroupCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /targets/{targetId}/metricGroups/{metricGroupName}:
+    get:
+      operationId: getMetricGroup
+      summary: Get metric group details
+      description: >-
+        Returns detailed information about a specific metric group for a target,
+        including metric column definitions, collection frequency, and thresholds.
+      tags:
+        - Metrics
+      parameters:
+        - $ref: '#/components/parameters/targetIdPath'
+        - $ref: '#/components/parameters/metricGroupNamePath'
+      responses:
+        '200':
+          description: Metric group details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricGroup'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /targets/{targetId}/metricGroups/{metricGroupName}/latestData:
+    get:
+      operationId: getLatestMetricData
+      summary: Get latest metric data
+      description: >-
+        Returns the most recently collected metric data for a specific metric
+        group on a target. Provides the latest snapshot of performance values.
+      tags:
+        - Metrics
+      parameters:
+        - $ref: '#/components/parameters/targetIdPath'
+        - $ref: '#/components/parameters/metricGroupNamePath'
+      responses:
+        '200':
+          description: Latest metric data for the group.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricDataCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /metricTimeSeries:
+    get:
+      operationId: getMetricTimeSeries
+      summary: Get metric time series data
+      description: >-
+        Returns numeric metric data points over a specified time range for
+        one or more targets. Supports filtering by target, metric group,
+        metric column, and time range.
+      tags:
+        - Metrics
+      parameters:
+        - name: targetNames
+          in: query
+          description: >-
+            Comma-separated list of target names to retrieve metric data for.
+          schema:
+            type: string
+        - name: targetTypes
+          in: query
+          description: >-
+            Comma-separated list of target types to filter by.
+          schema:
+            type: string
+        - name: metricGroups
+          in: query
+          description: >-
+            Comma-separated list of metric group names.
+          schema:
+            type: string
+        - name: metricColumns
+          in: query
+          description: >-
+            Comma-separated list of metric column names.
+          schema:
+            type: string
+        - name: startTime
+          in: query
+          description: >-
+            Start of the time range in ISO 8601 format.
+          schema:
+            type: string
+            format: date-time
+        - name: endTime
+          in: query
+          description: >-
+            End of the time range in ISO 8601 format.
+          schema:
+            type: string
+            format: date-time
+        - $ref: '#/components/parameters/limitQuery'
+      responses:
+        '200':
+          description: Metric time series data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricTimeSeriesCollection'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /incidents:
+    get:
+      operationId: listIncidents
+      summary: List incidents
+      description: >-
+        Returns a list of incidents in Enterprise Manager. Supports filtering
+        by severity, priority, status, target, and time range. Incidents
+        represent actionable issues detected by monitoring rules.
+      tags:
+        - Incidents
+      parameters:
+        - name: severity
+          in: query
+          description: Filter by incident severity level.
+          schema:
+            type: string
+            enum:
+              - FATAL
+              - CRITICAL
+              - WARNING
+              - ADVISORY
+              - INFORMATIONAL
+        - name: priority
+          in: query
+          description: Filter by incident priority.
+          schema:
+            type: string
+            enum:
+              - URGENT
+              - HIGH
+              - MEDIUM
+              - LOW
+              - NONE
+        - name: status
+          in: query
+          description: Filter by incident status.
+          schema:
+            type: string
+            enum:
+              - NEW
+              - WORK_IN_PROGRESS
+              - RESOLVED
+              - CLOSED
+              - SUPPRESSED
+        - name: targetName
+          in: query
+          description: Filter incidents by target name.
+          schema:
+            type: string
+        - name: targetType
+          in: query
+          description: Filter incidents by target type.
+          schema:
+            type: string
+        - name: sinceTime
+          in: query
+          description: >-
+            Return incidents created after this time in ISO 8601 format.
+          schema:
+            type: string
+            format: date-time
+        - $ref: '#/components/parameters/limitQuery'
+        - $ref: '#/components/parameters/offsetQuery'
+      responses:
+        '200':
+          description: A paginated list of incidents.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentCollection'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /incidents/{incidentId}:
+    get:
+      operationId: getIncident
+      summary: Get incident details
+      description: >-
+        Returns detailed information about a specific incident including
+        severity, priority, status, associated target, timeline, and
+        resolution information.
+      tags:
+        - Incidents
+      parameters:
+        - $ref: '#/components/parameters/incidentIdPath'
+      responses:
+        '200':
+          description: Incident details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Incident'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /incidents/{incidentId}/actions/clear:
+    post:
+      operationId: clearIncident
+      summary: Clear an incident
+      description: >-
+        Clears an incident, indicating that the issue has been resolved. The
+        incident status is set to CLOSED.
+      tags:
+        - Incidents
+      parameters:
+        - $ref: '#/components/parameters/incidentIdPath'
+      responses:
+        '200':
+          description: Incident cleared successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Incident'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /incidents/{incidentId}/actions/suppress:
+    post:
+      operationId: suppressIncident
+      summary: Suppress an incident
+      description: >-
+        Suppresses an incident so it does not appear in active incident views
+        or trigger notifications. Useful for known issues under investigation.
+      tags:
+        - Incidents
+      parameters:
+        - $ref: '#/components/parameters/incidentIdPath'
+      responses:
+        '200':
+          description: Incident suppressed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Incident'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /incidents/{incidentId}/actions/unsuppress:
+    post:
+      operationId: unsuppressIncident
+      summary: Unsuppress an incident
+      description: >-
+        Reverses the suppression of an incident, restoring it to active
+        visibility and notification eligibility.
+      tags:
+        - Incidents
+      parameters:
+        - $ref: '#/components/parameters/incidentIdPath'
+      responses:
+        '200':
+          description: Incident unsuppressed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Incident'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /incidents/{incidentId}/events:
+    get:
+      operationId: getIncidentEvents
+      summary: Get incident events
+      description: >-
+        Returns the list of events associated with an incident. Events are
+        the underlying monitoring detections that were correlated to form
+        the incident.
+      tags:
+        - Incidents
+      parameters:
+        - $ref: '#/components/parameters/incidentIdPath'
+      responses:
+        '200':
+          description: A list of events for the incident.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /incidents/{incidentId}/annotations:
+    get:
+      operationId: getIncidentAnnotations
+      summary: Get incident annotations
+      description: >-
+        Returns annotations (comments and notes) associated with an incident.
+        Annotations provide a record of investigation and remediation steps.
+      tags:
+        - Incidents
+      parameters:
+        - $ref: '#/components/parameters/incidentIdPath'
+      responses:
+        '200':
+          description: A list of annotations for the incident.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnotationCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /events/{eventId}:
+    get:
+      operationId: getEvent
+      summary: Get event details
+      description: >-
+        Returns detailed information about a specific event, including its
+        type, severity, message, target association, and timestamps.
+      tags:
+        - Events
+      parameters:
+        - $ref: '#/components/parameters/eventIdPath'
+      responses:
+        '200':
+          description: Event details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /blackouts:
+    get:
+      operationId: listBlackouts
+      summary: List blackouts
+      description: >-
+        Returns a list of blackouts (maintenance windows) configured in
+        Enterprise Manager. Supports filtering by status and associated target.
+      tags:
+        - Blackouts
+      parameters:
+        - name: status
+          in: query
+          description: Filter by blackout status.
+          schema:
+            type: string
+            enum:
+              - SCHEDULED
+              - STARTED
+              - STOPPED
+              - ENDED
+              - MODIFY_PENDING
+        - name: targetName
+          in: query
+          description: Filter by associated target name.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/limitQuery'
+        - $ref: '#/components/parameters/offsetQuery'
+      responses:
+        '200':
+          description: A paginated list of blackouts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlackoutCollection'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: createBlackout
+      summary: Create a blackout
+      description: >-
+        Creates a new blackout (maintenance window) for one or more targets.
+        During a blackout, monitoring data is still collected but alerts and
+        notifications are suppressed.
+      tags:
+        - Blackouts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlackoutCreateRequest'
+      responses:
+        '201':
+          description: Blackout created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Blackout'
+          headers:
+            Location:
+              description: URI of the newly created blackout resource.
+              schema:
+                type: string
+                format: uri
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /blackouts/{blackoutId}:
+    get:
+      operationId: getBlackout
+      summary: Get blackout details
+      description: >-
+        Returns detailed information about a specific blackout including its
+        schedule, affected targets, status, and reason.
+      tags:
+        - Blackouts
+      parameters:
+        - $ref: '#/components/parameters/blackoutIdPath'
+      responses:
+        '200':
+          description: Blackout details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Blackout'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      operationId: editBlackout
+      summary: Edit a blackout
+      description: >-
+        Modifies an existing blackout. Can update the schedule, targets,
+        reason, or other properties. Only scheduled or started blackouts
+        can be edited.
+      tags:
+        - Blackouts
+      parameters:
+        - $ref: '#/components/parameters/blackoutIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlackoutUpdateRequest'
+      responses:
+        '200':
+          description: Blackout updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Blackout'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      operationId: deleteBlackout
+      summary: Delete a blackout
+      description: >-
+        Deletes a blackout. Only scheduled (not yet started) blackouts can
+        be deleted. Use the stop action to end an active blackout.
+      tags:
+        - Blackouts
+      parameters:
+        - $ref: '#/components/parameters/blackoutIdPath'
+      responses:
+        '204':
+          description: Blackout deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /blackouts/{blackoutId}/actions/stop:
+    post:
+      operationId: stopBlackout
+      summary: Stop a blackout
+      description: >-
+        Stops an active blackout before its scheduled end time. Monitoring
+        and alerting resume immediately for all affected targets.
+      tags:
+        - Blackouts
+      parameters:
+        - $ref: '#/components/parameters/blackoutIdPath'
+      responses:
+        '200':
+          description: Blackout stopped successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Blackout'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Blackout is not in a stoppable state.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /blackouts/{blackoutId}/targets:
+    get:
+      operationId: getBlackoutTargets
+      summary: Get blackout targets
+      description: >-
+        Returns the list of targets affected by a specific blackout, including
+        both directly specified targets and targets included via group membership.
+      tags:
+        - Blackouts
+      parameters:
+        - $ref: '#/components/parameters/blackoutIdPath'
+      responses:
+        '200':
+          description: A list of targets in the blackout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlackoutTargetCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /blackouts/dashboard:
+    get:
+      operationId: getBlackoutDashboard
+      summary: Get blackout statistics
+      description: >-
+        Returns summary statistics about blackouts including counts by status,
+        upcoming blackouts, and recently ended blackouts.
+      tags:
+        - Blackouts
+      responses:
+        '200':
+          description: Blackout dashboard statistics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlackoutDashboard'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /blackouts/reasons:
+    get:
+      operationId: listBlackoutReasons
+      summary: List blackout reasons
+      description: >-
+        Returns a list of predefined blackout reasons that can be associated
+        with blackouts for categorization and reporting.
+      tags:
+        - Blackouts
+      responses:
+        '200':
+          description: A list of blackout reasons.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlackoutReasonCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: createBlackoutReason
+      summary: Create a blackout reason
+      description: >-
+        Creates a new blackout reason that can be used when creating or editing
+        blackouts.
+      tags:
+        - Blackouts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlackoutReasonCreateRequest'
+      responses:
+        '201':
+          description: Blackout reason created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlackoutReason'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /blackouts/reasons/{reasonId}:
+    delete:
+      operationId: deleteBlackoutReason
+      summary: Delete a blackout reason
+      description: Deletes a blackout reason by its identifier.
+      tags:
+        - Blackouts
+      parameters:
+        - name: reasonId
+          in: path
+          required: true
+          description: Unique identifier of the blackout reason.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Blackout reason deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /globalTargetProperties:
+    get:
+      operationId: listGlobalTargetProperties
+      summary: List global target properties
+      description: >-
+        Returns a list of global target properties that are defined for
+        classifying and organizing targets.
+      tags:
+        - Global Target Properties
+      responses:
+        '200':
+          description: A list of global target properties.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalTargetPropertyCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: createGlobalTargetProperty
+      summary: Create a global target property
+      description: >-
+        Creates a new global target property definition. Global properties
+        provide a way to classify targets with custom metadata.
+      tags:
+        - Global Target Properties
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalTargetPropertyCreateRequest'
+      responses:
+        '201':
+          description: Global target property created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalTargetProperty'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /globalTargetProperties/{globalTargetPropertyId}:
+    get:
+      operationId: getGlobalTargetProperty
+      summary: Get global target property details
+      description: Returns details of a specific global target property.
+      tags:
+        - Global Target Properties
+      parameters:
+        - name: globalTargetPropertyId
+          in: path
+          required: true
+          description: Unique identifier of the global target property.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Global target property details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalTargetProperty'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      operationId: modifyGlobalTargetProperty
+      summary: Modify a global target property
+      description: Updates a global target property definition.
+      tags:
+        - Global Target Properties
+      parameters:
+        - name: globalTargetPropertyId
+          in: path
+          required: true
+          description: Unique identifier of the global target property.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalTargetPropertyUpdateRequest'
+      responses:
+        '200':
+          description: Global target property updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalTargetProperty'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      operationId: deleteGlobalTargetProperty
+      summary: Delete a global target property
+      description: Deletes a global target property definition.
+      tags:
+        - Global Target Properties
+      parameters:
+        - name: globalTargetPropertyId
+          in: path
+          required: true
+          description: Unique identifier of the global target property.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Global target property deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /globalTargetProperties/{globalTargetPropertyId}/validValues:
+    get:
+      operationId: getGlobalTargetPropertyValidValues
+      summary: Get valid values for a global target property
+      description: >-
+        Returns the list of valid values defined for a global target property,
+        if the property has a constrained value set.
+      tags:
+        - Global Target Properties
+      parameters:
+        - name: globalTargetPropertyId
+          in: path
+          required: true
+          description: Unique identifier of the global target property.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of valid values.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        HTTP Basic Authentication using Enterprise Manager administrator
+        credentials. All API requests must include valid credentials.
+  parameters:
+    targetIdPath:
+      name: targetId
+      in: path
+      required: true
+      description: Unique identifier of the target.
+      schema:
+        type: string
+    targetNameQuery:
+      name: targetName
+      in: query
+      description: Filter targets by name. Supports partial matching.
+      schema:
+        type: string
+    targetTypeQuery:
+      name: targetType
+      in: query
+      description: >-
+        Filter targets by type (e.g., oracle_database, host, weblogic_j2eeserver).
+      schema:
+        type: string
+    lifecycleStatusQuery:
+      name: lifecycleStatus
+      in: query
+      description: Filter targets by lifecycle status.
+      schema:
+        type: string
+        enum:
+          - MONITORED
+          - BLACKOUT
+          - PENDING
+          - DELETED
+    limitQuery:
+      name: limit
+      in: query
+      description: Maximum number of items to return per page.
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 1000
+    offsetQuery:
+      name: offset
+      in: query
+      description: Number of items to skip for pagination.
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    incidentIdPath:
+      name: incidentId
+      in: path
+      required: true
+      description: Unique identifier of the incident.
+      schema:
+        type: string
+    eventIdPath:
+      name: eventId
+      in: path
+      required: true
+      description: Unique identifier of the event.
+      schema:
+        type: string
+    blackoutIdPath:
+      name: blackoutId
+      in: path
+      required: true
+      description: Unique identifier of the blackout.
+      schema:
+        type: string
+    metricGroupNamePath:
+      name: metricGroupName
+      in: path
+      required: true
+      description: Name of the metric group.
+      schema:
+        type: string
+  schemas:
+    Target:
+      type: object
+      description: >-
+        Represents a monitored target in Enterprise Manager. A target is any
+        managed entity such as a database, host, middleware instance, or
+        application.
+      properties:
+        targetId:
+          type: string
+          description: Unique identifier of the target.
+        targetName:
+          type: string
+          description: Display name of the target.
+        targetType:
+          type: string
+          description: >-
+            The type of the target, defining its monitoring template and
+            available metrics.
+          examples:
+            - oracle_database
+            - host
+            - weblogic_j2eeserver
+            - oracle_pdb
+            - rac_database
+        targetDisplayType:
+          type: string
+          description: Human-readable target type display name.
+          examples:
+            - Oracle Database
+            - Host
+            - WebLogic Server
+        hostName:
+          type: string
+          description: The hostname where the target resides.
+        lifecycleStatus:
+          type: string
+          description: Current lifecycle status of the target.
+          enum:
+            - MONITORED
+            - BLACKOUT
+            - PENDING
+            - DELETED
+        availabilityStatus:
+          type: string
+          description: Current availability status reported by monitoring.
+          enum:
+            - UP
+            - DOWN
+            - UNKNOWN
+            - UNREACHABLE
+            - BLACKOUT
+            - NOT_MONITORED
+            - ERROR
+            - AGENT_UNREACHABLE
+            - PENDING
+        agentUrl:
+          type: string
+          description: URL of the management agent monitoring this target.
+        oracleHome:
+          type: string
+          description: Oracle home directory path, applicable to Oracle targets.
+        machineName:
+          type: string
+          description: Machine name where the target is deployed.
+        installLocation:
+          type: string
+          description: Installation directory path for the target software.
+        timezone:
+          type: string
+          description: Time zone of the target.
+        owner:
+          type: string
+          description: Enterprise Manager user who owns this target.
+        timeCreated:
+          type: string
+          format: date-time
+          description: Timestamp when the target was added to Enterprise Manager.
+        timeUpdated:
+          type: string
+          format: date-time
+          description: Timestamp of the last target configuration update.
+        properties:
+          type: object
+          description: Additional target-type-specific configuration properties.
+          additionalProperties:
+            type: string
+        canonicalLink:
+          type: string
+          format: uri
+          description: Canonical URI for this target resource.
+    TargetCreateRequest:
+      type: object
+      description: Request body for creating a new target.
+      required:
+        - targetName
+        - targetType
+        - hostName
+      properties:
+        targetName:
+          type: string
+          description: Display name for the target.
+        targetType:
+          type: string
+          description: >-
+            Target type identifier defining the monitoring template.
+          examples:
+            - oracle_database
+            - host
+            - weblogic_j2eeserver
+        hostName:
+          type: string
+          description: The hostname where the target resides.
+        properties:
+          type: object
+          description: >-
+            Target-type-specific properties required for monitoring.
+          additionalProperties:
+            type: string
+        credentials:
+          type: object
+          description: Monitoring credentials for the target.
+          properties:
+            credentialName:
+              type: string
+              description: Name of a named credential to use.
+            credentialType:
+              type: string
+              description: Type of credential.
+    TargetUpdateRequest:
+      type: object
+      description: Request body for updating an existing target.
+      properties:
+        properties:
+          type: object
+          description: Properties to update on the target.
+          additionalProperties:
+            type: string
+    TargetCollection:
+      type: object
+      description: Paginated collection of targets.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Target'
+        totalCount:
+          type: integer
+          description: Total number of targets matching the query.
+        limit:
+          type: integer
+          description: Maximum items per page.
+        offset:
+          type: integer
+          description: Current offset in the result set.
+        hasMore:
+          type: boolean
+          description: Whether more results are available.
+    TargetProperty:
+      type: object
+      description: A configuration property of a target.
+      properties:
+        name:
+          type: string
+          description: Property name.
+        value:
+          type: string
+          description: Property value.
+        isReadOnly:
+          type: boolean
+          description: Whether the property is read-only.
+    TargetPropertyCollection:
+      type: object
+      description: Collection of target properties.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetProperty'
+    BulkPropertyUpdateRequest:
+      type: object
+      description: Request body for bulk property updates.
+      properties:
+        properties:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+    MetricGroup:
+      type: object
+      description: >-
+        Defines a group of related metrics collected for a target. Each metric
+        group has a name, collection frequency, and a set of metric columns.
+      properties:
+        metricGroupName:
+          type: string
+          description: Unique name of the metric group.
+        displayName:
+          type: string
+          description: Human-readable display name.
+        description:
+          type: string
+          description: Description of what this metric group measures.
+        collectionFrequency:
+          type: integer
+          description: Collection interval in seconds.
+        metricColumns:
+          type: array
+          description: List of metric columns in this group.
+          items:
+            $ref: '#/components/schemas/MetricColumn'
+    MetricColumn:
+      type: object
+      description: A single metric column within a metric group.
+      properties:
+        columnName:
+          type: string
+          description: Name of the metric column.
+        displayName:
+          type: string
+          description: Human-readable display name.
+        columnType:
+          type: string
+          description: Data type of the metric column.
+          enum:
+            - NUMBER
+            - STRING
+        isKey:
+          type: boolean
+          description: Whether this column is a key column.
+        unit:
+          type: string
+          description: Unit of measurement for the metric.
+    MetricGroupCollection:
+      type: object
+      description: Collection of metric groups.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricGroup'
+    MetricDataPoint:
+      type: object
+      description: A single metric data point.
+      properties:
+        metricColumn:
+          type: string
+          description: Name of the metric column.
+        value:
+          type: number
+          description: Numeric metric value.
+        key:
+          type: string
+          description: Key value identifying the metric row.
+        collectionTime:
+          type: string
+          format: date-time
+          description: Timestamp when the metric was collected.
+    MetricDataCollection:
+      type: object
+      description: Collection of metric data points.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricDataPoint'
+    MetricTimeSeries:
+      type: object
+      description: Time series data for a single metric.
+      properties:
+        targetName:
+          type: string
+          description: Name of the target.
+        targetType:
+          type: string
+          description: Type of the target.
+        metricGroupName:
+          type: string
+          description: Name of the metric group.
+        metricColumnName:
+          type: string
+          description: Name of the metric column.
+        key:
+          type: string
+          description: Key value for the metric row.
+        dataPoints:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: string
+                format: date-time
+              value:
+                type: number
+    MetricTimeSeriesCollection:
+      type: object
+      description: Collection of metric time series.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricTimeSeries'
+    Incident:
+      type: object
+      description: >-
+        Represents an incident in Enterprise Manager. Incidents are actionable
+        issues detected by monitoring rules, correlated from one or more events.
+      properties:
+        incidentId:
+          type: string
+          description: Unique identifier of the incident.
+        summary:
+          type: string
+          description: Brief summary of the incident.
+        severity:
+          type: string
+          description: Severity level of the incident.
+          enum:
+            - FATAL
+            - CRITICAL
+            - WARNING
+            - ADVISORY
+            - INFORMATIONAL
+        priority:
+          type: string
+          description: Priority assigned to the incident.
+          enum:
+            - URGENT
+            - HIGH
+            - MEDIUM
+            - LOW
+            - NONE
+        status:
+          type: string
+          description: Current status of the incident.
+          enum:
+            - NEW
+            - WORK_IN_PROGRESS
+            - RESOLVED
+            - CLOSED
+            - SUPPRESSED
+        category:
+          type: string
+          description: Category of the incident.
+          enum:
+            - AVAILABILITY
+            - PERFORMANCE
+            - SECURITY
+            - CONFIGURATION
+            - ERROR
+            - CAPACITY
+            - COMPLIANCE
+        targetName:
+          type: string
+          description: Name of the target associated with this incident.
+        targetType:
+          type: string
+          description: Type of the target associated with this incident.
+        escalationLevel:
+          type: integer
+          description: Current escalation level of the incident.
+        owner:
+          type: string
+          description: Username of the incident owner or assignee.
+        acknowledgedBy:
+          type: string
+          description: Username of the person who acknowledged the incident.
+        resolutionState:
+          type: string
+          description: Resolution state providing closure details.
+        ruleSetName:
+          type: string
+          description: Name of the incident rule set that created this incident.
+        timeRaised:
+          type: string
+          format: date-time
+          description: Timestamp when the incident was first raised.
+        timeUpdated:
+          type: string
+          format: date-time
+          description: Timestamp of the last incident update.
+        timeResolved:
+          type: string
+          format: date-time
+          description: Timestamp when the incident was resolved.
+        eventCount:
+          type: integer
+          description: Number of events correlated into this incident.
+        canonicalLink:
+          type: string
+          format: uri
+          description: Canonical URI for this incident resource.
+    IncidentCollection:
+      type: object
+      description: Paginated collection of incidents.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Incident'
+        totalCount:
+          type: integer
+          description: Total number of incidents matching the query.
+        limit:
+          type: integer
+        offset:
+          type: integer
+        hasMore:
+          type: boolean
+    Event:
+      type: object
+      description: >-
+        Represents a monitoring event detected by Enterprise Manager. Events
+        are the atomic detections that are correlated into incidents.
+      properties:
+        eventId:
+          type: string
+          description: Unique identifier of the event.
+        eventType:
+          type: string
+          description: Type of the event.
+          enum:
+            - METRIC_ALERT
+            - TARGET_AVAILABILITY
+            - JOB_STATUS_CHANGE
+            - COMPLIANCE_VIOLATION
+            - USER_REPORTED
+        severity:
+          type: string
+          description: Severity of the event.
+          enum:
+            - FATAL
+            - CRITICAL
+            - WARNING
+            - ADVISORY
+            - INFORMATIONAL
+            - CLEAR
+        message:
+          type: string
+          description: Descriptive message for the event.
+        targetName:
+          type: string
+          description: Name of the target that generated this event.
+        targetType:
+          type: string
+          description: Type of the target that generated this event.
+        metricGroupName:
+          type: string
+          description: Name of the metric group, if this is a metric alert event.
+        metricColumnName:
+          type: string
+          description: Name of the metric column, if this is a metric alert event.
+        metricValue:
+          type: number
+          description: Metric value that triggered the event.
+        timeRaised:
+          type: string
+          format: date-time
+          description: Timestamp when the event was raised.
+        timeResolved:
+          type: string
+          format: date-time
+          description: Timestamp when the event was resolved.
+        canonicalLink:
+          type: string
+          format: uri
+          description: Canonical URI for this event resource.
+    EventCollection:
+      type: object
+      description: Collection of events.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+    Annotation:
+      type: object
+      description: >-
+        A comment or note attached to an incident, providing investigation
+        details or remediation notes.
+      properties:
+        annotationId:
+          type: string
+          description: Unique identifier of the annotation.
+        summary:
+          type: string
+          description: Summary text of the annotation.
+        details:
+          type: string
+          description: Detailed content of the annotation.
+        author:
+          type: string
+          description: Username of the annotation author.
+        timeCreated:
+          type: string
+          format: date-time
+          description: Timestamp when the annotation was created.
+    AnnotationCollection:
+      type: object
+      description: Collection of annotations.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+    Blackout:
+      type: object
+      description: >-
+        Represents a blackout (maintenance window) in Enterprise Manager.
+        Blackouts suppress alerting and notifications for specified targets
+        during scheduled maintenance periods.
+      properties:
+        blackoutId:
+          type: string
+          description: Unique identifier of the blackout.
+        blackoutName:
+          type: string
+          description: Display name of the blackout.
+        description:
+          type: string
+          description: Description of the blackout purpose.
+        status:
+          type: string
+          description: Current status of the blackout.
+          enum:
+            - SCHEDULED
+            - STARTED
+            - STOPPED
+            - ENDED
+            - MODIFY_PENDING
+        reason:
+          type: string
+          description: Reason for the blackout.
+        createdBy:
+          type: string
+          description: Username of the blackout creator.
+        schedule:
+          $ref: '#/components/schemas/BlackoutSchedule'
+        targets:
+          type: array
+          description: List of targets included in the blackout.
+          items:
+            $ref: '#/components/schemas/BlackoutTarget'
+        timeCreated:
+          type: string
+          format: date-time
+          description: Timestamp when the blackout was created.
+        timeUpdated:
+          type: string
+          format: date-time
+          description: Timestamp of the last blackout update.
+        canonicalLink:
+          type: string
+          format: uri
+          description: Canonical URI for this blackout resource.
+    BlackoutSchedule:
+      type: object
+      description: Schedule definition for a blackout.
+      properties:
+        startTime:
+          type: string
+          format: date-time
+          description: Scheduled start time of the blackout.
+        endTime:
+          type: string
+          format: date-time
+          description: Scheduled end time of the blackout.
+        duration:
+          type: integer
+          description: Duration in minutes if no explicit end time is specified.
+        timezone:
+          type: string
+          description: Time zone for the schedule.
+        frequency:
+          type: string
+          description: Recurrence frequency for repeating blackouts.
+          enum:
+            - ONCE
+            - DAILY
+            - WEEKLY
+            - MONTHLY
+            - YEARLY
+        repeatInterval:
+          type: integer
+          description: Interval for repeating blackouts (e.g., every 2 weeks).
+        daysOfWeek:
+          type: array
+          description: Days of the week for weekly recurrence.
+          items:
+            type: string
+            enum:
+              - SUNDAY
+              - MONDAY
+              - TUESDAY
+              - WEDNESDAY
+              - THURSDAY
+              - FRIDAY
+              - SATURDAY
+    BlackoutTarget:
+      type: object
+      description: A target included in a blackout.
+      properties:
+        targetName:
+          type: string
+          description: Name of the target.
+        targetType:
+          type: string
+          description: Type of the target.
+        includeMembers:
+          type: boolean
+          description: >-
+            Whether to include member targets (for composite targets and groups).
+    BlackoutCreateRequest:
+      type: object
+      description: Request body for creating a new blackout.
+      required:
+        - blackoutName
+        - schedule
+        - targets
+      properties:
+        blackoutName:
+          type: string
+          description: Display name for the blackout.
+        description:
+          type: string
+          description: Description of the blackout purpose.
+        reason:
+          type: string
+          description: Reason for the blackout.
+        schedule:
+          $ref: '#/components/schemas/BlackoutSchedule'
+        targets:
+          type: array
+          description: List of targets to include in the blackout.
+          items:
+            $ref: '#/components/schemas/BlackoutTarget'
+    BlackoutUpdateRequest:
+      type: object
+      description: Request body for updating a blackout.
+      properties:
+        description:
+          type: string
+        reason:
+          type: string
+        schedule:
+          $ref: '#/components/schemas/BlackoutSchedule'
+        targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/BlackoutTarget'
+    BlackoutCollection:
+      type: object
+      description: Paginated collection of blackouts.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Blackout'
+        totalCount:
+          type: integer
+        limit:
+          type: integer
+        offset:
+          type: integer
+        hasMore:
+          type: boolean
+    BlackoutTargetCollection:
+      type: object
+      description: Collection of targets in a blackout.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/BlackoutTarget'
+    BlackoutDashboard:
+      type: object
+      description: Summary statistics for blackouts.
+      properties:
+        totalBlackouts:
+          type: integer
+          description: Total number of blackouts.
+        activeBlackouts:
+          type: integer
+          description: Number of currently active blackouts.
+        scheduledBlackouts:
+          type: integer
+          description: Number of scheduled future blackouts.
+        endedBlackouts:
+          type: integer
+          description: Number of ended blackouts.
+        targetsInBlackout:
+          type: integer
+          description: Total number of targets currently in blackout.
+    BlackoutReason:
+      type: object
+      description: A predefined reason for blackouts.
+      properties:
+        reasonId:
+          type: string
+          description: Unique identifier for the reason.
+        reason:
+          type: string
+          description: Text of the blackout reason.
+    BlackoutReasonCreateRequest:
+      type: object
+      description: Request body for creating a blackout reason.
+      required:
+        - reason
+      properties:
+        reason:
+          type: string
+          description: Text of the blackout reason.
+    BlackoutReasonCollection:
+      type: object
+      description: Collection of blackout reasons.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/BlackoutReason'
+    GlobalTargetProperty:
+      type: object
+      description: A global property definition for classifying targets.
+      properties:
+        globalTargetPropertyId:
+          type: string
+          description: Unique identifier for the property.
+        propertyName:
+          type: string
+          description: Name of the property.
+        propertyDisplayName:
+          type: string
+          description: Human-readable display name.
+        description:
+          type: string
+          description: Description of the property.
+        propertyType:
+          type: string
+          description: Data type of the property.
+          enum:
+            - STRING
+            - NUMBER
+            - BOOLEAN
+        hasValidValues:
+          type: boolean
+          description: Whether the property has a constrained value set.
+    GlobalTargetPropertyCreateRequest:
+      type: object
+      description: Request body for creating a global target property.
+      required:
+        - propertyName
+      properties:
+        propertyName:
+          type: string
+        propertyDisplayName:
+          type: string
+        description:
+          type: string
+        propertyType:
+          type: string
+          enum:
+            - STRING
+            - NUMBER
+            - BOOLEAN
+        validValues:
+          type: array
+          items:
+            type: string
+    GlobalTargetPropertyUpdateRequest:
+      type: object
+      description: Request body for updating a global target property.
+      properties:
+        propertyDisplayName:
+          type: string
+        description:
+          type: string
+        validValues:
+          type: array
+          items:
+            type: string
+    GlobalTargetPropertyCollection:
+      type: object
+      description: Collection of global target properties.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalTargetProperty'
+    Error:
+      type: object
+      description: Error response returned by the API.
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+        message:
+          type: string
+          description: Human-readable error message.
+        details:
+          type: string
+          description: Additional details about the error.
+        httpStatusCode:
+          type: integer
+          description: HTTP status code.
+  responses:
+    BadRequest:
+      description: >-
+        The request was invalid. Check the request body and parameters for errors.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: >-
+        Authentication failed. Provide valid Enterprise Manager credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: >-
+        The request conflicts with the current state of the resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: An unexpected error occurred on the server.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

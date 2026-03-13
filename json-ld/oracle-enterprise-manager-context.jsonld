@@ -1,0 +1,232 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "oem": "https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/vocab#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Target": {
+      "@id": "oem:Target",
+      "@context": {
+        "targetId": "oem:targetId",
+        "targetName": "schema:name",
+        "targetType": "oem:targetType",
+        "targetDisplayType": "oem:targetDisplayType",
+        "hostName": "oem:hostName",
+        "lifecycleStatus": "oem:lifecycleStatus",
+        "availabilityStatus": "oem:availabilityStatus",
+        "agentUrl": {
+          "@id": "oem:agentUrl",
+          "@type": "@id"
+        },
+        "oracleHome": "oem:oracleHome",
+        "machineName": "oem:machineName",
+        "installLocation": "oem:installLocation",
+        "timezone": "oem:timezone",
+        "owner": "oem:owner",
+        "timeCreated": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "timeUpdated": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "properties": "oem:properties",
+        "associations": {
+          "@id": "oem:associations",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Incident": {
+      "@id": "oem:Incident",
+      "@context": {
+        "incidentId": "oem:incidentId",
+        "summary": "schema:description",
+        "severity": "oem:severity",
+        "priority": "oem:priority",
+        "status": "oem:status",
+        "category": "oem:category",
+        "targetName": "oem:targetName",
+        "targetType": "oem:targetType",
+        "escalationLevel": "oem:escalationLevel",
+        "owner": "oem:owner",
+        "acknowledgedBy": "oem:acknowledgedBy",
+        "resolutionState": "oem:resolutionState",
+        "ruleSetName": "oem:ruleSetName",
+        "timeRaised": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "timeUpdated": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "timeResolved": {
+          "@id": "oem:timeResolved",
+          "@type": "xsd:dateTime"
+        },
+        "eventCount": "oem:eventCount"
+      }
+    },
+
+    "Event": {
+      "@id": "oem:Event",
+      "@context": {
+        "eventId": "oem:eventId",
+        "eventType": "oem:eventType",
+        "severity": "oem:severity",
+        "message": "schema:description",
+        "targetName": "oem:targetName",
+        "targetType": "oem:targetType",
+        "metricGroupName": "oem:metricGroupName",
+        "metricColumnName": "oem:metricColumnName",
+        "metricValue": "oem:metricValue",
+        "timeRaised": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "timeResolved": {
+          "@id": "oem:timeResolved",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Blackout": {
+      "@id": "oem:Blackout",
+      "@context": {
+        "blackoutId": "oem:blackoutId",
+        "blackoutName": "schema:name",
+        "description": "schema:description",
+        "status": "oem:status",
+        "reason": "oem:reason",
+        "createdBy": "dcterms:creator",
+        "schedule": "oem:schedule",
+        "targets": {
+          "@id": "oem:targets",
+          "@container": "@set"
+        },
+        "timeCreated": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "timeUpdated": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "BlackoutSchedule": {
+      "@id": "oem:BlackoutSchedule",
+      "@context": {
+        "startTime": {
+          "@id": "oem:startTime",
+          "@type": "xsd:dateTime"
+        },
+        "endTime": {
+          "@id": "oem:endTime",
+          "@type": "xsd:dateTime"
+        },
+        "duration": "oem:duration",
+        "timezone": "oem:timezone",
+        "frequency": "oem:frequency",
+        "repeatInterval": "oem:repeatInterval",
+        "daysOfWeek": {
+          "@id": "oem:daysOfWeek",
+          "@container": "@list"
+        }
+      }
+    },
+
+    "MetricGroup": {
+      "@id": "oem:MetricGroup",
+      "@context": {
+        "metricGroupName": "oem:metricGroupName",
+        "displayName": "schema:name",
+        "description": "schema:description",
+        "collectionFrequency": "oem:collectionFrequency",
+        "metricColumns": {
+          "@id": "oem:metricColumns",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "MetricColumn": {
+      "@id": "oem:MetricColumn",
+      "@context": {
+        "columnName": "oem:columnName",
+        "displayName": "schema:name",
+        "columnType": "oem:columnType",
+        "isKey": "oem:isKey",
+        "unit": "oem:unit"
+      }
+    },
+
+    "MetricDataPoint": {
+      "@id": "oem:MetricDataPoint",
+      "@context": {
+        "metricColumn": "oem:metricColumn",
+        "value": "schema:value",
+        "key": "oem:key",
+        "collectionTime": {
+          "@id": "oem:collectionTime",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Annotation": {
+      "@id": "oem:Annotation",
+      "@context": {
+        "annotationId": "oem:annotationId",
+        "summary": "schema:name",
+        "details": "schema:description",
+        "author": "dcterms:creator",
+        "timeCreated": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "GlobalTargetProperty": {
+      "@id": "oem:GlobalTargetProperty",
+      "@context": {
+        "globalTargetPropertyId": "oem:globalTargetPropertyId",
+        "propertyName": "schema:name",
+        "propertyDisplayName": "oem:propertyDisplayName",
+        "description": "schema:description",
+        "propertyType": "oem:propertyType",
+        "hasValidValues": "oem:hasValidValues"
+      }
+    },
+
+    "targetId": "oem:targetId",
+    "targetName": "schema:name",
+    "targetType": "oem:targetType",
+    "hostName": "oem:hostName",
+    "lifecycleStatus": "oem:lifecycleStatus",
+    "availabilityStatus": "oem:availabilityStatus",
+    "severity": "oem:severity",
+    "priority": "oem:priority",
+    "status": "oem:status",
+    "canonicalLink": {
+      "@id": "oem:canonicalLink",
+      "@type": "@id"
+    },
+    "timeCreated": {
+      "@id": "dcterms:created",
+      "@type": "xsd:dateTime"
+    },
+    "timeUpdated": {
+      "@id": "dcterms:modified",
+      "@type": "xsd:dateTime"
+    }
+  }
+}
