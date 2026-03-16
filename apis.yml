@@ -1,10 +1,18 @@
+aid: oracle-enterprise-manager
 name: Oracle Enterprise Manager
-description: Oracle Enterprise Manager (OEM) provides a comprehensive management platform for managing Oracle IT infrastructure and applications. The APIs enable programmatic access to monitoring, administration, and automation capabilities.
-image: https://www.oracle.com/a/ocom/img/oracle-enterprise-manager.jpg
-url: https://www.oracle.com/enterprise-manager/
-created: '2024'
-modified: '2026-03-03'
-specificationVersion: '0.18'
+description: >-
+  Oracle Enterprise Manager (OEM) provides a comprehensive management platform
+  for managing Oracle IT infrastructure and applications. The APIs enable
+  programmatic access to monitoring, administration, and automation capabilities.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/oracle-enterprise-manager/refs/heads/main/apis.yml
+created: '2024-01-01'
+modified: '2026-03-16'
+specificationVersion: '0.19'
 tags:
 - Enterprise Management
 - Monitoring
@@ -300,9 +308,8 @@ apis:
   - type: Programmers Reference
     url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.4/emprf/getting-started-plug-development.html
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
-  url: https://apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
 common:
 - type: Portal
   url: https://www.oracle.com/enterprise-manager/
