@@ -76,7 +76,7 @@ paths:
   /targets:
     get:
       operationId: listTargets
-      summary: List targets
+      summary: Oracle Enterprise Manager List targets
       description: >-
         Returns a list of monitored targets in Enterprise Manager. Supports
         filtering by target name, target type, and lifecycle status. Results
@@ -104,7 +104,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     post:
       operationId: createTarget
-      summary: Create a target
+      summary: Oracle Enterprise Manager Create a target
       description: >-
         Creates a new monitored target in Enterprise Manager. Requires target
         name, target type, and host information. Additional properties can be
@@ -141,7 +141,7 @@ paths:
   /targets/{targetId}:
     get:
       operationId: getTarget
-      summary: Get target details
+      summary: Oracle Enterprise Manager Get target details
       description: >-
         Returns detailed information about a specific target including its
         configuration properties, monitoring status, and associated metadata.
@@ -164,7 +164,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     patch:
       operationId: updateTarget
-      summary: Update a target
+      summary: Oracle Enterprise Manager Update a target
       description: >-
         Updates properties of an existing target. Only the specified fields
         are modified; unspecified fields remain unchanged.
@@ -195,7 +195,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     delete:
       operationId: deleteTarget
-      summary: Delete a target
+      summary: Oracle Enterprise Manager Delete a target
       description: >-
         Removes a monitored target from Enterprise Manager. This stops all
         monitoring, removes collected data associations, and deletes the
@@ -216,7 +216,7 @@ paths:
   /targets/{targetId}/properties:
     get:
       operationId: getTargetProperties
-      summary: Get target properties
+      summary: Oracle Enterprise Manager Get target properties
       description: >-
         Returns the configuration and monitoring properties of a specific
         target, including instance properties, dynamic properties, and any
@@ -241,7 +241,7 @@ paths:
   /targets/{targetId}/actions/bulkUpdateProperties:
     post:
       operationId: bulkUpdateTargetProperties
-      summary: Bulk update target properties
+      summary: Oracle Enterprise Manager Bulk update target properties
       description: >-
         Updates multiple properties of a target in a single request. Useful
         for batch configuration changes.
@@ -273,7 +273,7 @@ paths:
   /targets/{targetId}/metricGroups:
     get:
       operationId: listMetricGroups
-      summary: List metric groups for a target
+      summary: Oracle Enterprise Manager List metric groups for a target
       description: >-
         Returns a list of all metric groups available for a specific target.
         Metric groups organize related metrics and define the collection
@@ -298,7 +298,7 @@ paths:
   /targets/{targetId}/metricGroups/{metricGroupName}:
     get:
       operationId: getMetricGroup
-      summary: Get metric group details
+      summary: Oracle Enterprise Manager Get metric group details
       description: >-
         Returns detailed information about a specific metric group for a target,
         including metric column definitions, collection frequency, and thresholds.
@@ -323,7 +323,7 @@ paths:
   /targets/{targetId}/metricGroups/{metricGroupName}/latestData:
     get:
       operationId: getLatestMetricData
-      summary: Get latest metric data
+      summary: Oracle Enterprise Manager Get latest metric data
       description: >-
         Returns the most recently collected metric data for a specific metric
         group on a target. Provides the latest snapshot of performance values.
@@ -348,7 +348,7 @@ paths:
   /metricTimeSeries:
     get:
       operationId: getMetricTimeSeries
-      summary: Get metric time series data
+      summary: Oracle Enterprise Manager Get metric time series data
       description: >-
         Returns numeric metric data points over a specified time range for
         one or more targets. Supports filtering by target, metric group,
@@ -411,7 +411,7 @@ paths:
   /incidents:
     get:
       operationId: listIncidents
-      summary: List incidents
+      summary: Oracle Enterprise Manager List incidents
       description: >-
         Returns a list of incidents in Enterprise Manager. Supports filtering
         by severity, priority, status, target, and time range. Incidents
@@ -487,7 +487,7 @@ paths:
   /incidents/{incidentId}:
     get:
       operationId: getIncident
-      summary: Get incident details
+      summary: Oracle Enterprise Manager Get incident details
       description: >-
         Returns detailed information about a specific incident including
         severity, priority, status, associated target, timeline, and
@@ -512,7 +512,7 @@ paths:
   /incidents/{incidentId}/actions/clear:
     post:
       operationId: clearIncident
-      summary: Clear an incident
+      summary: Oracle Enterprise Manager Clear an incident
       description: >-
         Clears an incident, indicating that the issue has been resolved. The
         incident status is set to CLOSED.
@@ -536,7 +536,7 @@ paths:
   /incidents/{incidentId}/actions/suppress:
     post:
       operationId: suppressIncident
-      summary: Suppress an incident
+      summary: Oracle Enterprise Manager Suppress an incident
       description: >-
         Suppresses an incident so it does not appear in active incident views
         or trigger notifications. Useful for known issues under investigation.
@@ -560,7 +560,7 @@ paths:
   /incidents/{incidentId}/actions/unsuppress:
     post:
       operationId: unsuppressIncident
-      summary: Unsuppress an incident
+      summary: Oracle Enterprise Manager Unsuppress an incident
       description: >-
         Reverses the suppression of an incident, restoring it to active
         visibility and notification eligibility.
@@ -584,7 +584,7 @@ paths:
   /incidents/{incidentId}/events:
     get:
       operationId: getIncidentEvents
-      summary: Get incident events
+      summary: Oracle Enterprise Manager Get incident events
       description: >-
         Returns the list of events associated with an incident. Events are
         the underlying monitoring detections that were correlated to form
@@ -609,7 +609,7 @@ paths:
   /incidents/{incidentId}/annotations:
     get:
       operationId: getIncidentAnnotations
-      summary: Get incident annotations
+      summary: Oracle Enterprise Manager Get incident annotations
       description: >-
         Returns annotations (comments and notes) associated with an incident.
         Annotations provide a record of investigation and remediation steps.
@@ -633,7 +633,7 @@ paths:
   /events/{eventId}:
     get:
       operationId: getEvent
-      summary: Get event details
+      summary: Oracle Enterprise Manager Get event details
       description: >-
         Returns detailed information about a specific event, including its
         type, severity, message, target association, and timestamps.
@@ -657,7 +657,7 @@ paths:
   /blackouts:
     get:
       operationId: listBlackouts
-      summary: List blackouts
+      summary: Oracle Enterprise Manager List blackouts
       description: >-
         Returns a list of blackouts (maintenance windows) configured in
         Enterprise Manager. Supports filtering by status and associated target.
@@ -697,7 +697,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     post:
       operationId: createBlackout
-      summary: Create a blackout
+      summary: Oracle Enterprise Manager Create a blackout
       description: >-
         Creates a new blackout (maintenance window) for one or more targets.
         During a blackout, monitoring data is still collected but alerts and
@@ -732,7 +732,7 @@ paths:
   /blackouts/{blackoutId}:
     get:
       operationId: getBlackout
-      summary: Get blackout details
+      summary: Oracle Enterprise Manager Get blackout details
       description: >-
         Returns detailed information about a specific blackout including its
         schedule, affected targets, status, and reason.
@@ -755,7 +755,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     patch:
       operationId: editBlackout
-      summary: Edit a blackout
+      summary: Oracle Enterprise Manager Edit a blackout
       description: >-
         Modifies an existing blackout. Can update the schedule, targets,
         reason, or other properties. Only scheduled or started blackouts
@@ -787,7 +787,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     delete:
       operationId: deleteBlackout
-      summary: Delete a blackout
+      summary: Oracle Enterprise Manager Delete a blackout
       description: >-
         Deletes a blackout. Only scheduled (not yet started) blackouts can
         be deleted. Use the stop action to end an active blackout.
@@ -809,7 +809,7 @@ paths:
   /blackouts/{blackoutId}/actions/stop:
     post:
       operationId: stopBlackout
-      summary: Stop a blackout
+      summary: Oracle Enterprise Manager Stop a blackout
       description: >-
         Stops an active blackout before its scheduled end time. Monitoring
         and alerting resume immediately for all affected targets.
@@ -839,7 +839,7 @@ paths:
   /blackouts/{blackoutId}/targets:
     get:
       operationId: getBlackoutTargets
-      summary: Get blackout targets
+      summary: Oracle Enterprise Manager Get blackout targets
       description: >-
         Returns the list of targets affected by a specific blackout, including
         both directly specified targets and targets included via group membership.
@@ -863,7 +863,7 @@ paths:
   /blackouts/dashboard:
     get:
       operationId: getBlackoutDashboard
-      summary: Get blackout statistics
+      summary: Oracle Enterprise Manager Get blackout statistics
       description: >-
         Returns summary statistics about blackouts including counts by status,
         upcoming blackouts, and recently ended blackouts.
@@ -883,7 +883,7 @@ paths:
   /blackouts/reasons:
     get:
       operationId: listBlackoutReasons
-      summary: List blackout reasons
+      summary: Oracle Enterprise Manager List blackout reasons
       description: >-
         Returns a list of predefined blackout reasons that can be associated
         with blackouts for categorization and reporting.
@@ -902,7 +902,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     post:
       operationId: createBlackoutReason
-      summary: Create a blackout reason
+      summary: Oracle Enterprise Manager Create a blackout reason
       description: >-
         Creates a new blackout reason that can be used when creating or editing
         blackouts.
@@ -930,7 +930,7 @@ paths:
   /blackouts/reasons/{reasonId}:
     delete:
       operationId: deleteBlackoutReason
-      summary: Delete a blackout reason
+      summary: Oracle Enterprise Manager Delete a blackout reason
       description: Deletes a blackout reason by its identifier.
       tags:
         - Blackouts
@@ -953,7 +953,7 @@ paths:
   /globalTargetProperties:
     get:
       operationId: listGlobalTargetProperties
-      summary: List global target properties
+      summary: Oracle Enterprise Manager List global target properties
       description: >-
         Returns a list of global target properties that are defined for
         classifying and organizing targets.
@@ -972,7 +972,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     post:
       operationId: createGlobalTargetProperty
-      summary: Create a global target property
+      summary: Oracle Enterprise Manager Create a global target property
       description: >-
         Creates a new global target property definition. Global properties
         provide a way to classify targets with custom metadata.
@@ -1000,7 +1000,7 @@ paths:
   /globalTargetProperties/{globalTargetPropertyId}:
     get:
       operationId: getGlobalTargetProperty
-      summary: Get global target property details
+      summary: Oracle Enterprise Manager Get global target property details
       description: Returns details of a specific global target property.
       tags:
         - Global Target Properties
@@ -1026,7 +1026,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     patch:
       operationId: modifyGlobalTargetProperty
-      summary: Modify a global target property
+      summary: Oracle Enterprise Manager Modify a global target property
       description: Updates a global target property definition.
       tags:
         - Global Target Properties
@@ -1060,7 +1060,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     delete:
       operationId: deleteGlobalTargetProperty
-      summary: Delete a global target property
+      summary: Oracle Enterprise Manager Delete a global target property
       description: Deletes a global target property definition.
       tags:
         - Global Target Properties
@@ -1083,7 +1083,7 @@ paths:
   /globalTargetProperties/{globalTargetPropertyId}/validValues:
     get:
       operationId: getGlobalTargetPropertyValidValues
-      summary: Get valid values for a global target property
+      summary: Oracle Enterprise Manager Get valid values for a global target property
       description: >-
         Returns the list of valid values defined for a global target property,
         if the property has a constrained value set.
