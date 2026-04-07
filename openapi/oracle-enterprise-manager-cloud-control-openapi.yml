@@ -32,18 +32,23 @@ servers:
 security:
   - basicAuth: []
 tags:
-  - name: Targets
+  - name: Blackouts
     description: >-
-      Manage monitored targets in Enterprise Manager including discovery,
-      configuration, lifecycle operations, and property management. Targets
-      represent any managed entity such as databases, hosts, middleware, and
-      applications.
+      Manage blackout windows for maintenance activities. Blackouts suppress
+      monitoring and alerting during scheduled maintenance periods, preventing
+      false alerts.
     externalDocs:
       url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-  - name: Metrics
+  - name: Events
     description: >-
-      Query metric data and metadata for monitored targets. Access time-series
-      performance data, latest metric values, and metric group definitions.
+      Access individual event details. Events are the underlying occurrences
+      that are correlated into incidents.
+    externalDocs:
+      url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
+  - name: Global Target Properties
+    description: >-
+      Manage global properties that can be applied across targets for
+      classification, grouping, and reporting purposes.
     externalDocs:
       url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
   - name: Incidents
@@ -53,23 +58,18 @@ tags:
       operations for clearing, suppressing, and annotating.
     externalDocs:
       url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-  - name: Events
+  - name: Metrics
     description: >-
-      Access individual event details. Events are the underlying occurrences
-      that are correlated into incidents.
+      Query metric data and metadata for monitored targets. Access time-series
+      performance data, latest metric values, and metric group definitions.
     externalDocs:
       url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-  - name: Blackouts
+  - name: Targets
     description: >-
-      Manage blackout windows for maintenance activities. Blackouts suppress
-      monitoring and alerting during scheduled maintenance periods, preventing
-      false alerts.
-    externalDocs:
-      url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-  - name: Global Target Properties
-    description: >-
-      Manage global properties that can be applied across targets for
-      classification, grouping, and reporting purposes.
+      Manage monitored targets in Enterprise Manager including discovery,
+      configuration, lifecycle operations, and property management. Targets
+      represent any managed entity such as databases, hosts, middleware, and
+      applications.
     externalDocs:
       url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
 paths:
