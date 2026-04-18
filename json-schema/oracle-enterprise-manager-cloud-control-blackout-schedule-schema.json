@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BlackoutSchedule",
+  "type": "object",
+  "description": "Schedule definition for a blackout.",
+  "properties": {
+    "startTime": {
+      "type": "string",
+      "description": "Scheduled start time of the blackout."
+    },
+    "endTime": {
+      "type": "string",
+      "description": "Scheduled end time of the blackout."
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Duration in minutes if no explicit end time is specified."
+    },
+    "timezone": {
+      "type": "string",
+      "description": "Time zone for the schedule."
+    },
+    "frequency": {
+      "type": "string",
+      "description": "Recurrence frequency for repeating blackouts."
+    },
+    "repeatInterval": {
+      "type": "integer",
+      "description": "Interval for repeating blackouts (e.g., every 2 weeks)."
+    },
+    "daysOfWeek": {
+      "type": "array",
+      "description": "Days of the week for weekly recurrence."
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Target",
+  "type": "object",
+  "description": "Represents a monitored target in Enterprise Manager. A target is any managed entity such as a database, host, middleware instance, or application.",
+  "properties": {
+    "targetId": {
+      "type": "string",
+      "description": "Unique identifier of the target."
+    },
+    "targetName": {
+      "type": "string",
+      "description": "Display name of the target."
+    },
+    "targetType": {
+      "type": "string",
+      "description": "The type of the target, defining its monitoring template and available metrics."
+    },
+    "targetDisplayType": {
+      "type": "string",
+      "description": "Human-readable target type display name."
+    },
+    "hostName": {
+      "type": "string",
+      "description": "The hostname where the target resides."
+    },
+    "lifecycleStatus": {
+      "type": "string",
+      "description": "Current lifecycle status of the target."
+    },
+    "availabilityStatus": {
+      "type": "string",
+      "description": "Current availability status reported by monitoring."
+    },
+    "agentUrl": {
+      "type": "string",
+      "description": "URL of the management agent monitoring this target."
+    },
+    "oracleHome": {
+      "type": "string",
+      "description": "Oracle home directory path, applicable to Oracle targets."
+    },
+    "machineName": {
+      "type": "string",
+      "description": "Machine name where the target is deployed."
+    },
+    "installLocation": {
+      "type": "string",
+      "description": "Installation directory path for the target software."
+    },
+    "timezone": {
+      "type": "string",
+      "description": "Time zone of the target."
+    },
+    "owner": {
+      "type": "string",
+      "description": "Enterprise Manager user who owns this target."
+    },
+    "timeCreated": {
+      "type": "string",
+      "description": "Timestamp when the target was added to Enterprise Manager."
+    },
+    "timeUpdated": {
+      "type": "string",
+      "description": "Timestamp of the last target configuration update."
+    },
+    "properties": {
+      "type": "object",
+      "description": "Additional target-type-specific configuration properties."
+    },
+    "canonicalLink": {
+      "type": "string",
+      "description": "Canonical URI for this target resource."
+    }
+  }
+}

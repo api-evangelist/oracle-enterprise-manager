@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BulkPropertyUpdateRequest",
+  "type": "object",
+  "description": "Request body for bulk property updates.",
+  "properties": {
+    "properties": {
+      "type": "array"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "blackoutId": "500123",
+  "blackoutName": "example_value",
+  "description": "A sample description.",
+  "status": "example_value",
+  "reason": "example_value",
+  "createdBy": "example_value",
+  "targets": [],
+  "timeCreated": "example_value",
+  "timeUpdated": "example_value",
+  "canonicalLink": "example_value"
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Annotation",
+  "type": "object",
+  "properties": {
+    "annotationId": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "details": {
+      "type": "string"
+    },
+    "author": {
+      "type": "string"
+    },
+    "timeCreated": {
+      "type": "string"
+    }
+  }
+}

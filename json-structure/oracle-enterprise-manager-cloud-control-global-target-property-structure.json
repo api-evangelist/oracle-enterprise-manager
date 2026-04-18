@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "GlobalTargetProperty",
+  "type": "object",
+  "properties": {
+    "globalTargetPropertyId": {
+      "type": "string"
+    },
+    "propertyName": {
+      "type": "string"
+    },
+    "propertyDisplayName": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "propertyType": {
+      "type": "string"
+    },
+    "hasValidValues": {
+      "type": "boolean"
+    }
+  }
+}

@@ -20,75 +20,75 @@ externalDocs:
   description: Oracle Enterprise Manager Cloud Control REST API Documentation
   url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/APIOverview.html
 servers:
-  - url: https://{emHost}:{emPort}/em/api
-    description: Enterprise Manager Cloud Control server
-    variables:
-      emHost:
-        default: localhost
-        description: Enterprise Manager OMS hostname
-      emPort:
-        default: '7803'
-        description: Enterprise Manager HTTPS console port
+- url: https://{emHost}:{emPort}/em/api
+  description: Enterprise Manager Cloud Control server
+  variables:
+    emHost:
+      default: localhost
+      description: Enterprise Manager OMS hostname
+    emPort:
+      default: '7803'
+      description: Enterprise Manager HTTPS console port
 security:
-  - basicAuth: []
+- basicAuth: []
 tags:
-  - name: Blackouts
-    description: >-
-      Manage blackout windows for maintenance activities. Blackouts suppress
-      monitoring and alerting during scheduled maintenance periods, preventing
-      false alerts.
-    externalDocs:
-      url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-  - name: Events
-    description: >-
-      Access individual event details. Events are the underlying occurrences
-      that are correlated into incidents.
-    externalDocs:
-      url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-  - name: Global Target Properties
-    description: >-
-      Manage global properties that can be applied across targets for
-      classification, grouping, and reporting purposes.
-    externalDocs:
-      url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-  - name: Incidents
-    description: >-
-      Search, view, and manage incidents and events. Incidents represent
-      actionable issues detected by Enterprise Manager monitoring, with
-      operations for clearing, suppressing, and annotating.
-    externalDocs:
-      url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-  - name: Metrics
-    description: >-
-      Query metric data and metadata for monitored targets. Access time-series
-      performance data, latest metric values, and metric group definitions.
-    externalDocs:
-      url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-  - name: Targets
-    description: >-
-      Manage monitored targets in Enterprise Manager including discovery,
-      configuration, lifecycle operations, and property management. Targets
-      represent any managed entity such as databases, hosts, middleware, and
-      applications.
-    externalDocs:
-      url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
+- name: Blackouts
+  description: >-
+    Manage blackout windows for maintenance activities. Blackouts suppress
+    monitoring and alerting during scheduled maintenance periods, preventing
+    false alerts.
+  externalDocs:
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
+- name: Events
+  description: >-
+    Access individual event details. Events are the underlying occurrences
+    that are correlated into incidents.
+  externalDocs:
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
+- name: Global Target Properties
+  description: >-
+    Manage global properties that can be applied across targets for
+    classification, grouping, and reporting purposes.
+  externalDocs:
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
+- name: Incidents
+  description: >-
+    Search, view, and manage incidents and events. Incidents represent
+    actionable issues detected by Enterprise Manager monitoring, with
+    operations for clearing, suppressing, and annotating.
+  externalDocs:
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
+- name: Metrics
+  description: >-
+    Query metric data and metadata for monitored targets. Access time-series
+    performance data, latest metric values, and metric group definitions.
+  externalDocs:
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
+- name: Targets
+  description: >-
+    Manage monitored targets in Enterprise Manager including discovery,
+    configuration, lifecycle operations, and property management. Targets
+    represent any managed entity such as databases, hosts, middleware, and
+    applications.
+  externalDocs:
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
 paths:
   /targets:
     get:
       operationId: listTargets
-      summary: Oracle Enterprise Manager List targets
+      summary: Oracle Enterprise Manager List Targets
       description: >-
         Returns a list of monitored targets in Enterprise Manager. Supports
         filtering by target name, target type, and lifecycle status. Results
         are paginated.
       tags:
-        - Targets
+      - Targets
       parameters:
-        - $ref: '#/components/parameters/targetNameQuery'
-        - $ref: '#/components/parameters/targetTypeQuery'
-        - $ref: '#/components/parameters/lifecycleStatusQuery'
-        - $ref: '#/components/parameters/limitQuery'
-        - $ref: '#/components/parameters/offsetQuery'
+      - $ref: '#/components/parameters/targetNameQuery'
+      - $ref: '#/components/parameters/targetTypeQuery'
+      - $ref: '#/components/parameters/lifecycleStatusQuery'
+      - $ref: '#/components/parameters/limitQuery'
+      - $ref: '#/components/parameters/offsetQuery'
       responses:
         '200':
           description: A paginated list of targets.
@@ -96,27 +96,69 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TargetCollection'
+              examples:
+                Listtargets200Example:
+                  summary: Default listTargets 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - targetId: '500123'
+                      targetName: example_value
+                      targetType: example_value
+                      targetDisplayType: example_value
+                      hostName: example_value
+                      lifecycleStatus: MONITORED
+                      availabilityStatus: UP
+                      agentUrl: https://www.example.com
+                      oracleHome: example_value
+                      machineName: example_value
+                      installLocation: example_value
+                      timezone: example_value
+                      owner: example_value
+                      timeCreated: '2026-01-15T10:30:00Z'
+                      timeUpdated: '2026-01-15T10:30:00Z'
+                      properties: example_value
+                      canonicalLink: https://www.example.com
+                    totalCount: 10
+                    limit: 10
+                    offset: 10
+                    hasMore: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createTarget
-      summary: Oracle Enterprise Manager Create a target
+      summary: Oracle Enterprise Manager Create a Target
       description: >-
         Creates a new monitored target in Enterprise Manager. Requires target
         name, target type, and host information. Additional properties can be
         specified depending on the target type.
       tags:
-        - Targets
+      - Targets
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/TargetCreateRequest'
+            examples:
+              CreatetargetRequestExample:
+                summary: Default createTarget request
+                x-microcks-default: true
+                value:
+                  targetName: example_value
+                  targetType: example_value
+                  hostName: example_value
+                  properties: example_value
+                  credentials:
+                    credentialName: example_value
+                    credentialType: example_value
       responses:
         '201':
           description: Target created successfully.
@@ -124,6 +166,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Target'
+              examples:
+                Createtarget201Example:
+                  summary: Default createTarget 201 response
+                  x-microcks-default: true
+                  value:
+                    targetId: '500123'
+                    targetName: example_value
+                    targetType: example_value
+                    targetDisplayType: example_value
+                    hostName: example_value
+                    lifecycleStatus: MONITORED
+                    availabilityStatus: UP
+                    agentUrl: https://www.example.com
+                    oracleHome: example_value
+                    machineName: example_value
+                    installLocation: example_value
+                    timezone: example_value
+                    owner: example_value
+                    timeCreated: '2026-01-15T10:30:00Z'
+                    timeUpdated: '2026-01-15T10:30:00Z'
+                    properties: example_value
+                    canonicalLink: https://www.example.com
           headers:
             Location:
               description: URI of the newly created target resource.
@@ -138,17 +202,20 @@ paths:
           $ref: '#/components/responses/Conflict'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /targets/{targetId}:
     get:
       operationId: getTarget
-      summary: Oracle Enterprise Manager Get target details
+      summary: Oracle Enterprise Manager Get Target Details
       description: >-
         Returns detailed information about a specific target including its
         configuration properties, monitoring status, and associated metadata.
       tags:
-        - Targets
+      - Targets
       parameters:
-        - $ref: '#/components/parameters/targetIdPath'
+      - $ref: '#/components/parameters/targetIdPath'
       responses:
         '200':
           description: Target details.
@@ -156,28 +223,59 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Target'
+              examples:
+                Gettarget200Example:
+                  summary: Default getTarget 200 response
+                  x-microcks-default: true
+                  value:
+                    targetId: '500123'
+                    targetName: example_value
+                    targetType: example_value
+                    targetDisplayType: example_value
+                    hostName: example_value
+                    lifecycleStatus: MONITORED
+                    availabilityStatus: UP
+                    agentUrl: https://www.example.com
+                    oracleHome: example_value
+                    machineName: example_value
+                    installLocation: example_value
+                    timezone: example_value
+                    owner: example_value
+                    timeCreated: '2026-01-15T10:30:00Z'
+                    timeUpdated: '2026-01-15T10:30:00Z'
+                    properties: example_value
+                    canonicalLink: https://www.example.com
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateTarget
-      summary: Oracle Enterprise Manager Update a target
+      summary: Oracle Enterprise Manager Update a Target
       description: >-
         Updates properties of an existing target. Only the specified fields
         are modified; unspecified fields remain unchanged.
       tags:
-        - Targets
+      - Targets
       parameters:
-        - $ref: '#/components/parameters/targetIdPath'
+      - $ref: '#/components/parameters/targetIdPath'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/TargetUpdateRequest'
+            examples:
+              UpdatetargetRequestExample:
+                summary: Default updateTarget request
+                x-microcks-default: true
+                value:
+                  properties: example_value
       responses:
         '200':
           description: Target updated successfully.
@@ -185,6 +283,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Target'
+              examples:
+                Updatetarget200Example:
+                  summary: Default updateTarget 200 response
+                  x-microcks-default: true
+                  value:
+                    targetId: '500123'
+                    targetName: example_value
+                    targetType: example_value
+                    targetDisplayType: example_value
+                    hostName: example_value
+                    lifecycleStatus: MONITORED
+                    availabilityStatus: UP
+                    agentUrl: https://www.example.com
+                    oracleHome: example_value
+                    machineName: example_value
+                    installLocation: example_value
+                    timezone: example_value
+                    owner: example_value
+                    timeCreated: '2026-01-15T10:30:00Z'
+                    timeUpdated: '2026-01-15T10:30:00Z'
+                    properties: example_value
+                    canonicalLink: https://www.example.com
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -193,17 +313,20 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteTarget
-      summary: Oracle Enterprise Manager Delete a target
+      summary: Oracle Enterprise Manager Delete a Target
       description: >-
         Removes a monitored target from Enterprise Manager. This stops all
         monitoring, removes collected data associations, and deletes the
         target configuration.
       tags:
-        - Targets
+      - Targets
       parameters:
-        - $ref: '#/components/parameters/targetIdPath'
+      - $ref: '#/components/parameters/targetIdPath'
       responses:
         '204':
           description: Target deleted successfully.
@@ -213,18 +336,21 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /targets/{targetId}/properties:
     get:
       operationId: getTargetProperties
-      summary: Oracle Enterprise Manager Get target properties
+      summary: Oracle Enterprise Manager Get Target Properties
       description: >-
         Returns the configuration and monitoring properties of a specific
         target, including instance properties, dynamic properties, and any
         custom properties defined for the target type.
       tags:
-        - Targets
+      - Targets
       parameters:
-        - $ref: '#/components/parameters/targetIdPath'
+      - $ref: '#/components/parameters/targetIdPath'
       responses:
         '200':
           description: Target properties.
@@ -232,29 +358,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TargetPropertyCollection'
+              examples:
+                Gettargetproperties200Example:
+                  summary: Default getTargetProperties 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - name: Example Title
+                      value: example_value
+                      isReadOnly: true
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /targets/{targetId}/actions/bulkUpdateProperties:
     post:
       operationId: bulkUpdateTargetProperties
-      summary: Oracle Enterprise Manager Bulk update target properties
+      summary: Oracle Enterprise Manager Bulk Update Target Properties
       description: >-
         Updates multiple properties of a target in a single request. Useful
         for batch configuration changes.
       tags:
-        - Targets
+      - Targets
       parameters:
-        - $ref: '#/components/parameters/targetIdPath'
+      - $ref: '#/components/parameters/targetIdPath'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/BulkPropertyUpdateRequest'
+            examples:
+              BulkupdatetargetpropertiesRequestExample:
+                summary: Default bulkUpdateTargetProperties request
+                x-microcks-default: true
+                value:
+                  properties:
+                  - name: Example Title
+                    value: example_value
       responses:
         '200':
           description: Properties updated successfully.
@@ -262,6 +408,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TargetPropertyCollection'
+              examples:
+                Bulkupdatetargetproperties200Example:
+                  summary: Default bulkUpdateTargetProperties 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - name: Example Title
+                      value: example_value
+                      isReadOnly: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -270,18 +425,21 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /targets/{targetId}/metricGroups:
     get:
       operationId: listMetricGroups
-      summary: Oracle Enterprise Manager List metric groups for a target
+      summary: Oracle Enterprise Manager List Metric Groups for a Target
       description: >-
         Returns a list of all metric groups available for a specific target.
         Metric groups organize related metrics and define the collection
         schedule and columns.
       tags:
-        - Metrics
+      - Metrics
       parameters:
-        - $ref: '#/components/parameters/targetIdPath'
+      - $ref: '#/components/parameters/targetIdPath'
       responses:
         '200':
           description: A list of metric groups.
@@ -289,24 +447,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MetricGroupCollection'
+              examples:
+                Listmetricgroups200Example:
+                  summary: Default listMetricGroups 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - metricGroupName: example_value
+                      displayName: example_value
+                      description: A sample description.
+                      collectionFrequency: 10
+                      metricColumns: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /targets/{targetId}/metricGroups/{metricGroupName}:
     get:
       operationId: getMetricGroup
-      summary: Oracle Enterprise Manager Get metric group details
+      summary: Oracle Enterprise Manager Get Metric Group Details
       description: >-
         Returns detailed information about a specific metric group for a target,
         including metric column definitions, collection frequency, and thresholds.
       tags:
-        - Metrics
+      - Metrics
       parameters:
-        - $ref: '#/components/parameters/targetIdPath'
-        - $ref: '#/components/parameters/metricGroupNamePath'
+      - $ref: '#/components/parameters/targetIdPath'
+      - $ref: '#/components/parameters/metricGroupNamePath'
       responses:
         '200':
           description: Metric group details.
@@ -314,24 +486,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MetricGroup'
+              examples:
+                Getmetricgroup200Example:
+                  summary: Default getMetricGroup 200 response
+                  x-microcks-default: true
+                  value:
+                    metricGroupName: example_value
+                    displayName: example_value
+                    description: A sample description.
+                    collectionFrequency: 10
+                    metricColumns:
+                    - columnName: example_value
+                      displayName: example_value
+                      columnType: NUMBER
+                      isKey: true
+                      unit: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /targets/{targetId}/metricGroups/{metricGroupName}/latestData:
     get:
       operationId: getLatestMetricData
-      summary: Oracle Enterprise Manager Get latest metric data
+      summary: Oracle Enterprise Manager Get Latest Metric Data
       description: >-
         Returns the most recently collected metric data for a specific metric
         group on a target. Provides the latest snapshot of performance values.
       tags:
-        - Metrics
+      - Metrics
       parameters:
-        - $ref: '#/components/parameters/targetIdPath'
-        - $ref: '#/components/parameters/metricGroupNamePath'
+      - $ref: '#/components/parameters/targetIdPath'
+      - $ref: '#/components/parameters/metricGroupNamePath'
       responses:
         '200':
           description: Latest metric data for the group.
@@ -339,62 +529,81 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MetricDataCollection'
+              examples:
+                Getlatestmetricdata200Example:
+                  summary: Default getLatestMetricData 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - metricColumn: example_value
+                      value: 42.5
+                      key: example_value
+                      collectionTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /metricTimeSeries:
     get:
       operationId: getMetricTimeSeries
-      summary: Oracle Enterprise Manager Get metric time series data
+      summary: Oracle Enterprise Manager Get Metric Time Series Data
       description: >-
         Returns numeric metric data points over a specified time range for
         one or more targets. Supports filtering by target, metric group,
         metric column, and time range.
       tags:
-        - Metrics
+      - Metrics
       parameters:
-        - name: targetNames
-          in: query
-          description: >-
-            Comma-separated list of target names to retrieve metric data for.
-          schema:
-            type: string
-        - name: targetTypes
-          in: query
-          description: >-
-            Comma-separated list of target types to filter by.
-          schema:
-            type: string
-        - name: metricGroups
-          in: query
-          description: >-
-            Comma-separated list of metric group names.
-          schema:
-            type: string
-        - name: metricColumns
-          in: query
-          description: >-
-            Comma-separated list of metric column names.
-          schema:
-            type: string
-        - name: startTime
-          in: query
-          description: >-
-            Start of the time range in ISO 8601 format.
-          schema:
-            type: string
-            format: date-time
-        - name: endTime
-          in: query
-          description: >-
-            End of the time range in ISO 8601 format.
-          schema:
-            type: string
-            format: date-time
-        - $ref: '#/components/parameters/limitQuery'
+      - name: targetNames
+        in: query
+        description: >-
+          Comma-separated list of target names to retrieve metric data for.
+        schema:
+          type: string
+        example: example_value
+      - name: targetTypes
+        in: query
+        description: >-
+          Comma-separated list of target types to filter by.
+        schema:
+          type: string
+        example: example_value
+      - name: metricGroups
+        in: query
+        description: >-
+          Comma-separated list of metric group names.
+        schema:
+          type: string
+        example: example_value
+      - name: metricColumns
+        in: query
+        description: >-
+          Comma-separated list of metric column names.
+        schema:
+          type: string
+        example: example_value
+      - name: startTime
+        in: query
+        description: >-
+          Start of the time range in ISO 8601 format.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: endTime
+        in: query
+        description: >-
+          End of the time range in ISO 8601 format.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - $ref: '#/components/parameters/limitQuery'
       responses:
         '200':
           description: Metric time series data.
@@ -402,75 +611,96 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MetricTimeSeriesCollection'
+              examples:
+                Getmetrictimeseries200Example:
+                  summary: Default getMetricTimeSeries 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - targetName: example_value
+                      targetType: example_value
+                      metricGroupName: example_value
+                      metricColumnName: example_value
+                      key: example_value
+                      dataPoints: {}
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /incidents:
     get:
       operationId: listIncidents
-      summary: Oracle Enterprise Manager List incidents
+      summary: Oracle Enterprise Manager List Incidents
       description: >-
         Returns a list of incidents in Enterprise Manager. Supports filtering
         by severity, priority, status, target, and time range. Incidents
         represent actionable issues detected by monitoring rules.
       tags:
-        - Incidents
+      - Incidents
       parameters:
-        - name: severity
-          in: query
-          description: Filter by incident severity level.
-          schema:
-            type: string
-            enum:
-              - FATAL
-              - CRITICAL
-              - WARNING
-              - ADVISORY
-              - INFORMATIONAL
-        - name: priority
-          in: query
-          description: Filter by incident priority.
-          schema:
-            type: string
-            enum:
-              - URGENT
-              - HIGH
-              - MEDIUM
-              - LOW
-              - NONE
-        - name: status
-          in: query
-          description: Filter by incident status.
-          schema:
-            type: string
-            enum:
-              - NEW
-              - WORK_IN_PROGRESS
-              - RESOLVED
-              - CLOSED
-              - SUPPRESSED
-        - name: targetName
-          in: query
-          description: Filter incidents by target name.
-          schema:
-            type: string
-        - name: targetType
-          in: query
-          description: Filter incidents by target type.
-          schema:
-            type: string
-        - name: sinceTime
-          in: query
-          description: >-
-            Return incidents created after this time in ISO 8601 format.
-          schema:
-            type: string
-            format: date-time
-        - $ref: '#/components/parameters/limitQuery'
-        - $ref: '#/components/parameters/offsetQuery'
+      - name: severity
+        in: query
+        description: Filter by incident severity level.
+        schema:
+          type: string
+          enum:
+          - FATAL
+          - CRITICAL
+          - WARNING
+          - ADVISORY
+          - INFORMATIONAL
+        example: FATAL
+      - name: priority
+        in: query
+        description: Filter by incident priority.
+        schema:
+          type: string
+          enum:
+          - URGENT
+          - HIGH
+          - MEDIUM
+          - LOW
+          - NONE
+        example: URGENT
+      - name: status
+        in: query
+        description: Filter by incident status.
+        schema:
+          type: string
+          enum:
+          - NEW
+          - WORK_IN_PROGRESS
+          - RESOLVED
+          - CLOSED
+          - SUPPRESSED
+        example: NEW
+      - name: targetName
+        in: query
+        description: Filter incidents by target name.
+        schema:
+          type: string
+        example: example_value
+      - name: targetType
+        in: query
+        description: Filter incidents by target type.
+        schema:
+          type: string
+        example: example_value
+      - name: sinceTime
+        in: query
+        description: >-
+          Return incidents created after this time in ISO 8601 format.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - $ref: '#/components/parameters/limitQuery'
+      - $ref: '#/components/parameters/offsetQuery'
       responses:
         '200':
           description: A paginated list of incidents.
@@ -478,24 +708,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/IncidentCollection'
+              examples:
+                Listincidents200Example:
+                  summary: Default listIncidents 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - incidentId: '500123'
+                      summary: example_value
+                      severity: FATAL
+                      priority: URGENT
+                      status: NEW
+                      category: AVAILABILITY
+                      targetName: example_value
+                      targetType: example_value
+                      escalationLevel: 10
+                      owner: example_value
+                      acknowledgedBy: example_value
+                      resolutionState: example_value
+                      ruleSetName: example_value
+                      timeRaised: '2026-01-15T10:30:00Z'
+                      timeUpdated: '2026-01-15T10:30:00Z'
+                      timeResolved: '2026-01-15T10:30:00Z'
+                      eventCount: 10
+                      canonicalLink: https://www.example.com
+                    totalCount: 10
+                    limit: 10
+                    offset: 10
+                    hasMore: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /incidents/{incidentId}:
     get:
       operationId: getIncident
-      summary: Oracle Enterprise Manager Get incident details
+      summary: Oracle Enterprise Manager Get Incident Details
       description: >-
         Returns detailed information about a specific incident including
         severity, priority, status, associated target, timeline, and
         resolution information.
       tags:
-        - Incidents
+      - Incidents
       parameters:
-        - $ref: '#/components/parameters/incidentIdPath'
+      - $ref: '#/components/parameters/incidentIdPath'
       responses:
         '200':
           description: Incident details.
@@ -503,23 +764,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Incident'
+              examples:
+                Getincident200Example:
+                  summary: Default getIncident 200 response
+                  x-microcks-default: true
+                  value:
+                    incidentId: '500123'
+                    summary: example_value
+                    severity: FATAL
+                    priority: URGENT
+                    status: NEW
+                    category: AVAILABILITY
+                    targetName: example_value
+                    targetType: example_value
+                    escalationLevel: 10
+                    owner: example_value
+                    acknowledgedBy: example_value
+                    resolutionState: example_value
+                    ruleSetName: example_value
+                    timeRaised: '2026-01-15T10:30:00Z'
+                    timeUpdated: '2026-01-15T10:30:00Z'
+                    timeResolved: '2026-01-15T10:30:00Z'
+                    eventCount: 10
+                    canonicalLink: https://www.example.com
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /incidents/{incidentId}/actions/clear:
     post:
       operationId: clearIncident
-      summary: Oracle Enterprise Manager Clear an incident
+      summary: Oracle Enterprise Manager Clear an Incident
       description: >-
         Clears an incident, indicating that the issue has been resolved. The
         incident status is set to CLOSED.
       tags:
-        - Incidents
+      - Incidents
       parameters:
-        - $ref: '#/components/parameters/incidentIdPath'
+      - $ref: '#/components/parameters/incidentIdPath'
       responses:
         '200':
           description: Incident cleared successfully.
@@ -527,23 +814,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Incident'
+              examples:
+                Clearincident200Example:
+                  summary: Default clearIncident 200 response
+                  x-microcks-default: true
+                  value:
+                    incidentId: '500123'
+                    summary: example_value
+                    severity: FATAL
+                    priority: URGENT
+                    status: NEW
+                    category: AVAILABILITY
+                    targetName: example_value
+                    targetType: example_value
+                    escalationLevel: 10
+                    owner: example_value
+                    acknowledgedBy: example_value
+                    resolutionState: example_value
+                    ruleSetName: example_value
+                    timeRaised: '2026-01-15T10:30:00Z'
+                    timeUpdated: '2026-01-15T10:30:00Z'
+                    timeResolved: '2026-01-15T10:30:00Z'
+                    eventCount: 10
+                    canonicalLink: https://www.example.com
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /incidents/{incidentId}/actions/suppress:
     post:
       operationId: suppressIncident
-      summary: Oracle Enterprise Manager Suppress an incident
+      summary: Oracle Enterprise Manager Suppress an Incident
       description: >-
         Suppresses an incident so it does not appear in active incident views
         or trigger notifications. Useful for known issues under investigation.
       tags:
-        - Incidents
+      - Incidents
       parameters:
-        - $ref: '#/components/parameters/incidentIdPath'
+      - $ref: '#/components/parameters/incidentIdPath'
       responses:
         '200':
           description: Incident suppressed successfully.
@@ -551,23 +864,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Incident'
+              examples:
+                Suppressincident200Example:
+                  summary: Default suppressIncident 200 response
+                  x-microcks-default: true
+                  value:
+                    incidentId: '500123'
+                    summary: example_value
+                    severity: FATAL
+                    priority: URGENT
+                    status: NEW
+                    category: AVAILABILITY
+                    targetName: example_value
+                    targetType: example_value
+                    escalationLevel: 10
+                    owner: example_value
+                    acknowledgedBy: example_value
+                    resolutionState: example_value
+                    ruleSetName: example_value
+                    timeRaised: '2026-01-15T10:30:00Z'
+                    timeUpdated: '2026-01-15T10:30:00Z'
+                    timeResolved: '2026-01-15T10:30:00Z'
+                    eventCount: 10
+                    canonicalLink: https://www.example.com
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /incidents/{incidentId}/actions/unsuppress:
     post:
       operationId: unsuppressIncident
-      summary: Oracle Enterprise Manager Unsuppress an incident
+      summary: Oracle Enterprise Manager Unsuppress an Incident
       description: >-
         Reverses the suppression of an incident, restoring it to active
         visibility and notification eligibility.
       tags:
-        - Incidents
+      - Incidents
       parameters:
-        - $ref: '#/components/parameters/incidentIdPath'
+      - $ref: '#/components/parameters/incidentIdPath'
       responses:
         '200':
           description: Incident unsuppressed successfully.
@@ -575,24 +914,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Incident'
+              examples:
+                Unsuppressincident200Example:
+                  summary: Default unsuppressIncident 200 response
+                  x-microcks-default: true
+                  value:
+                    incidentId: '500123'
+                    summary: example_value
+                    severity: FATAL
+                    priority: URGENT
+                    status: NEW
+                    category: AVAILABILITY
+                    targetName: example_value
+                    targetType: example_value
+                    escalationLevel: 10
+                    owner: example_value
+                    acknowledgedBy: example_value
+                    resolutionState: example_value
+                    ruleSetName: example_value
+                    timeRaised: '2026-01-15T10:30:00Z'
+                    timeUpdated: '2026-01-15T10:30:00Z'
+                    timeResolved: '2026-01-15T10:30:00Z'
+                    eventCount: 10
+                    canonicalLink: https://www.example.com
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /incidents/{incidentId}/events:
     get:
       operationId: getIncidentEvents
-      summary: Oracle Enterprise Manager Get incident events
+      summary: Oracle Enterprise Manager Get Incident Events
       description: >-
         Returns the list of events associated with an incident. Events are
         the underlying monitoring detections that were correlated to form
         the incident.
       tags:
-        - Incidents
+      - Incidents
       parameters:
-        - $ref: '#/components/parameters/incidentIdPath'
+      - $ref: '#/components/parameters/incidentIdPath'
       responses:
         '200':
           description: A list of events for the incident.
@@ -600,23 +965,44 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EventCollection'
+              examples:
+                Getincidentevents200Example:
+                  summary: Default getIncidentEvents 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - eventId: '500123'
+                      eventType: METRIC_ALERT
+                      severity: FATAL
+                      message: example_value
+                      targetName: example_value
+                      targetType: example_value
+                      metricGroupName: example_value
+                      metricColumnName: example_value
+                      metricValue: 42.5
+                      timeRaised: '2026-01-15T10:30:00Z'
+                      timeResolved: '2026-01-15T10:30:00Z'
+                      canonicalLink: https://www.example.com
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /incidents/{incidentId}/annotations:
     get:
       operationId: getIncidentAnnotations
-      summary: Oracle Enterprise Manager Get incident annotations
+      summary: Oracle Enterprise Manager Get Incident Annotations
       description: >-
         Returns annotations (comments and notes) associated with an incident.
         Annotations provide a record of investigation and remediation steps.
       tags:
-        - Incidents
+      - Incidents
       parameters:
-        - $ref: '#/components/parameters/incidentIdPath'
+      - $ref: '#/components/parameters/incidentIdPath'
       responses:
         '200':
           description: A list of annotations for the incident.
@@ -624,23 +1010,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnnotationCollection'
+              examples:
+                Getincidentannotations200Example:
+                  summary: Default getIncidentAnnotations 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - annotationId: '500123'
+                      summary: example_value
+                      details: example_value
+                      author: example_value
+                      timeCreated: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /events/{eventId}:
     get:
       operationId: getEvent
-      summary: Oracle Enterprise Manager Get event details
+      summary: Oracle Enterprise Manager Get Event Details
       description: >-
         Returns detailed information about a specific event, including its
         type, severity, message, target association, and timestamps.
       tags:
-        - Events
+      - Events
       parameters:
-        - $ref: '#/components/parameters/eventIdPath'
+      - $ref: '#/components/parameters/eventIdPath'
       responses:
         '200':
           description: Event details.
@@ -648,40 +1048,62 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Event'
+              examples:
+                Getevent200Example:
+                  summary: Default getEvent 200 response
+                  x-microcks-default: true
+                  value:
+                    eventId: '500123'
+                    eventType: METRIC_ALERT
+                    severity: FATAL
+                    message: example_value
+                    targetName: example_value
+                    targetType: example_value
+                    metricGroupName: example_value
+                    metricColumnName: example_value
+                    metricValue: 42.5
+                    timeRaised: '2026-01-15T10:30:00Z'
+                    timeResolved: '2026-01-15T10:30:00Z'
+                    canonicalLink: https://www.example.com
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /blackouts:
     get:
       operationId: listBlackouts
-      summary: Oracle Enterprise Manager List blackouts
+      summary: Oracle Enterprise Manager List Blackouts
       description: >-
         Returns a list of blackouts (maintenance windows) configured in
         Enterprise Manager. Supports filtering by status and associated target.
       tags:
-        - Blackouts
+      - Blackouts
       parameters:
-        - name: status
-          in: query
-          description: Filter by blackout status.
-          schema:
-            type: string
-            enum:
-              - SCHEDULED
-              - STARTED
-              - STOPPED
-              - ENDED
-              - MODIFY_PENDING
-        - name: targetName
-          in: query
-          description: Filter by associated target name.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/limitQuery'
-        - $ref: '#/components/parameters/offsetQuery'
+      - name: status
+        in: query
+        description: Filter by blackout status.
+        schema:
+          type: string
+          enum:
+          - SCHEDULED
+          - STARTED
+          - STOPPED
+          - ENDED
+          - MODIFY_PENDING
+        example: SCHEDULED
+      - name: targetName
+        in: query
+        description: Filter by associated target name.
+        schema:
+          type: string
+        example: example_value
+      - $ref: '#/components/parameters/limitQuery'
+      - $ref: '#/components/parameters/offsetQuery'
       responses:
         '200':
           description: A paginated list of blackouts.
@@ -689,27 +1111,71 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BlackoutCollection'
+              examples:
+                Listblackouts200Example:
+                  summary: Default listBlackouts 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - blackoutId: '500123'
+                      blackoutName: example_value
+                      description: A sample description.
+                      status: SCHEDULED
+                      reason: example_value
+                      createdBy: example_value
+                      targets: {}
+                      timeCreated: '2026-01-15T10:30:00Z'
+                      timeUpdated: '2026-01-15T10:30:00Z'
+                      canonicalLink: https://www.example.com
+                    totalCount: 10
+                    limit: 10
+                    offset: 10
+                    hasMore: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createBlackout
-      summary: Oracle Enterprise Manager Create a blackout
+      summary: Oracle Enterprise Manager Create a Blackout
       description: >-
         Creates a new blackout (maintenance window) for one or more targets.
         During a blackout, monitoring data is still collected but alerts and
         notifications are suppressed.
       tags:
-        - Blackouts
+      - Blackouts
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/BlackoutCreateRequest'
+            examples:
+              CreateblackoutRequestExample:
+                summary: Default createBlackout request
+                x-microcks-default: true
+                value:
+                  blackoutName: example_value
+                  description: A sample description.
+                  reason: example_value
+                  schedule:
+                    startTime: '2026-01-15T10:30:00Z'
+                    endTime: '2026-01-15T10:30:00Z'
+                    duration: 10
+                    timezone: example_value
+                    frequency: ONCE
+                    repeatInterval: 10
+                    daysOfWeek:
+                    - {}
+                  targets:
+                  - targetName: example_value
+                    targetType: example_value
+                    includeMembers: true
       responses:
         '201':
           description: Blackout created successfully.
@@ -717,6 +1183,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Blackout'
+              examples:
+                Createblackout201Example:
+                  summary: Default createBlackout 201 response
+                  x-microcks-default: true
+                  value:
+                    blackoutId: '500123'
+                    blackoutName: example_value
+                    description: A sample description.
+                    status: SCHEDULED
+                    reason: example_value
+                    createdBy: example_value
+                    schedule:
+                      startTime: '2026-01-15T10:30:00Z'
+                      endTime: '2026-01-15T10:30:00Z'
+                      duration: 10
+                      timezone: example_value
+                      frequency: ONCE
+                      repeatInterval: 10
+                      daysOfWeek:
+                      - {}
+                    targets:
+                    - targetName: example_value
+                      targetType: example_value
+                      includeMembers: true
+                    timeCreated: '2026-01-15T10:30:00Z'
+                    timeUpdated: '2026-01-15T10:30:00Z'
+                    canonicalLink: https://www.example.com
           headers:
             Location:
               description: URI of the newly created blackout resource.
@@ -729,17 +1222,20 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /blackouts/{blackoutId}:
     get:
       operationId: getBlackout
-      summary: Oracle Enterprise Manager Get blackout details
+      summary: Oracle Enterprise Manager Get Blackout Details
       description: >-
         Returns detailed information about a specific blackout including its
         schedule, affected targets, status, and reason.
       tags:
-        - Blackouts
+      - Blackouts
       parameters:
-        - $ref: '#/components/parameters/blackoutIdPath'
+      - $ref: '#/components/parameters/blackoutIdPath'
       responses:
         '200':
           description: Blackout details.
@@ -747,29 +1243,79 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Blackout'
+              examples:
+                Getblackout200Example:
+                  summary: Default getBlackout 200 response
+                  x-microcks-default: true
+                  value:
+                    blackoutId: '500123'
+                    blackoutName: example_value
+                    description: A sample description.
+                    status: SCHEDULED
+                    reason: example_value
+                    createdBy: example_value
+                    schedule:
+                      startTime: '2026-01-15T10:30:00Z'
+                      endTime: '2026-01-15T10:30:00Z'
+                      duration: 10
+                      timezone: example_value
+                      frequency: ONCE
+                      repeatInterval: 10
+                      daysOfWeek:
+                      - {}
+                    targets:
+                    - targetName: example_value
+                      targetType: example_value
+                      includeMembers: true
+                    timeCreated: '2026-01-15T10:30:00Z'
+                    timeUpdated: '2026-01-15T10:30:00Z'
+                    canonicalLink: https://www.example.com
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: editBlackout
-      summary: Oracle Enterprise Manager Edit a blackout
+      summary: Oracle Enterprise Manager Edit a Blackout
       description: >-
         Modifies an existing blackout. Can update the schedule, targets,
         reason, or other properties. Only scheduled or started blackouts
         can be edited.
       tags:
-        - Blackouts
+      - Blackouts
       parameters:
-        - $ref: '#/components/parameters/blackoutIdPath'
+      - $ref: '#/components/parameters/blackoutIdPath'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/BlackoutUpdateRequest'
+            examples:
+              EditblackoutRequestExample:
+                summary: Default editBlackout request
+                x-microcks-default: true
+                value:
+                  description: A sample description.
+                  reason: example_value
+                  schedule:
+                    startTime: '2026-01-15T10:30:00Z'
+                    endTime: '2026-01-15T10:30:00Z'
+                    duration: 10
+                    timezone: example_value
+                    frequency: ONCE
+                    repeatInterval: 10
+                    daysOfWeek:
+                    - {}
+                  targets:
+                  - targetName: example_value
+                    targetType: example_value
+                    includeMembers: true
       responses:
         '200':
           description: Blackout updated successfully.
@@ -777,6 +1323,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Blackout'
+              examples:
+                Editblackout200Example:
+                  summary: Default editBlackout 200 response
+                  x-microcks-default: true
+                  value:
+                    blackoutId: '500123'
+                    blackoutName: example_value
+                    description: A sample description.
+                    status: SCHEDULED
+                    reason: example_value
+                    createdBy: example_value
+                    schedule:
+                      startTime: '2026-01-15T10:30:00Z'
+                      endTime: '2026-01-15T10:30:00Z'
+                      duration: 10
+                      timezone: example_value
+                      frequency: ONCE
+                      repeatInterval: 10
+                      daysOfWeek:
+                      - {}
+                    targets:
+                    - targetName: example_value
+                      targetType: example_value
+                      includeMembers: true
+                    timeCreated: '2026-01-15T10:30:00Z'
+                    timeUpdated: '2026-01-15T10:30:00Z'
+                    canonicalLink: https://www.example.com
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -785,16 +1358,19 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteBlackout
-      summary: Oracle Enterprise Manager Delete a blackout
+      summary: Oracle Enterprise Manager Delete a Blackout
       description: >-
         Deletes a blackout. Only scheduled (not yet started) blackouts can
         be deleted. Use the stop action to end an active blackout.
       tags:
-        - Blackouts
+      - Blackouts
       parameters:
-        - $ref: '#/components/parameters/blackoutIdPath'
+      - $ref: '#/components/parameters/blackoutIdPath'
       responses:
         '204':
           description: Blackout deleted successfully.
@@ -806,17 +1382,20 @@ paths:
           $ref: '#/components/responses/Conflict'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /blackouts/{blackoutId}/actions/stop:
     post:
       operationId: stopBlackout
-      summary: Oracle Enterprise Manager Stop a blackout
+      summary: Oracle Enterprise Manager Stop a Blackout
       description: >-
         Stops an active blackout before its scheduled end time. Monitoring
         and alerting resume immediately for all affected targets.
       tags:
-        - Blackouts
+      - Blackouts
       parameters:
-        - $ref: '#/components/parameters/blackoutIdPath'
+      - $ref: '#/components/parameters/blackoutIdPath'
       responses:
         '200':
           description: Blackout stopped successfully.
@@ -824,6 +1403,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Blackout'
+              examples:
+                Stopblackout200Example:
+                  summary: Default stopBlackout 200 response
+                  x-microcks-default: true
+                  value:
+                    blackoutId: '500123'
+                    blackoutName: example_value
+                    description: A sample description.
+                    status: SCHEDULED
+                    reason: example_value
+                    createdBy: example_value
+                    schedule:
+                      startTime: '2026-01-15T10:30:00Z'
+                      endTime: '2026-01-15T10:30:00Z'
+                      duration: 10
+                      timezone: example_value
+                      frequency: ONCE
+                      repeatInterval: 10
+                      daysOfWeek:
+                      - {}
+                    targets:
+                    - targetName: example_value
+                      targetType: example_value
+                      includeMembers: true
+                    timeCreated: '2026-01-15T10:30:00Z'
+                    timeUpdated: '2026-01-15T10:30:00Z'
+                    canonicalLink: https://www.example.com
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
@@ -834,19 +1440,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Stopblackout409Example:
+                  summary: Default stopBlackout 409 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    message: example_value
+                    details: example_value
+                    httpStatusCode: 10
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /blackouts/{blackoutId}/targets:
     get:
       operationId: getBlackoutTargets
-      summary: Oracle Enterprise Manager Get blackout targets
+      summary: Oracle Enterprise Manager Get Blackout Targets
       description: >-
         Returns the list of targets affected by a specific blackout, including
         both directly specified targets and targets included via group membership.
       tags:
-        - Blackouts
+      - Blackouts
       parameters:
-        - $ref: '#/components/parameters/blackoutIdPath'
+      - $ref: '#/components/parameters/blackoutIdPath'
       responses:
         '200':
           description: A list of targets in the blackout.
@@ -854,21 +1472,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BlackoutTargetCollection'
+              examples:
+                Getblackouttargets200Example:
+                  summary: Default getBlackoutTargets 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - targetName: example_value
+                      targetType: example_value
+                      includeMembers: true
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /blackouts/dashboard:
     get:
       operationId: getBlackoutDashboard
-      summary: Oracle Enterprise Manager Get blackout statistics
+      summary: Oracle Enterprise Manager Get Blackout Statistics
       description: >-
         Returns summary statistics about blackouts including counts by status,
         upcoming blackouts, and recently ended blackouts.
       tags:
-        - Blackouts
+      - Blackouts
       responses:
         '200':
           description: Blackout dashboard statistics.
@@ -876,19 +1506,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BlackoutDashboard'
+              examples:
+                Getblackoutdashboard200Example:
+                  summary: Default getBlackoutDashboard 200 response
+                  x-microcks-default: true
+                  value:
+                    totalBlackouts: 10
+                    activeBlackouts: 10
+                    scheduledBlackouts: 10
+                    endedBlackouts: 10
+                    targetsInBlackout: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /blackouts/reasons:
     get:
       operationId: listBlackoutReasons
-      summary: Oracle Enterprise Manager List blackout reasons
+      summary: Oracle Enterprise Manager List Blackout Reasons
       description: >-
         Returns a list of predefined blackout reasons that can be associated
         with blackouts for categorization and reporting.
       tags:
-        - Blackouts
+      - Blackouts
       responses:
         '200':
           description: A list of blackout reasons.
@@ -896,24 +1539,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BlackoutReasonCollection'
+              examples:
+                Listblackoutreasons200Example:
+                  summary: Default listBlackoutReasons 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - reasonId: '500123'
+                      reason: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createBlackoutReason
-      summary: Oracle Enterprise Manager Create a blackout reason
+      summary: Oracle Enterprise Manager Create a Blackout Reason
       description: >-
         Creates a new blackout reason that can be used when creating or editing
         blackouts.
       tags:
-        - Blackouts
+      - Blackouts
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/BlackoutReasonCreateRequest'
+            examples:
+              CreateblackoutreasonRequestExample:
+                summary: Default createBlackoutReason request
+                x-microcks-default: true
+                value:
+                  reason: example_value
       responses:
         '201':
           description: Blackout reason created successfully.
@@ -921,26 +1581,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BlackoutReason'
+              examples:
+                Createblackoutreason201Example:
+                  summary: Default createBlackoutReason 201 response
+                  x-microcks-default: true
+                  value:
+                    reasonId: '500123'
+                    reason: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /blackouts/reasons/{reasonId}:
     delete:
       operationId: deleteBlackoutReason
-      summary: Oracle Enterprise Manager Delete a blackout reason
+      summary: Oracle Enterprise Manager Delete a Blackout Reason
       description: Deletes a blackout reason by its identifier.
       tags:
-        - Blackouts
+      - Blackouts
       parameters:
-        - name: reasonId
-          in: path
-          required: true
-          description: Unique identifier of the blackout reason.
-          schema:
-            type: string
+      - name: reasonId
+        in: path
+        required: true
+        description: Unique identifier of the blackout reason.
+        schema:
+          type: string
+        example: '500123'
       responses:
         '204':
           description: Blackout reason deleted successfully.
@@ -950,15 +1621,18 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /globalTargetProperties:
     get:
       operationId: listGlobalTargetProperties
-      summary: Oracle Enterprise Manager List global target properties
+      summary: Oracle Enterprise Manager List Global Target Properties
       description: >-
         Returns a list of global target properties that are defined for
         classifying and organizing targets.
       tags:
-        - Global Target Properties
+      - Global Target Properties
       responses:
         '200':
           description: A list of global target properties.
@@ -966,24 +1640,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GlobalTargetPropertyCollection'
+              examples:
+                Listglobaltargetproperties200Example:
+                  summary: Default listGlobalTargetProperties 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - globalTargetPropertyId: '500123'
+                      propertyName: example_value
+                      propertyDisplayName: example_value
+                      description: A sample description.
+                      propertyType: STRING
+                      hasValidValues: true
         '401':
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createGlobalTargetProperty
-      summary: Oracle Enterprise Manager Create a global target property
+      summary: Oracle Enterprise Manager Create a Global Target Property
       description: >-
         Creates a new global target property definition. Global properties
         provide a way to classify targets with custom metadata.
       tags:
-        - Global Target Properties
+      - Global Target Properties
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/GlobalTargetPropertyCreateRequest'
+            examples:
+              CreateglobaltargetpropertyRequestExample:
+                summary: Default createGlobalTargetProperty request
+                x-microcks-default: true
+                value:
+                  propertyName: example_value
+                  propertyDisplayName: example_value
+                  description: A sample description.
+                  propertyType: STRING
+                  validValues:
+                  - example_value
       responses:
         '201':
           description: Global target property created successfully.
@@ -991,26 +1691,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GlobalTargetProperty'
+              examples:
+                Createglobaltargetproperty201Example:
+                  summary: Default createGlobalTargetProperty 201 response
+                  x-microcks-default: true
+                  value:
+                    globalTargetPropertyId: '500123'
+                    propertyName: example_value
+                    propertyDisplayName: example_value
+                    description: A sample description.
+                    propertyType: STRING
+                    hasValidValues: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /globalTargetProperties/{globalTargetPropertyId}:
     get:
       operationId: getGlobalTargetProperty
-      summary: Oracle Enterprise Manager Get global target property details
+      summary: Oracle Enterprise Manager Get Global Target Property Details
       description: Returns details of a specific global target property.
       tags:
-        - Global Target Properties
+      - Global Target Properties
       parameters:
-        - name: globalTargetPropertyId
-          in: path
-          required: true
-          description: Unique identifier of the global target property.
-          schema:
-            type: string
+      - name: globalTargetPropertyId
+        in: path
+        required: true
+        description: Unique identifier of the global target property.
+        schema:
+          type: string
+        example: '500123'
       responses:
         '200':
           description: Global target property details.
@@ -1018,31 +1733,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GlobalTargetProperty'
+              examples:
+                Getglobaltargetproperty200Example:
+                  summary: Default getGlobalTargetProperty 200 response
+                  x-microcks-default: true
+                  value:
+                    globalTargetPropertyId: '500123'
+                    propertyName: example_value
+                    propertyDisplayName: example_value
+                    description: A sample description.
+                    propertyType: STRING
+                    hasValidValues: true
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: modifyGlobalTargetProperty
-      summary: Oracle Enterprise Manager Modify a global target property
+      summary: Oracle Enterprise Manager Modify a Global Target Property
       description: Updates a global target property definition.
       tags:
-        - Global Target Properties
+      - Global Target Properties
       parameters:
-        - name: globalTargetPropertyId
-          in: path
-          required: true
-          description: Unique identifier of the global target property.
-          schema:
-            type: string
+      - name: globalTargetPropertyId
+        in: path
+        required: true
+        description: Unique identifier of the global target property.
+        schema:
+          type: string
+        example: '500123'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/GlobalTargetPropertyUpdateRequest'
+            examples:
+              ModifyglobaltargetpropertyRequestExample:
+                summary: Default modifyGlobalTargetProperty request
+                x-microcks-default: true
+                value:
+                  propertyDisplayName: example_value
+                  description: A sample description.
+                  validValues:
+                  - example_value
       responses:
         '200':
           description: Global target property updated successfully.
@@ -1050,6 +1789,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GlobalTargetProperty'
+              examples:
+                Modifyglobaltargetproperty200Example:
+                  summary: Default modifyGlobalTargetProperty 200 response
+                  x-microcks-default: true
+                  value:
+                    globalTargetPropertyId: '500123'
+                    propertyName: example_value
+                    propertyDisplayName: example_value
+                    description: A sample description.
+                    propertyType: STRING
+                    hasValidValues: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -1058,19 +1808,23 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteGlobalTargetProperty
-      summary: Oracle Enterprise Manager Delete a global target property
+      summary: Oracle Enterprise Manager Delete a Global Target Property
       description: Deletes a global target property definition.
       tags:
-        - Global Target Properties
+      - Global Target Properties
       parameters:
-        - name: globalTargetPropertyId
-          in: path
-          required: true
-          description: Unique identifier of the global target property.
-          schema:
-            type: string
+      - name: globalTargetPropertyId
+        in: path
+        required: true
+        description: Unique identifier of the global target property.
+        schema:
+          type: string
+        example: '500123'
       responses:
         '204':
           description: Global target property deleted successfully.
@@ -1080,22 +1834,26 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /globalTargetProperties/{globalTargetPropertyId}/validValues:
     get:
       operationId: getGlobalTargetPropertyValidValues
-      summary: Oracle Enterprise Manager Get valid values for a global target property
+      summary: Oracle Enterprise Manager Get Valid Values for a Global Target Property
       description: >-
         Returns the list of valid values defined for a global target property,
         if the property has a constrained value set.
       tags:
-        - Global Target Properties
+      - Global Target Properties
       parameters:
-        - name: globalTargetPropertyId
-          in: path
-          required: true
-          description: Unique identifier of the global target property.
-          schema:
-            type: string
+      - name: globalTargetPropertyId
+        in: path
+        required: true
+        description: Unique identifier of the global target property.
+        schema:
+          type: string
+        example: '500123'
       responses:
         '200':
           description: List of valid values.
@@ -1108,12 +1866,22 @@ paths:
                     type: array
                     items:
                       type: string
+              examples:
+                Getglobaltargetpropertyvalidvalues200Example:
+                  summary: Default getGlobalTargetPropertyValidValues 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
@@ -1150,10 +1918,10 @@ components:
       schema:
         type: string
         enum:
-          - MONITORED
-          - BLACKOUT
-          - PENDING
-          - DELETED
+        - MONITORED
+        - BLACKOUT
+        - PENDING
+        - DELETED
     limitQuery:
       name: limit
       in: query
@@ -1210,114 +1978,132 @@ components:
         targetId:
           type: string
           description: Unique identifier of the target.
+          example: '500123'
         targetName:
           type: string
           description: Display name of the target.
+          example: example_value
         targetType:
           type: string
           description: >-
             The type of the target, defining its monitoring template and
             available metrics.
           examples:
-            - oracle_database
-            - host
-            - weblogic_j2eeserver
-            - oracle_pdb
-            - rac_database
+          - oracle_database
+          - host
+          - weblogic_j2eeserver
+          - oracle_pdb
+          - rac_database
         targetDisplayType:
           type: string
           description: Human-readable target type display name.
           examples:
-            - Oracle Database
-            - Host
-            - WebLogic Server
+          - Oracle Database
+          - Host
+          - WebLogic Server
         hostName:
           type: string
           description: The hostname where the target resides.
+          example: example_value
         lifecycleStatus:
           type: string
           description: Current lifecycle status of the target.
           enum:
-            - MONITORED
-            - BLACKOUT
-            - PENDING
-            - DELETED
+          - MONITORED
+          - BLACKOUT
+          - PENDING
+          - DELETED
+          example: MONITORED
         availabilityStatus:
           type: string
           description: Current availability status reported by monitoring.
           enum:
-            - UP
-            - DOWN
-            - UNKNOWN
-            - UNREACHABLE
-            - BLACKOUT
-            - NOT_MONITORED
-            - ERROR
-            - AGENT_UNREACHABLE
-            - PENDING
+          - UP
+          - DOWN
+          - UNKNOWN
+          - UNREACHABLE
+          - BLACKOUT
+          - NOT_MONITORED
+          - ERROR
+          - AGENT_UNREACHABLE
+          - PENDING
+          example: UP
         agentUrl:
           type: string
           description: URL of the management agent monitoring this target.
+          example: https://www.example.com
         oracleHome:
           type: string
           description: Oracle home directory path, applicable to Oracle targets.
+          example: example_value
         machineName:
           type: string
           description: Machine name where the target is deployed.
+          example: example_value
         installLocation:
           type: string
           description: Installation directory path for the target software.
+          example: example_value
         timezone:
           type: string
           description: Time zone of the target.
+          example: example_value
         owner:
           type: string
           description: Enterprise Manager user who owns this target.
+          example: example_value
         timeCreated:
           type: string
           format: date-time
           description: Timestamp when the target was added to Enterprise Manager.
+          example: '2026-01-15T10:30:00Z'
         timeUpdated:
           type: string
           format: date-time
           description: Timestamp of the last target configuration update.
+          example: '2026-01-15T10:30:00Z'
         properties:
           type: object
           description: Additional target-type-specific configuration properties.
           additionalProperties:
             type: string
+          example: example_value
         canonicalLink:
           type: string
           format: uri
           description: Canonical URI for this target resource.
+          example: https://www.example.com
     TargetCreateRequest:
       type: object
       description: Request body for creating a new target.
       required:
-        - targetName
-        - targetType
-        - hostName
+      - targetName
+      - targetType
+      - hostName
       properties:
         targetName:
           type: string
           description: Display name for the target.
+          example: example_value
         targetType:
           type: string
           description: >-
             Target type identifier defining the monitoring template.
           examples:
-            - oracle_database
-            - host
-            - weblogic_j2eeserver
+          - oracle_database
+          - host
+          - weblogic_j2eeserver
         hostName:
           type: string
           description: The hostname where the target resides.
+          example: example_value
         properties:
           type: object
           description: >-
             Target-type-specific properties required for monitoring.
           additionalProperties:
             type: string
+          example: example_value
         credentials:
           type: object
           description: Monitoring credentials for the target.
@@ -1328,6 +2114,7 @@ components:
             credentialType:
               type: string
               description: Type of credential.
+          example: example_value
     TargetUpdateRequest:
       type: object
       description: Request body for updating an existing target.
@@ -1337,6 +2124,7 @@ components:
           description: Properties to update on the target.
           additionalProperties:
             type: string
+          example: example_value
     TargetCollection:
       type: object
       description: Paginated collection of targets.
@@ -1345,18 +2133,23 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Target'
+          example: []
         totalCount:
           type: integer
           description: Total number of targets matching the query.
+          example: 10
         limit:
           type: integer
           description: Maximum items per page.
+          example: 10
         offset:
           type: integer
           description: Current offset in the result set.
+          example: 10
         hasMore:
           type: boolean
           description: Whether more results are available.
+          example: true
     TargetProperty:
       type: object
       description: A configuration property of a target.
@@ -1364,12 +2157,15 @@ components:
         name:
           type: string
           description: Property name.
+          example: Example Title
         value:
           type: string
           description: Property value.
+          example: example_value
         isReadOnly:
           type: boolean
           description: Whether the property is read-only.
+          example: true
     TargetPropertyCollection:
       type: object
       description: Collection of target properties.
@@ -1378,6 +2174,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TargetProperty'
+          example: []
     BulkPropertyUpdateRequest:
       type: object
       description: Request body for bulk property updates.
@@ -1391,6 +2188,7 @@ components:
                 type: string
               value:
                 type: string
+          example: []
     MetricGroup:
       type: object
       description: >-
@@ -1400,20 +2198,25 @@ components:
         metricGroupName:
           type: string
           description: Unique name of the metric group.
+          example: example_value
         displayName:
           type: string
           description: Human-readable display name.
+          example: example_value
         description:
           type: string
           description: Description of what this metric group measures.
+          example: A sample description.
         collectionFrequency:
           type: integer
           description: Collection interval in seconds.
+          example: 10
         metricColumns:
           type: array
           description: List of metric columns in this group.
           items:
             $ref: '#/components/schemas/MetricColumn'
+          example: []
     MetricColumn:
       type: object
       description: A single metric column within a metric group.
@@ -1421,21 +2224,26 @@ components:
         columnName:
           type: string
           description: Name of the metric column.
+          example: example_value
         displayName:
           type: string
           description: Human-readable display name.
+          example: example_value
         columnType:
           type: string
           description: Data type of the metric column.
           enum:
-            - NUMBER
-            - STRING
+          - NUMBER
+          - STRING
+          example: NUMBER
         isKey:
           type: boolean
           description: Whether this column is a key column.
+          example: true
         unit:
           type: string
           description: Unit of measurement for the metric.
+          example: example_value
     MetricGroupCollection:
       type: object
       description: Collection of metric groups.
@@ -1444,6 +2252,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MetricGroup'
+          example: []
     MetricDataPoint:
       type: object
       description: A single metric data point.
@@ -1451,16 +2260,20 @@ components:
         metricColumn:
           type: string
           description: Name of the metric column.
+          example: example_value
         value:
           type: number
           description: Numeric metric value.
+          example: 42.5
         key:
           type: string
           description: Key value identifying the metric row.
+          example: example_value
         collectionTime:
           type: string
           format: date-time
           description: Timestamp when the metric was collected.
+          example: '2026-01-15T10:30:00Z'
     MetricDataCollection:
       type: object
       description: Collection of metric data points.
@@ -1469,6 +2282,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MetricDataPoint'
+          example: []
     MetricTimeSeries:
       type: object
       description: Time series data for a single metric.
@@ -1476,18 +2290,23 @@ components:
         targetName:
           type: string
           description: Name of the target.
+          example: example_value
         targetType:
           type: string
           description: Type of the target.
+          example: example_value
         metricGroupName:
           type: string
           description: Name of the metric group.
+          example: example_value
         metricColumnName:
           type: string
           description: Name of the metric column.
+          example: example_value
         key:
           type: string
           description: Key value for the metric row.
+          example: example_value
         dataPoints:
           type: array
           items:
@@ -1498,6 +2317,7 @@ components:
                 format: date-time
               value:
                 type: number
+          example: []
     MetricTimeSeriesCollection:
       type: object
       description: Collection of metric time series.
@@ -1506,6 +2326,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MetricTimeSeries'
+          example: []
     Incident:
       type: object
       description: >-
@@ -1515,87 +2336,105 @@ components:
         incidentId:
           type: string
           description: Unique identifier of the incident.
+          example: '500123'
         summary:
           type: string
           description: Brief summary of the incident.
+          example: example_value
         severity:
           type: string
           description: Severity level of the incident.
           enum:
-            - FATAL
-            - CRITICAL
-            - WARNING
-            - ADVISORY
-            - INFORMATIONAL
+          - FATAL
+          - CRITICAL
+          - WARNING
+          - ADVISORY
+          - INFORMATIONAL
+          example: FATAL
         priority:
           type: string
           description: Priority assigned to the incident.
           enum:
-            - URGENT
-            - HIGH
-            - MEDIUM
-            - LOW
-            - NONE
+          - URGENT
+          - HIGH
+          - MEDIUM
+          - LOW
+          - NONE
+          example: URGENT
         status:
           type: string
           description: Current status of the incident.
           enum:
-            - NEW
-            - WORK_IN_PROGRESS
-            - RESOLVED
-            - CLOSED
-            - SUPPRESSED
+          - NEW
+          - WORK_IN_PROGRESS
+          - RESOLVED
+          - CLOSED
+          - SUPPRESSED
+          example: NEW
         category:
           type: string
           description: Category of the incident.
           enum:
-            - AVAILABILITY
-            - PERFORMANCE
-            - SECURITY
-            - CONFIGURATION
-            - ERROR
-            - CAPACITY
-            - COMPLIANCE
+          - AVAILABILITY
+          - PERFORMANCE
+          - SECURITY
+          - CONFIGURATION
+          - ERROR
+          - CAPACITY
+          - COMPLIANCE
+          example: AVAILABILITY
         targetName:
           type: string
           description: Name of the target associated with this incident.
+          example: example_value
         targetType:
           type: string
           description: Type of the target associated with this incident.
+          example: example_value
         escalationLevel:
           type: integer
           description: Current escalation level of the incident.
+          example: 10
         owner:
           type: string
           description: Username of the incident owner or assignee.
+          example: example_value
         acknowledgedBy:
           type: string
           description: Username of the person who acknowledged the incident.
+          example: example_value
         resolutionState:
           type: string
           description: Resolution state providing closure details.
+          example: example_value
         ruleSetName:
           type: string
           description: Name of the incident rule set that created this incident.
+          example: example_value
         timeRaised:
           type: string
           format: date-time
           description: Timestamp when the incident was first raised.
+          example: '2026-01-15T10:30:00Z'
         timeUpdated:
           type: string
           format: date-time
           description: Timestamp of the last incident update.
+          example: '2026-01-15T10:30:00Z'
         timeResolved:
           type: string
           format: date-time
           description: Timestamp when the incident was resolved.
+          example: '2026-01-15T10:30:00Z'
         eventCount:
           type: integer
           description: Number of events correlated into this incident.
+          example: 10
         canonicalLink:
           type: string
           format: uri
           description: Canonical URI for this incident resource.
+          example: https://www.example.com
     IncidentCollection:
       type: object
       description: Paginated collection of incidents.
@@ -1604,15 +2443,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Incident'
+          example: []
         totalCount:
           type: integer
           description: Total number of incidents matching the query.
+          example: 10
         limit:
           type: integer
+          example: 10
         offset:
           type: integer
+          example: 10
         hasMore:
           type: boolean
+          example: true
     Event:
       type: object
       description: >-
@@ -1622,55 +2466,67 @@ components:
         eventId:
           type: string
           description: Unique identifier of the event.
+          example: '500123'
         eventType:
           type: string
           description: Type of the event.
           enum:
-            - METRIC_ALERT
-            - TARGET_AVAILABILITY
-            - JOB_STATUS_CHANGE
-            - COMPLIANCE_VIOLATION
-            - USER_REPORTED
+          - METRIC_ALERT
+          - TARGET_AVAILABILITY
+          - JOB_STATUS_CHANGE
+          - COMPLIANCE_VIOLATION
+          - USER_REPORTED
+          example: METRIC_ALERT
         severity:
           type: string
           description: Severity of the event.
           enum:
-            - FATAL
-            - CRITICAL
-            - WARNING
-            - ADVISORY
-            - INFORMATIONAL
-            - CLEAR
+          - FATAL
+          - CRITICAL
+          - WARNING
+          - ADVISORY
+          - INFORMATIONAL
+          - CLEAR
+          example: FATAL
         message:
           type: string
           description: Descriptive message for the event.
+          example: example_value
         targetName:
           type: string
           description: Name of the target that generated this event.
+          example: example_value
         targetType:
           type: string
           description: Type of the target that generated this event.
+          example: example_value
         metricGroupName:
           type: string
           description: Name of the metric group, if this is a metric alert event.
+          example: example_value
         metricColumnName:
           type: string
           description: Name of the metric column, if this is a metric alert event.
+          example: example_value
         metricValue:
           type: number
           description: Metric value that triggered the event.
+          example: 42.5
         timeRaised:
           type: string
           format: date-time
           description: Timestamp when the event was raised.
+          example: '2026-01-15T10:30:00Z'
         timeResolved:
           type: string
           format: date-time
           description: Timestamp when the event was resolved.
+          example: '2026-01-15T10:30:00Z'
         canonicalLink:
           type: string
           format: uri
           description: Canonical URI for this event resource.
+          example: https://www.example.com
     EventCollection:
       type: object
       description: Collection of events.
@@ -1679,6 +2535,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Event'
+          example: []
     Annotation:
       type: object
       description: >-
@@ -1688,19 +2545,24 @@ components:
         annotationId:
           type: string
           description: Unique identifier of the annotation.
+          example: '500123'
         summary:
           type: string
           description: Summary text of the annotation.
+          example: example_value
         details:
           type: string
           description: Detailed content of the annotation.
+          example: example_value
         author:
           type: string
           description: Username of the annotation author.
+          example: example_value
         timeCreated:
           type: string
           format: date-time
           description: Timestamp when the annotation was created.
+          example: '2026-01-15T10:30:00Z'
     AnnotationCollection:
       type: object
       description: Collection of annotations.
@@ -1709,6 +2571,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Annotation'
+          example: []
     Blackout:
       type: object
       description: >-
@@ -1719,27 +2582,33 @@ components:
         blackoutId:
           type: string
           description: Unique identifier of the blackout.
+          example: '500123'
         blackoutName:
           type: string
           description: Display name of the blackout.
+          example: example_value
         description:
           type: string
           description: Description of the blackout purpose.
+          example: A sample description.
         status:
           type: string
           description: Current status of the blackout.
           enum:
-            - SCHEDULED
-            - STARTED
-            - STOPPED
-            - ENDED
-            - MODIFY_PENDING
+          - SCHEDULED
+          - STARTED
+          - STOPPED
+          - ENDED
+          - MODIFY_PENDING
+          example: SCHEDULED
         reason:
           type: string
           description: Reason for the blackout.
+          example: example_value
         createdBy:
           type: string
           description: Username of the blackout creator.
+          example: example_value
         schedule:
           $ref: '#/components/schemas/BlackoutSchedule'
         targets:
@@ -1747,18 +2616,22 @@ components:
           description: List of targets included in the blackout.
           items:
             $ref: '#/components/schemas/BlackoutTarget'
+          example: []
         timeCreated:
           type: string
           format: date-time
           description: Timestamp when the blackout was created.
+          example: '2026-01-15T10:30:00Z'
         timeUpdated:
           type: string
           format: date-time
           description: Timestamp of the last blackout update.
+          example: '2026-01-15T10:30:00Z'
         canonicalLink:
           type: string
           format: uri
           description: Canonical URI for this blackout resource.
+          example: https://www.example.com
     BlackoutSchedule:
       type: object
       description: Schedule definition for a blackout.
@@ -1767,41 +2640,48 @@ components:
           type: string
           format: date-time
           description: Scheduled start time of the blackout.
+          example: '2026-01-15T10:30:00Z'
         endTime:
           type: string
           format: date-time
           description: Scheduled end time of the blackout.
+          example: '2026-01-15T10:30:00Z'
         duration:
           type: integer
           description: Duration in minutes if no explicit end time is specified.
+          example: 10
         timezone:
           type: string
           description: Time zone for the schedule.
+          example: example_value
         frequency:
           type: string
           description: Recurrence frequency for repeating blackouts.
           enum:
-            - ONCE
-            - DAILY
-            - WEEKLY
-            - MONTHLY
-            - YEARLY
+          - ONCE
+          - DAILY
+          - WEEKLY
+          - MONTHLY
+          - YEARLY
+          example: ONCE
         repeatInterval:
           type: integer
           description: Interval for repeating blackouts (e.g., every 2 weeks).
+          example: 10
         daysOfWeek:
           type: array
           description: Days of the week for weekly recurrence.
           items:
             type: string
             enum:
-              - SUNDAY
-              - MONDAY
-              - TUESDAY
-              - WEDNESDAY
-              - THURSDAY
-              - FRIDAY
-              - SATURDAY
+            - SUNDAY
+            - MONDAY
+            - TUESDAY
+            - WEDNESDAY
+            - THURSDAY
+            - FRIDAY
+            - SATURDAY
+          example: []
     BlackoutTarget:
       type: object
       description: A target included in a blackout.
@@ -1809,30 +2689,36 @@ components:
         targetName:
           type: string
           description: Name of the target.
+          example: example_value
         targetType:
           type: string
           description: Type of the target.
+          example: example_value
         includeMembers:
           type: boolean
           description: >-
             Whether to include member targets (for composite targets and groups).
+          example: true
     BlackoutCreateRequest:
       type: object
       description: Request body for creating a new blackout.
       required:
-        - blackoutName
-        - schedule
-        - targets
+      - blackoutName
+      - schedule
+      - targets
       properties:
         blackoutName:
           type: string
           description: Display name for the blackout.
+          example: example_value
         description:
           type: string
           description: Description of the blackout purpose.
+          example: A sample description.
         reason:
           type: string
           description: Reason for the blackout.
+          example: example_value
         schedule:
           $ref: '#/components/schemas/BlackoutSchedule'
         targets:
@@ -1840,20 +2726,24 @@ components:
           description: List of targets to include in the blackout.
           items:
             $ref: '#/components/schemas/BlackoutTarget'
+          example: []
     BlackoutUpdateRequest:
       type: object
       description: Request body for updating a blackout.
       properties:
         description:
           type: string
+          example: A sample description.
         reason:
           type: string
+          example: example_value
         schedule:
           $ref: '#/components/schemas/BlackoutSchedule'
         targets:
           type: array
           items:
             $ref: '#/components/schemas/BlackoutTarget'
+          example: []
     BlackoutCollection:
       type: object
       description: Paginated collection of blackouts.
@@ -1862,14 +2752,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Blackout'
+          example: []
         totalCount:
           type: integer
+          example: 10
         limit:
           type: integer
+          example: 10
         offset:
           type: integer
+          example: 10
         hasMore:
           type: boolean
+          example: true
     BlackoutTargetCollection:
       type: object
       description: Collection of targets in a blackout.
@@ -1878,6 +2773,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BlackoutTarget'
+          example: []
     BlackoutDashboard:
       type: object
       description: Summary statistics for blackouts.
@@ -1885,18 +2781,23 @@ components:
         totalBlackouts:
           type: integer
           description: Total number of blackouts.
+          example: 10
         activeBlackouts:
           type: integer
           description: Number of currently active blackouts.
+          example: 10
         scheduledBlackouts:
           type: integer
           description: Number of scheduled future blackouts.
+          example: 10
         endedBlackouts:
           type: integer
           description: Number of ended blackouts.
+          example: 10
         targetsInBlackout:
           type: integer
           description: Total number of targets currently in blackout.
+          example: 10
     BlackoutReason:
       type: object
       description: A predefined reason for blackouts.
@@ -1904,18 +2805,21 @@ components:
         reasonId:
           type: string
           description: Unique identifier for the reason.
+          example: '500123'
         reason:
           type: string
           description: Text of the blackout reason.
+          example: example_value
     BlackoutReasonCreateRequest:
       type: object
       description: Request body for creating a blackout reason.
       required:
-        - reason
+      - reason
       properties:
         reason:
           type: string
           description: Text of the blackout reason.
+          example: example_value
     BlackoutReasonCollection:
       type: object
       description: Collection of blackout reasons.
@@ -1924,6 +2828,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BlackoutReason'
+          example: []
     GlobalTargetProperty:
       type: object
       description: A global property definition for classifying targets.
@@ -1931,59 +2836,73 @@ components:
         globalTargetPropertyId:
           type: string
           description: Unique identifier for the property.
+          example: '500123'
         propertyName:
           type: string
           description: Name of the property.
+          example: example_value
         propertyDisplayName:
           type: string
           description: Human-readable display name.
+          example: example_value
         description:
           type: string
           description: Description of the property.
+          example: A sample description.
         propertyType:
           type: string
           description: Data type of the property.
           enum:
-            - STRING
-            - NUMBER
-            - BOOLEAN
+          - STRING
+          - NUMBER
+          - BOOLEAN
+          example: STRING
         hasValidValues:
           type: boolean
           description: Whether the property has a constrained value set.
+          example: true
     GlobalTargetPropertyCreateRequest:
       type: object
       description: Request body for creating a global target property.
       required:
-        - propertyName
+      - propertyName
       properties:
         propertyName:
           type: string
+          example: example_value
         propertyDisplayName:
           type: string
+          example: example_value
         description:
           type: string
+          example: A sample description.
         propertyType:
           type: string
           enum:
-            - STRING
-            - NUMBER
-            - BOOLEAN
+          - STRING
+          - NUMBER
+          - BOOLEAN
+          example: STRING
         validValues:
           type: array
           items:
             type: string
+          example: []
     GlobalTargetPropertyUpdateRequest:
       type: object
       description: Request body for updating a global target property.
       properties:
         propertyDisplayName:
           type: string
+          example: example_value
         description:
           type: string
+          example: A sample description.
         validValues:
           type: array
           items:
             type: string
+          example: []
     GlobalTargetPropertyCollection:
       type: object
       description: Collection of global target properties.
@@ -1992,6 +2911,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GlobalTargetProperty'
+          example: []
     Error:
       type: object
       description: Error response returned by the API.
@@ -1999,15 +2919,19 @@ components:
         errorCode:
           type: string
           description: Machine-readable error code.
+          example: example_value
         message:
           type: string
           description: Human-readable error message.
+          example: example_value
         details:
           type: string
           description: Additional details about the error.
+          example: example_value
         httpStatusCode:
           type: integer
           description: HTTP status code.
+          example: 10
   responses:
     BadRequest:
       description: >-

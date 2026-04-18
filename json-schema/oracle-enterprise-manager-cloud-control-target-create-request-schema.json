@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TargetCreateRequest",
+  "type": "object",
+  "description": "Request body for creating a new target.",
+  "properties": {
+    "targetName": {
+      "type": "string",
+      "description": "Display name for the target."
+    },
+    "targetType": {
+      "type": "string",
+      "description": "Target type identifier defining the monitoring template."
+    },
+    "hostName": {
+      "type": "string",
+      "description": "The hostname where the target resides."
+    },
+    "properties": {
+      "type": "object",
+      "description": "Target-type-specific properties required for monitoring."
+    },
+    "credentials": {
+      "type": "object",
+      "description": "Monitoring credentials for the target."
+    }
+  }
+}

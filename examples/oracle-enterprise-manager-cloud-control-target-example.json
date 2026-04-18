@@ -1,0 +1,19 @@
+{
+  "targetId": "500123",
+  "targetName": "example_value",
+  "targetType": "example_value",
+  "targetDisplayType": "example_value",
+  "hostName": "example_value",
+  "lifecycleStatus": "example_value",
+  "availabilityStatus": "example_value",
+  "agentUrl": "https://www.example.com",
+  "oracleHome": "example_value",
+  "machineName": "example_value",
+  "installLocation": "example_value",
+  "timezone": "example_value",
+  "owner": "example_value",
+  "timeCreated": "example_value",
+  "timeUpdated": "example_value",
+  "properties": "example_value",
+  "canonicalLink": "example_value"
+}

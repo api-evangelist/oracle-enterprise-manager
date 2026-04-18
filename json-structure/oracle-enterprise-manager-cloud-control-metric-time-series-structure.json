@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "MetricTimeSeries",
+  "type": "object",
+  "properties": {
+    "targetName": {
+      "type": "string"
+    },
+    "targetType": {
+      "type": "string"
+    },
+    "metricGroupName": {
+      "type": "string"
+    },
+    "metricColumnName": {
+      "type": "string"
+    },
+    "key": {
+      "type": "string"
+    },
+    "dataPoints": {
+      "type": "array"
+    }
+  }
+}

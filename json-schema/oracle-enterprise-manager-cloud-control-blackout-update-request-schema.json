@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BlackoutUpdateRequest",
+  "type": "object",
+  "description": "Request body for updating a blackout.",
+  "properties": {
+    "description": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "targets": {
+      "type": "array"
+    }
+  }
+}

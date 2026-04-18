@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "MetricDataPoint",
+  "type": "object",
+  "properties": {
+    "metricColumn": {
+      "type": "string"
+    },
+    "value": {
+      "type": "number"
+    },
+    "key": {
+      "type": "string"
+    },
+    "collectionTime": {
+      "type": "string"
+    }
+  }
+}

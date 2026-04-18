@@ -1,0 +1,9 @@
+{
+  "startTime": "example_value",
+  "endTime": "example_value",
+  "duration": 10,
+  "timezone": "example_value",
+  "frequency": "example_value",
+  "repeatInterval": 10,
+  "daysOfWeek": []
+}

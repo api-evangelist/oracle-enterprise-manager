@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Error",
+  "type": "object",
+  "properties": {
+    "errorCode": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "details": {
+      "type": "string"
+    },
+    "httpStatusCode": {
+      "type": "integer"
+    }
+  }
+}

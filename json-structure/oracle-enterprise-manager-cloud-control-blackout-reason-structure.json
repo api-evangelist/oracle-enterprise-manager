@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "BlackoutReason",
+  "type": "object",
+  "properties": {
+    "reasonId": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    }
+  }
+}

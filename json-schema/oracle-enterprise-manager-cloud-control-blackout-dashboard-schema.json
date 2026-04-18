@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BlackoutDashboard",
+  "type": "object",
+  "description": "Summary statistics for blackouts.",
+  "properties": {
+    "totalBlackouts": {
+      "type": "integer",
+      "description": "Total number of blackouts."
+    },
+    "activeBlackouts": {
+      "type": "integer",
+      "description": "Number of currently active blackouts."
+    },
+    "scheduledBlackouts": {
+      "type": "integer",
+      "description": "Number of scheduled future blackouts."
+    },
+    "endedBlackouts": {
+      "type": "integer",
+      "description": "Number of ended blackouts."
+    },
+    "targetsInBlackout": {
+      "type": "integer",
+      "description": "Total number of targets currently in blackout."
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "BlackoutCreateRequest",
+  "type": "object",
+  "properties": {
+    "blackoutName": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "targets": {
+      "type": "array"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "TargetCreateRequest",
+  "type": "object",
+  "properties": {
+    "targetName": {
+      "type": "string"
+    },
+    "targetType": {
+      "type": "string"
+    },
+    "hostName": {
+      "type": "string"
+    },
+    "properties": {
+      "type": "object"
+    },
+    "credentials": {
+      "type": "object"
+    }
+  }
+}

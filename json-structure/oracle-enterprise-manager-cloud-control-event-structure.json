@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Event",
+  "type": "object",
+  "properties": {
+    "eventId": {
+      "type": "string"
+    },
+    "eventType": {
+      "type": "string"
+    },
+    "severity": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "targetName": {
+      "type": "string"
+    },
+    "targetType": {
+      "type": "string"
+    },
+    "metricGroupName": {
+      "type": "string"
+    },
+    "metricColumnName": {
+      "type": "string"
+    },
+    "metricValue": {
+      "type": "number"
+    },
+    "timeRaised": {
+      "type": "string"
+    },
+    "timeResolved": {
+      "type": "string"
+    },
+    "canonicalLink": {
+      "type": "string"
+    }
+  }
+}

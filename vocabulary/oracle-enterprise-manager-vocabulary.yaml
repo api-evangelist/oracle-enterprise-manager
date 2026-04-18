@@ -1,0 +1,13 @@
+name: oracle-enterprise-manager API Vocabulary
+provider: oracle-enterprise-manager
+created: '2026-04-18'
+modified: '2026-04-18'
+operations: 36
+schemas: 36
+tags:
+- Blackouts
+- Events
+- Global Target Properties
+- Incidents
+- Metrics
+- Targets

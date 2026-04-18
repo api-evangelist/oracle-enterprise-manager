@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "MetricColumn",
+  "type": "object",
+  "properties": {
+    "columnName": {
+      "type": "string"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "columnType": {
+      "type": "string"
+    },
+    "isKey": {
+      "type": "boolean"
+    },
+    "unit": {
+      "type": "string"
+    }
+  }
+}

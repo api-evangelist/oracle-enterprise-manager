@@ -1,0 +1,264 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Oracle Enterprise Manager Infrastructure Management"
+  description: "Unified workflow for monitoring, incident response, and maintenance management across Oracle infrastructure using Enterprise Manager Cloud Control APIs. Designed for infrastructure administrators and operations teams."
+  tags:
+    - Oracle
+    - Enterprise Manager
+    - Infrastructure Management
+    - Monitoring
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      OEM_USERNAME: OEM_USERNAME
+      OEM_PASSWORD: OEM_PASSWORD
+
+capability:
+  consumes:
+    - import: cloud-control
+      location: ./shared/cloud-control.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: oem-infra-api
+      description: "Unified REST API for Oracle Enterprise Manager infrastructure management."
+      resources:
+        - path: /v1/targets
+          name: targets
+          description: "Monitored targets"
+          operations:
+            - method: GET
+              name: list-targets
+              description: "List monitored targets"
+              call: "cloud-control.list-targets"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-target
+              description: "Create a monitored target"
+              call: "cloud-control.create-target"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/targets/{targetId}
+          name: target-details
+          description: "Target details"
+          operations:
+            - method: GET
+              name: get-target
+              description: "Get target details"
+              call: "cloud-control.get-target"
+              with:
+                targetId: "rest.targetId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/incidents
+          name: incidents
+          description: "Infrastructure incidents"
+          operations:
+            - method: GET
+              name: list-incidents
+              description: "List incidents"
+              call: "cloud-control.list-incidents"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/incidents/{incidentId}
+          name: incident-details
+          description: "Incident details"
+          operations:
+            - method: GET
+              name: get-incident
+              description: "Get incident details"
+              call: "cloud-control.get-incident"
+              with:
+                incidentId: "rest.incidentId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/blackouts
+          name: blackouts
+          description: "Maintenance windows"
+          operations:
+            - method: GET
+              name: list-blackouts
+              description: "List blackouts"
+              call: "cloud-control.list-blackouts"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/metrics
+          name: metrics
+          description: "Performance metrics"
+          operations:
+            - method: GET
+              name: get-metric-time-series
+              description: "Get metric time series data"
+              call: "cloud-control.get-metric-time-series"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: oem-infra-mcp
+      transport: http
+      description: "MCP server for AI-assisted Oracle Enterprise Manager infrastructure management."
+      tools:
+        - name: list-targets
+          description: "List monitored targets in Enterprise Manager"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cloud-control.list-targets"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-target
+          description: "Get details of a specific monitored target"
+          hints:
+            readOnly: true
+          call: "cloud-control.get-target"
+          with:
+            targetId: "tools.targetId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-target
+          description: "Create a new monitored target"
+          hints:
+            readOnly: false
+          call: "cloud-control.create-target"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-incidents
+          description: "List incidents in Enterprise Manager"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cloud-control.list-incidents"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-incident
+          description: "Get details of a specific incident"
+          hints:
+            readOnly: true
+          call: "cloud-control.get-incident"
+          with:
+            incidentId: "tools.incidentId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: clear-incident
+          description: "Clear an incident marking it as resolved"
+          hints:
+            readOnly: false
+          call: "cloud-control.clear-incident"
+          with:
+            incidentId: "tools.incidentId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: suppress-incident
+          description: "Suppress an incident from active views"
+          hints:
+            readOnly: false
+          call: "cloud-control.suppress-incident"
+          with:
+            incidentId: "tools.incidentId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-blackouts
+          description: "List blackouts (maintenance windows)"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cloud-control.list-blackouts"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-blackout
+          description: "Get details of a specific blackout"
+          hints:
+            readOnly: true
+          call: "cloud-control.get-blackout"
+          with:
+            blackoutId: "tools.blackoutId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-blackout
+          description: "Create a new blackout (maintenance window)"
+          hints:
+            readOnly: false
+          call: "cloud-control.create-blackout"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-blackout
+          description: "Delete a scheduled blackout"
+          hints:
+            destructive: true
+            idempotent: true
+          call: "cloud-control.delete-blackout"
+          with:
+            blackoutId: "tools.blackoutId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-metric-time-series
+          description: "Get metric time series data for performance analysis"
+          hints:
+            readOnly: true
+          call: "cloud-control.get-metric-time-series"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-metric-groups
+          description: "List metric groups available for a target"
+          hints:
+            readOnly: true
+          call: "cloud-control.list-metric-groups"
+          with:
+            targetId: "tools.targetId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-event
+          description: "Get details of a specific monitoring event"
+          hints:
+            readOnly: true
+          call: "cloud-control.get-event"
+          with:
+            eventId: "tools.eventId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-target-properties
+          description: "Get configuration properties of a target"
+          hints:
+            readOnly: true
+          call: "cloud-control.get-target-properties"
+          with:
+            targetId: "tools.targetId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-global-target-properties
+          description: "List global target properties for classification"
+          hints:
+            readOnly: true
+          call: "cloud-control.list-global-target-properties"
+          outputParameters:
+            - type: object
+              mapping: "$."

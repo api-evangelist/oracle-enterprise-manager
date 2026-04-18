@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Blackout",
+  "type": "object",
+  "description": "Represents a blackout (maintenance window) in Enterprise Manager. Blackouts suppress alerting and notifications for specified targets during scheduled maintenance periods.",
+  "properties": {
+    "blackoutId": {
+      "type": "string",
+      "description": "Unique identifier of the blackout."
+    },
+    "blackoutName": {
+      "type": "string",
+      "description": "Display name of the blackout."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the blackout purpose."
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the blackout."
+    },
+    "reason": {
+      "type": "string",
+      "description": "Reason for the blackout."
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "Username of the blackout creator."
+    },
+    "targets": {
+      "type": "array",
+      "description": "List of targets included in the blackout."
+    },
+    "timeCreated": {
+      "type": "string",
+      "description": "Timestamp when the blackout was created."
+    },
+    "timeUpdated": {
+      "type": "string",
+      "description": "Timestamp of the last blackout update."
+    },
+    "canonicalLink": {
+      "type": "string",
+      "description": "Canonical URI for this blackout resource."
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "GlobalTargetPropertyUpdateRequest",
+  "type": "object",
+  "properties": {
+    "propertyDisplayName": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "validValues": {
+      "type": "array"
+    }
+  }
+}

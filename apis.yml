@@ -11,7 +11,7 @@ image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 url: >-
   https://raw.githubusercontent.com/api-evangelist/oracle-enterprise-manager/refs/heads/main/apis.yml
 created: '2024-01-01'
-modified: '2026-03-16'
+modified: '2026-04-18'
 specificationVersion: '0.19'
 tags:
   - Cloud Management
@@ -42,9 +42,9 @@ apis:
         url: json-ld/oracle-enterprise-manager-context.jsonld
       - type: Authentication
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/Authentication.html
-      - type: API Reference
+      - type: APIReference
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-      - type: Getting Started
+      - type: GettingStarted
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/SendRequests.html
     contact:
       - FN: Oracle Support
@@ -63,9 +63,9 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcli/
-      - type: Getting Started
+      - type: GettingStarted
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcli/getting-started-em-cli.html
-      - type: Command Reference
+      - type: APIReference
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcli/em-cli-verbs.html
       - type: Authentication
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcli/emcli-security.html
@@ -82,7 +82,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/
-      - type: API Reference
+      - type: APIReference
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
   - name: Enterprise Manager Metric and Monitoring API
     description: API for accessing performance metrics, monitoring data, and alerting information including numeric metric data points over time, latest metric values, and metric group metadata.
@@ -97,10 +97,8 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/
-      - type: API Reference
+      - type: APIReference
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-      - type: Monitoring Guide
-        url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emmon/executing-sql-rest-api.html
   - name: Enterprise Manager Target Management API
     description: API for managing monitored targets including discovery, configuration, lifecycle operations, bulk property updates, and target type metadata.
     image: https://www.oracle.com/a/ocom/img/oracle-enterprise-manager.jpg
@@ -114,7 +112,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/
-      - type: API Reference
+      - type: APIReference
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
   - name: Enterprise Manager Incidents and Events API
     description: REST API for searching, viewing, and managing incidents and events in Enterprise Manager, including clearing, suppressing, unsuppressing incidents, viewing member events, and managing annotations.
@@ -129,7 +127,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-      - type: API Reference
+      - type: APIReference
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
   - name: Enterprise Manager Blackout Management API
     description: REST API for managing blackouts (maintenance windows) in Enterprise Manager, including creating, editing, deleting, listing, and stopping blackouts, managing blackout reasons, and retrieving targets in blackouts.
@@ -143,7 +141,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-      - type: API Reference
+      - type: APIReference
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
   - name: Enterprise Manager Credentials Management API
     description: REST API for managing named credentials, monitoring credentials, and preferred credentials in Enterprise Manager, including creating, listing, deleting, updating, testing, and searching credential types.
@@ -157,9 +155,9 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-      - type: API Reference
+      - type: APIReference
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-      - type: Security Guide
+      - type: Security
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emsec/index.html
   - name: Enterprise Manager User Management API
     description: REST API for managing Enterprise Manager users and roles, including creating, modifying, and deleting users and roles, managing privilege grants and role assignments, and listing secure resources and permissions.
@@ -174,9 +172,9 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-      - type: API Reference
+      - type: APIReference
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-      - type: Security Guide
+      - type: Security
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emsec/index.html
   - name: Enterprise Manager Database Patching and Maintenance API
     description: REST API for database maintenance operations including updates, upgrades, and patching, with support for creating and managing Gold Images, patch recommendations, compliance reporting, and Fleet Patching and Provisioning (FPP) integration.
@@ -192,10 +190,8 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emlcm/patch-history.html
-      - type: API Reference
+      - type: APIReference
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-      - type: Fleet Patching Guide
-        url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emlcm/fleet-maintenance-patching-fpp.html
   - name: Enterprise Manager Deployment Procedure API
     description: REST API for managing deployment procedures including creating, submitting, and deleting procedures, managing procedure instances with resume, suspend, stop, and retry operations, and tracking execution history.
     image: https://www.oracle.com/a/ocom/img/oracle-enterprise-manager.jpg
@@ -209,7 +205,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-      - type: API Reference
+      - type: APIReference
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
   - name: Enterprise Manager Database Backup Management API
     description: REST API for configuring and managing database backup settings, fleet-level backup configuration, and scheduling backup operations in Enterprise Manager.
@@ -223,7 +219,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-      - type: API Reference
+      - type: APIReference
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
   - name: Enterprise Manager ZDLRA Management API
     description: REST API for managing Oracle Zero Data Loss Recovery Appliance (ZDLRA) including adding and removing protected databases, creating and managing protection policies, creating archival backups, and retrieving restore information.
@@ -238,7 +234,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
-      - type: API Reference
+      - type: APIReference
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
   - name: Enterprise Manager SQL Execution REST API
     description: REST API for executing SQL queries against database targets monitored by Enterprise Manager and against the Enterprise Manager repository, enabling custom data extraction for dashboards and KPI reports.
@@ -253,7 +249,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emmon/executing-sql-rest-api.html
-      - type: API Reference
+      - type: APIReference
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
   - name: Enterprise Manager Data Guard Administration REST API
     description: REST API for managing Oracle Data Guard configurations in Enterprise Manager, enabling high availability operations including switchover, failover, and standby database management.
@@ -268,8 +264,6 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emlcm/data-guard-administration-rest-api1.html
-      - type: Lifecycle Management Guide
-        url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emlcm/patch-history.html
   - name: Enterprise Manager Cloud APIs (DBaaS)
     description: REST APIs for Database as a Service (DBaaS) operations enabling self-service database provisioning, request management, and quota administration through Enterprise Manager Cloud Control.
     image: https://www.oracle.com/a/ocom/img/oracle-enterprise-manager.jpg
@@ -284,11 +278,9 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.4/emclo/using-cloud-apis.html
-      - type: API Reference
+      - type: APIReference
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.4/emclo/database-service-ssa-user-rest-apis.html
-      - type: Administrator API Reference
-        url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.4/emclo/database-service-administrator-rest-apis.html
-      - type: Use Cases
+      - type: UseCases
         url: https://docs.oracle.com/cd/E73210_01/EMCLO/GUID-99E7450E-4255-46B5-9C0E-DC520DE376D2.htm
   - name: Enterprise Manager Extensibility Development Kit (EDK) API
     description: Extensibility Development Kit providing tools, utilities, and APIs for developing Enterprise Manager plug-ins to extend platform capabilities for custom target monitoring and management.
@@ -303,10 +295,6 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/plug-ins.html
-      - type: Programmers Guide
-        url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.4/emprg/getting-started-enterprise-manager-plug-ins.html
-      - type: Programmers Reference
-        url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.4/emprf/getting-started-plug-development.html
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
@@ -315,36 +303,62 @@ common:
     url: https://www.oracle.com/enterprise-manager/
   - type: Documentation
     url: https://docs.oracle.com/en/enterprise-manager/
-  - type: Downloads
-    url: https://www.oracle.com/enterprise-manager/downloads/
   - type: Support
     url: https://www.oracle.com/support/
-  - type: Community
-    url: https://community.oracle.com/customerconnect/categories/enterprise-manager
   - type: Pricing
     url: https://www.oracle.com/enterprise-manager/pricing.html
   - type: Blog
     url: https://blogs.oracle.com/oem/
   - type: Training
     url: https://education.oracle.com/enterprise-manager
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.oracle.com/legal/terms.html
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.oracle.com/legal/privacy/
-  - type: Getting Started
+  - type: GettingStarted
     url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/index.html
-  - type: Release Notes
+  - type: ReleaseNotes
     url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrel/cloud-control-release-notes-emrel.html
-  - type: Change Log
+  - type: ChangeLog
     url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcon/new-features-release-update.html
-  - type: Security Guide
+  - type: Security
     url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emsec/index.html
-  - type: Books
-    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/books.html
-  - type: Grafana Integration
+  - type: Integrations
     url: https://www.oracle.com/enterprise-manager/technologies/grafana/
-  - type: Technologies
+  - type: Resources
     url: https://www.oracle.com/enterprise-manager/technologies/
+  - type: Features
+    data:
+      - name: Target Monitoring
+        description: Monitor Oracle databases, hosts, middleware, and custom applications with configurable metrics, thresholds, and alerting.
+      - name: Incident Management
+        description: Correlate events into actionable incidents with severity, priority, escalation, and automated notification workflows.
+      - name: Blackout Management
+        description: Schedule maintenance windows to suppress monitoring alerts during planned downtime without losing data collection.
+      - name: Database Lifecycle Management
+        description: Automate database patching, upgrades, and fleet maintenance with Gold Images and compliance reporting.
+      - name: Deployment Procedures
+        description: Create and manage multi-step deployment workflows for provisioning, patching, and configuration changes.
+      - name: Cloud Self-Service
+        description: Enable Database as a Service with self-service provisioning, quota management, and request workflows.
+  - type: UseCases
+    data:
+      - name: Infrastructure Monitoring
+        description: Centralized monitoring of Oracle databases, hosts, middleware, and applications with real-time metrics and alerting.
+      - name: Automated Patching
+        description: Fleet-level database patching using Gold Images with compliance validation and rollback capabilities.
+      - name: Incident Response
+        description: Detect, triage, and resolve infrastructure issues using correlated incidents with annotations and escalation.
+      - name: Capacity Planning
+        description: Analyze metric trends over time to forecast resource needs and optimize infrastructure utilization.
+  - type: Integrations
+    data:
+      - name: Grafana
+        description: Visualize Enterprise Manager metrics in Grafana dashboards using the OEM data source plugin.
+      - name: Oracle Cloud Infrastructure
+        description: Extend monitoring to OCI resources and hybrid cloud environments through unified management.
+      - name: ServiceNow
+        description: Forward incidents to ServiceNow for ITSM integration and automated ticket creation.
 include:
   - name: Oracle Cloud Infrastructure APIs
     url: https://docs.oracle.com/en-us/iaas/api/

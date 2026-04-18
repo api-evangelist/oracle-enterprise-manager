@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BlackoutCollection",
+  "type": "object",
+  "description": "Paginated collection of blackouts.",
+  "properties": {
+    "items": {
+      "type": "array"
+    },
+    "totalCount": {
+      "type": "integer"
+    },
+    "limit": {
+      "type": "integer"
+    },
+    "offset": {
+      "type": "integer"
+    },
+    "hasMore": {
+      "type": "boolean"
+    }
+  }
+}

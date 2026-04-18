@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "TargetUpdateRequest",
+  "type": "object",
+  "properties": {
+    "properties": {
+      "type": "object"
+    }
+  }
+}

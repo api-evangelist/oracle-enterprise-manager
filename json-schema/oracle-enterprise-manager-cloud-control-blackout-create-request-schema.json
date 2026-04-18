@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BlackoutCreateRequest",
+  "type": "object",
+  "description": "Request body for creating a new blackout.",
+  "properties": {
+    "blackoutName": {
+      "type": "string",
+      "description": "Display name for the blackout."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the blackout purpose."
+    },
+    "reason": {
+      "type": "string",
+      "description": "Reason for the blackout."
+    },
+    "targets": {
+      "type": "array",
+      "description": "List of targets to include in the blackout."
+    }
+  }
+}

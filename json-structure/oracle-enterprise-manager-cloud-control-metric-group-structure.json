@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "MetricGroup",
+  "type": "object",
+  "properties": {
+    "metricGroupName": {
+      "type": "string"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "collectionFrequency": {
+      "type": "integer"
+    },
+    "metricColumns": {
+      "type": "array"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "eventId": "500123",
+  "eventType": "example_value",
+  "severity": "example_value",
+  "message": "example_value",
+  "targetName": "example_value",
+  "targetType": "example_value",
+  "metricGroupName": "example_value",
+  "metricColumnName": "example_value",
+  "metricValue": 42.5,
+  "timeRaised": "example_value",
+  "timeResolved": "example_value",
+  "canonicalLink": "example_value"
+}

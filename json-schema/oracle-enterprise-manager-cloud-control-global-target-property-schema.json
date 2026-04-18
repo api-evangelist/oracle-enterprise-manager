@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GlobalTargetProperty",
+  "type": "object",
+  "description": "A global property definition for classifying targets.",
+  "properties": {
+    "globalTargetPropertyId": {
+      "type": "string",
+      "description": "Unique identifier for the property."
+    },
+    "propertyName": {
+      "type": "string",
+      "description": "Name of the property."
+    },
+    "propertyDisplayName": {
+      "type": "string",
+      "description": "Human-readable display name."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the property."
+    },
+    "propertyType": {
+      "type": "string",
+      "description": "Data type of the property."
+    },
+    "hasValidValues": {
+      "type": "boolean",
+      "description": "Whether the property has a constrained value set."
+    }
+  }
+}

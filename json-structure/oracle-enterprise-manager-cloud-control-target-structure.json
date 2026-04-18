@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Target",
+  "type": "object",
+  "properties": {
+    "targetId": {
+      "type": "string"
+    },
+    "targetName": {
+      "type": "string"
+    },
+    "targetType": {
+      "type": "string"
+    },
+    "targetDisplayType": {
+      "type": "string"
+    },
+    "hostName": {
+      "type": "string"
+    },
+    "lifecycleStatus": {
+      "type": "string"
+    },
+    "availabilityStatus": {
+      "type": "string"
+    },
+    "agentUrl": {
+      "type": "string"
+    },
+    "oracleHome": {
+      "type": "string"
+    },
+    "machineName": {
+      "type": "string"
+    },
+    "installLocation": {
+      "type": "string"
+    },
+    "timezone": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "timeCreated": {
+      "type": "string"
+    },
+    "timeUpdated": {
+      "type": "string"
+    },
+    "properties": {
+      "type": "object"
+    },
+    "canonicalLink": {
+      "type": "string"
+    }
+  }
+}

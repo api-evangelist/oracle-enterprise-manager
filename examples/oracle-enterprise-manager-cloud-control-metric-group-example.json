@@ -1,0 +1,7 @@
+{
+  "metricGroupName": "example_value",
+  "displayName": "example_value",
+  "description": "A sample description.",
+  "collectionFrequency": 10,
+  "metricColumns": []
+}

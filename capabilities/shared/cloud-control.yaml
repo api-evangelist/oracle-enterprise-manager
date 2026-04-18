@@ -1,0 +1,535 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Oracle Enterprise Manager Cloud Control REST API"
+  description: "REST API for Oracle Enterprise Manager Cloud Control providing programmatic access to monitoring, configuration, and administration capabilities including targets, metrics, incidents, and blackouts."
+  tags:
+    - Oracle
+    - Enterprise Manager
+    - Monitoring
+    - Infrastructure Management
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      OEM_USERNAME: OEM_USERNAME
+      OEM_PASSWORD: OEM_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: cloud-control
+      baseUri: "https://{emHost}:{emPort}/em/api"
+      description: "Oracle Enterprise Manager Cloud Control REST API"
+      authentication:
+        type: basic
+        username: "{{OEM_USERNAME}}"
+        password: "{{OEM_PASSWORD}}"
+      resources:
+        - name: targets
+          path: /targets
+          description: "Manage monitored targets in Enterprise Manager"
+          operations:
+            - name: list-targets
+              method: GET
+              description: "List monitored targets with optional filtering"
+              inputParameters:
+                - name: targetName
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter targets by name"
+                - name: targetType
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter targets by type"
+                - name: lifecycleStatus
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter targets by lifecycle status"
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of items to return"
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Number of items to skip"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-target
+              method: POST
+              description: "Create a new monitored target"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  targetName: "{{tools.targetName}}"
+                  targetType: "{{tools.targetType}}"
+                  hostName: "{{tools.hostName}}"
+        - name: target-details
+          path: /targets/{targetId}
+          description: "Get, update, or delete a specific target"
+          operations:
+            - name: get-target
+              method: GET
+              description: "Get target details"
+              inputParameters:
+                - name: targetId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique identifier of the target"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-target
+              method: PATCH
+              description: "Update target properties"
+              inputParameters:
+                - name: targetId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique identifier of the target"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  properties: "{{tools.properties}}"
+            - name: delete-target
+              method: DELETE
+              description: "Remove a monitored target"
+              inputParameters:
+                - name: targetId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique identifier of the target"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: target-properties
+          path: /targets/{targetId}/properties
+          description: "Get target configuration properties"
+          operations:
+            - name: get-target-properties
+              method: GET
+              description: "Get target properties"
+              inputParameters:
+                - name: targetId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique identifier of the target"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: metrics
+          path: /targets/{targetId}/metricGroups
+          description: "Manage metric groups for targets"
+          operations:
+            - name: list-metric-groups
+              method: GET
+              description: "List metric groups for a target"
+              inputParameters:
+                - name: targetId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique identifier of the target"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: metric-time-series
+          path: /metricTimeSeries
+          description: "Query metric time series data"
+          operations:
+            - name: get-metric-time-series
+              method: GET
+              description: "Get metric time series data over a time range"
+              inputParameters:
+                - name: targetNames
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated target names"
+                - name: metricGroups
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated metric group names"
+                - name: startTime
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start time in ISO 8601 format"
+                - name: endTime
+                  in: query
+                  type: string
+                  required: false
+                  description: "End time in ISO 8601 format"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: incidents
+          path: /incidents
+          description: "Search and manage incidents"
+          operations:
+            - name: list-incidents
+              method: GET
+              description: "List incidents with optional filtering"
+              inputParameters:
+                - name: severity
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by severity level"
+                - name: priority
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by priority"
+                - name: status
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by status"
+                - name: targetName
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by target name"
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of items"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: incident-details
+          path: /incidents/{incidentId}
+          description: "Get incident details"
+          operations:
+            - name: get-incident
+              method: GET
+              description: "Get incident details"
+              inputParameters:
+                - name: incidentId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique identifier of the incident"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: incident-actions
+          path: /incidents/{incidentId}/actions
+          description: "Perform actions on incidents"
+          operations:
+            - name: clear-incident
+              method: POST
+              description: "Clear an incident"
+              inputParameters:
+                - name: incidentId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique identifier of the incident"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: suppress-incident
+              method: POST
+              description: "Suppress an incident"
+              inputParameters:
+                - name: incidentId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique identifier of the incident"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: blackouts
+          path: /blackouts
+          description: "Manage maintenance windows"
+          operations:
+            - name: list-blackouts
+              method: GET
+              description: "List blackouts"
+              inputParameters:
+                - name: status
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by blackout status"
+                - name: targetName
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by target name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-blackout
+              method: POST
+              description: "Create a new blackout"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  blackoutName: "{{tools.blackoutName}}"
+                  reason: "{{tools.reason}}"
+        - name: blackout-details
+          path: /blackouts/{blackoutId}
+          description: "Get, update, or delete a blackout"
+          operations:
+            - name: get-blackout
+              method: GET
+              description: "Get blackout details"
+              inputParameters:
+                - name: blackoutId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique identifier of the blackout"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-blackout
+              method: DELETE
+              description: "Delete a blackout"
+              inputParameters:
+                - name: blackoutId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique identifier of the blackout"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: events
+          path: /events/{eventId}
+          description: "Get event details"
+          operations:
+            - name: get-event
+              method: GET
+              description: "Get event details"
+              inputParameters:
+                - name: eventId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique identifier of the event"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: global-target-properties
+          path: /globalTargetProperties
+          description: "Manage global target properties"
+          operations:
+            - name: list-global-target-properties
+              method: GET
+              description: "List global target properties"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: cloud-control-api
+      resources:
+        - path: /v1/targets
+          name: targets
+          description: "Monitored targets"
+          operations:
+            - method: GET
+              name: list-targets
+              description: "List monitored targets"
+              call: "cloud-control.list-targets"
+            - method: POST
+              name: create-target
+              description: "Create a target"
+              call: "cloud-control.create-target"
+        - path: /v1/targets/{targetId}
+          name: target-details
+          description: "Target details"
+          operations:
+            - method: GET
+              name: get-target
+              description: "Get target details"
+              call: "cloud-control.get-target"
+              with:
+                targetId: "rest.targetId"
+
+    - type: mcp
+      port: 9100
+      namespace: cloud-control-mcp
+      transport: http
+      tools:
+        - name: list-targets
+          description: "List monitored targets in Enterprise Manager"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cloud-control.list-targets"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-target
+          description: "Get details of a specific monitored target"
+          hints:
+            readOnly: true
+          call: "cloud-control.get-target"
+          with:
+            targetId: "tools.targetId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-incidents
+          description: "List incidents in Enterprise Manager"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cloud-control.list-incidents"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-incident
+          description: "Get details of a specific incident"
+          hints:
+            readOnly: true
+          call: "cloud-control.get-incident"
+          with:
+            incidentId: "tools.incidentId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: clear-incident
+          description: "Clear an incident marking it as resolved"
+          hints:
+            readOnly: false
+          call: "cloud-control.clear-incident"
+          with:
+            incidentId: "tools.incidentId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-blackouts
+          description: "List blackouts (maintenance windows)"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cloud-control.list-blackouts"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-blackout
+          description: "Get details of a specific blackout"
+          hints:
+            readOnly: true
+          call: "cloud-control.get-blackout"
+          with:
+            blackoutId: "tools.blackoutId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-blackout
+          description: "Create a new blackout (maintenance window)"
+          hints:
+            readOnly: false
+          call: "cloud-control.create-blackout"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-metric-time-series
+          description: "Get metric time series data for targets"
+          hints:
+            readOnly: true
+          call: "cloud-control.get-metric-time-series"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-metric-groups
+          description: "List metric groups for a target"
+          hints:
+            readOnly: true
+          call: "cloud-control.list-metric-groups"
+          with:
+            targetId: "tools.targetId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-event
+          description: "Get details of a specific monitoring event"
+          hints:
+            readOnly: true
+          call: "cloud-control.get-event"
+          with:
+            eventId: "tools.eventId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-global-target-properties
+          description: "List global target properties for classification"
+          hints:
+            readOnly: true
+          call: "cloud-control.list-global-target-properties"
+          outputParameters:
+            - type: object
+              mapping: "$."

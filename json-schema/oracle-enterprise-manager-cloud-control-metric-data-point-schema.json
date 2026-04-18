@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MetricDataPoint",
+  "type": "object",
+  "description": "A single metric data point.",
+  "properties": {
+    "metricColumn": {
+      "type": "string",
+      "description": "Name of the metric column."
+    },
+    "value": {
+      "type": "number",
+      "description": "Numeric metric value."
+    },
+    "key": {
+      "type": "string",
+      "description": "Key value identifying the metric row."
+    },
+    "collectionTime": {
+      "type": "string",
+      "description": "Timestamp when the metric was collected."
+    }
+  }
+}

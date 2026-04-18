@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MetricTimeSeries",
+  "type": "object",
+  "description": "Time series data for a single metric.",
+  "properties": {
+    "targetName": {
+      "type": "string",
+      "description": "Name of the target."
+    },
+    "targetType": {
+      "type": "string",
+      "description": "Type of the target."
+    },
+    "metricGroupName": {
+      "type": "string",
+      "description": "Name of the metric group."
+    },
+    "metricColumnName": {
+      "type": "string",
+      "description": "Name of the metric column."
+    },
+    "key": {
+      "type": "string",
+      "description": "Key value for the metric row."
+    },
+    "dataPoints": {
+      "type": "array"
+    }
+  }
+}

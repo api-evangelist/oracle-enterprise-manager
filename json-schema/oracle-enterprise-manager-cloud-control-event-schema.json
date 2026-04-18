@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Event",
+  "type": "object",
+  "description": "Represents a monitoring event detected by Enterprise Manager. Events are the atomic detections that are correlated into incidents.",
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "description": "Unique identifier of the event."
+    },
+    "eventType": {
+      "type": "string",
+      "description": "Type of the event."
+    },
+    "severity": {
+      "type": "string",
+      "description": "Severity of the event."
+    },
+    "message": {
+      "type": "string",
+      "description": "Descriptive message for the event."
+    },
+    "targetName": {
+      "type": "string",
+      "description": "Name of the target that generated this event."
+    },
+    "targetType": {
+      "type": "string",
+      "description": "Type of the target that generated this event."
+    },
+    "metricGroupName": {
+      "type": "string",
+      "description": "Name of the metric group, if this is a metric alert event."
+    },
+    "metricColumnName": {
+      "type": "string",
+      "description": "Name of the metric column, if this is a metric alert event."
+    },
+    "metricValue": {
+      "type": "number",
+      "description": "Metric value that triggered the event."
+    },
+    "timeRaised": {
+      "type": "string",
+      "description": "Timestamp when the event was raised."
+    },
+    "timeResolved": {
+      "type": "string",
+      "description": "Timestamp when the event was resolved."
+    },
+    "canonicalLink": {
+      "type": "string",
+      "description": "Canonical URI for this event resource."
+    }
+  }
+}

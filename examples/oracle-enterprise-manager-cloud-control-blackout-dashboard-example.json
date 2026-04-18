@@ -1,0 +1,7 @@
+{
+  "totalBlackouts": 10,
+  "activeBlackouts": 10,
+  "scheduledBlackouts": 10,
+  "endedBlackouts": 10,
+  "targetsInBlackout": 10
+}

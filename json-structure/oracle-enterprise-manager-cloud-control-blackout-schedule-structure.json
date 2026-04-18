@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "BlackoutSchedule",
+  "type": "object",
+  "properties": {
+    "startTime": {
+      "type": "string"
+    },
+    "endTime": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "integer"
+    },
+    "timezone": {
+      "type": "string"
+    },
+    "frequency": {
+      "type": "string"
+    },
+    "repeatInterval": {
+      "type": "integer"
+    },
+    "daysOfWeek": {
+      "type": "array"
+    }
+  }
+}

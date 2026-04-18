@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "BlackoutDashboard",
+  "type": "object",
+  "properties": {
+    "totalBlackouts": {
+      "type": "integer"
+    },
+    "activeBlackouts": {
+      "type": "integer"
+    },
+    "scheduledBlackouts": {
+      "type": "integer"
+    },
+    "endedBlackouts": {
+      "type": "integer"
+    },
+    "targetsInBlackout": {
+      "type": "integer"
+    }
+  }
+}

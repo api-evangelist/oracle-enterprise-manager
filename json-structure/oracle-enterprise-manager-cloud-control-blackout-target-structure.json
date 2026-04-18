@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "BlackoutTarget",
+  "type": "object",
+  "properties": {
+    "targetName": {
+      "type": "string"
+    },
+    "targetType": {
+      "type": "string"
+    },
+    "includeMembers": {
+      "type": "boolean"
+    }
+  }
+}

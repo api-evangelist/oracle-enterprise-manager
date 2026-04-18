@@ -1,0 +1,20 @@
+{
+  "incidentId": "500123",
+  "summary": "example_value",
+  "severity": "example_value",
+  "priority": "example_value",
+  "status": "example_value",
+  "category": "example_value",
+  "targetName": "example_value",
+  "targetType": "example_value",
+  "escalationLevel": 10,
+  "owner": "example_value",
+  "acknowledgedBy": "example_value",
+  "resolutionState": "example_value",
+  "ruleSetName": "example_value",
+  "timeRaised": "example_value",
+  "timeUpdated": "example_value",
+  "timeResolved": "example_value",
+  "eventCount": 10,
+  "canonicalLink": "example_value"
+}

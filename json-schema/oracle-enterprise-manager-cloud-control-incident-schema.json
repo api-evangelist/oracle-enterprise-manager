@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Incident",
+  "type": "object",
+  "description": "Represents an incident in Enterprise Manager. Incidents are actionable issues detected by monitoring rules, correlated from one or more events.",
+  "properties": {
+    "incidentId": {
+      "type": "string",
+      "description": "Unique identifier of the incident."
+    },
+    "summary": {
+      "type": "string",
+      "description": "Brief summary of the incident."
+    },
+    "severity": {
+      "type": "string",
+      "description": "Severity level of the incident."
+    },
+    "priority": {
+      "type": "string",
+      "description": "Priority assigned to the incident."
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the incident."
+    },
+    "category": {
+      "type": "string",
+      "description": "Category of the incident."
+    },
+    "targetName": {
+      "type": "string",
+      "description": "Name of the target associated with this incident."
+    },
+    "targetType": {
+      "type": "string",
+      "description": "Type of the target associated with this incident."
+    },
+    "escalationLevel": {
+      "type": "integer",
+      "description": "Current escalation level of the incident."
+    },
+    "owner": {
+      "type": "string",
+      "description": "Username of the incident owner or assignee."
+    },
+    "acknowledgedBy": {
+      "type": "string",
+      "description": "Username of the person who acknowledged the incident."
+    },
+    "resolutionState": {
+      "type": "string",
+      "description": "Resolution state providing closure details."
+    },
+    "ruleSetName": {
+      "type": "string",
+      "description": "Name of the incident rule set that created this incident."
+    },
+    "timeRaised": {
+      "type": "string",
+      "description": "Timestamp when the incident was first raised."
+    },
+    "timeUpdated": {
+      "type": "string",
+      "description": "Timestamp of the last incident update."
+    },
+    "timeResolved": {
+      "type": "string",
+      "description": "Timestamp when the incident was resolved."
+    },
+    "eventCount": {
+      "type": "integer",
+      "description": "Number of events correlated into this incident."
+    },
+    "canonicalLink": {
+      "type": "string",
+      "description": "Canonical URI for this incident resource."
+    }
+  }
+}
