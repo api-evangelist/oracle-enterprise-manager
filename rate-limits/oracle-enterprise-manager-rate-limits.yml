@@ -4,167 +4,47 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Oracle Enterprise Manager
 providerId: oracle-enterprise-manager
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Cloud Management
-  - Database Management
   - Enterprise Management
-  - Infrastructure Management
   - Monitoring
   - Oracle
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Oracle Enterprise Manager API surface. Captures
-  per-tier quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values
-  to be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+notes: OEM is on-premises management software. Throughput depends on the Oracle Management Server (OMS)
+  sizing, the OEM repository database, and the agent fleet topology — there are no upstream-published
+  per-second numeric rate limits. The OEM REST API throughput is bounded by WebLogic and the underlying
+  repository.
+description: Oracle Enterprise Manager throughput is operator-controlled — the OEM Management Server
+  is an on-prem WebLogic deployment with its repository database in Oracle. There is no centrally enforced
+  per-tenant rate limit; the EMCLI / REST API performance is shaped by OMS sizing and back-end DB performance.
+sources:
+  - https://docs.oracle.com/en/enterprise-manager/cloud-control/
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+  unavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Oracle Enterprise Manager Cloud Control REST API
-      - Enterprise Manager Command Line Interface (EM CLI)
-      - Enterprise Manager Job System API
-      - Enterprise Manager Metric and Monitoring API
-      - Enterprise Manager Target Management API
-      - Enterprise Manager Incidents and Events API
-      - Enterprise Manager Blackout Management API
-      - Enterprise Manager Credentials Management API
-      - Enterprise Manager User Management API
-      - Enterprise Manager Database Patching and Maintenance API
-      - Enterprise Manager Deployment Procedure API
-      - Enterprise Manager Database Backup Management API
-      - Enterprise Manager ZDLRA Management API
-      - Enterprise Manager SQL Execution REST API
-      - Enterprise Manager Data Guard Administration REST API
-      - Enterprise Manager Cloud APIs (DBaaS)
-      - Enterprise Manager Extensibility Development Kit (EDK) API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Oracle Enterprise Manager Cloud Control REST API
-      - Enterprise Manager Command Line Interface (EM CLI)
-      - Enterprise Manager Job System API
-      - Enterprise Manager Metric and Monitoring API
-      - Enterprise Manager Target Management API
-      - Enterprise Manager Incidents and Events API
-      - Enterprise Manager Blackout Management API
-      - Enterprise Manager Credentials Management API
-      - Enterprise Manager User Management API
-      - Enterprise Manager Database Patching and Maintenance API
-      - Enterprise Manager Deployment Procedure API
-      - Enterprise Manager Database Backup Management API
-      - Enterprise Manager ZDLRA Management API
-      - Enterprise Manager SQL Execution REST API
-      - Enterprise Manager Data Guard Administration REST API
-      - Enterprise Manager Cloud APIs (DBaaS)
-      - Enterprise Manager Extensibility Development Kit (EDK) API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Oracle Enterprise Manager Cloud Control REST API
-      - Enterprise Manager Command Line Interface (EM CLI)
-      - Enterprise Manager Job System API
-      - Enterprise Manager Metric and Monitoring API
-      - Enterprise Manager Target Management API
-      - Enterprise Manager Incidents and Events API
-      - Enterprise Manager Blackout Management API
-      - Enterprise Manager Credentials Management API
-      - Enterprise Manager User Management API
-      - Enterprise Manager Database Patching and Maintenance API
-      - Enterprise Manager Deployment Procedure API
-      - Enterprise Manager Database Backup Management API
-      - Enterprise Manager ZDLRA Management API
-      - Enterprise Manager SQL Execution REST API
-      - Enterprise Manager Data Guard Administration REST API
-      - Enterprise Manager Cloud APIs (DBaaS)
-      - Enterprise Manager Extensibility Development Kit (EDK) API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Oracle Enterprise Manager Cloud Control REST API
-      - Enterprise Manager Command Line Interface (EM CLI)
-      - Enterprise Manager Job System API
-      - Enterprise Manager Metric and Monitoring API
-      - Enterprise Manager Target Management API
-      - Enterprise Manager Incidents and Events API
-      - Enterprise Manager Blackout Management API
-      - Enterprise Manager Credentials Management API
-      - Enterprise Manager User Management API
-      - Enterprise Manager Database Patching and Maintenance API
-      - Enterprise Manager Deployment Procedure API
-      - Enterprise Manager Database Backup Management API
-      - Enterprise Manager ZDLRA Management API
-      - Enterprise Manager SQL Execution REST API
-      - Enterprise Manager Data Guard Administration REST API
-      - Enterprise Manager Cloud APIs (DBaaS)
-      - Enterprise Manager Extensibility Development Kit (EDK) API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Oracle Enterprise Manager Cloud Control REST API
-      - Enterprise Manager Command Line Interface (EM CLI)
-      - Enterprise Manager Job System API
-      - Enterprise Manager Metric and Monitoring API
-      - Enterprise Manager Target Management API
-      - Enterprise Manager Incidents and Events API
-      - Enterprise Manager Blackout Management API
-      - Enterprise Manager Credentials Management API
-      - Enterprise Manager User Management API
-      - Enterprise Manager Database Patching and Maintenance API
-      - Enterprise Manager Deployment Procedure API
-      - Enterprise Manager Database Backup Management API
-      - Enterprise Manager ZDLRA Management API
-      - Enterprise Manager SQL Execution REST API
-      - Enterprise Manager Data Guard Administration REST API
-      - Enterprise Manager Cloud APIs (DBaaS)
-      - Enterprise Manager Extensibility Development Kit (EDK) API
+  - name: OMS REST / EMCLI throughput
+    scope: management-server
+    metric: varies
+    limit: bounded by OMS WebLogic + repository DB sizing
+  - name: Agent upload rate
+    scope: agent
+    metric: varies
+    limit: configured per agent (uploadInterval)
+  - name: OCI Observability + Management services
+    scope: tenancy/region/service
+    metric: varies
+    limit: see OCI service docs (per-service throttling)
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: OMS sizing
+    description: Follow Oracle's OEM sizing guide (small / medium / large) to provision OMS instances
+      and repository DB capacity for your agent count.
+  - name: Agent upload tuning
+    description: Tune agent upload intervals to balance freshness vs OMS load.
+  - name: Backoff
+    description: Honor 429 / 503 from OCI O+M services; for OMS REST, retry with backoff on transient
+      WebLogic errors.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

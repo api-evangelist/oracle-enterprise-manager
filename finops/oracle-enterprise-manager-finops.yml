@@ -1,277 +1,101 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Oracle Enterprise Manager
+providerId: oracle-enterprise-manager
+created: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
+tags:
+  - Enterprise Management
+  - Monitoring
+  - FinOps
+  - Cost Management
+  - FOCUS
+description: 'FOCUS-aligned FinOps for Oracle Enterprise Manager: the OEM framework itself is included
+  with Oracle DB licenses, but each Management Pack (Diagnostics, Tuning, Database Lifecycle Management,
+  Cloud Management, etc.) is a separately-licensed perpetual line item with 22% annual support, sized
+  on the same metric (Processor or NUP) as the targets being managed. OCI Observability and Management
+  is the cloud-native consumption-based alternative.'
+sources:
+  - https://www.oracle.com/manageability/
+  - https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/24.1/oemli/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-provider: Oracle Enterprise Manager
-providerId: oracle-enterprise-manager
-publisherName: Oracle Enterprise Manager
-serviceCategory: API
-created: '2026-05-04'
-modified: '2026-05-04'
-tags:
-  - Cloud Management
-  - Database Management
-  - Enterprise Management
-  - Infrastructure Management
-  - Monitoring
-  - Oracle
-  - FinOps
-  - Cost Management
-  - FOCUS
-description: FinOps framework definition for the Oracle Enterprise Manager API surface. Provides a FOCUS-aligned
-  mapping for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+publisherName: Oracle Corporation
+serviceCategory: IT Operations Management
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Perpetual License + Support + Pay-As-You-Go (OCI O+M)
+  billingFrequency: Annual (license/support); Monthly (cloud)
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
+    - Usage
     - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
   ServiceName: Oracle Enterprise Manager
-  ServiceCategory: Developer Tools / API
-  ProviderName: Oracle Enterprise Manager
-  PublisherName: Oracle Enterprise Manager
-  InvoiceIssuerName: Oracle Enterprise Manager
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceCategory: IT Operations Management
+  ProviderName: Oracle
+  PublisherName: Oracle Corporation
+  InvoiceIssuerName: Oracle America, Inc.
   BillingCurrency: USD
-  ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: diagnostics_pack_licenses
+    unit: processor or NUP
+    aggregation: max
+    dimensions:
+      - target_type
+      - environment
+  - name: tuning_pack_licenses
+    unit: processor or NUP
+    aggregation: max
+    dimensions:
+      - target_type
+      - environment
+  - name: db_lifecycle_management_pack_licenses
+    unit: processor or NUP
+    aggregation: max
+    dimensions:
+      - target_type
+  - name: other_pack_licenses
+    unit: processor or NUP
+    aggregation: max
+    dimensions:
+      - pack
+      - target_type
+  - name: annual_support
+    unit: USD-year
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
+      - pack
+      - contract
+  - name: oci_observability_consumption
+    unit: varies
+    aggregation: sum
+    dimensions:
+      - service
       - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
-    dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Oracle Enterprise Manager Cloud Control REST API
-    baseURL: https://<em-host>:<port>/em/api
-    tags:
-      - Administration
-      - Cloud Control
-      - Monitoring
-      - REST API
-    serviceName: Oracle Enterprise Manager Cloud Control REST API
-    serviceCategory: API
-  - name: Enterprise Manager Command Line Interface (EM CLI)
-    baseURL: https://<em-host>:<port>/em
-    tags:
-      - Automation
-      - CLI
-      - Command Line
-      - Scripting
-    serviceName: Enterprise Manager Command Line Interface (EM CLI)
-    serviceCategory: API
-  - name: Enterprise Manager Job System API
-    baseURL: https://<em-host>:<port>/em/websvcs/restful/emws/job
-    tags:
-      - Automation
-      - Jobs
-      - Scheduling
-      - Task Management
-    serviceName: Enterprise Manager Job System API
-    serviceCategory: API
-  - name: Enterprise Manager Metric and Monitoring API
-    baseURL: https://<em-host>:<port>/em/websvcs/restful/emws/metric
-    tags:
-      - Alerts
-      - Metrics
-      - Monitoring
-      - Performance
-    serviceName: Enterprise Manager Metric and Monitoring API
-    serviceCategory: API
-  - name: Enterprise Manager Target Management API
-    baseURL: https://<em-host>:<port>/em/websvcs/restful/emws/target
-    tags:
-      - Configuration
-      - Discovery
-      - Lifecycle
-      - Target Management
-    serviceName: Enterprise Manager Target Management API
-    serviceCategory: API
-  - name: Enterprise Manager Incidents and Events API
-    baseURL: https://<em-host>:<port>/em/api/incidents
-    tags:
-      - Alerting
-      - Events
-      - Incidents
-      - Troubleshooting
-    serviceName: Enterprise Manager Incidents and Events API
-    serviceCategory: API
-  - name: Enterprise Manager Blackout Management API
-    baseURL: https://<em-host>:<port>/em/api/blackouts
-    tags:
-      - Blackouts
-      - Maintenance Windows
-      - Scheduling
-    serviceName: Enterprise Manager Blackout Management API
-    serviceCategory: API
-  - name: Enterprise Manager Credentials Management API
-    baseURL: https://<em-host>:<port>/em/api/credentials
-    tags:
-      - Authentication
-      - Credentials
-      - Security
-    serviceName: Enterprise Manager Credentials Management API
-    serviceCategory: API
-  - name: Enterprise Manager User Management API
-    baseURL: https://<em-host>:<port>/em/api/users
-    tags:
-      - Permissions
-      - Roles
-      - Security
-      - User Management
-    serviceName: Enterprise Manager User Management API
-    serviceCategory: API
-  - name: Enterprise Manager Database Patching and Maintenance API
-    baseURL: https://<em-host>:<port>/em/api/dblm
-    tags:
-      - Database Maintenance
-      - Fleet Maintenance
-      - Gold Images
-      - Lifecycle Management
-      - Patching
-    serviceName: Enterprise Manager Database Patching and Maintenance API
-    serviceCategory: API
-  - name: Enterprise Manager Deployment Procedure API
-    baseURL: https://<em-host>:<port>/em/api/deploymentProcedures
-    tags:
-      - Automation
-      - Deployment
-      - Procedures
-      - Provisioning
-    serviceName: Enterprise Manager Deployment Procedure API
-    serviceCategory: API
-  - name: Enterprise Manager Database Backup Management API
-    baseURL: https://<em-host>:<port>/em/api/databaseBackup
-    tags:
-      - Backup Management
-      - Database Backup
-      - Recovery
-    serviceName: Enterprise Manager Database Backup Management API
-    serviceCategory: API
-  - name: Enterprise Manager ZDLRA Management API
-    baseURL: https://<em-host>:<port>/em/api/zdlra
-    tags:
-      - Data Protection
-      - Recovery Appliance
-      - ZDLRA
-      - Zero Data Loss
-    serviceName: Enterprise Manager ZDLRA Management API
-    serviceCategory: API
-  - name: Enterprise Manager SQL Execution REST API
-    baseURL: https://<em-host>:<port>/em/api/db/sql
-    tags:
-      - Data Extraction
-      - Database Queries
-      - Reporting
-      - SQL Execution
-    serviceName: Enterprise Manager SQL Execution REST API
-    serviceCategory: API
-  - name: Enterprise Manager Data Guard Administration REST API
-    baseURL: https://<em-host>:<port>/em/api/dataguard
-    tags:
-      - Data Guard
-      - Disaster Recovery
-      - High Availability
-      - Standby Database
-    serviceName: Enterprise Manager Data Guard Administration REST API
-    serviceCategory: API
-  - name: Enterprise Manager Cloud APIs (DBaaS)
-    baseURL: https://<em-host>:<port>/em/cloud
-    tags:
-      - Cloud
-      - Database as a Service
-      - DBaaS
-      - Provisioning
-      - Self-Service
-    serviceName: Enterprise Manager Cloud APIs (DBaaS)
-    serviceCategory: API
-  - name: Enterprise Manager Extensibility Development Kit (EDK) API
-    baseURL: https://<em-host>:<port>/em
-    tags:
-      - Custom Monitoring
-      - Extensibility
-      - Plugin Development
-      - SDK
-    serviceName: Enterprise Manager Extensibility Development Kit (EDK) API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+principles:
+  - name: Visibility
+    description: Maintain a target-to-pack matrix — which databases, hosts, middleware are entitled to
+      Diagnostics, Tuning, DBLM, etc. Reconcile with Oracle LMS audit data; track OCI O+M consumption
+      separately.
+  - name: Allocation
+    description: Allocate Management Pack cost to the team that owns the target estate (DBA team for
+      Diagnostics/Tuning/DBLM; platform team for Cloud Management Pack).
+  - name: Optimization
+    description: Eliminate Diagnostics/Tuning Pack on environments that don't need them (Dev, DR); migrate
+      lightweight monitoring needs to OCI O+M consumption-based services; ensure Tuning Pack always paired
+      with Diagnostics Pack (license rule). Each pack carries 22% annual support — every removed pack
+      saves the support stream too.
+  - name: Accountability
+    description: A named DBA or platform manager owns the OEM pack catalog and reconciles before each
+      annual true-up; finance owns annual support renewal.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
