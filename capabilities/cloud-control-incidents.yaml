@@ -1,0 +1,303 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Enterprise Manager Cloud Control REST API — Incidents
+  description: 'Oracle Enterprise Manager Cloud Control REST API — Incidents. 7 operations. Lead operation: Oracle Enterprise
+    Manager List Incidents. Self-contained Naftiko capability covering one Oracle Enterprise Manager business surface.'
+  tags:
+  - Oracle Enterprise Manager
+  - Incidents
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_ENTERPRISE_MANAGER_API_KEY: ORACLE_ENTERPRISE_MANAGER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-control-incidents
+    baseUri: https://{emHost}:{emPort}/em/api
+    description: Oracle Enterprise Manager Cloud Control REST API — Incidents business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: incidents
+      path: /incidents
+      operations:
+      - name: listincidents
+        method: GET
+        description: Oracle Enterprise Manager List Incidents
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: severity
+          in: query
+          type: string
+          description: Filter by incident severity level.
+        - name: priority
+          in: query
+          type: string
+          description: Filter by incident priority.
+        - name: status
+          in: query
+          type: string
+          description: Filter by incident status.
+        - name: targetName
+          in: query
+          type: string
+          description: Filter incidents by target name.
+        - name: targetType
+          in: query
+          type: string
+          description: Filter incidents by target type.
+        - name: sinceTime
+          in: query
+          type: string
+          description: Return incidents created after this time in ISO 8601 format.
+    - name: incidents-incidentId
+      path: /incidents/{incidentId}
+      operations:
+      - name: getincident
+        method: GET
+        description: Oracle Enterprise Manager Get Incident Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: incidents-incidentId-actions-clear
+      path: /incidents/{incidentId}/actions/clear
+      operations:
+      - name: clearincident
+        method: POST
+        description: Oracle Enterprise Manager Clear an Incident
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: incidents-incidentId-actions-suppress
+      path: /incidents/{incidentId}/actions/suppress
+      operations:
+      - name: suppressincident
+        method: POST
+        description: Oracle Enterprise Manager Suppress an Incident
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: incidents-incidentId-actions-unsuppress
+      path: /incidents/{incidentId}/actions/unsuppress
+      operations:
+      - name: unsuppressincident
+        method: POST
+        description: Oracle Enterprise Manager Unsuppress an Incident
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: incidents-incidentId-annotations
+      path: /incidents/{incidentId}/annotations
+      operations:
+      - name: getincidentannotations
+        method: GET
+        description: Oracle Enterprise Manager Get Incident Annotations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: incidents-incidentId-events
+      path: /incidents/{incidentId}/events
+      operations:
+      - name: getincidentevents
+        method: GET
+        description: Oracle Enterprise Manager Get Incident Events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.ORACLE_ENTERPRISE_MANAGER_USER}}'
+      password: '{{env.ORACLE_ENTERPRISE_MANAGER_PASS}}'
+  exposes:
+  - type: rest
+    namespace: cloud-control-incidents-rest
+    port: 8080
+    description: REST adapter for Oracle Enterprise Manager Cloud Control REST API — Incidents. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/incidents
+      name: incidents
+      description: REST surface for incidents.
+      operations:
+      - method: GET
+        name: listincidents
+        description: Oracle Enterprise Manager List Incidents
+        call: cloud-control-incidents.listincidents
+        with:
+          severity: rest.severity
+          priority: rest.priority
+          status: rest.status
+          targetName: rest.targetName
+          targetType: rest.targetType
+          sinceTime: rest.sinceTime
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/incidents/{incidentid}
+      name: incidents-incidentid
+      description: REST surface for incidents-incidentId.
+      operations:
+      - method: GET
+        name: getincident
+        description: Oracle Enterprise Manager Get Incident Details
+        call: cloud-control-incidents.getincident
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/incidents/{incidentid}/actions/clear
+      name: incidents-incidentid-actions-clear
+      description: REST surface for incidents-incidentId-actions-clear.
+      operations:
+      - method: POST
+        name: clearincident
+        description: Oracle Enterprise Manager Clear an Incident
+        call: cloud-control-incidents.clearincident
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/incidents/{incidentid}/actions/suppress
+      name: incidents-incidentid-actions-suppress
+      description: REST surface for incidents-incidentId-actions-suppress.
+      operations:
+      - method: POST
+        name: suppressincident
+        description: Oracle Enterprise Manager Suppress an Incident
+        call: cloud-control-incidents.suppressincident
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/incidents/{incidentid}/actions/unsuppress
+      name: incidents-incidentid-actions-unsuppress
+      description: REST surface for incidents-incidentId-actions-unsuppress.
+      operations:
+      - method: POST
+        name: unsuppressincident
+        description: Oracle Enterprise Manager Unsuppress an Incident
+        call: cloud-control-incidents.unsuppressincident
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/incidents/{incidentid}/annotations
+      name: incidents-incidentid-annotations
+      description: REST surface for incidents-incidentId-annotations.
+      operations:
+      - method: GET
+        name: getincidentannotations
+        description: Oracle Enterprise Manager Get Incident Annotations
+        call: cloud-control-incidents.getincidentannotations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/incidents/{incidentid}/events
+      name: incidents-incidentid-events
+      description: REST surface for incidents-incidentId-events.
+      operations:
+      - method: GET
+        name: getincidentevents
+        description: Oracle Enterprise Manager Get Incident Events
+        call: cloud-control-incidents.getincidentevents
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-control-incidents-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Enterprise Manager Cloud Control REST API — Incidents. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: oracle-enterprise-manager-list-incidents
+      description: Oracle Enterprise Manager List Incidents
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-control-incidents.listincidents
+      with:
+        severity: tools.severity
+        priority: tools.priority
+        status: tools.status
+        targetName: tools.targetName
+        targetType: tools.targetType
+        sinceTime: tools.sinceTime
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-get-incident
+      description: Oracle Enterprise Manager Get Incident Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-control-incidents.getincident
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-clear-incident
+      description: Oracle Enterprise Manager Clear an Incident
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-control-incidents.clearincident
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-suppress-incident
+      description: Oracle Enterprise Manager Suppress an Incident
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-control-incidents.suppressincident
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-unsuppress-incident
+      description: Oracle Enterprise Manager Unsuppress an Incident
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-control-incidents.unsuppressincident
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-get-incident-2
+      description: Oracle Enterprise Manager Get Incident Annotations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-control-incidents.getincidentannotations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-get-incident-3
+      description: Oracle Enterprise Manager Get Incident Events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-control-incidents.getincidentevents
+      outputParameters:
+      - type: object
+        mapping: $.

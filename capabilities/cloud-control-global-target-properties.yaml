@@ -1,0 +1,269 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Enterprise Manager Cloud Control REST API — Global Target Properties
+  description: 'Oracle Enterprise Manager Cloud Control REST API — Global Target Properties. 6 operations. Lead operation:
+    Oracle Enterprise Manager List Global Target Properties. Self-contained Naftiko capability covering one Oracle Enterprise
+    Manager business surface.'
+  tags:
+  - Oracle Enterprise Manager
+  - Global Target Properties
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_ENTERPRISE_MANAGER_API_KEY: ORACLE_ENTERPRISE_MANAGER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-control-global-target-properties
+    baseUri: https://{emHost}:{emPort}/em/api
+    description: Oracle Enterprise Manager Cloud Control REST API — Global Target Properties business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: globalTargetProperties
+      path: /globalTargetProperties
+      operations:
+      - name: listglobaltargetproperties
+        method: GET
+        description: Oracle Enterprise Manager List Global Target Properties
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createglobaltargetproperty
+        method: POST
+        description: Oracle Enterprise Manager Create a Global Target Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: globalTargetProperties-globalTargetPropertyId
+      path: /globalTargetProperties/{globalTargetPropertyId}
+      operations:
+      - name: getglobaltargetproperty
+        method: GET
+        description: Oracle Enterprise Manager Get Global Target Property Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: globalTargetPropertyId
+          in: path
+          type: string
+          description: Unique identifier of the global target property.
+          required: true
+      - name: modifyglobaltargetproperty
+        method: PATCH
+        description: Oracle Enterprise Manager Modify a Global Target Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: globalTargetPropertyId
+          in: path
+          type: string
+          description: Unique identifier of the global target property.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteglobaltargetproperty
+        method: DELETE
+        description: Oracle Enterprise Manager Delete a Global Target Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: globalTargetPropertyId
+          in: path
+          type: string
+          description: Unique identifier of the global target property.
+          required: true
+    - name: globalTargetProperties-globalTargetPropertyId-validValues
+      path: /globalTargetProperties/{globalTargetPropertyId}/validValues
+      operations:
+      - name: getglobaltargetpropertyvalidvalues
+        method: GET
+        description: Oracle Enterprise Manager Get Valid Values for a Global Target Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: globalTargetPropertyId
+          in: path
+          type: string
+          description: Unique identifier of the global target property.
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.ORACLE_ENTERPRISE_MANAGER_USER}}'
+      password: '{{env.ORACLE_ENTERPRISE_MANAGER_PASS}}'
+  exposes:
+  - type: rest
+    namespace: cloud-control-global-target-properties-rest
+    port: 8080
+    description: REST adapter for Oracle Enterprise Manager Cloud Control REST API — Global Target Properties. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/globaltargetproperties
+      name: globaltargetproperties
+      description: REST surface for globalTargetProperties.
+      operations:
+      - method: GET
+        name: listglobaltargetproperties
+        description: Oracle Enterprise Manager List Global Target Properties
+        call: cloud-control-global-target-properties.listglobaltargetproperties
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createglobaltargetproperty
+        description: Oracle Enterprise Manager Create a Global Target Property
+        call: cloud-control-global-target-properties.createglobaltargetproperty
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/globaltargetproperties/{globaltargetpropertyid}
+      name: globaltargetproperties-globaltargetpropertyid
+      description: REST surface for globalTargetProperties-globalTargetPropertyId.
+      operations:
+      - method: GET
+        name: getglobaltargetproperty
+        description: Oracle Enterprise Manager Get Global Target Property Details
+        call: cloud-control-global-target-properties.getglobaltargetproperty
+        with:
+          globalTargetPropertyId: rest.globalTargetPropertyId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: modifyglobaltargetproperty
+        description: Oracle Enterprise Manager Modify a Global Target Property
+        call: cloud-control-global-target-properties.modifyglobaltargetproperty
+        with:
+          globalTargetPropertyId: rest.globalTargetPropertyId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteglobaltargetproperty
+        description: Oracle Enterprise Manager Delete a Global Target Property
+        call: cloud-control-global-target-properties.deleteglobaltargetproperty
+        with:
+          globalTargetPropertyId: rest.globalTargetPropertyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/globaltargetproperties/{globaltargetpropertyid}/validvalues
+      name: globaltargetproperties-globaltargetpropertyid-validvalues
+      description: REST surface for globalTargetProperties-globalTargetPropertyId-validValues.
+      operations:
+      - method: GET
+        name: getglobaltargetpropertyvalidvalues
+        description: Oracle Enterprise Manager Get Valid Values for a Global Target Property
+        call: cloud-control-global-target-properties.getglobaltargetpropertyvalidvalues
+        with:
+          globalTargetPropertyId: rest.globalTargetPropertyId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-control-global-target-properties-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Enterprise Manager Cloud Control REST API — Global Target Properties. One tool per
+      consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: oracle-enterprise-manager-list-global
+      description: Oracle Enterprise Manager List Global Target Properties
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-control-global-target-properties.listglobaltargetproperties
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-create-global
+      description: Oracle Enterprise Manager Create a Global Target Property
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: cloud-control-global-target-properties.createglobaltargetproperty
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-get-global
+      description: Oracle Enterprise Manager Get Global Target Property Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-control-global-target-properties.getglobaltargetproperty
+      with:
+        globalTargetPropertyId: tools.globalTargetPropertyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-modify-global
+      description: Oracle Enterprise Manager Modify a Global Target Property
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-control-global-target-properties.modifyglobaltargetproperty
+      with:
+        globalTargetPropertyId: tools.globalTargetPropertyId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-delete-global
+      description: Oracle Enterprise Manager Delete a Global Target Property
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-control-global-target-properties.deleteglobaltargetproperty
+      with:
+        globalTargetPropertyId: tools.globalTargetPropertyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-get-valid
+      description: Oracle Enterprise Manager Get Valid Values for a Global Target Property
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-control-global-target-properties.getglobaltargetpropertyvalidvalues
+      with:
+        globalTargetPropertyId: tools.globalTargetPropertyId
+      outputParameters:
+      - type: object
+        mapping: $.

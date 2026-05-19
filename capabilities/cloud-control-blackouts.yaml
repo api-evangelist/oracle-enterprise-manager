@@ -1,0 +1,419 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Enterprise Manager Cloud Control REST API — Blackouts
+  description: 'Oracle Enterprise Manager Cloud Control REST API — Blackouts. 11 operations. Lead operation: Oracle Enterprise
+    Manager List Blackouts. Self-contained Naftiko capability covering one Oracle Enterprise Manager business surface.'
+  tags:
+  - Oracle Enterprise Manager
+  - Blackouts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_ENTERPRISE_MANAGER_API_KEY: ORACLE_ENTERPRISE_MANAGER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-control-blackouts
+    baseUri: https://{emHost}:{emPort}/em/api
+    description: Oracle Enterprise Manager Cloud Control REST API — Blackouts business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: blackouts
+      path: /blackouts
+      operations:
+      - name: listblackouts
+        method: GET
+        description: Oracle Enterprise Manager List Blackouts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Filter by blackout status.
+        - name: targetName
+          in: query
+          type: string
+          description: Filter by associated target name.
+      - name: createblackout
+        method: POST
+        description: Oracle Enterprise Manager Create a Blackout
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: blackouts-dashboard
+      path: /blackouts/dashboard
+      operations:
+      - name: getblackoutdashboard
+        method: GET
+        description: Oracle Enterprise Manager Get Blackout Statistics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: blackouts-reasons
+      path: /blackouts/reasons
+      operations:
+      - name: listblackoutreasons
+        method: GET
+        description: Oracle Enterprise Manager List Blackout Reasons
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createblackoutreason
+        method: POST
+        description: Oracle Enterprise Manager Create a Blackout Reason
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: blackouts-reasons-reasonId
+      path: /blackouts/reasons/{reasonId}
+      operations:
+      - name: deleteblackoutreason
+        method: DELETE
+        description: Oracle Enterprise Manager Delete a Blackout Reason
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: reasonId
+          in: path
+          type: string
+          description: Unique identifier of the blackout reason.
+          required: true
+    - name: blackouts-blackoutId
+      path: /blackouts/{blackoutId}
+      operations:
+      - name: getblackout
+        method: GET
+        description: Oracle Enterprise Manager Get Blackout Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: editblackout
+        method: PATCH
+        description: Oracle Enterprise Manager Edit a Blackout
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteblackout
+        method: DELETE
+        description: Oracle Enterprise Manager Delete a Blackout
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: blackouts-blackoutId-actions-stop
+      path: /blackouts/{blackoutId}/actions/stop
+      operations:
+      - name: stopblackout
+        method: POST
+        description: Oracle Enterprise Manager Stop a Blackout
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: blackouts-blackoutId-targets
+      path: /blackouts/{blackoutId}/targets
+      operations:
+      - name: getblackouttargets
+        method: GET
+        description: Oracle Enterprise Manager Get Blackout Targets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.ORACLE_ENTERPRISE_MANAGER_USER}}'
+      password: '{{env.ORACLE_ENTERPRISE_MANAGER_PASS}}'
+  exposes:
+  - type: rest
+    namespace: cloud-control-blackouts-rest
+    port: 8080
+    description: REST adapter for Oracle Enterprise Manager Cloud Control REST API — Blackouts. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/blackouts
+      name: blackouts
+      description: REST surface for blackouts.
+      operations:
+      - method: GET
+        name: listblackouts
+        description: Oracle Enterprise Manager List Blackouts
+        call: cloud-control-blackouts.listblackouts
+        with:
+          status: rest.status
+          targetName: rest.targetName
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createblackout
+        description: Oracle Enterprise Manager Create a Blackout
+        call: cloud-control-blackouts.createblackout
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/blackouts/dashboard
+      name: blackouts-dashboard
+      description: REST surface for blackouts-dashboard.
+      operations:
+      - method: GET
+        name: getblackoutdashboard
+        description: Oracle Enterprise Manager Get Blackout Statistics
+        call: cloud-control-blackouts.getblackoutdashboard
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/blackouts/reasons
+      name: blackouts-reasons
+      description: REST surface for blackouts-reasons.
+      operations:
+      - method: GET
+        name: listblackoutreasons
+        description: Oracle Enterprise Manager List Blackout Reasons
+        call: cloud-control-blackouts.listblackoutreasons
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createblackoutreason
+        description: Oracle Enterprise Manager Create a Blackout Reason
+        call: cloud-control-blackouts.createblackoutreason
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/blackouts/reasons/{reasonid}
+      name: blackouts-reasons-reasonid
+      description: REST surface for blackouts-reasons-reasonId.
+      operations:
+      - method: DELETE
+        name: deleteblackoutreason
+        description: Oracle Enterprise Manager Delete a Blackout Reason
+        call: cloud-control-blackouts.deleteblackoutreason
+        with:
+          reasonId: rest.reasonId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/blackouts/{blackoutid}
+      name: blackouts-blackoutid
+      description: REST surface for blackouts-blackoutId.
+      operations:
+      - method: GET
+        name: getblackout
+        description: Oracle Enterprise Manager Get Blackout Details
+        call: cloud-control-blackouts.getblackout
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: editblackout
+        description: Oracle Enterprise Manager Edit a Blackout
+        call: cloud-control-blackouts.editblackout
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteblackout
+        description: Oracle Enterprise Manager Delete a Blackout
+        call: cloud-control-blackouts.deleteblackout
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/blackouts/{blackoutid}/actions/stop
+      name: blackouts-blackoutid-actions-stop
+      description: REST surface for blackouts-blackoutId-actions-stop.
+      operations:
+      - method: POST
+        name: stopblackout
+        description: Oracle Enterprise Manager Stop a Blackout
+        call: cloud-control-blackouts.stopblackout
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/blackouts/{blackoutid}/targets
+      name: blackouts-blackoutid-targets
+      description: REST surface for blackouts-blackoutId-targets.
+      operations:
+      - method: GET
+        name: getblackouttargets
+        description: Oracle Enterprise Manager Get Blackout Targets
+        call: cloud-control-blackouts.getblackouttargets
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-control-blackouts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Enterprise Manager Cloud Control REST API — Blackouts. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: oracle-enterprise-manager-list-blackouts
+      description: Oracle Enterprise Manager List Blackouts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-control-blackouts.listblackouts
+      with:
+        status: tools.status
+        targetName: tools.targetName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-create-blackout
+      description: Oracle Enterprise Manager Create a Blackout
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-control-blackouts.createblackout
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-get-blackout
+      description: Oracle Enterprise Manager Get Blackout Statistics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-control-blackouts.getblackoutdashboard
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-list-blackout
+      description: Oracle Enterprise Manager List Blackout Reasons
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-control-blackouts.listblackoutreasons
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-create-blackout-2
+      description: Oracle Enterprise Manager Create a Blackout Reason
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-control-blackouts.createblackoutreason
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-delete-blackout
+      description: Oracle Enterprise Manager Delete a Blackout Reason
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-control-blackouts.deleteblackoutreason
+      with:
+        reasonId: tools.reasonId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-get-blackout-2
+      description: Oracle Enterprise Manager Get Blackout Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-control-blackouts.getblackout
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-edit-blackout
+      description: Oracle Enterprise Manager Edit a Blackout
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-control-blackouts.editblackout
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-delete-blackout-2
+      description: Oracle Enterprise Manager Delete a Blackout
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-control-blackouts.deleteblackout
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-stop-blackout
+      description: Oracle Enterprise Manager Stop a Blackout
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-control-blackouts.stopblackout
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-get-blackout-3
+      description: Oracle Enterprise Manager Get Blackout Targets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-control-blackouts.getblackouttargets
+      outputParameters:
+      - type: object
+        mapping: $.

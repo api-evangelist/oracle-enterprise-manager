@@ -1,0 +1,208 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Enterprise Manager Cloud Control REST API — Metrics
+  description: 'Oracle Enterprise Manager Cloud Control REST API — Metrics. 4 operations. Lead operation: Oracle Enterprise
+    Manager Get Metric Time Series Data. Self-contained Naftiko capability covering one Oracle Enterprise Manager business
+    surface.'
+  tags:
+  - Oracle Enterprise Manager
+  - Metrics
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_ENTERPRISE_MANAGER_API_KEY: ORACLE_ENTERPRISE_MANAGER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-control-metrics
+    baseUri: https://{emHost}:{emPort}/em/api
+    description: Oracle Enterprise Manager Cloud Control REST API — Metrics business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: metricTimeSeries
+      path: /metricTimeSeries
+      operations:
+      - name: getmetrictimeseries
+        method: GET
+        description: Oracle Enterprise Manager Get Metric Time Series Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: targetNames
+          in: query
+          type: string
+          description: Comma-separated list of target names to retrieve metric data for.
+        - name: targetTypes
+          in: query
+          type: string
+          description: Comma-separated list of target types to filter by.
+        - name: metricGroups
+          in: query
+          type: string
+          description: Comma-separated list of metric group names.
+        - name: metricColumns
+          in: query
+          type: string
+          description: Comma-separated list of metric column names.
+        - name: startTime
+          in: query
+          type: string
+          description: Start of the time range in ISO 8601 format.
+        - name: endTime
+          in: query
+          type: string
+          description: End of the time range in ISO 8601 format.
+    - name: targets-targetId-metricGroups
+      path: /targets/{targetId}/metricGroups
+      operations:
+      - name: listmetricgroups
+        method: GET
+        description: Oracle Enterprise Manager List Metric Groups for a Target
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: targets-targetId-metricGroups-metricGroupName
+      path: /targets/{targetId}/metricGroups/{metricGroupName}
+      operations:
+      - name: getmetricgroup
+        method: GET
+        description: Oracle Enterprise Manager Get Metric Group Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: targets-targetId-metricGroups-metricGroupName-latestData
+      path: /targets/{targetId}/metricGroups/{metricGroupName}/latestData
+      operations:
+      - name: getlatestmetricdata
+        method: GET
+        description: Oracle Enterprise Manager Get Latest Metric Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.ORACLE_ENTERPRISE_MANAGER_USER}}'
+      password: '{{env.ORACLE_ENTERPRISE_MANAGER_PASS}}'
+  exposes:
+  - type: rest
+    namespace: cloud-control-metrics-rest
+    port: 8080
+    description: REST adapter for Oracle Enterprise Manager Cloud Control REST API — Metrics. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/metrictimeseries
+      name: metrictimeseries
+      description: REST surface for metricTimeSeries.
+      operations:
+      - method: GET
+        name: getmetrictimeseries
+        description: Oracle Enterprise Manager Get Metric Time Series Data
+        call: cloud-control-metrics.getmetrictimeseries
+        with:
+          targetNames: rest.targetNames
+          targetTypes: rest.targetTypes
+          metricGroups: rest.metricGroups
+          metricColumns: rest.metricColumns
+          startTime: rest.startTime
+          endTime: rest.endTime
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/targets/{targetid}/metricgroups
+      name: targets-targetid-metricgroups
+      description: REST surface for targets-targetId-metricGroups.
+      operations:
+      - method: GET
+        name: listmetricgroups
+        description: Oracle Enterprise Manager List Metric Groups for a Target
+        call: cloud-control-metrics.listmetricgroups
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/targets/{targetid}/metricgroups/{metricgroupname}
+      name: targets-targetid-metricgroups-metricgroupname
+      description: REST surface for targets-targetId-metricGroups-metricGroupName.
+      operations:
+      - method: GET
+        name: getmetricgroup
+        description: Oracle Enterprise Manager Get Metric Group Details
+        call: cloud-control-metrics.getmetricgroup
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/targets/{targetid}/metricgroups/{metricgroupname}/latestdata
+      name: targets-targetid-metricgroups-metricgroupname-latestdata
+      description: REST surface for targets-targetId-metricGroups-metricGroupName-latestData.
+      operations:
+      - method: GET
+        name: getlatestmetricdata
+        description: Oracle Enterprise Manager Get Latest Metric Data
+        call: cloud-control-metrics.getlatestmetricdata
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-control-metrics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Enterprise Manager Cloud Control REST API — Metrics. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: oracle-enterprise-manager-get-metric
+      description: Oracle Enterprise Manager Get Metric Time Series Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-control-metrics.getmetrictimeseries
+      with:
+        targetNames: tools.targetNames
+        targetTypes: tools.targetTypes
+        metricGroups: tools.metricGroups
+        metricColumns: tools.metricColumns
+        startTime: tools.startTime
+        endTime: tools.endTime
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-list-metric
+      description: Oracle Enterprise Manager List Metric Groups for a Target
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-control-metrics.listmetricgroups
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-get-metric-2
+      description: Oracle Enterprise Manager Get Metric Group Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-control-metrics.getmetricgroup
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-enterprise-manager-get-latest
+      description: Oracle Enterprise Manager Get Latest Metric Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-control-metrics.getlatestmetricdata
+      outputParameters:
+      - type: object
+        mapping: $.
