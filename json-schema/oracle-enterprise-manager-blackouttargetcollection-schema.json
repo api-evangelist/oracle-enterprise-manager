@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BlackoutTargetCollection",
+  "title": "BlackoutTargetCollection",
+  "type": "object",
+  "description": "Collection of targets in a blackout.",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/BlackoutTarget"
+      },
+      "example": []
+    }
+  }
+}

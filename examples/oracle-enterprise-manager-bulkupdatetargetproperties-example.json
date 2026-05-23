@@ -1,0 +1,36 @@
+{
+  "operationId": "bulkUpdateTargetProperties",
+  "method": "POST",
+  "path": "/targets/{targetId}/actions/bulkUpdateProperties",
+  "summary": "Oracle Enterprise Manager Bulk Update Target Properties",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "BulkupdatetargetpropertiesRequestExample",
+      "example": {
+        "properties": [
+          {
+            "name": "Example Title",
+            "value": "example_value"
+          }
+        ]
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Bulkupdatetargetproperties200Example",
+      "example": {
+        "items": [
+          {
+            "name": "Example Title",
+            "value": "example_value",
+            "isReadOnly": true
+          }
+        ]
+      }
+    }
+  ]
+}

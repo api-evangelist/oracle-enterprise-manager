@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BlackoutReasonCollection",
+  "title": "BlackoutReasonCollection",
+  "type": "object",
+  "description": "Collection of blackout reasons.",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/BlackoutReason"
+      },
+      "example": []
+    }
+  }
+}

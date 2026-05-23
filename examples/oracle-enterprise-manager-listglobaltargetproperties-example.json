@@ -1,0 +1,26 @@
+{
+  "operationId": "listGlobalTargetProperties",
+  "method": "GET",
+  "path": "/globalTargetProperties",
+  "summary": "Oracle Enterprise Manager List Global Target Properties",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listglobaltargetproperties200Example",
+      "example": {
+        "items": [
+          {
+            "globalTargetPropertyId": "500123",
+            "propertyName": "example_value",
+            "propertyDisplayName": "example_value",
+            "description": "A sample description.",
+            "propertyType": "STRING",
+            "hasValidValues": true
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/MetricGroup",
+  "title": "MetricGroup",
+  "type": "object",
+  "description": "Defines a group of related metrics collected for a target. Each metric group has a name, collection frequency, and a set of metric columns.",
+  "properties": {
+    "metricGroupName": {
+      "type": "string",
+      "description": "Unique name of the metric group.",
+      "example": "example_value"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable display name.",
+      "example": "example_value"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of what this metric group measures.",
+      "example": "A sample description."
+    },
+    "collectionFrequency": {
+      "type": "integer",
+      "description": "Collection interval in seconds.",
+      "example": 10
+    },
+    "metricColumns": {
+      "type": "array",
+      "description": "List of metric columns in this group.",
+      "items": {
+        "$ref": "#/components/schemas/MetricColumn"
+      },
+      "example": []
+    }
+  }
+}

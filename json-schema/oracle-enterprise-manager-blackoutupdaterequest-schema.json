@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BlackoutUpdateRequest",
+  "title": "BlackoutUpdateRequest",
+  "type": "object",
+  "description": "Request body for updating a blackout.",
+  "properties": {
+    "description": {
+      "type": "string",
+      "example": "A sample description."
+    },
+    "reason": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "schedule": {
+      "$ref": "#/components/schemas/BlackoutSchedule"
+    },
+    "targets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/BlackoutTarget"
+      },
+      "example": []
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "operationId": "getEvent",
+  "method": "GET",
+  "path": "/events/{eventId}",
+  "summary": "Oracle Enterprise Manager Get Event Details",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getevent200Example",
+      "example": {
+        "eventId": "500123",
+        "eventType": "METRIC_ALERT",
+        "severity": "FATAL",
+        "message": "example_value",
+        "targetName": "example_value",
+        "targetType": "example_value",
+        "metricGroupName": "example_value",
+        "metricColumnName": "example_value",
+        "metricValue": 42.5,
+        "timeRaised": "2026-01-15T10:30:00Z",
+        "timeResolved": "2026-01-15T10:30:00Z",
+        "canonicalLink": "https://www.example.com"
+      }
+    }
+  ]
+}

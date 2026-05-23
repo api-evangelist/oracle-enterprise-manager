@@ -1,0 +1,21 @@
+{
+  "operationId": "getBlackoutDashboard",
+  "method": "GET",
+  "path": "/blackouts/dashboard",
+  "summary": "Oracle Enterprise Manager Get Blackout Statistics",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getblackoutdashboard200Example",
+      "example": {
+        "totalBlackouts": 10,
+        "activeBlackouts": 10,
+        "scheduledBlackouts": 10,
+        "endedBlackouts": 10,
+        "targetsInBlackout": 10
+      }
+    }
+  ]
+}

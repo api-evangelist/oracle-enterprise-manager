@@ -1,0 +1,19 @@
+{
+  "operationId": "getGlobalTargetPropertyValidValues",
+  "method": "GET",
+  "path": "/globalTargetProperties/{globalTargetPropertyId}/validValues",
+  "summary": "Oracle Enterprise Manager Get Valid Values for a Global Target Property",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getglobaltargetpropertyvalidvalues200Example",
+      "example": {
+        "items": [
+          "example_value"
+        ]
+      }
+    }
+  ]
+}

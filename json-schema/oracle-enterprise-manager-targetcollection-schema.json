@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TargetCollection",
+  "title": "TargetCollection",
+  "type": "object",
+  "description": "Paginated collection of targets.",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Target"
+      },
+      "example": []
+    },
+    "totalCount": {
+      "type": "integer",
+      "description": "Total number of targets matching the query.",
+      "example": 10
+    },
+    "limit": {
+      "type": "integer",
+      "description": "Maximum items per page.",
+      "example": 10
+    },
+    "offset": {
+      "type": "integer",
+      "description": "Current offset in the result set.",
+      "example": 10
+    },
+    "hasMore": {
+      "type": "boolean",
+      "description": "Whether more results are available.",
+      "example": true
+    }
+  }
+}

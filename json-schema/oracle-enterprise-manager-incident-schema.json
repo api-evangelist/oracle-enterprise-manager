@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Incident",
+  "title": "Incident",
+  "type": "object",
+  "description": "Represents an incident in Enterprise Manager. Incidents are actionable issues detected by monitoring rules, correlated from one or more events.",
+  "properties": {
+    "incidentId": {
+      "type": "string",
+      "description": "Unique identifier of the incident.",
+      "example": "500123"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Brief summary of the incident.",
+      "example": "example_value"
+    },
+    "severity": {
+      "type": "string",
+      "description": "Severity level of the incident.",
+      "enum": [
+        "FATAL",
+        "CRITICAL",
+        "WARNING",
+        "ADVISORY",
+        "INFORMATIONAL"
+      ],
+      "example": "FATAL"
+    },
+    "priority": {
+      "type": "string",
+      "description": "Priority assigned to the incident.",
+      "enum": [
+        "URGENT",
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "NONE"
+      ],
+      "example": "URGENT"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the incident.",
+      "enum": [
+        "NEW",
+        "WORK_IN_PROGRESS",
+        "RESOLVED",
+        "CLOSED",
+        "SUPPRESSED"
+      ],
+      "example": "NEW"
+    },
+    "category": {
+      "type": "string",
+      "description": "Category of the incident.",
+      "enum": [
+        "AVAILABILITY",
+        "PERFORMANCE",
+        "SECURITY",
+        "CONFIGURATION",
+        "ERROR",
+        "CAPACITY",
+        "COMPLIANCE"
+      ],
+      "example": "AVAILABILITY"
+    },
+    "targetName": {
+      "type": "string",
+      "description": "Name of the target associated with this incident.",
+      "example": "example_value"
+    },
+    "targetType": {
+      "type": "string",
+      "description": "Type of the target associated with this incident.",
+      "example": "example_value"
+    },
+    "escalationLevel": {
+      "type": "integer",
+      "description": "Current escalation level of the incident.",
+      "example": 10
+    },
+    "owner": {
+      "type": "string",
+      "description": "Username of the incident owner or assignee.",
+      "example": "example_value"
+    },
+    "acknowledgedBy": {
+      "type": "string",
+      "description": "Username of the person who acknowledged the incident.",
+      "example": "example_value"
+    },
+    "resolutionState": {
+      "type": "string",
+      "description": "Resolution state providing closure details.",
+      "example": "example_value"
+    },
+    "ruleSetName": {
+      "type": "string",
+      "description": "Name of the incident rule set that created this incident.",
+      "example": "example_value"
+    },
+    "timeRaised": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the incident was first raised.",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "timeUpdated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the last incident update.",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "timeResolved": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the incident was resolved.",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "eventCount": {
+      "type": "integer",
+      "description": "Number of events correlated into this incident.",
+      "example": 10
+    },
+    "canonicalLink": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical URI for this incident resource.",
+      "example": "https://www.example.com"
+    }
+  }
+}

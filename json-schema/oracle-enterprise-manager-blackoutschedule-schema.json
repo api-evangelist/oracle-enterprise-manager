@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BlackoutSchedule",
+  "title": "BlackoutSchedule",
+  "type": "object",
+  "description": "Schedule definition for a blackout.",
+  "properties": {
+    "startTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Scheduled start time of the blackout.",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "endTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Scheduled end time of the blackout.",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Duration in minutes if no explicit end time is specified.",
+      "example": 10
+    },
+    "timezone": {
+      "type": "string",
+      "description": "Time zone for the schedule.",
+      "example": "example_value"
+    },
+    "frequency": {
+      "type": "string",
+      "description": "Recurrence frequency for repeating blackouts.",
+      "enum": [
+        "ONCE",
+        "DAILY",
+        "WEEKLY",
+        "MONTHLY",
+        "YEARLY"
+      ],
+      "example": "ONCE"
+    },
+    "repeatInterval": {
+      "type": "integer",
+      "description": "Interval for repeating blackouts (e.g., every 2 weeks).",
+      "example": 10
+    },
+    "daysOfWeek": {
+      "type": "array",
+      "description": "Days of the week for weekly recurrence.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "SUNDAY",
+          "MONDAY",
+          "TUESDAY",
+          "WEDNESDAY",
+          "THURSDAY",
+          "FRIDAY",
+          "SATURDAY"
+        ]
+      },
+      "example": []
+    }
+  }
+}

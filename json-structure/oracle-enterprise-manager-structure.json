@@ -1,0 +1,564 @@
+{
+  "provider": "Oracle Enterprise Manager",
+  "providerId": "oracle-enterprise-manager",
+  "kind": "json-structure",
+  "description": "Structural overview of the Oracle Enterprise Manager API surface; extracted from openapi/.",
+  "schemaCount": 36,
+  "operationCount": 36,
+  "schemas": [
+    {
+      "name": "Target",
+      "type": "object",
+      "propertyCount": 17,
+      "required": []
+    },
+    {
+      "name": "TargetCreateRequest",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "targetName",
+        "targetType",
+        "hostName"
+      ]
+    },
+    {
+      "name": "TargetUpdateRequest",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "TargetCollection",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "TargetProperty",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "TargetPropertyCollection",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "BulkPropertyUpdateRequest",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "MetricGroup",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "MetricColumn",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "MetricGroupCollection",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "MetricDataPoint",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "MetricDataCollection",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "MetricTimeSeries",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "MetricTimeSeriesCollection",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Incident",
+      "type": "object",
+      "propertyCount": 18,
+      "required": []
+    },
+    {
+      "name": "IncidentCollection",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "Event",
+      "type": "object",
+      "propertyCount": 12,
+      "required": []
+    },
+    {
+      "name": "EventCollection",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Annotation",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "AnnotationCollection",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Blackout",
+      "type": "object",
+      "propertyCount": 11,
+      "required": []
+    },
+    {
+      "name": "BlackoutSchedule",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "BlackoutTarget",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "BlackoutCreateRequest",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "blackoutName",
+        "schedule",
+        "targets"
+      ]
+    },
+    {
+      "name": "BlackoutUpdateRequest",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "BlackoutCollection",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "BlackoutTargetCollection",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "BlackoutDashboard",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "BlackoutReason",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "BlackoutReasonCreateRequest",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "reason"
+      ]
+    },
+    {
+      "name": "BlackoutReasonCollection",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "GlobalTargetProperty",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "GlobalTargetPropertyCreateRequest",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "propertyName"
+      ]
+    },
+    {
+      "name": "GlobalTargetPropertyUpdateRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "GlobalTargetPropertyCollection",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Error",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/targets",
+      "operationId": "listTargets",
+      "summary": "Oracle Enterprise Manager List Targets",
+      "tags": [
+        "Targets"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/targets",
+      "operationId": "createTarget",
+      "summary": "Oracle Enterprise Manager Create a Target",
+      "tags": [
+        "Targets"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/targets/{targetId}",
+      "operationId": "getTarget",
+      "summary": "Oracle Enterprise Manager Get Target Details",
+      "tags": [
+        "Targets"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/targets/{targetId}",
+      "operationId": "deleteTarget",
+      "summary": "Oracle Enterprise Manager Delete a Target",
+      "tags": [
+        "Targets"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/targets/{targetId}",
+      "operationId": "updateTarget",
+      "summary": "Oracle Enterprise Manager Update a Target",
+      "tags": [
+        "Targets"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/targets/{targetId}/properties",
+      "operationId": "getTargetProperties",
+      "summary": "Oracle Enterprise Manager Get Target Properties",
+      "tags": [
+        "Targets"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/targets/{targetId}/actions/bulkUpdateProperties",
+      "operationId": "bulkUpdateTargetProperties",
+      "summary": "Oracle Enterprise Manager Bulk Update Target Properties",
+      "tags": [
+        "Targets"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/targets/{targetId}/metricGroups",
+      "operationId": "listMetricGroups",
+      "summary": "Oracle Enterprise Manager List Metric Groups for a Target",
+      "tags": [
+        "Metrics"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/targets/{targetId}/metricGroups/{metricGroupName}",
+      "operationId": "getMetricGroup",
+      "summary": "Oracle Enterprise Manager Get Metric Group Details",
+      "tags": [
+        "Metrics"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/targets/{targetId}/metricGroups/{metricGroupName}/latestData",
+      "operationId": "getLatestMetricData",
+      "summary": "Oracle Enterprise Manager Get Latest Metric Data",
+      "tags": [
+        "Metrics"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/metricTimeSeries",
+      "operationId": "getMetricTimeSeries",
+      "summary": "Oracle Enterprise Manager Get Metric Time Series Data",
+      "tags": [
+        "Metrics"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/incidents",
+      "operationId": "listIncidents",
+      "summary": "Oracle Enterprise Manager List Incidents",
+      "tags": [
+        "Incidents"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/incidents/{incidentId}",
+      "operationId": "getIncident",
+      "summary": "Oracle Enterprise Manager Get Incident Details",
+      "tags": [
+        "Incidents"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/incidents/{incidentId}/actions/clear",
+      "operationId": "clearIncident",
+      "summary": "Oracle Enterprise Manager Clear an Incident",
+      "tags": [
+        "Incidents"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/incidents/{incidentId}/actions/suppress",
+      "operationId": "suppressIncident",
+      "summary": "Oracle Enterprise Manager Suppress an Incident",
+      "tags": [
+        "Incidents"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/incidents/{incidentId}/actions/unsuppress",
+      "operationId": "unsuppressIncident",
+      "summary": "Oracle Enterprise Manager Unsuppress an Incident",
+      "tags": [
+        "Incidents"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/incidents/{incidentId}/events",
+      "operationId": "getIncidentEvents",
+      "summary": "Oracle Enterprise Manager Get Incident Events",
+      "tags": [
+        "Incidents"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/incidents/{incidentId}/annotations",
+      "operationId": "getIncidentAnnotations",
+      "summary": "Oracle Enterprise Manager Get Incident Annotations",
+      "tags": [
+        "Incidents"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/events/{eventId}",
+      "operationId": "getEvent",
+      "summary": "Oracle Enterprise Manager Get Event Details",
+      "tags": [
+        "Events"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/blackouts",
+      "operationId": "listBlackouts",
+      "summary": "Oracle Enterprise Manager List Blackouts",
+      "tags": [
+        "Blackouts"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/blackouts",
+      "operationId": "createBlackout",
+      "summary": "Oracle Enterprise Manager Create a Blackout",
+      "tags": [
+        "Blackouts"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/blackouts/{blackoutId}",
+      "operationId": "getBlackout",
+      "summary": "Oracle Enterprise Manager Get Blackout Details",
+      "tags": [
+        "Blackouts"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/blackouts/{blackoutId}",
+      "operationId": "deleteBlackout",
+      "summary": "Oracle Enterprise Manager Delete a Blackout",
+      "tags": [
+        "Blackouts"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/blackouts/{blackoutId}",
+      "operationId": "editBlackout",
+      "summary": "Oracle Enterprise Manager Edit a Blackout",
+      "tags": [
+        "Blackouts"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/blackouts/{blackoutId}/actions/stop",
+      "operationId": "stopBlackout",
+      "summary": "Oracle Enterprise Manager Stop a Blackout",
+      "tags": [
+        "Blackouts"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/blackouts/{blackoutId}/targets",
+      "operationId": "getBlackoutTargets",
+      "summary": "Oracle Enterprise Manager Get Blackout Targets",
+      "tags": [
+        "Blackouts"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/blackouts/dashboard",
+      "operationId": "getBlackoutDashboard",
+      "summary": "Oracle Enterprise Manager Get Blackout Statistics",
+      "tags": [
+        "Blackouts"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/blackouts/reasons",
+      "operationId": "listBlackoutReasons",
+      "summary": "Oracle Enterprise Manager List Blackout Reasons",
+      "tags": [
+        "Blackouts"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/blackouts/reasons",
+      "operationId": "createBlackoutReason",
+      "summary": "Oracle Enterprise Manager Create a Blackout Reason",
+      "tags": [
+        "Blackouts"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/blackouts/reasons/{reasonId}",
+      "operationId": "deleteBlackoutReason",
+      "summary": "Oracle Enterprise Manager Delete a Blackout Reason",
+      "tags": [
+        "Blackouts"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/globalTargetProperties",
+      "operationId": "listGlobalTargetProperties",
+      "summary": "Oracle Enterprise Manager List Global Target Properties",
+      "tags": [
+        "Global Target Properties"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/globalTargetProperties",
+      "operationId": "createGlobalTargetProperty",
+      "summary": "Oracle Enterprise Manager Create a Global Target Property",
+      "tags": [
+        "Global Target Properties"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/globalTargetProperties/{globalTargetPropertyId}",
+      "operationId": "getGlobalTargetProperty",
+      "summary": "Oracle Enterprise Manager Get Global Target Property Details",
+      "tags": [
+        "Global Target Properties"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/globalTargetProperties/{globalTargetPropertyId}",
+      "operationId": "deleteGlobalTargetProperty",
+      "summary": "Oracle Enterprise Manager Delete a Global Target Property",
+      "tags": [
+        "Global Target Properties"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/globalTargetProperties/{globalTargetPropertyId}",
+      "operationId": "modifyGlobalTargetProperty",
+      "summary": "Oracle Enterprise Manager Modify a Global Target Property",
+      "tags": [
+        "Global Target Properties"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/globalTargetProperties/{globalTargetPropertyId}/validValues",
+      "operationId": "getGlobalTargetPropertyValidValues",
+      "summary": "Oracle Enterprise Manager Get Valid Values for a Global Target Property",
+      "tags": [
+        "Global Target Properties"
+      ]
+    }
+  ]
+}

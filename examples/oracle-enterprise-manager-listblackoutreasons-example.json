@@ -1,0 +1,22 @@
+{
+  "operationId": "listBlackoutReasons",
+  "method": "GET",
+  "path": "/blackouts/reasons",
+  "summary": "Oracle Enterprise Manager List Blackout Reasons",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listblackoutreasons200Example",
+      "example": {
+        "items": [
+          {
+            "reasonId": "500123",
+            "reason": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

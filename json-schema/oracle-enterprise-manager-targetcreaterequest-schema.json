@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TargetCreateRequest",
+  "title": "TargetCreateRequest",
+  "type": "object",
+  "description": "Request body for creating a new target.",
+  "required": [
+    "targetName",
+    "targetType",
+    "hostName"
+  ],
+  "properties": {
+    "targetName": {
+      "type": "string",
+      "description": "Display name for the target.",
+      "example": "example_value"
+    },
+    "targetType": {
+      "type": "string",
+      "description": "Target type identifier defining the monitoring template.",
+      "examples": [
+        "oracle_database",
+        "host",
+        "weblogic_j2eeserver"
+      ]
+    },
+    "hostName": {
+      "type": "string",
+      "description": "The hostname where the target resides.",
+      "example": "example_value"
+    },
+    "properties": {
+      "type": "object",
+      "description": "Target-type-specific properties required for monitoring.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": "example_value"
+    },
+    "credentials": {
+      "type": "object",
+      "description": "Monitoring credentials for the target.",
+      "properties": {
+        "credentialName": {
+          "type": "string",
+          "description": "Name of a named credential to use."
+        },
+        "credentialType": {
+          "type": "string",
+          "description": "Type of credential."
+        }
+      },
+      "example": "example_value"
+    }
+  }
+}

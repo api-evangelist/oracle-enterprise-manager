@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TargetProperty",
+  "title": "TargetProperty",
+  "type": "object",
+  "description": "A configuration property of a target.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Property name.",
+      "example": "Example Title"
+    },
+    "value": {
+      "type": "string",
+      "description": "Property value.",
+      "example": "example_value"
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "description": "Whether the property is read-only.",
+      "example": true
+    }
+  }
+}

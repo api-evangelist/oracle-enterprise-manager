@@ -1,0 +1,41 @@
+{
+  "operationId": "updateTarget",
+  "method": "PATCH",
+  "path": "/targets/{targetId}",
+  "summary": "Oracle Enterprise Manager Update a Target",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "UpdatetargetRequestExample",
+      "example": {
+        "properties": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Updatetarget200Example",
+      "example": {
+        "targetId": "500123",
+        "targetName": "example_value",
+        "targetType": "example_value",
+        "targetDisplayType": "example_value",
+        "hostName": "example_value",
+        "lifecycleStatus": "MONITORED",
+        "availabilityStatus": "UP",
+        "agentUrl": "https://www.example.com",
+        "oracleHome": "example_value",
+        "machineName": "example_value",
+        "installLocation": "example_value",
+        "timezone": "example_value",
+        "owner": "example_value",
+        "timeCreated": "2026-01-15T10:30:00Z",
+        "timeUpdated": "2026-01-15T10:30:00Z",
+        "properties": "example_value",
+        "canonicalLink": "https://www.example.com"
+      }
+    }
+  ]
+}

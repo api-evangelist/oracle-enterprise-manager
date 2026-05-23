@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TargetPropertyCollection",
+  "title": "TargetPropertyCollection",
+  "type": "object",
+  "description": "Collection of target properties.",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/TargetProperty"
+      },
+      "example": []
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "operationId": "getTargetProperties",
+  "method": "GET",
+  "path": "/targets/{targetId}/properties",
+  "summary": "Oracle Enterprise Manager Get Target Properties",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Gettargetproperties200Example",
+      "example": {
+        "items": [
+          {
+            "name": "Example Title",
+            "value": "example_value",
+            "isReadOnly": true
+          }
+        ]
+      }
+    }
+  ]
+}

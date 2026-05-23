@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BulkPropertyUpdateRequest",
+  "title": "BulkPropertyUpdateRequest",
+  "type": "object",
+  "description": "Request body for bulk property updates.",
+  "properties": {
+    "properties": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "example": []
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "operationId": "listBlackouts",
+  "method": "GET",
+  "path": "/blackouts",
+  "summary": "Oracle Enterprise Manager List Blackouts",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listblackouts200Example",
+      "example": {
+        "items": [
+          {
+            "blackoutId": "500123",
+            "blackoutName": "example_value",
+            "description": "A sample description.",
+            "status": "SCHEDULED",
+            "reason": "example_value",
+            "createdBy": "example_value",
+            "targets": {},
+            "timeCreated": "2026-01-15T10:30:00Z",
+            "timeUpdated": "2026-01-15T10:30:00Z",
+            "canonicalLink": "https://www.example.com"
+          }
+        ],
+        "totalCount": 10,
+        "limit": 10,
+        "offset": 10,
+        "hasMore": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/IncidentCollection",
+  "title": "IncidentCollection",
+  "type": "object",
+  "description": "Paginated collection of incidents.",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Incident"
+      },
+      "example": []
+    },
+    "totalCount": {
+      "type": "integer",
+      "description": "Total number of incidents matching the query.",
+      "example": 10
+    },
+    "limit": {
+      "type": "integer",
+      "example": 10
+    },
+    "offset": {
+      "type": "integer",
+      "example": 10
+    },
+    "hasMore": {
+      "type": "boolean",
+      "example": true
+    }
+  }
+}

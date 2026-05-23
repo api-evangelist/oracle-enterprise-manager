@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GlobalTargetPropertyUpdateRequest",
+  "title": "GlobalTargetPropertyUpdateRequest",
+  "type": "object",
+  "description": "Request body for updating a global target property.",
+  "properties": {
+    "propertyDisplayName": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "description": {
+      "type": "string",
+      "example": "A sample description."
+    },
+    "validValues": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": []
+    }
+  }
+}

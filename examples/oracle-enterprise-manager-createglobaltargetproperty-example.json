@@ -1,0 +1,36 @@
+{
+  "operationId": "createGlobalTargetProperty",
+  "method": "POST",
+  "path": "/globalTargetProperties",
+  "summary": "Oracle Enterprise Manager Create a Global Target Property",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreateglobaltargetpropertyRequestExample",
+      "example": {
+        "propertyName": "example_value",
+        "propertyDisplayName": "example_value",
+        "description": "A sample description.",
+        "propertyType": "STRING",
+        "validValues": [
+          "example_value"
+        ]
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Createglobaltargetproperty201Example",
+      "example": {
+        "globalTargetPropertyId": "500123",
+        "propertyName": "example_value",
+        "propertyDisplayName": "example_value",
+        "description": "A sample description.",
+        "propertyType": "STRING",
+        "hasValidValues": true
+      }
+    }
+  ]
+}

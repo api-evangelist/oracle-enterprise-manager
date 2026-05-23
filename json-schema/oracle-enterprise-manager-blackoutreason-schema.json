@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BlackoutReason",
+  "title": "BlackoutReason",
+  "type": "object",
+  "description": "A predefined reason for blackouts.",
+  "properties": {
+    "reasonId": {
+      "type": "string",
+      "description": "Unique identifier for the reason.",
+      "example": "500123"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Text of the blackout reason.",
+      "example": "example_value"
+    }
+  }
+}

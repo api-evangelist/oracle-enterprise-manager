@@ -1,0 +1,29 @@
+{
+  "operationId": "getMetricGroup",
+  "method": "GET",
+  "path": "/targets/{targetId}/metricGroups/{metricGroupName}",
+  "summary": "Oracle Enterprise Manager Get Metric Group Details",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getmetricgroup200Example",
+      "example": {
+        "metricGroupName": "example_value",
+        "displayName": "example_value",
+        "description": "A sample description.",
+        "collectionFrequency": 10,
+        "metricColumns": [
+          {
+            "columnName": "example_value",
+            "displayName": "example_value",
+            "columnType": "NUMBER",
+            "isKey": true,
+            "unit": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

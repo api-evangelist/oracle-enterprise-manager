@@ -1,0 +1,25 @@
+{
+  "operationId": "getIncidentAnnotations",
+  "method": "GET",
+  "path": "/incidents/{incidentId}/annotations",
+  "summary": "Oracle Enterprise Manager Get Incident Annotations",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getincidentannotations200Example",
+      "example": {
+        "items": [
+          {
+            "annotationId": "500123",
+            "summary": "example_value",
+            "details": "example_value",
+            "author": "example_value",
+            "timeCreated": "2026-01-15T10:30:00Z"
+          }
+        ]
+      }
+    }
+  ]
+}

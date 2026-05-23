@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/MetricGroupCollection",
+  "title": "MetricGroupCollection",
+  "type": "object",
+  "description": "Collection of metric groups.",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/MetricGroup"
+      },
+      "example": []
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "operationId": "modifyGlobalTargetProperty",
+  "method": "PATCH",
+  "path": "/globalTargetProperties/{globalTargetPropertyId}",
+  "summary": "Oracle Enterprise Manager Modify a Global Target Property",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "ModifyglobaltargetpropertyRequestExample",
+      "example": {
+        "propertyDisplayName": "example_value",
+        "description": "A sample description.",
+        "validValues": [
+          "example_value"
+        ]
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Modifyglobaltargetproperty200Example",
+      "example": {
+        "globalTargetPropertyId": "500123",
+        "propertyName": "example_value",
+        "propertyDisplayName": "example_value",
+        "description": "A sample description.",
+        "propertyType": "STRING",
+        "hasValidValues": true
+      }
+    }
+  ]
+}

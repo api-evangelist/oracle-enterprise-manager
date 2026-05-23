@@ -1,0 +1,48 @@
+{
+  "operationId": "createTarget",
+  "method": "POST",
+  "path": "/targets",
+  "summary": "Oracle Enterprise Manager Create a Target",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreatetargetRequestExample",
+      "example": {
+        "targetName": "example_value",
+        "targetType": "example_value",
+        "hostName": "example_value",
+        "properties": "example_value",
+        "credentials": {
+          "credentialName": "example_value",
+          "credentialType": "example_value"
+        }
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Createtarget201Example",
+      "example": {
+        "targetId": "500123",
+        "targetName": "example_value",
+        "targetType": "example_value",
+        "targetDisplayType": "example_value",
+        "hostName": "example_value",
+        "lifecycleStatus": "MONITORED",
+        "availabilityStatus": "UP",
+        "agentUrl": "https://www.example.com",
+        "oracleHome": "example_value",
+        "machineName": "example_value",
+        "installLocation": "example_value",
+        "timezone": "example_value",
+        "owner": "example_value",
+        "timeCreated": "2026-01-15T10:30:00Z",
+        "timeUpdated": "2026-01-15T10:30:00Z",
+        "properties": "example_value",
+        "canonicalLink": "https://www.example.com"
+      }
+    }
+  ]
+}

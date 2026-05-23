@@ -1,0 +1,41 @@
+{
+  "operationId": "listTargets",
+  "method": "GET",
+  "path": "/targets",
+  "summary": "Oracle Enterprise Manager List Targets",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listtargets200Example",
+      "example": {
+        "items": [
+          {
+            "targetId": "500123",
+            "targetName": "example_value",
+            "targetType": "example_value",
+            "targetDisplayType": "example_value",
+            "hostName": "example_value",
+            "lifecycleStatus": "MONITORED",
+            "availabilityStatus": "UP",
+            "agentUrl": "https://www.example.com",
+            "oracleHome": "example_value",
+            "machineName": "example_value",
+            "installLocation": "example_value",
+            "timezone": "example_value",
+            "owner": "example_value",
+            "timeCreated": "2026-01-15T10:30:00Z",
+            "timeUpdated": "2026-01-15T10:30:00Z",
+            "properties": "example_value",
+            "canonicalLink": "https://www.example.com"
+          }
+        ],
+        "totalCount": 10,
+        "limit": 10,
+        "offset": 10,
+        "hasMore": true
+      }
+    }
+  ]
+}

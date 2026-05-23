@@ -1,0 +1,42 @@
+{
+  "operationId": "listIncidents",
+  "method": "GET",
+  "path": "/incidents",
+  "summary": "Oracle Enterprise Manager List Incidents",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listincidents200Example",
+      "example": {
+        "items": [
+          {
+            "incidentId": "500123",
+            "summary": "example_value",
+            "severity": "FATAL",
+            "priority": "URGENT",
+            "status": "NEW",
+            "category": "AVAILABILITY",
+            "targetName": "example_value",
+            "targetType": "example_value",
+            "escalationLevel": 10,
+            "owner": "example_value",
+            "acknowledgedBy": "example_value",
+            "resolutionState": "example_value",
+            "ruleSetName": "example_value",
+            "timeRaised": "2026-01-15T10:30:00Z",
+            "timeUpdated": "2026-01-15T10:30:00Z",
+            "timeResolved": "2026-01-15T10:30:00Z",
+            "eventCount": 10,
+            "canonicalLink": "https://www.example.com"
+          }
+        ],
+        "totalCount": 10,
+        "limit": 10,
+        "offset": 10,
+        "hasMore": true
+      }
+    }
+  ]
+}

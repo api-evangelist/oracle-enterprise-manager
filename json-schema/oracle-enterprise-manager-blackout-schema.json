@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Blackout",
+  "title": "Blackout",
+  "type": "object",
+  "description": "Represents a blackout (maintenance window) in Enterprise Manager. Blackouts suppress alerting and notifications for specified targets during scheduled maintenance periods.",
+  "properties": {
+    "blackoutId": {
+      "type": "string",
+      "description": "Unique identifier of the blackout.",
+      "example": "500123"
+    },
+    "blackoutName": {
+      "type": "string",
+      "description": "Display name of the blackout.",
+      "example": "example_value"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the blackout purpose.",
+      "example": "A sample description."
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the blackout.",
+      "enum": [
+        "SCHEDULED",
+        "STARTED",
+        "STOPPED",
+        "ENDED",
+        "MODIFY_PENDING"
+      ],
+      "example": "SCHEDULED"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Reason for the blackout.",
+      "example": "example_value"
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "Username of the blackout creator.",
+      "example": "example_value"
+    },
+    "schedule": {
+      "$ref": "#/components/schemas/BlackoutSchedule"
+    },
+    "targets": {
+      "type": "array",
+      "description": "List of targets included in the blackout.",
+      "items": {
+        "$ref": "#/components/schemas/BlackoutTarget"
+      },
+      "example": []
+    },
+    "timeCreated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the blackout was created.",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "timeUpdated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the last blackout update.",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "canonicalLink": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical URI for this blackout resource.",
+      "example": "https://www.example.com"
+    }
+  }
+}

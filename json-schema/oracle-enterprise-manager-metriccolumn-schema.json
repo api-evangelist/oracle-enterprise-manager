@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/MetricColumn",
+  "title": "MetricColumn",
+  "type": "object",
+  "description": "A single metric column within a metric group.",
+  "properties": {
+    "columnName": {
+      "type": "string",
+      "description": "Name of the metric column.",
+      "example": "example_value"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable display name.",
+      "example": "example_value"
+    },
+    "columnType": {
+      "type": "string",
+      "description": "Data type of the metric column.",
+      "enum": [
+        "NUMBER",
+        "STRING"
+      ],
+      "example": "NUMBER"
+    },
+    "isKey": {
+      "type": "boolean",
+      "description": "Whether this column is a key column.",
+      "example": true
+    },
+    "unit": {
+      "type": "string",
+      "description": "Unit of measurement for the metric.",
+      "example": "example_value"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+name: Oracle Enterprise Manager Domain Vocabulary
+provider: Oracle Enterprise Manager
+providerId: oracle-enterprise-manager
+description: Tag-derived vocabulary for the Oracle Enterprise Manager API surface; sourced from openapi/ tags.
+terms:
+- term: Blackouts
+  description: Manage blackout windows for maintenance activities. Blackouts suppress monitoring and alerting during scheduled
+    maintenance periods, preventing false alerts.
+- term: Events
+  description: Access individual event details. Events are the underlying occurrences that are correlated into incidents.
+- term: Global Target Properties
+  description: Manage global properties that can be applied across targets for classification, grouping, and reporting purposes.
+- term: Incidents
+  description: Search, view, and manage incidents and events. Incidents represent actionable issues detected by Enterprise
+    Manager monitoring, with operations for clearing, suppressing, and annotating.
+- term: Metrics
+  description: Query metric data and metadata for monitored targets. Access time-series performance data, latest metric values,
+    and metric group definitions.
+- term: Targets
+  description: Manage monitored targets in Enterprise Manager including discovery, configuration, lifecycle operations, and
+    property management. Targets represent any managed entity such as databases, hosts, middleware, and applications.

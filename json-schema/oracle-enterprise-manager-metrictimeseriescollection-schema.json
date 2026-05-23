@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/MetricTimeSeriesCollection",
+  "title": "MetricTimeSeriesCollection",
+  "type": "object",
+  "description": "Collection of metric time series.",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/MetricTimeSeries"
+      },
+      "example": []
+    }
+  }
+}

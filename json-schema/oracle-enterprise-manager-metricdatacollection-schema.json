@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/MetricDataCollection",
+  "title": "MetricDataCollection",
+  "type": "object",
+  "description": "Collection of metric data points.",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/MetricDataPoint"
+      },
+      "example": []
+    }
+  }
+}

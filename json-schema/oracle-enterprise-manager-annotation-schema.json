@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Annotation",
+  "title": "Annotation",
+  "type": "object",
+  "description": "A comment or note attached to an incident, providing investigation details or remediation notes.",
+  "properties": {
+    "annotationId": {
+      "type": "string",
+      "description": "Unique identifier of the annotation.",
+      "example": "500123"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Summary text of the annotation.",
+      "example": "example_value"
+    },
+    "details": {
+      "type": "string",
+      "description": "Detailed content of the annotation.",
+      "example": "example_value"
+    },
+    "author": {
+      "type": "string",
+      "description": "Username of the annotation author.",
+      "example": "example_value"
+    },
+    "timeCreated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the annotation was created.",
+      "example": "2026-01-15T10:30:00Z"
+    }
+  }
+}

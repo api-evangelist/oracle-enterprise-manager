@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TargetUpdateRequest",
+  "title": "TargetUpdateRequest",
+  "type": "object",
+  "description": "Request body for updating an existing target.",
+  "properties": {
+    "properties": {
+      "type": "object",
+      "description": "Properties to update on the target.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": "example_value"
+    }
+  }
+}

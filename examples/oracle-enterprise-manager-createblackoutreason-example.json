@@ -1,0 +1,26 @@
+{
+  "operationId": "createBlackoutReason",
+  "method": "POST",
+  "path": "/blackouts/reasons",
+  "summary": "Oracle Enterprise Manager Create a Blackout Reason",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreateblackoutreasonRequestExample",
+      "example": {
+        "reason": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Createblackoutreason201Example",
+      "example": {
+        "reasonId": "500123",
+        "reason": "example_value"
+      }
+    }
+  ]
+}

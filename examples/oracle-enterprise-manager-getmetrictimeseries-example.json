@@ -1,0 +1,26 @@
+{
+  "operationId": "getMetricTimeSeries",
+  "method": "GET",
+  "path": "/metricTimeSeries",
+  "summary": "Oracle Enterprise Manager Get Metric Time Series Data",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getmetrictimeseries200Example",
+      "example": {
+        "items": [
+          {
+            "targetName": "example_value",
+            "targetType": "example_value",
+            "metricGroupName": "example_value",
+            "metricColumnName": "example_value",
+            "key": "example_value",
+            "dataPoints": {}
+          }
+        ]
+      }
+    }
+  ]
+}

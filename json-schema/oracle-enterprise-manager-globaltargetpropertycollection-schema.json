@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GlobalTargetPropertyCollection",
+  "title": "GlobalTargetPropertyCollection",
+  "type": "object",
+  "description": "Collection of global target properties.",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/GlobalTargetProperty"
+      },
+      "example": []
+    }
+  }
+}

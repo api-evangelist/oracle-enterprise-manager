@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Event",
+  "title": "Event",
+  "type": "object",
+  "description": "Represents a monitoring event detected by Enterprise Manager. Events are the atomic detections that are correlated into incidents.",
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "description": "Unique identifier of the event.",
+      "example": "500123"
+    },
+    "eventType": {
+      "type": "string",
+      "description": "Type of the event.",
+      "enum": [
+        "METRIC_ALERT",
+        "TARGET_AVAILABILITY",
+        "JOB_STATUS_CHANGE",
+        "COMPLIANCE_VIOLATION",
+        "USER_REPORTED"
+      ],
+      "example": "METRIC_ALERT"
+    },
+    "severity": {
+      "type": "string",
+      "description": "Severity of the event.",
+      "enum": [
+        "FATAL",
+        "CRITICAL",
+        "WARNING",
+        "ADVISORY",
+        "INFORMATIONAL",
+        "CLEAR"
+      ],
+      "example": "FATAL"
+    },
+    "message": {
+      "type": "string",
+      "description": "Descriptive message for the event.",
+      "example": "example_value"
+    },
+    "targetName": {
+      "type": "string",
+      "description": "Name of the target that generated this event.",
+      "example": "example_value"
+    },
+    "targetType": {
+      "type": "string",
+      "description": "Type of the target that generated this event.",
+      "example": "example_value"
+    },
+    "metricGroupName": {
+      "type": "string",
+      "description": "Name of the metric group, if this is a metric alert event.",
+      "example": "example_value"
+    },
+    "metricColumnName": {
+      "type": "string",
+      "description": "Name of the metric column, if this is a metric alert event.",
+      "example": "example_value"
+    },
+    "metricValue": {
+      "type": "number",
+      "description": "Metric value that triggered the event.",
+      "example": 42.5
+    },
+    "timeRaised": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the event was raised.",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "timeResolved": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the event was resolved.",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "canonicalLink": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical URI for this event resource.",
+      "example": "https://www.example.com"
+    }
+  }
+}

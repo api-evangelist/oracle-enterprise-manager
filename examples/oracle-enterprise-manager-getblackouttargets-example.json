@@ -1,0 +1,23 @@
+{
+  "operationId": "getBlackoutTargets",
+  "method": "GET",
+  "path": "/blackouts/{blackoutId}/targets",
+  "summary": "Oracle Enterprise Manager Get Blackout Targets",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getblackouttargets200Example",
+      "example": {
+        "items": [
+          {
+            "targetName": "example_value",
+            "targetType": "example_value",
+            "includeMembers": true
+          }
+        ]
+      }
+    }
+  ]
+}
