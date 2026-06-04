@@ -1,0 +1,88 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Enterprise Manager Bulk Configure Target Properties
+  summary: Confirm a target, read its current properties, then bulk-apply property updates.
+  description: >-
+    Applies a batch of configuration property changes to a single target in one
+    pass. The workflow confirms the target exists, reads its current property
+    collection so the caller can see the before-state, and then submits a bulk
+    update that writes the supplied name/value property pairs in a single
+    request. Three real operations are chained so the write is always preceded
+    by verification of the target and its existing configuration.
+  version: 1.0.0
+sourceDescriptions:
+- name: emCloudControl
+  url: ../openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+  type: openapi
+workflows:
+- workflowId: bulk-configure-target
+  summary: Verify a target, read its properties, and bulk-update property values.
+  description: >-
+    Confirms the target, reads its current properties, and applies a batch of
+    property updates in a single bulk request.
+  inputs:
+    type: object
+    required:
+    - targetId
+    - properties
+    properties:
+      targetId:
+        type: string
+        description: Unique identifier of the target to reconfigure.
+      properties:
+        type: array
+        description: List of name/value property pairs to apply to the target.
+        items:
+          type: object
+          required:
+          - name
+          - value
+          properties:
+            name:
+              type: string
+            value:
+              type: string
+  steps:
+  - stepId: confirmTarget
+    description: Confirm the target exists before reading or writing its properties.
+    operationId: getTarget
+    parameters:
+    - name: targetId
+      in: path
+      value: $inputs.targetId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      targetId: $response.body#/targetId
+      targetType: $response.body#/targetType
+  - stepId: readCurrentProperties
+    description: Read the target's current property collection as the before-state.
+    operationId: getTargetProperties
+    parameters:
+    - name: targetId
+      in: path
+      value: $steps.confirmTarget.outputs.targetId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currentProperties: $response.body#/items
+  - stepId: applyBulkUpdate
+    description: >-
+      Submit the batch of property updates to the target in a single request.
+    operationId: bulkUpdateTargetProperties
+    parameters:
+    - name: targetId
+      in: path
+      value: $steps.confirmTarget.outputs.targetId
+    requestBody:
+      contentType: application/json
+      payload:
+        properties: $inputs.properties
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updatedProperties: $response.body#/items
+  outputs:
+    targetId: $steps.confirmTarget.outputs.targetId
+    currentProperties: $steps.readCurrentProperties.outputs.currentProperties
+    updatedProperties: $steps.applyBulkUpdate.outputs.updatedProperties

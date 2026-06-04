@@ -1,0 +1,116 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Enterprise Manager Target Metric Trend
+  summary: Resolve a target by name, then pull a metric time series over a window.
+  description: >-
+    Builds a performance trend for a named target. The workflow resolves the
+    target by name to confirm it is monitored and capture its exact name and
+    type, then queries the metric time series endpoint for numeric data points
+    over the requested time range, scoped to the resolved target and the chosen
+    metric group and column. Two real read operations are chained, with a branch
+    that only requests the time series once a matching target has been found.
+  version: 1.0.0
+sourceDescriptions:
+- name: emCloudControl
+  url: ../openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+  type: openapi
+workflows:
+- workflowId: target-metric-trend
+  summary: Find a target by name and read a metric time series for it over a window.
+  description: >-
+    Resolves a target by name, then retrieves numeric metric data points for a
+    chosen metric group and column over a start/end time range.
+  inputs:
+    type: object
+    required:
+    - targetName
+    - metricGroups
+    - metricColumns
+    - startTime
+    - endTime
+    properties:
+      targetName:
+        type: string
+        description: Name (or partial name) of the target to trend.
+      targetType:
+        type: string
+        description: Optional target type filter for the target lookup.
+      metricGroups:
+        type: string
+        description: Comma-separated list of metric group names to read.
+      metricColumns:
+        type: string
+        description: Comma-separated list of metric column names to read.
+      startTime:
+        type: string
+        description: Start of the time range in ISO 8601 format.
+      endTime:
+        type: string
+        description: End of the time range in ISO 8601 format.
+      limit:
+        type: integer
+        description: Maximum number of data series to return.
+        default: 25
+  steps:
+  - stepId: resolveTarget
+    description: >-
+      Resolve the target by name so the time-series query can be scoped to its
+      exact name and type.
+    operationId: listTargets
+    parameters:
+    - name: targetName
+      in: query
+      value: $inputs.targetName
+    - name: targetType
+      in: query
+      value: $inputs.targetType
+    - name: limit
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      resolvedName: $response.body#/items/0/targetName
+      resolvedType: $response.body#/items/0/targetType
+    onSuccess:
+    - name: targetResolved
+      type: goto
+      stepId: readTimeSeries
+      criteria:
+      - context: $response.body
+        condition: $.items.length > 0
+        type: jsonpath
+  - stepId: readTimeSeries
+    description: >-
+      Read numeric metric data points over the requested time range for the
+      resolved target, metric group, and column.
+    operationId: getMetricTimeSeries
+    parameters:
+    - name: targetNames
+      in: query
+      value: $steps.resolveTarget.outputs.resolvedName
+    - name: targetTypes
+      in: query
+      value: $steps.resolveTarget.outputs.resolvedType
+    - name: metricGroups
+      in: query
+      value: $inputs.metricGroups
+    - name: metricColumns
+      in: query
+      value: $inputs.metricColumns
+    - name: startTime
+      in: query
+      value: $inputs.startTime
+    - name: endTime
+      in: query
+      value: $inputs.endTime
+    - name: limit
+      in: query
+      value: $inputs.limit
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      series: $response.body#/items
+  outputs:
+    resolvedName: $steps.resolveTarget.outputs.resolvedName
+    series: $steps.readTimeSeries.outputs.series

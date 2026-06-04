@@ -1,0 +1,75 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Enterprise Manager Investigate and Suppress Incident
+  summary: Review an incident's details and annotations, then suppress it.
+  description: >-
+    Supports the "known issue under investigation" pattern. Given an incident
+    identifier, the workflow retrieves the incident detail record, reads the
+    annotations (investigation and remediation notes) attached to it, and then
+    suppresses the incident so it stops surfacing in active views and triggering
+    notifications while the team works it. Three real operations are chained so
+    the suppress action is always preceded by the context that justifies it.
+  version: 1.0.0
+sourceDescriptions:
+- name: emCloudControl
+  url: ../openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+  type: openapi
+workflows:
+- workflowId: investigate-suppress-incident
+  summary: Pull an incident's details and annotations, then suppress it.
+  description: >-
+    Reads the incident, reviews its annotation history, and suppresses the
+    incident from active views and notifications.
+  inputs:
+    type: object
+    required:
+    - incidentId
+    properties:
+      incidentId:
+        type: string
+        description: Unique identifier of the incident to investigate and suppress.
+  steps:
+  - stepId: getIncidentDetails
+    description: Retrieve the incident detail record to confirm its current state.
+    operationId: getIncident
+    parameters:
+    - name: incidentId
+      in: path
+      value: $inputs.incidentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      incidentId: $response.body#/incidentId
+      status: $response.body#/status
+      severity: $response.body#/severity
+  - stepId: getAnnotations
+    description: >-
+      Read the annotations attached to the incident to capture the
+      investigation record before suppressing.
+    operationId: getIncidentAnnotations
+    parameters:
+    - name: incidentId
+      in: path
+      value: $steps.getIncidentDetails.outputs.incidentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      annotations: $response.body#/items
+  - stepId: suppressTheIncident
+    description: >-
+      Suppress the incident so it no longer appears in active incident views
+      or triggers notifications.
+    operationId: suppressIncident
+    parameters:
+    - name: incidentId
+      in: path
+      value: $steps.getIncidentDetails.outputs.incidentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      incidentId: $response.body#/incidentId
+      suppressedStatus: $response.body#/status
+  outputs:
+    incidentId: $steps.getIncidentDetails.outputs.incidentId
+    suppressedStatus: $steps.suppressTheIncident.outputs.suppressedStatus
+    annotations: $steps.getAnnotations.outputs.annotations

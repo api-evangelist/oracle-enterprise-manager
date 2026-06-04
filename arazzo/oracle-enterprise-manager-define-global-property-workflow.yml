@@ -1,0 +1,100 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Enterprise Manager Define Global Target Property
+  summary: Create a global target property, verify it, and read back its valid values.
+  description: >-
+    Defines a new global target property used to classify and organize targets
+    with custom metadata. The workflow creates the property with an optional
+    constrained value set, reads the created definition back to confirm it,
+    and — when the property advertises a constrained value set — retrieves the
+    list of valid values. Three real operations are chained with a branch that
+    only fetches valid values when the property actually has them.
+  version: 1.0.0
+sourceDescriptions:
+- name: emCloudControl
+  url: ../openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+  type: openapi
+workflows:
+- workflowId: define-global-property
+  summary: Create and verify a global target property, then read its valid values.
+  description: >-
+    Creates a global target property, reads it back, and lists its valid
+    values when it has a constrained value set.
+  inputs:
+    type: object
+    required:
+    - propertyName
+    - propertyDisplayName
+    properties:
+      propertyName:
+        type: string
+        description: Internal name of the global target property.
+      propertyDisplayName:
+        type: string
+        description: Human-readable display name of the property.
+      description:
+        type: string
+        description: Description of the property's purpose.
+      propertyType:
+        type: string
+        description: Property value type (e.g. STRING).
+        default: STRING
+      validValues:
+        type: array
+        description: Optional constrained set of valid values for the property.
+        items:
+          type: string
+  steps:
+  - stepId: createProperty
+    description: Create the global target property definition.
+    operationId: createGlobalTargetProperty
+    requestBody:
+      contentType: application/json
+      payload:
+        propertyName: $inputs.propertyName
+        propertyDisplayName: $inputs.propertyDisplayName
+        description: $inputs.description
+        propertyType: $inputs.propertyType
+        validValues: $inputs.validValues
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      globalTargetPropertyId: $response.body#/globalTargetPropertyId
+      hasValidValues: $response.body#/hasValidValues
+  - stepId: confirmProperty
+    description: Read the created property back to confirm its definition.
+    operationId: getGlobalTargetProperty
+    parameters:
+    - name: globalTargetPropertyId
+      in: path
+      value: $steps.createProperty.outputs.globalTargetPropertyId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      globalTargetPropertyId: $response.body#/globalTargetPropertyId
+      hasValidValues: $response.body#/hasValidValues
+    onSuccess:
+    - name: hasConstrainedValues
+      type: goto
+      stepId: readValidValues
+      criteria:
+      - context: $response.body
+        condition: $.hasValidValues == true
+        type: jsonpath
+  - stepId: readValidValues
+    description: >-
+      Retrieve the constrained set of valid values for the property when it
+      advertises one.
+    operationId: getGlobalTargetPropertyValidValues
+    parameters:
+    - name: globalTargetPropertyId
+      in: path
+      value: $steps.confirmProperty.outputs.globalTargetPropertyId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      validValues: $response.body#/items
+  outputs:
+    globalTargetPropertyId: $steps.confirmProperty.outputs.globalTargetPropertyId
+    hasValidValues: $steps.confirmProperty.outputs.hasValidValues
+    validValues: $steps.readValidValues.outputs.validValues

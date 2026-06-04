@@ -1,0 +1,88 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Enterprise Manager End Active Blackout
+  summary: Find a started blackout for a target and stop it early to resume monitoring.
+  description: >-
+    Ends an in-progress maintenance window early. The workflow lists blackouts
+    filtered to STARTED status (optionally scoped to a target), selects the
+    first active blackout, reads it back to confirm it is still stoppable, and
+    then issues the stop action so monitoring and alerting resume immediately.
+    A branch ensures the stop only runs when an active blackout was found, and
+    the stop step documents the 409 "not stoppable" outcome.
+  version: 1.0.0
+sourceDescriptions:
+- name: emCloudControl
+  url: ../openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+  type: openapi
+workflows:
+- workflowId: end-active-blackout
+  summary: Locate a started blackout and stop it early.
+  description: >-
+    Lists STARTED blackouts, picks the first, confirms it, and stops it so
+    monitoring resumes for the affected targets.
+  inputs:
+    type: object
+    properties:
+      targetName:
+        type: string
+        description: Optional target name to scope the active-blackout search.
+      limit:
+        type: integer
+        description: Maximum number of blackouts to scan.
+        default: 25
+  steps:
+  - stepId: listActiveBlackouts
+    description: List blackouts currently in the STARTED state.
+    operationId: listBlackouts
+    parameters:
+    - name: status
+      in: query
+      value: STARTED
+    - name: targetName
+      in: query
+      value: $inputs.targetName
+    - name: limit
+      in: query
+      value: $inputs.limit
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      activeBlackoutId: $response.body#/items/0/blackoutId
+    onSuccess:
+    - name: blackoutFound
+      type: goto
+      stepId: confirmBlackout
+      criteria:
+      - context: $response.body
+        condition: $.items.length > 0
+        type: jsonpath
+  - stepId: confirmBlackout
+    description: Read the selected blackout to confirm its current status before stopping.
+    operationId: getBlackout
+    parameters:
+    - name: blackoutId
+      in: path
+      value: $steps.listActiveBlackouts.outputs.activeBlackoutId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      blackoutId: $response.body#/blackoutId
+      status: $response.body#/status
+  - stepId: stopTheBlackout
+    description: >-
+      Stop the active blackout so monitoring and alerting resume immediately.
+      A 200 confirms the stop; a 409 indicates the blackout was not in a
+      stoppable state.
+    operationId: stopBlackout
+    parameters:
+    - name: blackoutId
+      in: path
+      value: $steps.confirmBlackout.outputs.blackoutId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      blackoutId: $response.body#/blackoutId
+      stoppedStatus: $response.body#/status
+  outputs:
+    blackoutId: $steps.confirmBlackout.outputs.blackoutId
+    stoppedStatus: $steps.stopTheBlackout.outputs.stoppedStatus

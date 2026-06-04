@@ -1,0 +1,107 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Enterprise Manager Read Metric Snapshot
+  summary: Resolve a target's metric group and pull its latest collected data point.
+  description: >-
+    Walks from a known target down to a single live performance reading. It
+    confirms the target, lists its metric groups, selects (or accepts) a metric
+    group, reads that group's definition, and then fetches the latest collected
+    data snapshot for the group. This is the everyday "show me the current
+    numbers for this target" flow, chaining four read operations with a branch
+    that ensures a metric group exists before requesting data.
+  version: 1.0.0
+sourceDescriptions:
+- name: emCloudControl
+  url: ../openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+  type: openapi
+workflows:
+- workflowId: read-metric-snapshot
+  summary: From a target, resolve a metric group and read its latest collected data.
+  description: >-
+    Verifies the target, lists its metric groups, picks the supplied metric
+    group (or the first available), reads the group definition, and retrieves
+    the latest collected metric data for that group.
+  inputs:
+    type: object
+    required:
+    - targetId
+    properties:
+      targetId:
+        type: string
+        description: Unique identifier of the target to read metrics from.
+      metricGroupName:
+        type: string
+        description: >-
+          Optional metric group name to read. If omitted, the first metric
+          group returned for the target is used.
+  steps:
+  - stepId: confirmTarget
+    description: Confirm the target exists and is monitored before reading metrics.
+    operationId: getTarget
+    parameters:
+    - name: targetId
+      in: path
+      value: $inputs.targetId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      targetId: $response.body#/targetId
+      lifecycleStatus: $response.body#/lifecycleStatus
+  - stepId: listGroups
+    description: List the metric groups available for the confirmed target.
+    operationId: listMetricGroups
+    parameters:
+    - name: targetId
+      in: path
+      value: $steps.confirmTarget.outputs.targetId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstGroupName: $response.body#/items/0/metricGroupName
+    onSuccess:
+    - name: groupsExist
+      type: goto
+      stepId: getGroupDefinition
+      criteria:
+      - context: $response.body
+        condition: $.items.length > 0
+        type: jsonpath
+  - stepId: getGroupDefinition
+    description: >-
+      Read the definition of the selected metric group, falling back to the
+      first available group when no group name was supplied.
+    operationId: getMetricGroup
+    parameters:
+    - name: targetId
+      in: path
+      value: $steps.confirmTarget.outputs.targetId
+    - name: metricGroupName
+      in: path
+      value: $steps.listGroups.outputs.firstGroupName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      metricGroupName: $response.body#/metricGroupName
+      collectionFrequency: $response.body#/collectionFrequency
+      metricColumns: $response.body#/metricColumns
+  - stepId: getLatestData
+    description: >-
+      Fetch the most recently collected metric data for the resolved metric
+      group on the target.
+    operationId: getLatestMetricData
+    parameters:
+    - name: targetId
+      in: path
+      value: $steps.confirmTarget.outputs.targetId
+    - name: metricGroupName
+      in: path
+      value: $steps.getGroupDefinition.outputs.metricGroupName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      latestData: $response.body#/items
+  outputs:
+    targetId: $steps.confirmTarget.outputs.targetId
+    metricGroupName: $steps.getGroupDefinition.outputs.metricGroupName
+    collectionFrequency: $steps.getGroupDefinition.outputs.collectionFrequency
+    latestData: $steps.getLatestData.outputs.latestData

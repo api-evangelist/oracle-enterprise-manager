@@ -1,0 +1,114 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Enterprise Manager Inspect Target
+  summary: Find a monitored target by name and pull its full configuration profile.
+  description: >-
+    Discovers a monitored target in Enterprise Manager by filtering the target
+    list on a name fragment, then drills into the matched target to retrieve its
+    details, configuration properties, and the metric groups that are collected
+    for it. This is the canonical "what am I monitoring and how" inspection flow,
+    chaining four read operations so an operator can confirm a target exists and
+    understand its monitoring footprint without opening the OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: emCloudControl
+  url: ../openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+  type: openapi
+workflows:
+- workflowId: inspect-target
+  summary: Resolve a target by name and gather its details, properties, and metric groups.
+  description: >-
+    Lists targets filtered by a name fragment and optional type, selects the
+    first match, then fetches the target details, its property collection, and
+    the metric groups available for it.
+  inputs:
+    type: object
+    required:
+    - targetName
+    properties:
+      targetName:
+        type: string
+        description: Target name (or partial name) to search for.
+      targetType:
+        type: string
+        description: Optional target type filter (e.g. oracle_database, host).
+      limit:
+        type: integer
+        description: Maximum number of targets to return in the search.
+        default: 25
+  steps:
+  - stepId: findTarget
+    description: >-
+      Search the monitored targets for one whose name matches the supplied
+      fragment, optionally constrained by target type.
+    operationId: listTargets
+    parameters:
+    - name: targetName
+      in: query
+      value: $inputs.targetName
+    - name: targetType
+      in: query
+      value: $inputs.targetType
+    - name: limit
+      in: query
+      value: $inputs.limit
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      matchedTargetId: $response.body#/items/0/targetId
+      totalCount: $response.body#/totalCount
+    onSuccess:
+    - name: targetFound
+      type: goto
+      stepId: getTargetDetails
+      criteria:
+      - context: $response.body
+        condition: $.items.length > 0
+        type: jsonpath
+  - stepId: getTargetDetails
+    description: >-
+      Retrieve the full detail record for the matched target, including its
+      lifecycle and availability status.
+    operationId: getTarget
+    parameters:
+    - name: targetId
+      in: path
+      value: $steps.findTarget.outputs.matchedTargetId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      targetId: $response.body#/targetId
+      targetType: $response.body#/targetType
+      lifecycleStatus: $response.body#/lifecycleStatus
+      availabilityStatus: $response.body#/availabilityStatus
+  - stepId: getProperties
+    description: >-
+      Read the configuration and monitoring property collection for the target.
+    operationId: getTargetProperties
+    parameters:
+    - name: targetId
+      in: path
+      value: $steps.getTargetDetails.outputs.targetId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      properties: $response.body#/items
+  - stepId: listMetricGroupsForTarget
+    description: >-
+      List the metric groups collected for the target to understand what
+      performance data is available.
+    operationId: listMetricGroups
+    parameters:
+    - name: targetId
+      in: path
+      value: $steps.getTargetDetails.outputs.targetId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      metricGroups: $response.body#/items
+  outputs:
+    targetId: $steps.getTargetDetails.outputs.targetId
+    lifecycleStatus: $steps.getTargetDetails.outputs.lifecycleStatus
+    availabilityStatus: $steps.getTargetDetails.outputs.availabilityStatus
+    properties: $steps.getProperties.outputs.properties
+    metricGroups: $steps.listMetricGroupsForTarget.outputs.metricGroups

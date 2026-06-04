@@ -1,0 +1,116 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Enterprise Manager Triage and Clear Incident
+  summary: Find the most severe open incident, inspect its events, and clear it.
+  description: >-
+    Triages the active incident queue by listing incidents filtered to a chosen
+    severity and the NEW status, selects the first matching incident, reviews
+    the underlying monitoring events that formed it, and then clears the incident
+    to mark the issue resolved. A branch guards the clear action so it only runs
+    when a matching incident was actually found, chaining three real read steps
+    into a single resolution action.
+  version: 1.0.0
+sourceDescriptions:
+- name: emCloudControl
+  url: ../openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+  type: openapi
+workflows:
+- workflowId: triage-clear-incident
+  summary: List open incidents by severity, inspect events, and clear the top match.
+  description: >-
+    Lists NEW incidents at the requested severity, picks the first one, pulls
+    its details and correlated events, then clears it.
+  inputs:
+    type: object
+    required:
+    - severity
+    properties:
+      severity:
+        type: string
+        description: Incident severity to triage (FATAL, CRITICAL, WARNING, ADVISORY, INFORMATIONAL).
+      targetName:
+        type: string
+        description: Optional target name to constrain the incident search.
+      limit:
+        type: integer
+        description: Maximum number of incidents to scan.
+        default: 25
+  steps:
+  - stepId: listOpenIncidents
+    description: >-
+      List NEW incidents at the requested severity, optionally scoped to a
+      single target.
+    operationId: listIncidents
+    parameters:
+    - name: severity
+      in: query
+      value: $inputs.severity
+    - name: status
+      in: query
+      value: NEW
+    - name: targetName
+      in: query
+      value: $inputs.targetName
+    - name: limit
+      in: query
+      value: $inputs.limit
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      topIncidentId: $response.body#/items/0/incidentId
+    onSuccess:
+    - name: incidentFound
+      type: goto
+      stepId: getIncidentDetails
+      criteria:
+      - context: $response.body
+        condition: $.items.length > 0
+        type: jsonpath
+  - stepId: getIncidentDetails
+    description: Retrieve full detail for the selected incident.
+    operationId: getIncident
+    parameters:
+    - name: incidentId
+      in: path
+      value: $steps.listOpenIncidents.outputs.topIncidentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      incidentId: $response.body#/incidentId
+      status: $response.body#/status
+      eventCount: $response.body#/eventCount
+  - stepId: getIncidentEventList
+    description: >-
+      Review the monitoring events correlated into the incident before clearing.
+    operationId: getIncidentEvents
+    parameters:
+    - name: incidentId
+      in: path
+      value: $steps.getIncidentDetails.outputs.incidentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      events: $response.body#/items
+  - stepId: clearTheIncident
+    description: >-
+      Clear the incident, setting its status to CLOSED to mark the issue
+      resolved.
+    operationId: clearIncident
+    parameters:
+    - name: incidentId
+      in: path
+      value: $steps.getIncidentDetails.outputs.incidentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      incidentId: $response.body#/incidentId
+      clearedStatus: $response.body#/status
+      timeResolved: $response.body#/timeResolved
+    onSuccess:
+    - name: done
+      type: end
+  outputs:
+    incidentId: $steps.getIncidentDetails.outputs.incidentId
+    clearedStatus: $steps.clearTheIncident.outputs.clearedStatus
+    timeResolved: $steps.clearTheIncident.outputs.timeResolved
+    events: $steps.getIncidentEventList.outputs.events

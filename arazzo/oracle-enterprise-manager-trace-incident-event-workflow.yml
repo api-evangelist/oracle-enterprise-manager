@@ -1,0 +1,86 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Enterprise Manager Trace Incident Event
+  summary: Drill from an incident into its events and one event's full detail.
+  description: >-
+    Performs root-cause drill-down for an incident. Starting from an incident
+    identifier, the workflow reads the incident, lists the underlying monitoring
+    events that were correlated to form it, and then fetches the full detail of
+    the first event — exposing the metric group, metric column, and value that
+    raised the alert. A branch guards the event lookup so it only runs when the
+    incident actually carries events, chaining three real read operations.
+  version: 1.0.0
+sourceDescriptions:
+- name: emCloudControl
+  url: ../openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+  type: openapi
+workflows:
+- workflowId: trace-incident-event
+  summary: Read an incident, list its events, and fetch the first event's detail.
+  description: >-
+    Resolves an incident, retrieves its correlated events, and pulls the full
+    detail record for the first event to expose the originating metric.
+  inputs:
+    type: object
+    required:
+    - incidentId
+    properties:
+      incidentId:
+        type: string
+        description: Unique identifier of the incident to trace.
+  steps:
+  - stepId: getIncidentDetails
+    description: Retrieve the incident to confirm it exists before tracing events.
+    operationId: getIncident
+    parameters:
+    - name: incidentId
+      in: path
+      value: $inputs.incidentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      incidentId: $response.body#/incidentId
+      eventCount: $response.body#/eventCount
+  - stepId: listIncidentEvents
+    description: List the monitoring events correlated into the incident.
+    operationId: getIncidentEvents
+    parameters:
+    - name: incidentId
+      in: path
+      value: $steps.getIncidentDetails.outputs.incidentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstEventId: $response.body#/items/0/eventId
+      events: $response.body#/items
+    onSuccess:
+    - name: eventsExist
+      type: goto
+      stepId: getEventDetail
+      criteria:
+      - context: $response.body
+        condition: $.items.length > 0
+        type: jsonpath
+  - stepId: getEventDetail
+    description: >-
+      Fetch the full detail for the first correlated event, exposing the metric
+      group, column, and value that raised the alert.
+    operationId: getEvent
+    parameters:
+    - name: eventId
+      in: path
+      value: $steps.listIncidentEvents.outputs.firstEventId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      eventId: $response.body#/eventId
+      eventType: $response.body#/eventType
+      metricGroupName: $response.body#/metricGroupName
+      metricColumnName: $response.body#/metricColumnName
+      metricValue: $response.body#/metricValue
+  outputs:
+    incidentId: $steps.getIncidentDetails.outputs.incidentId
+    eventId: $steps.getEventDetail.outputs.eventId
+    metricGroupName: $steps.getEventDetail.outputs.metricGroupName
+    metricColumnName: $steps.getEventDetail.outputs.metricColumnName
+    metricValue: $steps.getEventDetail.outputs.metricValue
