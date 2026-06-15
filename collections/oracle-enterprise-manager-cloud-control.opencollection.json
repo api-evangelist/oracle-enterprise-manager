@@ -1,0 +1,857 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Enterprise Manager Cloud Control REST API",
+    "version": "13.5.0.23"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Targets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager List Targets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/targets",
+            "params": [
+              {
+                "name": "targetName",
+                "value": "",
+                "type": "query",
+                "description": "Filter targets by name. Supports partial matching."
+              },
+              {
+                "name": "targetType",
+                "value": "",
+                "type": "query",
+                "description": "Filter targets by type (e.g., oracle_database, host, weblogic_j2eeserver)."
+              },
+              {
+                "name": "lifecycleStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filter targets by lifecycle status."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip for pagination."
+              }
+            ]
+          },
+          "docs": "Returns a list of monitored targets in Enterprise Manager. Supports filtering by target name, target type, and lifecycle status. Results are paginated."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Create a Target",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{emHost}:{emPort}/em/api/targets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new monitored target in Enterprise Manager. Requires target name, target type, and host information. Additional properties can be specified depending on the target type."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Target Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/targets/:targetId",
+            "params": [
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the target."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific target including its configuration properties, monitoring status, and associated metadata."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Update a Target",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{emHost}:{emPort}/em/api/targets/:targetId",
+            "params": [
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the target."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates properties of an existing target. Only the specified fields are modified; unspecified fields remain unchanged."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Delete a Target",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{emHost}:{emPort}/em/api/targets/:targetId",
+            "params": [
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the target."
+              }
+            ]
+          },
+          "docs": "Removes a monitored target from Enterprise Manager. This stops all monitoring, removes collected data associations, and deletes the target configuration."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Target Properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/targets/:targetId/properties",
+            "params": [
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the target."
+              }
+            ]
+          },
+          "docs": "Returns the configuration and monitoring properties of a specific target, including instance properties, dynamic properties, and any custom properties defined for the target type."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Bulk Update Target Properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{emHost}:{emPort}/em/api/targets/:targetId/actions/bulkUpdateProperties",
+            "params": [
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the target."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates multiple properties of a target in a single request. Useful for batch configuration changes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager List Metric Groups for a Target",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/targets/:targetId/metricGroups",
+            "params": [
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the target."
+              }
+            ]
+          },
+          "docs": "Returns a list of all metric groups available for a specific target. Metric groups organize related metrics and define the collection schedule and columns."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Metric Group Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/targets/:targetId/metricGroups/:metricGroupName",
+            "params": [
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the target."
+              },
+              {
+                "name": "metricGroupName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the metric group."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific metric group for a target, including metric column definitions, collection frequency, and thresholds."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Latest Metric Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/targets/:targetId/metricGroups/:metricGroupName/latestData",
+            "params": [
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the target."
+              },
+              {
+                "name": "metricGroupName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the metric group."
+              }
+            ]
+          },
+          "docs": "Returns the most recently collected metric data for a specific metric group on a target. Provides the latest snapshot of performance values."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Metric Time Series Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/metricTimeSeries",
+            "params": [
+              {
+                "name": "targetNames",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of target names to retrieve metric data for."
+              },
+              {
+                "name": "targetTypes",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of target types to filter by."
+              },
+              {
+                "name": "metricGroups",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of metric group names."
+              },
+              {
+                "name": "metricColumns",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of metric column names."
+              },
+              {
+                "name": "startTime",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "Start of the time range in ISO 8601 format."
+              },
+              {
+                "name": "endTime",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "End of the time range in ISO 8601 format."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page."
+              }
+            ]
+          },
+          "docs": "Returns numeric metric data points over a specified time range for one or more targets. Supports filtering by target, metric group, metric column, and time range."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Incidents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager List Incidents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/incidents",
+            "params": [
+              {
+                "name": "severity",
+                "value": "FATAL",
+                "type": "query",
+                "description": "Filter by incident severity level."
+              },
+              {
+                "name": "priority",
+                "value": "URGENT",
+                "type": "query",
+                "description": "Filter by incident priority."
+              },
+              {
+                "name": "status",
+                "value": "NEW",
+                "type": "query",
+                "description": "Filter by incident status."
+              },
+              {
+                "name": "targetName",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter incidents by target name."
+              },
+              {
+                "name": "targetType",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter incidents by target type."
+              },
+              {
+                "name": "sinceTime",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "Return incidents created after this time in ISO 8601 format."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip for pagination."
+              }
+            ]
+          },
+          "docs": "Returns a list of incidents in Enterprise Manager. Supports filtering by severity, priority, status, target, and time range. Incidents represent actionable issues detected by monitoring rules."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Incident Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/incidents/:incidentId",
+            "params": [
+              {
+                "name": "incidentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the incident."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific incident including severity, priority, status, associated target, timeline, and resolution information."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Clear an Incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{emHost}:{emPort}/em/api/incidents/:incidentId/actions/clear",
+            "params": [
+              {
+                "name": "incidentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the incident."
+              }
+            ]
+          },
+          "docs": "Clears an incident, indicating that the issue has been resolved. The incident status is set to CLOSED."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Suppress an Incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{emHost}:{emPort}/em/api/incidents/:incidentId/actions/suppress",
+            "params": [
+              {
+                "name": "incidentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the incident."
+              }
+            ]
+          },
+          "docs": "Suppresses an incident so it does not appear in active incident views or trigger notifications. Useful for known issues under investigation."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Unsuppress an Incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{emHost}:{emPort}/em/api/incidents/:incidentId/actions/unsuppress",
+            "params": [
+              {
+                "name": "incidentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the incident."
+              }
+            ]
+          },
+          "docs": "Reverses the suppression of an incident, restoring it to active visibility and notification eligibility."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Incident Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/incidents/:incidentId/events",
+            "params": [
+              {
+                "name": "incidentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the incident."
+              }
+            ]
+          },
+          "docs": "Returns the list of events associated with an incident. Events are the underlying monitoring detections that were correlated to form the incident."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Incident Annotations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/incidents/:incidentId/annotations",
+            "params": [
+              {
+                "name": "incidentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the incident."
+              }
+            ]
+          },
+          "docs": "Returns annotations (comments and notes) associated with an incident. Annotations provide a record of investigation and remediation steps."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Event Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/events/:eventId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the event."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific event, including its type, severity, message, target association, and timestamps."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Blackouts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager List Blackouts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts",
+            "params": [
+              {
+                "name": "status",
+                "value": "SCHEDULED",
+                "type": "query",
+                "description": "Filter by blackout status."
+              },
+              {
+                "name": "targetName",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter by associated target name."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip for pagination."
+              }
+            ]
+          },
+          "docs": "Returns a list of blackouts (maintenance windows) configured in Enterprise Manager. Supports filtering by status and associated target."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Create a Blackout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new blackout (maintenance window) for one or more targets. During a blackout, monitoring data is still collected but alerts and notifications are suppressed."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Blackout Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts/:blackoutId",
+            "params": [
+              {
+                "name": "blackoutId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the blackout."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific blackout including its schedule, affected targets, status, and reason."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Edit a Blackout",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts/:blackoutId",
+            "params": [
+              {
+                "name": "blackoutId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the blackout."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies an existing blackout. Can update the schedule, targets, reason, or other properties. Only scheduled or started blackouts can be edited."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Delete a Blackout",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts/:blackoutId",
+            "params": [
+              {
+                "name": "blackoutId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the blackout."
+              }
+            ]
+          },
+          "docs": "Deletes a blackout. Only scheduled (not yet started) blackouts can be deleted. Use the stop action to end an active blackout."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Stop a Blackout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts/:blackoutId/actions/stop",
+            "params": [
+              {
+                "name": "blackoutId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the blackout."
+              }
+            ]
+          },
+          "docs": "Stops an active blackout before its scheduled end time. Monitoring and alerting resume immediately for all affected targets."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Blackout Targets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts/:blackoutId/targets",
+            "params": [
+              {
+                "name": "blackoutId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the blackout."
+              }
+            ]
+          },
+          "docs": "Returns the list of targets affected by a specific blackout, including both directly specified targets and targets included via group membership."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Blackout Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts/dashboard"
+          },
+          "docs": "Returns summary statistics about blackouts including counts by status, upcoming blackouts, and recently ended blackouts."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager List Blackout Reasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts/reasons"
+          },
+          "docs": "Returns a list of predefined blackout reasons that can be associated with blackouts for categorization and reporting."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Create a Blackout Reason",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts/reasons",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new blackout reason that can be used when creating or editing blackouts."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Delete a Blackout Reason",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts/reasons/:reasonId",
+            "params": [
+              {
+                "name": "reasonId",
+                "value": "500123",
+                "type": "path",
+                "description": "Unique identifier of the blackout reason."
+              }
+            ]
+          },
+          "docs": "Deletes a blackout reason by its identifier."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Global Target Properties",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager List Global Target Properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/globalTargetProperties"
+          },
+          "docs": "Returns a list of global target properties that are defined for classifying and organizing targets."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Create a Global Target Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{emHost}:{emPort}/em/api/globalTargetProperties",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new global target property definition. Global properties provide a way to classify targets with custom metadata."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Global Target Property Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/globalTargetProperties/:globalTargetPropertyId",
+            "params": [
+              {
+                "name": "globalTargetPropertyId",
+                "value": "500123",
+                "type": "path",
+                "description": "Unique identifier of the global target property."
+              }
+            ]
+          },
+          "docs": "Returns details of a specific global target property."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Modify a Global Target Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{emHost}:{emPort}/em/api/globalTargetProperties/:globalTargetPropertyId",
+            "params": [
+              {
+                "name": "globalTargetPropertyId",
+                "value": "500123",
+                "type": "path",
+                "description": "Unique identifier of the global target property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a global target property definition."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Delete a Global Target Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{emHost}:{emPort}/em/api/globalTargetProperties/:globalTargetPropertyId",
+            "params": [
+              {
+                "name": "globalTargetPropertyId",
+                "value": "500123",
+                "type": "path",
+                "description": "Unique identifier of the global target property."
+              }
+            ]
+          },
+          "docs": "Deletes a global target property definition."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Valid Values for a Global Target Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/globalTargetProperties/:globalTargetPropertyId/validValues",
+            "params": [
+              {
+                "name": "globalTargetPropertyId",
+                "value": "500123",
+                "type": "path",
+                "description": "Unique identifier of the global target property."
+              }
+            ]
+          },
+          "docs": "Returns the list of valid values defined for a global target property, if the property has a constrained value set."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
