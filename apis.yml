@@ -386,39 +386,36 @@ maintainers:
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/oracle-enterprise-manager/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/oracle-enterprise-manager-bulk-configure-target-workflow.yml
-        name: Oracle Enterprise Manager Bulk Configure Target Properties
-        summary: Confirm a target, read its current properties, then bulk-apply property updates.
-      - url: arazzo/oracle-enterprise-manager-define-global-property-workflow.yml
-        name: Oracle Enterprise Manager Define Global Target Property
-        summary: Create a global target property, verify it, and read back its valid values.
-      - url: arazzo/oracle-enterprise-manager-end-active-blackout-workflow.yml
-        name: Oracle Enterprise Manager End Active Blackout
-        summary: Find a started blackout for a target and stop it early to resume monitoring.
-      - url: arazzo/oracle-enterprise-manager-inspect-target-workflow.yml
-        name: Oracle Enterprise Manager Inspect Target
-        summary: Find a monitored target by name and pull its full configuration profile.
-      - url: arazzo/oracle-enterprise-manager-investigate-suppress-incident-workflow.yml
-        name: Oracle Enterprise Manager Investigate and Suppress Incident
-        summary: Review an incident's details and annotations, then suppress it.
-      - url: arazzo/oracle-enterprise-manager-read-metric-snapshot-workflow.yml
-        name: Oracle Enterprise Manager Read Metric Snapshot
-        summary: Resolve a target's metric group and pull its latest collected data point.
-      - url: arazzo/oracle-enterprise-manager-schedule-blackout-workflow.yml
-        name: Oracle Enterprise Manager Schedule Blackout
-        summary: Ensure a blackout reason exists, then create and verify a maintenance window.
-      - url: arazzo/oracle-enterprise-manager-target-metric-trend-workflow.yml
-        name: Oracle Enterprise Manager Target Metric Trend
-        summary: Resolve a target by name, then pull a metric time series over a window.
-      - url: arazzo/oracle-enterprise-manager-trace-incident-event-workflow.yml
-        name: Oracle Enterprise Manager Trace Incident Event
-        summary: Drill from an incident into its events and one event's full detail.
-      - url: arazzo/oracle-enterprise-manager-triage-clear-incident-workflow.yml
-        name: Oracle Enterprise Manager Triage and Clear Incident
-        summary: Find the most severe open incident, inspect its events, and clear it.
+  - type: Arazzo
+    url: arazzo/oracle-enterprise-manager-bulk-configure-target-workflow.yml
+    name: Oracle Enterprise Manager Bulk Configure Target Properties
+  - type: Arazzo
+    url: arazzo/oracle-enterprise-manager-define-global-property-workflow.yml
+    name: Oracle Enterprise Manager Define Global Target Property
+  - type: Arazzo
+    url: arazzo/oracle-enterprise-manager-end-active-blackout-workflow.yml
+    name: Oracle Enterprise Manager End Active Blackout
+  - type: Arazzo
+    url: arazzo/oracle-enterprise-manager-inspect-target-workflow.yml
+    name: Oracle Enterprise Manager Inspect Target
+  - type: Arazzo
+    url: arazzo/oracle-enterprise-manager-investigate-suppress-incident-workflow.yml
+    name: Oracle Enterprise Manager Investigate and Suppress Incident
+  - type: Arazzo
+    url: arazzo/oracle-enterprise-manager-read-metric-snapshot-workflow.yml
+    name: Oracle Enterprise Manager Read Metric Snapshot
+  - type: Arazzo
+    url: arazzo/oracle-enterprise-manager-schedule-blackout-workflow.yml
+    name: Oracle Enterprise Manager Schedule Blackout
+  - type: Arazzo
+    url: arazzo/oracle-enterprise-manager-target-metric-trend-workflow.yml
+    name: Oracle Enterprise Manager Target Metric Trend
+  - type: Arazzo
+    url: arazzo/oracle-enterprise-manager-trace-incident-event-workflow.yml
+    name: Oracle Enterprise Manager Trace Incident Event
+  - type: Arazzo
+    url: arazzo/oracle-enterprise-manager-triage-clear-incident-workflow.yml
+    name: Oracle Enterprise Manager Triage and Clear Incident
   - type: GitHubOrganization
     url: https://github.com/oracle
   - type: Portal
