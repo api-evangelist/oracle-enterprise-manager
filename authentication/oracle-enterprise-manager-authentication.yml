@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic Authentication using Enterprise Manager administrator credentials.
+    All API requests must include valid credentials.
+  sources:
+  - openapi/oracle-enterprise-manager-cloud-control-openapi.yml
