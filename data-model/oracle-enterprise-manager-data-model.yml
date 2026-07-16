@@ -1,0 +1,93 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+description: >-
+  Entity-relationship graph derived from the Oracle Enterprise Manager Cloud
+  Control REST API OpenAPI schemas, sub-resource paths, and id-reference fields.
+  Relationships inferred from collection endpoints (has_many), sub-resource paths
+  (getIncidentEvents, getBlackoutTargets), and reference identifiers.
+entities:
+  - name: Target
+    id_field: targetId
+    description: A monitored entity (database, host, middleware, application).
+    schema: json-schema/oracle-enterprise-manager-cloud-control-target-schema.json
+  - name: TargetProperty
+    description: A configurable property attached to a target.
+    schema: json-schema/oracle-enterprise-manager-cloud-control-target-property-schema.json
+  - name: GlobalTargetProperty
+    description: A property definition applied across targets for classification and grouping.
+    schema: json-schema/oracle-enterprise-manager-cloud-control-global-target-property-schema.json
+  - name: MetricGroup
+    description: A named group of metric columns collected for a target type.
+    schema: json-schema/oracle-enterprise-manager-cloud-control-metric-group-schema.json
+  - name: MetricColumn
+    description: A single metric within a metric group.
+    schema: json-schema/oracle-enterprise-manager-cloud-control-metric-column-schema.json
+  - name: MetricDataPoint
+    description: A latest metric value for a target.
+    schema: json-schema/oracle-enterprise-manager-cloud-control-metric-data-point-schema.json
+  - name: MetricTimeSeries
+    description: A series of numeric metric data points over time.
+    schema: json-schema/oracle-enterprise-manager-cloud-control-metric-time-series-schema.json
+  - name: Incident
+    id_field: incidentId
+    description: An actionable issue correlated from one or more events.
+    schema: json-schema/oracle-enterprise-manager-cloud-control-incident-schema.json
+  - name: Event
+    id_field: eventId
+    description: An underlying occurrence detected by monitoring.
+    schema: json-schema/oracle-enterprise-manager-cloud-control-event-schema.json
+  - name: Annotation
+    description: A note attached to an incident.
+    schema: json-schema/oracle-enterprise-manager-cloud-control-annotation-schema.json
+  - name: Blackout
+    id_field: blackoutId
+    description: A maintenance window that suppresses monitoring for a set of targets.
+    schema: json-schema/oracle-enterprise-manager-cloud-control-blackout-schema.json
+  - name: BlackoutReason
+    description: A reusable reason label for a blackout.
+    schema: json-schema/oracle-enterprise-manager-cloud-control-blackout-reason-schema.json
+  - name: BlackoutTarget
+    description: A target association within a blackout.
+    schema: json-schema/oracle-enterprise-manager-cloud-control-blackout-target-schema.json
+relationships:
+  - from: Target
+    to: TargetProperty
+    type: has_many
+    via: getTargetProperties
+  - from: GlobalTargetProperty
+    to: Target
+    type: has_many
+    via: applied across targets
+  - from: MetricGroup
+    to: MetricColumn
+    type: has_many
+    via: metric group metadata
+  - from: Target
+    to: MetricDataPoint
+    type: has_many
+    via: getLatestMetricData
+  - from: Target
+    to: MetricTimeSeries
+    type: has_many
+    via: getMetricTimeSeries
+  - from: Incident
+    to: Event
+    type: has_many
+    via: getIncidentEvents
+  - from: Incident
+    to: Annotation
+    type: has_many
+    via: getIncidentAnnotations
+  - from: Event
+    to: Target
+    type: belongs_to
+    via: target reference
+  - from: Blackout
+    to: BlackoutTarget
+    type: has_many
+    via: getBlackoutTargets
+  - from: Blackout
+    to: BlackoutReason
+    type: belongs_to
+    via: reason reference

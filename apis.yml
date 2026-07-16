@@ -9,7 +9,7 @@ access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/oracle-enterprise-manager/refs/heads/main/apis.yml
 created: '2024-01-01'
-modified: '2026-05-19'
+modified: '2026-06-20'
 specificationVersion: '0.19'
 tags:
   - Cloud Management
@@ -390,6 +390,26 @@ common:
     url: security/oracle-enterprise-manager-domain-security.yml
   - type: Authentication
     url: authentication/oracle-enterprise-manager-authentication.yml
+  - type: Conventions
+    url: conventions/oracle-enterprise-manager-conventions.yml
+  - type: ErrorCatalog
+    url: errors/oracle-enterprise-manager-problem-types.yml
+  - type: Conformance
+    url: conformance/oracle-enterprise-manager-conformance.yml
+  - type: DataModel
+    url: data-model/oracle-enterprise-manager-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/oracle-enterprise-manager-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/oracle-enterprise-manager-changelog.yml
+  - type: MCPServer
+    url: mcp/oracle-enterprise-manager-mcp.yml
+  - type: LLMsTxt
+    url: llms/oracle-enterprise-manager-llms.txt
+  - type: Overlay
+    url: overlays/oracle-enterprise-manager-cloud-control-overlay.yaml
+  - type: CLI
+    url: cli/oracle-enterprise-manager-cli.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/oracle-enterprise-manager/overview
   - type: Arazzo

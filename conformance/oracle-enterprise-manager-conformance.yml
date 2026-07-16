@@ -1,0 +1,47 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+description: >-
+  Industry / cross-cutting standards conformance for the Oracle Enterprise Manager
+  Cloud Control REST API, derived from the captured OpenAPI (security schemes,
+  media types, pagination shape, error envelope) and Oracle documentation. OEM is
+  on-premises management software; it does not participate in payment/identity
+  federation standards.
+standards:
+  - id: openapi-3.1
+    conforms: true
+    evidence: repo openapi/ is OpenAPI 3.1.0
+  - id: http-basic-auth
+    conforms: true
+    evidence: securitySchemes basicAuth type http scheme basic
+  - id: oauth2
+    conforms: false
+    evidence: no oauth2 securityScheme; API uses HTTP Basic with EM administrator credentials
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      error responses use application/json with a custom envelope
+      (errorCode/message/details/httpStatusCode), not application/problem+json
+  - id: json-api
+    conforms: false
+  - id: offset-limit-pagination
+    conforms: true
+    evidence: >-
+      collection operations accept limit/offset query params and return
+      totalCount, limit, offset, hasMore, and canonicalLink
+  - id: hateoas-links
+    conforms: true
+    evidence: collection and resource payloads carry canonicalLink references
+  - id: fhir-r4
+    conforms: false
+  - id: scim2
+    conforms: false
+    evidence: user/role management is via OEM-proprietary endpoints, not SCIM 2.0
+  - id: odata
+    conforms: false
+  - id: psd2
+    conforms: false
+  - id: fapi
+    conforms: false

@@ -1,0 +1,87 @@
+generated: '2026-06-20'
+method: searched
+source: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcli/em-cli-verbs.html
+docs: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcli/
+description: >-
+  The Enterprise Manager Command Line Interface (EM CLI / emcli) — the first-party
+  scriptable command surface over Enterprise Manager Cloud Control. A verb is a task
+  or action issued as `emcli <verb> -param1 -param2 ...`. Immediately after
+  installation only the basic operational verbs are present; the full verb set is
+  installed by synchronizing the client with the OMS (`emcli sync`). The emcli
+  binary is distributed from the OMS (and an EM CLI with Scripting Option build),
+  not from a public package registry.
+name: EM CLI (emcli)
+install:
+  oms_download: >-
+    Download the EM CLI client kit (emclikit.jar) from the OMS at
+    https://{emHost}:{emPort}/em/public_lib_download/emcli/kit/emclikit.jar and run
+    `java -jar emclikit.jar -install_dir=<dir>`.
+  scripting_option: >-
+    EM CLI with Scripting Option adds an interactive Jython scripting shell
+    (`emcli` interactive mode) for Perl/Python-style scripting.
+syntax: emcli verb_name -required_param1 -required_param2 ... [-optional_param ...]
+command_groups:
+  basic:
+    description: Basic operational verbs installed immediately after client install.
+    verbs:
+      - {name: setup, description: Configure EM CLI to function with a specific OMS.}
+      - {name: sync, description: Synchronize the EM CLI client with an OMS (installs the full verb set).}
+      - {name: login, description: Log in and establish a session with the OMS.}
+      - {name: logout, description: Log out of the EM CLI client from Enterprise Manager.}
+      - {name: help, description: Access command-line help for EM CLI verbs.}
+      - {name: version, description: List EM CLI verb versions or the EM CLI client version.}
+      - {name: argfile, description: Execute an EM CLI verb where the verb and arguments are contained in a file.}
+  targets:
+    description: Discover, add, and manage monitored targets.
+    verbs:
+      - {name: get_targets, description: List targets and their status.}
+      - {name: add_target, description: Add a target to be monitored.}
+      - {name: modify_target, description: Modify an existing target's configuration.}
+      - {name: delete_target, description: Remove a target from monitoring.}
+      - {name: get_target_properties, description: Retrieve properties of a target.}
+      - {name: set_target_property_value, description: Set a target property value.}
+  groups:
+    description: Manage target groups.
+    verbs:
+      - {name: create_group, description: Create a group of targets.}
+      - {name: modify_group, description: Modify a group's membership.}
+      - {name: delete_group, description: Delete a group.}
+  jobs:
+    description: Create, run, and manage jobs.
+    verbs:
+      - {name: create_job, description: Create and optionally submit a job.}
+      - {name: get_jobs, description: List jobs and executions with status.}
+      - {name: stop_job, description: Stop a running job.}
+      - {name: suspend_job, description: Suspend a job.}
+      - {name: resume_job, description: Resume a suspended job.}
+      - {name: delete_job, description: Delete a job.}
+  blackouts:
+    description: Manage blackout (maintenance) windows.
+    verbs:
+      - {name: create_blackout, description: Create a blackout to suppress monitoring.}
+      - {name: stop_blackout, description: Stop an active blackout.}
+      - {name: delete_blackout, description: Delete a blackout.}
+  credentials:
+    description: Manage named and preferred credentials.
+    verbs:
+      - {name: create_named_credential, description: Create a named credential.}
+      - {name: update_named_credential, description: Update a named credential.}
+      - {name: delete_named_credential, description: Delete a named credential.}
+      - {name: set_preferred_credential, description: Set a preferred credential for a target.}
+  security:
+    description: Manage users, roles, and privileges.
+    verbs:
+      - {name: create_user, description: Create an Enterprise Manager administrator user.}
+      - {name: update_user, description: Update a user.}
+      - {name: delete_user, description: Delete a user.}
+      - {name: create_role, description: Create a role.}
+      - {name: grant_privs, description: Grant privileges to a user or role.}
+      - {name: revoke_privs, description: Revoke privileges from a user or role.}
+      - {name: grant_roles, description: Grant roles to a user.}
+  provisioning:
+    description: Deployment procedures, patching, and provisioning.
+    verbs:
+      - {name: get_procedures, description: List deployment procedures.}
+      - {name: submit_procedure, description: Submit a deployment procedure for execution.}
+      - {name: describe_procedure_input, description: Describe the input parameters of a procedure.}
+      - {name: get_instances, description: List procedure instances and their status.}

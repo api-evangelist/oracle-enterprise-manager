@@ -1,0 +1,48 @@
+# Oracle Enterprise Manager
+
+> Oracle Enterprise Manager (OEM) is an on-premises management platform for Oracle IT infrastructure and applications. Its REST APIs and the EM CLI provide programmatic access to monitoring, administration, and automation — targets, metrics, incidents, blackouts, credentials, users/roles, jobs, patching, deployment procedures, and database lifecycle management. APIs are served from the customer's own Oracle Management Service (OMS) at https://{emHost}:{emPort}/em/api using HTTP Basic authentication.
+
+## APIs
+
+- [Cloud Control REST API](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/APIOverview.html): Monitoring, configuration, and administration — targets, metrics, incidents, blackouts, credentials, users, deployment procedures.
+- [EM CLI (emcli)](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcli/): Scriptable command-line interface over Enterprise Manager functionality.
+- [Job System API](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html): Create, manage, and monitor jobs and tasks.
+- [Metric and Monitoring API](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html): Performance metrics, latest values, and metric group metadata.
+- [Target Management API](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html): Discovery, configuration, and lifecycle of monitored targets.
+- [Incidents and Events API](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html): Search, view, and manage incidents and events.
+- [Blackout Management API](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html): Create and manage maintenance windows.
+- [Credentials Management API](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html): Named, monitoring, and preferred credentials.
+- [User Management API](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html): Users, roles, privileges, and secure resources.
+- [Database Patching and Maintenance API](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emlcm/patch-history.html): Fleet patching, Gold Images, compliance.
+- [Deployment Procedure API](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html): Create, submit, and track deployment procedures.
+- [SQL Execution REST API](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emmon/executing-sql-rest-api.html): Execute SQL against database targets and the EM repository.
+- [Data Guard Administration REST API](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emlcm/data-guard-administration-rest-api1.html): High-availability switchover/failover operations.
+- [Cloud APIs (DBaaS)](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.4/emclo/using-cloud-apis.html): Self-service database provisioning and quota administration.
+
+## Specs
+
+- [OpenAPI 3.1 (Cloud Control REST API)](https://raw.githubusercontent.com/api-evangelist/oracle-enterprise-manager/refs/heads/main/openapi/oracle-enterprise-manager-cloud-control-openapi.yml): 36 operations across targets, metrics, incidents, events, blackouts, and global target properties.
+- [Postman Collection](https://raw.githubusercontent.com/api-evangelist/oracle-enterprise-manager/refs/heads/main/postman/oracle-enterprise-manager-cloud-control.postman_collection.json)
+- [APIs.json index](https://raw.githubusercontent.com/api-evangelist/oracle-enterprise-manager/refs/heads/main/apis.yml)
+
+## Artifacts
+
+- [Authentication profile](https://raw.githubusercontent.com/api-evangelist/oracle-enterprise-manager/refs/heads/main/authentication/oracle-enterprise-manager-authentication.yml): HTTP Basic with EM administrator credentials.
+- [Conventions](https://raw.githubusercontent.com/api-evangelist/oracle-enterprise-manager/refs/heads/main/conventions/oracle-enterprise-manager-conventions.yml): offset/limit pagination, canonicalLink, custom-JSON error envelope.
+- [Error catalog](https://raw.githubusercontent.com/api-evangelist/oracle-enterprise-manager/refs/heads/main/errors/oracle-enterprise-manager-problem-types.yml)
+- [Conformance](https://raw.githubusercontent.com/api-evangelist/oracle-enterprise-manager/refs/heads/main/conformance/oracle-enterprise-manager-conformance.yml)
+- [Data model](https://raw.githubusercontent.com/api-evangelist/oracle-enterprise-manager/refs/heads/main/data-model/oracle-enterprise-manager-data-model.yml)
+- [Lifecycle](https://raw.githubusercontent.com/api-evangelist/oracle-enterprise-manager/refs/heads/main/lifecycle/oracle-enterprise-manager-lifecycle.yml)
+- [Changelog](https://raw.githubusercontent.com/api-evangelist/oracle-enterprise-manager/refs/heads/main/changelog/oracle-enterprise-manager-changelog.yml)
+- [Candidate MCP tool list](https://raw.githubusercontent.com/api-evangelist/oracle-enterprise-manager/refs/heads/main/mcp/oracle-enterprise-manager-mcp.yml)
+- [EM CLI command surface](https://raw.githubusercontent.com/api-evangelist/oracle-enterprise-manager/refs/heads/main/cli/oracle-enterprise-manager-cli.yml)
+
+## Docs
+
+- [Documentation home](https://docs.oracle.com/en/enterprise-manager/)
+- [REST API Overview](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/APIOverview.html)
+- [Authentication](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/Authentication.html)
+- [REST Endpoints reference](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html)
+- [New Features by Release Update](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcon/new-features-release-update.html)
+- [Security Guide](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emsec/index.html)
+- [Product page](https://www.oracle.com/enterprise-manager/)

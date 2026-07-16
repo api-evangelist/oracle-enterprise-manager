@@ -1,0 +1,42 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+format: custom-json
+description: >-
+  Error catalog derived from the OpenAPI named response components and the Error
+  schema. The Enterprise Manager Cloud Control REST API does NOT use RFC 9457
+  application/problem+json; errors are returned as application/json with a custom
+  envelope. Titles/remediation summarized from the OpenAPI response descriptions.
+envelope:
+  media_type: application/json
+  schema: json-schema/oracle-enterprise-manager-cloud-control-error-schema.json
+  fields:
+    - name: errorCode
+      description: Machine-readable error code.
+    - name: message
+      description: Human-readable error message.
+    - name: details
+      description: Additional details about the error.
+    - name: httpStatusCode
+      description: HTTP status code (echoed in the body).
+problems:
+  - status: 400
+    name: BadRequest
+    title: Bad request
+    remediation: The request was malformed or contained invalid parameters. Correct the request payload or query parameters.
+  - status: 401
+    name: Unauthorized
+    title: Unauthorized
+    remediation: Authentication failed or credentials were missing. Supply valid EM administrator credentials via HTTP Basic auth.
+  - status: 404
+    name: NotFound
+    title: Resource not found
+    remediation: The requested resource (target, incident, blackout, property) does not exist. Verify the identifier.
+  - status: 409
+    name: Conflict
+    title: Conflict
+    remediation: The request conflicts with the current state of the resource (e.g. duplicate or concurrent modification). Reconcile state and retry.
+  - status: 500
+    name: InternalServerError
+    title: Internal server error
+    remediation: An unexpected error occurred on the OMS. Retry; if it persists, check OMS logs and contact Oracle Support.

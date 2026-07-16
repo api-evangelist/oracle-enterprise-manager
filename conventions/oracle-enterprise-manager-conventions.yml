@@ -1,0 +1,58 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+description: >-
+  Cross-cutting request/response conventions for the Oracle Enterprise Manager
+  Cloud Control REST API, derived from the captured OpenAPI and Oracle docs. OEM
+  is on-premises: the base URL is deployment-specific (https://{emHost}:{emPort}/em/api).
+base_url: https://{emHost}:{emPort}/em/api
+authentication:
+  style: http-basic
+  detail: >-
+    HTTP Basic Authentication with Enterprise Manager administrator credentials on
+    every request over HTTPS. See authentication/oracle-enterprise-manager-authentication.yml.
+pagination:
+  style: offset-limit
+  request_params:
+    - limit
+    - offset
+  response_fields:
+    - totalCount
+    - limit
+    - offset
+    - hasMore
+  note: Collection responses wrap results in an items[] array with paging metadata.
+links:
+  style: canonical
+  field: canonicalLink
+  note: Resources and collection entries carry a canonicalLink self-reference.
+idempotency:
+  header: null
+  note: No idempotency-key header is defined; write operations are not declared idempotent beyond HTTP method semantics (PUT/PATCH/DELETE).
+field_expansion:
+  supported: false
+metadata:
+  note: Target metadata is exposed via target properties and global target properties.
+request_tracing:
+  header: null
+  note: No standard request-id/correlation header is documented in the spec.
+versioning:
+  scheme: product-release
+  detail: >-
+    The REST surface tracks the Enterprise Manager product release (e.g. 13.5) and
+    its Release Updates (13.5.0.x); the URI path is /em/api. See
+    lifecycle/oracle-enterprise-manager-lifecycle.yml and
+    changelog/oracle-enterprise-manager-changelog.yml.
+error_envelope:
+  media_type: application/json
+  fields: [errorCode, message, details, httpStatusCode]
+  format: custom-json
+  ref: errors/oracle-enterprise-manager-problem-types.yml
+rate_limiting:
+  signaling: none-documented
+  note: No published rate-limit headers; the API runs against the customer's own OMS.
+cross_links:
+  errors: errors/oracle-enterprise-manager-problem-types.yml
+  lifecycle: lifecycle/oracle-enterprise-manager-lifecycle.yml
+  authentication: authentication/oracle-enterprise-manager-authentication.yml
+  rate_limits: rate-limits/oracle-enterprise-manager-rate-limits.yml

@@ -1,0 +1,128 @@
+generated: '2026-06-20'
+method: derived
+status: candidate
+source: openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+description: >-
+  Candidate MCP server tool list derived one-to-one from the Oracle Enterprise
+  Manager Cloud Control REST API OpenAPI operations. Oracle publishes MCP servers
+  for several products (Oracle Database, MySQL/HeatWave, OCI, Database Tools — see
+  https://www.oracle.com/mcp/ and https://github.com/oracle/mcp) but NO official
+  MCP server exists for Enterprise Manager as of this writing. This is a governance
+  starting point, not a published Oracle server; OEM is on-premises software reached
+  at https://{emHost}:{emPort}/em/api with HTTP Basic auth.
+server:
+  name: oracle-enterprise-manager
+  transport: http
+  url: null
+  note: >-
+    No hosted/remote OEM MCP server is published. A candidate server would front the
+    on-premises OMS REST endpoint using HTTP Basic administrator credentials.
+tools:
+  - name: list_targets
+    description: List monitored targets with optional filtering by name, type, and lifecycle status.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#listTargets
+  - name: create_target
+    description: Add and configure a new monitored target.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#createTarget
+  - name: get_target
+    description: Retrieve details of a single target.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#getTarget
+  - name: update_target
+    description: Update a target's configuration.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#updateTarget
+  - name: delete_target
+    description: Remove a target from monitoring.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#deleteTarget
+  - name: get_target_properties
+    description: Retrieve the properties of a target.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#getTargetProperties
+  - name: bulk_update_target_properties
+    description: Update properties across multiple targets in a single request.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#bulkUpdateTargetProperties
+  - name: list_metric_groups
+    description: List available metric groups for monitoring.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#listMetricGroups
+  - name: get_metric_group
+    description: Retrieve metadata for a metric group.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#getMetricGroup
+  - name: get_latest_metric_data
+    description: Retrieve the latest metric values for a target.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#getLatestMetricData
+  - name: get_metric_time_series
+    description: Retrieve numeric metric data points over a time range.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#getMetricTimeSeries
+  - name: list_incidents
+    description: Search and list incidents.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#listIncidents
+  - name: get_incident
+    description: Retrieve details of a single incident.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#getIncident
+  - name: clear_incident
+    description: Clear an incident.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#clearIncident
+  - name: suppress_incident
+    description: Suppress an incident.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#suppressIncident
+  - name: unsuppress_incident
+    description: Remove suppression from an incident.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#unsuppressIncident
+  - name: get_incident_events
+    description: List the member events of an incident.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#getIncidentEvents
+  - name: get_incident_annotations
+    description: Retrieve annotations attached to an incident.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#getIncidentAnnotations
+  - name: get_event
+    description: Retrieve details of a single event.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#getEvent
+  - name: list_blackouts
+    description: List blackout (maintenance window) definitions.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#listBlackouts
+  - name: create_blackout
+    description: Create a blackout to suppress monitoring during maintenance.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#createBlackout
+  - name: get_blackout
+    description: Retrieve details of a blackout.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#getBlackout
+  - name: edit_blackout
+    description: Edit an existing blackout.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#editBlackout
+  - name: delete_blackout
+    description: Delete a blackout.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#deleteBlackout
+  - name: stop_blackout
+    description: Stop an active blackout.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#stopBlackout
+  - name: get_blackout_targets
+    description: List the targets covered by a blackout.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#getBlackoutTargets
+  - name: get_blackout_dashboard
+    description: Retrieve the blackout dashboard summary.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#getBlackoutDashboard
+  - name: list_blackout_reasons
+    description: List available blackout reasons.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#listBlackoutReasons
+  - name: create_blackout_reason
+    description: Create a new blackout reason.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#createBlackoutReason
+  - name: delete_blackout_reason
+    description: Delete a blackout reason.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#deleteBlackoutReason
+  - name: list_global_target_properties
+    description: List global target properties.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#listGlobalTargetProperties
+  - name: create_global_target_property
+    description: Create a global target property.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#createGlobalTargetProperty
+  - name: get_global_target_property
+    description: Retrieve a global target property.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#getGlobalTargetProperty
+  - name: modify_global_target_property
+    description: Modify a global target property.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#modifyGlobalTargetProperty
+  - name: delete_global_target_property
+    description: Delete a global target property.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#deleteGlobalTargetProperty
+  - name: get_global_target_property_valid_values
+    description: Retrieve the valid values for a global target property.
+    source_operation: openapi/oracle-enterprise-manager-cloud-control-openapi.yml#getGlobalTargetPropertyValidValues

@@ -1,0 +1,43 @@
+generated: '2026-06-20'
+method: searched
+source: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcon/new-features-release-update.html
+description: >-
+  Changelog for Oracle Enterprise Manager Cloud Control, captured from the "New
+  Features by Release Update" documentation. Enterprise Manager ships quarterly
+  Release Updates (RUs) as 13.5.0.x; each RU adds features and REST API
+  enhancements. Recent window only — the live docs and My Oracle Support Doc ID
+  2760230.2 are the source of truth for the full history.
+scheme: product-release-update
+current_version: 13.5.0.25
+docs: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcon/new-features-release-update.html
+main_ru_list: My Oracle Support Doc ID 2760230.2
+entries:
+  - version: 13.5.0.25
+    breaking: false
+    highlights:
+      - REST APIs for Blackouts Management
+  - version: 13.5.0.24
+    date: '2024-10-29'
+    breaking: false
+    highlights:
+      - Automated Migration of Oracle Management Service (OMS)
+      - Exadata Cloud Infrastructure Support for Multicloud@Azure
+  - version: 13.5.0.23
+    breaking: false
+    highlights:
+      - Support for Including/Excluding Indirect Members in Dynamic Group
+      - Enterprise Manager Supports ADBs Configured Using ECPU
+      - Enterprise Manager Cloud Extension Capability
+      - New CIS 1.2.0 Compliance Standards for Oracle Database 19c
+      - Support for Oracle Exadata 24.1 and Oracle Database 23ai
+      - Exascale Monitoring
+      - EM CLI Verb Enhancement to Support wallet_root Location
+      - Enhancements and Addition to REST APIs
+  - version: 13.5.0.22
+    breaking: false
+    highlights:
+      - Cross Platform Enterprise Manager Repository Database Migration using RepMigrate Utility
+      - Holistic Patching
+      - SQL Analysis Tab for Real-time SQL Monitoring in Performance Hub
+      - Oracle DBSAT Compliance Standard for Pluggable and RAC Databases
+      - STIG Standards Version 2 Release 8 and 9 for Oracle Database 12c and 19c

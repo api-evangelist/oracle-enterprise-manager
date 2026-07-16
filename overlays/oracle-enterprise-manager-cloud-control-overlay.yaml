@@ -1,0 +1,37 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Oracle Enterprise Manager Cloud Control REST API
+  version: 1.0.0
+extends: openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-slug: oracle-enterprise-manager
+      x-apievangelist-catalog: https://apis.io/oracle-enterprise-manager
+      x-apievangelist-position: Consumer
+      x-apievangelist-access: 3rd-Party
+      x-artifacts:
+        authentication: authentication/oracle-enterprise-manager-authentication.yml
+        conventions: conventions/oracle-enterprise-manager-conventions.yml
+        errors: errors/oracle-enterprise-manager-problem-types.yml
+        conformance: conformance/oracle-enterprise-manager-conformance.yml
+        data-model: data-model/oracle-enterprise-manager-data-model.yml
+        lifecycle: lifecycle/oracle-enterprise-manager-lifecycle.yml
+        changelog: changelog/oracle-enterprise-manager-changelog.yml
+        mcp: mcp/oracle-enterprise-manager-mcp.yml
+        cli: cli/oracle-enterprise-manager-cli.yml
+  - target: $.info
+    update:
+      x-deployment-model: on-premises
+      x-base-url-template: https://{emHost}:{emPort}/em/api
+      x-note: >-
+        Enterprise Manager Cloud Control is customer-operated on-premises software;
+        the API host is deployment-specific and reached with HTTP Basic auth.
+  - target: $.tags
+    update:
+      - name: API Evangelist
+        description: >-
+          Enriched by the API Evangelist enrichment pipeline — authentication,
+          conventions, error catalog, conformance, data model, lifecycle, changelog,
+          candidate MCP tool list, and EM CLI command surface artifacts accompany
+          this specification in the repo.

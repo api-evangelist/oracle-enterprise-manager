@@ -1,0 +1,35 @@
+generated: '2026-06-20'
+method: searched
+source: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrel/cloud-control-release-notes-emrel.html
+description: >-
+  Lifecycle and versioning posture for Oracle Enterprise Manager Cloud Control,
+  captured from Oracle release notes, the New Features by Release Update page, and
+  Oracle Lifetime Support policy. OEM is on-premises: releases ship as Release
+  Updates (RUs) applied by the customer to the OMS and Management Agents.
+versioning:
+  scheme: product-release-update
+  current: 13.5.0.25
+  train: 13c Release 5 (13.5)
+  cadence: Quarterly Release Updates (RU), version 13.5.0.x
+  docs: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emcon/new-features-release-update.html
+deprecation:
+  policy_url: https://www.oracle.com/support/lifetime-support/
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    Feature deprecation is announced in RU release notes and the Enterprise Manager
+    Main Release Update List (My Oracle Support Doc ID 2760230.2), not via RFC 8594
+    HTTP Sunset/Deprecation headers.
+support:
+  policy: Oracle Lifetime Support (Premier / Extended / Sustaining)
+  policy_url: https://www.oracle.com/support/lifetime-support/
+  premier_support_note: >-
+    Enterprise Manager Cloud Control 13.5 Premier Support timeframe is published in
+    the Oracle Lifetime Support Policy for Oracle Technology products.
+sla:
+  url: null
+  note: OEM is customer-operated on-premises software; availability is governed by the customer's own deployment, not an Oracle-hosted SLA.
+status_page: null
+release_notes: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrel/cloud-control-release-notes-emrel.html
+main_ru_list: My Oracle Support Doc ID 2760230.2 (Enterprise Manager 13.5 Main Release Update List)
+deprecated_operations: []
