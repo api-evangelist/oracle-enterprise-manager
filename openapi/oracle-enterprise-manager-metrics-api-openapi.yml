@@ -1,0 +1,435 @@
+openapi: 3.1.0
+info:
+  title: Oracle Enterprise Manager Cloud Control REST Blackouts Metrics API
+  description: REST API for Oracle Enterprise Manager Cloud Control providing programmatic access to monitoring, configuration, and administration capabilities. This specification covers core resources including targets, metrics, incidents, and blackouts for managing Oracle IT infrastructure and applications.
+  version: 13.5.0.23
+  contact:
+    name: Oracle Support
+    url: https://www.oracle.com/support/
+    email: support@oracle.com
+  license:
+    name: Oracle Technology Network License
+    url: https://www.oracle.com/legal/terms.html
+  x-logo:
+    url: https://www.oracle.com/a/ocom/img/oracle-enterprise-manager.jpg
+servers:
+- url: https://{emHost}:{emPort}/em/api
+  description: Enterprise Manager Cloud Control server
+  variables:
+    emHost:
+      default: localhost
+      description: Enterprise Manager OMS hostname
+    emPort:
+      default: '7803'
+      description: Enterprise Manager HTTPS console port
+security:
+- basicAuth: []
+tags:
+- name: Metrics
+  description: Query metric data and metadata for monitored targets. Access time-series performance data, latest metric values, and metric group definitions.
+  externalDocs:
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
+paths:
+  /targets/{targetId}/metricGroups:
+    get:
+      operationId: listMetricGroups
+      summary: Oracle Enterprise Manager List Metric Groups for a Target
+      description: Returns a list of all metric groups available for a specific target. Metric groups organize related metrics and define the collection schedule and columns.
+      tags:
+      - Metrics
+      parameters:
+      - $ref: '#/components/parameters/targetIdPath'
+      responses:
+        '200':
+          description: A list of metric groups.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricGroupCollection'
+              examples:
+                Listmetricgroups200Example:
+                  summary: Default listMetricGroups 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - metricGroupName: example_value
+                      displayName: example_value
+                      description: A sample description.
+                      collectionFrequency: 10
+                      metricColumns: {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /targets/{targetId}/metricGroups/{metricGroupName}:
+    get:
+      operationId: getMetricGroup
+      summary: Oracle Enterprise Manager Get Metric Group Details
+      description: Returns detailed information about a specific metric group for a target, including metric column definitions, collection frequency, and thresholds.
+      tags:
+      - Metrics
+      parameters:
+      - $ref: '#/components/parameters/targetIdPath'
+      - $ref: '#/components/parameters/metricGroupNamePath'
+      responses:
+        '200':
+          description: Metric group details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricGroup'
+              examples:
+                Getmetricgroup200Example:
+                  summary: Default getMetricGroup 200 response
+                  x-microcks-default: true
+                  value:
+                    metricGroupName: example_value
+                    displayName: example_value
+                    description: A sample description.
+                    collectionFrequency: 10
+                    metricColumns:
+                    - columnName: example_value
+                      displayName: example_value
+                      columnType: NUMBER
+                      isKey: true
+                      unit: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /targets/{targetId}/metricGroups/{metricGroupName}/latestData:
+    get:
+      operationId: getLatestMetricData
+      summary: Oracle Enterprise Manager Get Latest Metric Data
+      description: Returns the most recently collected metric data for a specific metric group on a target. Provides the latest snapshot of performance values.
+      tags:
+      - Metrics
+      parameters:
+      - $ref: '#/components/parameters/targetIdPath'
+      - $ref: '#/components/parameters/metricGroupNamePath'
+      responses:
+        '200':
+          description: Latest metric data for the group.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricDataCollection'
+              examples:
+                Getlatestmetricdata200Example:
+                  summary: Default getLatestMetricData 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - metricColumn: example_value
+                      value: 42.5
+                      key: example_value
+                      collectionTime: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /metricTimeSeries:
+    get:
+      operationId: getMetricTimeSeries
+      summary: Oracle Enterprise Manager Get Metric Time Series Data
+      description: Returns numeric metric data points over a specified time range for one or more targets. Supports filtering by target, metric group, metric column, and time range.
+      tags:
+      - Metrics
+      parameters:
+      - name: targetNames
+        in: query
+        description: Comma-separated list of target names to retrieve metric data for.
+        schema:
+          type: string
+        example: example_value
+      - name: targetTypes
+        in: query
+        description: Comma-separated list of target types to filter by.
+        schema:
+          type: string
+        example: example_value
+      - name: metricGroups
+        in: query
+        description: Comma-separated list of metric group names.
+        schema:
+          type: string
+        example: example_value
+      - name: metricColumns
+        in: query
+        description: Comma-separated list of metric column names.
+        schema:
+          type: string
+        example: example_value
+      - name: startTime
+        in: query
+        description: Start of the time range in ISO 8601 format.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: endTime
+        in: query
+        description: End of the time range in ISO 8601 format.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - $ref: '#/components/parameters/limitQuery'
+      responses:
+        '200':
+          description: Metric time series data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricTimeSeriesCollection'
+              examples:
+                Getmetrictimeseries200Example:
+                  summary: Default getMetricTimeSeries 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - targetName: example_value
+                      targetType: example_value
+                      metricGroupName: example_value
+                      metricColumnName: example_value
+                      key: example_value
+                      dataPoints: {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    MetricTimeSeriesCollection:
+      type: object
+      description: Collection of metric time series.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricTimeSeries'
+          example: []
+    MetricColumn:
+      type: object
+      description: A single metric column within a metric group.
+      properties:
+        columnName:
+          type: string
+          description: Name of the metric column.
+          example: example_value
+        displayName:
+          type: string
+          description: Human-readable display name.
+          example: example_value
+        columnType:
+          type: string
+          description: Data type of the metric column.
+          enum:
+          - NUMBER
+          - STRING
+          example: NUMBER
+        isKey:
+          type: boolean
+          description: Whether this column is a key column.
+          example: true
+        unit:
+          type: string
+          description: Unit of measurement for the metric.
+          example: example_value
+    MetricTimeSeries:
+      type: object
+      description: Time series data for a single metric.
+      properties:
+        targetName:
+          type: string
+          description: Name of the target.
+          example: example_value
+        targetType:
+          type: string
+          description: Type of the target.
+          example: example_value
+        metricGroupName:
+          type: string
+          description: Name of the metric group.
+          example: example_value
+        metricColumnName:
+          type: string
+          description: Name of the metric column.
+          example: example_value
+        key:
+          type: string
+          description: Key value for the metric row.
+          example: example_value
+        dataPoints:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: string
+                format: date-time
+              value:
+                type: number
+          example: []
+    MetricGroupCollection:
+      type: object
+      description: Collection of metric groups.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricGroup'
+          example: []
+    MetricDataPoint:
+      type: object
+      description: A single metric data point.
+      properties:
+        metricColumn:
+          type: string
+          description: Name of the metric column.
+          example: example_value
+        value:
+          type: number
+          description: Numeric metric value.
+          example: 42.5
+        key:
+          type: string
+          description: Key value identifying the metric row.
+          example: example_value
+        collectionTime:
+          type: string
+          format: date-time
+          description: Timestamp when the metric was collected.
+          example: '2026-01-15T10:30:00Z'
+    MetricGroup:
+      type: object
+      description: Defines a group of related metrics collected for a target. Each metric group has a name, collection frequency, and a set of metric columns.
+      properties:
+        metricGroupName:
+          type: string
+          description: Unique name of the metric group.
+          example: example_value
+        displayName:
+          type: string
+          description: Human-readable display name.
+          example: example_value
+        description:
+          type: string
+          description: Description of what this metric group measures.
+          example: A sample description.
+        collectionFrequency:
+          type: integer
+          description: Collection interval in seconds.
+          example: 10
+        metricColumns:
+          type: array
+          description: List of metric columns in this group.
+          items:
+            $ref: '#/components/schemas/MetricColumn'
+          example: []
+    Error:
+      type: object
+      description: Error response returned by the API.
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+        details:
+          type: string
+          description: Additional details about the error.
+          example: example_value
+        httpStatusCode:
+          type: integer
+          description: HTTP status code.
+          example: 10
+    MetricDataCollection:
+      type: object
+      description: Collection of metric data points.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricDataPoint'
+          example: []
+  parameters:
+    limitQuery:
+      name: limit
+      in: query
+      description: Maximum number of items to return per page.
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 1000
+    targetIdPath:
+      name: targetId
+      in: path
+      required: true
+      description: Unique identifier of the target.
+      schema:
+        type: string
+    metricGroupNamePath:
+      name: metricGroupName
+      in: path
+      required: true
+      description: Name of the metric group.
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Provide valid Enterprise Manager credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was invalid. Check the request body and parameters for errors.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: An unexpected error occurred on the server.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication using Enterprise Manager administrator credentials. All API requests must include valid credentials.
+externalDocs:
+  description: Oracle Enterprise Manager Cloud Control REST API Documentation
+  url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/APIOverview.html

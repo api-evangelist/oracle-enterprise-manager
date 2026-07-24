@@ -1,0 +1,199 @@
+openapi: 3.1.0
+info:
+  title: Oracle Enterprise Manager Cloud Control REST Blackouts Events API
+  description: REST API for Oracle Enterprise Manager Cloud Control providing programmatic access to monitoring, configuration, and administration capabilities. This specification covers core resources including targets, metrics, incidents, and blackouts for managing Oracle IT infrastructure and applications.
+  version: 13.5.0.23
+  contact:
+    name: Oracle Support
+    url: https://www.oracle.com/support/
+    email: support@oracle.com
+  license:
+    name: Oracle Technology Network License
+    url: https://www.oracle.com/legal/terms.html
+  x-logo:
+    url: https://www.oracle.com/a/ocom/img/oracle-enterprise-manager.jpg
+servers:
+- url: https://{emHost}:{emPort}/em/api
+  description: Enterprise Manager Cloud Control server
+  variables:
+    emHost:
+      default: localhost
+      description: Enterprise Manager OMS hostname
+    emPort:
+      default: '7803'
+      description: Enterprise Manager HTTPS console port
+security:
+- basicAuth: []
+tags:
+- name: Events
+  description: Access individual event details. Events are the underlying occurrences that are correlated into incidents.
+  externalDocs:
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
+paths:
+  /events/{eventId}:
+    get:
+      operationId: getEvent
+      summary: Oracle Enterprise Manager Get Event Details
+      description: Returns detailed information about a specific event, including its type, severity, message, target association, and timestamps.
+      tags:
+      - Events
+      parameters:
+      - $ref: '#/components/parameters/eventIdPath'
+      responses:
+        '200':
+          description: Event details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+              examples:
+                Getevent200Example:
+                  summary: Default getEvent 200 response
+                  x-microcks-default: true
+                  value:
+                    eventId: '500123'
+                    eventType: METRIC_ALERT
+                    severity: FATAL
+                    message: example_value
+                    targetName: example_value
+                    targetType: example_value
+                    metricGroupName: example_value
+                    metricColumnName: example_value
+                    metricValue: 42.5
+                    timeRaised: '2026-01-15T10:30:00Z'
+                    timeResolved: '2026-01-15T10:30:00Z'
+                    canonicalLink: https://www.example.com
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Provide valid Enterprise Manager credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: An unexpected error occurred on the server.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      description: Error response returned by the API.
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+        details:
+          type: string
+          description: Additional details about the error.
+          example: example_value
+        httpStatusCode:
+          type: integer
+          description: HTTP status code.
+          example: 10
+    Event:
+      type: object
+      description: Represents a monitoring event detected by Enterprise Manager. Events are the atomic detections that are correlated into incidents.
+      properties:
+        eventId:
+          type: string
+          description: Unique identifier of the event.
+          example: '500123'
+        eventType:
+          type: string
+          description: Type of the event.
+          enum:
+          - METRIC_ALERT
+          - TARGET_AVAILABILITY
+          - JOB_STATUS_CHANGE
+          - COMPLIANCE_VIOLATION
+          - USER_REPORTED
+          example: METRIC_ALERT
+        severity:
+          type: string
+          description: Severity of the event.
+          enum:
+          - FATAL
+          - CRITICAL
+          - WARNING
+          - ADVISORY
+          - INFORMATIONAL
+          - CLEAR
+          example: FATAL
+        message:
+          type: string
+          description: Descriptive message for the event.
+          example: example_value
+        targetName:
+          type: string
+          description: Name of the target that generated this event.
+          example: example_value
+        targetType:
+          type: string
+          description: Type of the target that generated this event.
+          example: example_value
+        metricGroupName:
+          type: string
+          description: Name of the metric group, if this is a metric alert event.
+          example: example_value
+        metricColumnName:
+          type: string
+          description: Name of the metric column, if this is a metric alert event.
+          example: example_value
+        metricValue:
+          type: number
+          description: Metric value that triggered the event.
+          example: 42.5
+        timeRaised:
+          type: string
+          format: date-time
+          description: Timestamp when the event was raised.
+          example: '2026-01-15T10:30:00Z'
+        timeResolved:
+          type: string
+          format: date-time
+          description: Timestamp when the event was resolved.
+          example: '2026-01-15T10:30:00Z'
+        canonicalLink:
+          type: string
+          format: uri
+          description: Canonical URI for this event resource.
+          example: https://www.example.com
+  parameters:
+    eventIdPath:
+      name: eventId
+      in: path
+      required: true
+      description: Unique identifier of the event.
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication using Enterprise Manager administrator credentials. All API requests must include valid credentials.
+externalDocs:
+  description: Oracle Enterprise Manager Cloud Control REST API Documentation
+  url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/APIOverview.html

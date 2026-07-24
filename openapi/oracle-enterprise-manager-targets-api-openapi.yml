@@ -1,0 +1,692 @@
+openapi: 3.1.0
+info:
+  title: Oracle Enterprise Manager Cloud Control REST Blackouts Targets API
+  description: REST API for Oracle Enterprise Manager Cloud Control providing programmatic access to monitoring, configuration, and administration capabilities. This specification covers core resources including targets, metrics, incidents, and blackouts for managing Oracle IT infrastructure and applications.
+  version: 13.5.0.23
+  contact:
+    name: Oracle Support
+    url: https://www.oracle.com/support/
+    email: support@oracle.com
+  license:
+    name: Oracle Technology Network License
+    url: https://www.oracle.com/legal/terms.html
+  x-logo:
+    url: https://www.oracle.com/a/ocom/img/oracle-enterprise-manager.jpg
+servers:
+- url: https://{emHost}:{emPort}/em/api
+  description: Enterprise Manager Cloud Control server
+  variables:
+    emHost:
+      default: localhost
+      description: Enterprise Manager OMS hostname
+    emPort:
+      default: '7803'
+      description: Enterprise Manager HTTPS console port
+security:
+- basicAuth: []
+tags:
+- name: Targets
+  description: Manage monitored targets in Enterprise Manager including discovery, configuration, lifecycle operations, and property management. Targets represent any managed entity such as databases, hosts, middleware, and applications.
+  externalDocs:
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
+paths:
+  /targets:
+    get:
+      operationId: listTargets
+      summary: Oracle Enterprise Manager List Targets
+      description: Returns a list of monitored targets in Enterprise Manager. Supports filtering by target name, target type, and lifecycle status. Results are paginated.
+      tags:
+      - Targets
+      parameters:
+      - $ref: '#/components/parameters/targetNameQuery'
+      - $ref: '#/components/parameters/targetTypeQuery'
+      - $ref: '#/components/parameters/lifecycleStatusQuery'
+      - $ref: '#/components/parameters/limitQuery'
+      - $ref: '#/components/parameters/offsetQuery'
+      responses:
+        '200':
+          description: A paginated list of targets.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TargetCollection'
+              examples:
+                Listtargets200Example:
+                  summary: Default listTargets 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - targetId: '500123'
+                      targetName: example_value
+                      targetType: example_value
+                      targetDisplayType: example_value
+                      hostName: example_value
+                      lifecycleStatus: MONITORED
+                      availabilityStatus: UP
+                      agentUrl: https://www.example.com
+                      oracleHome: example_value
+                      machineName: example_value
+                      installLocation: example_value
+                      timezone: example_value
+                      owner: example_value
+                      timeCreated: '2026-01-15T10:30:00Z'
+                      timeUpdated: '2026-01-15T10:30:00Z'
+                      properties: example_value
+                      canonicalLink: https://www.example.com
+                    totalCount: 10
+                    limit: 10
+                    offset: 10
+                    hasMore: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createTarget
+      summary: Oracle Enterprise Manager Create a Target
+      description: Creates a new monitored target in Enterprise Manager. Requires target name, target type, and host information. Additional properties can be specified depending on the target type.
+      tags:
+      - Targets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TargetCreateRequest'
+            examples:
+              CreatetargetRequestExample:
+                summary: Default createTarget request
+                x-microcks-default: true
+                value:
+                  targetName: example_value
+                  targetType: example_value
+                  hostName: example_value
+                  properties: example_value
+                  credentials:
+                    credentialName: example_value
+                    credentialType: example_value
+      responses:
+        '201':
+          description: Target created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Target'
+              examples:
+                Createtarget201Example:
+                  summary: Default createTarget 201 response
+                  x-microcks-default: true
+                  value:
+                    targetId: '500123'
+                    targetName: example_value
+                    targetType: example_value
+                    targetDisplayType: example_value
+                    hostName: example_value
+                    lifecycleStatus: MONITORED
+                    availabilityStatus: UP
+                    agentUrl: https://www.example.com
+                    oracleHome: example_value
+                    machineName: example_value
+                    installLocation: example_value
+                    timezone: example_value
+                    owner: example_value
+                    timeCreated: '2026-01-15T10:30:00Z'
+                    timeUpdated: '2026-01-15T10:30:00Z'
+                    properties: example_value
+                    canonicalLink: https://www.example.com
+          headers:
+            Location:
+              description: URI of the newly created target resource.
+              schema:
+                type: string
+                format: uri
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /targets/{targetId}:
+    get:
+      operationId: getTarget
+      summary: Oracle Enterprise Manager Get Target Details
+      description: Returns detailed information about a specific target including its configuration properties, monitoring status, and associated metadata.
+      tags:
+      - Targets
+      parameters:
+      - $ref: '#/components/parameters/targetIdPath'
+      responses:
+        '200':
+          description: Target details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Target'
+              examples:
+                Gettarget200Example:
+                  summary: Default getTarget 200 response
+                  x-microcks-default: true
+                  value:
+                    targetId: '500123'
+                    targetName: example_value
+                    targetType: example_value
+                    targetDisplayType: example_value
+                    hostName: example_value
+                    lifecycleStatus: MONITORED
+                    availabilityStatus: UP
+                    agentUrl: https://www.example.com
+                    oracleHome: example_value
+                    machineName: example_value
+                    installLocation: example_value
+                    timezone: example_value
+                    owner: example_value
+                    timeCreated: '2026-01-15T10:30:00Z'
+                    timeUpdated: '2026-01-15T10:30:00Z'
+                    properties: example_value
+                    canonicalLink: https://www.example.com
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateTarget
+      summary: Oracle Enterprise Manager Update a Target
+      description: Updates properties of an existing target. Only the specified fields are modified; unspecified fields remain unchanged.
+      tags:
+      - Targets
+      parameters:
+      - $ref: '#/components/parameters/targetIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TargetUpdateRequest'
+            examples:
+              UpdatetargetRequestExample:
+                summary: Default updateTarget request
+                x-microcks-default: true
+                value:
+                  properties: example_value
+      responses:
+        '200':
+          description: Target updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Target'
+              examples:
+                Updatetarget200Example:
+                  summary: Default updateTarget 200 response
+                  x-microcks-default: true
+                  value:
+                    targetId: '500123'
+                    targetName: example_value
+                    targetType: example_value
+                    targetDisplayType: example_value
+                    hostName: example_value
+                    lifecycleStatus: MONITORED
+                    availabilityStatus: UP
+                    agentUrl: https://www.example.com
+                    oracleHome: example_value
+                    machineName: example_value
+                    installLocation: example_value
+                    timezone: example_value
+                    owner: example_value
+                    timeCreated: '2026-01-15T10:30:00Z'
+                    timeUpdated: '2026-01-15T10:30:00Z'
+                    properties: example_value
+                    canonicalLink: https://www.example.com
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteTarget
+      summary: Oracle Enterprise Manager Delete a Target
+      description: Removes a monitored target from Enterprise Manager. This stops all monitoring, removes collected data associations, and deletes the target configuration.
+      tags:
+      - Targets
+      parameters:
+      - $ref: '#/components/parameters/targetIdPath'
+      responses:
+        '204':
+          description: Target deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /targets/{targetId}/properties:
+    get:
+      operationId: getTargetProperties
+      summary: Oracle Enterprise Manager Get Target Properties
+      description: Returns the configuration and monitoring properties of a specific target, including instance properties, dynamic properties, and any custom properties defined for the target type.
+      tags:
+      - Targets
+      parameters:
+      - $ref: '#/components/parameters/targetIdPath'
+      responses:
+        '200':
+          description: Target properties.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TargetPropertyCollection'
+              examples:
+                Gettargetproperties200Example:
+                  summary: Default getTargetProperties 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - name: Example Title
+                      value: example_value
+                      isReadOnly: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /targets/{targetId}/actions/bulkUpdateProperties:
+    post:
+      operationId: bulkUpdateTargetProperties
+      summary: Oracle Enterprise Manager Bulk Update Target Properties
+      description: Updates multiple properties of a target in a single request. Useful for batch configuration changes.
+      tags:
+      - Targets
+      parameters:
+      - $ref: '#/components/parameters/targetIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkPropertyUpdateRequest'
+            examples:
+              BulkupdatetargetpropertiesRequestExample:
+                summary: Default bulkUpdateTargetProperties request
+                x-microcks-default: true
+                value:
+                  properties:
+                  - name: Example Title
+                    value: example_value
+      responses:
+        '200':
+          description: Properties updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TargetPropertyCollection'
+              examples:
+                Bulkupdatetargetproperties200Example:
+                  summary: Default bulkUpdateTargetProperties 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - name: Example Title
+                      value: example_value
+                      isReadOnly: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    lifecycleStatusQuery:
+      name: lifecycleStatus
+      in: query
+      description: Filter targets by lifecycle status.
+      schema:
+        type: string
+        enum:
+        - MONITORED
+        - BLACKOUT
+        - PENDING
+        - DELETED
+    limitQuery:
+      name: limit
+      in: query
+      description: Maximum number of items to return per page.
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 1000
+    targetNameQuery:
+      name: targetName
+      in: query
+      description: Filter targets by name. Supports partial matching.
+      schema:
+        type: string
+    targetTypeQuery:
+      name: targetType
+      in: query
+      description: Filter targets by type (e.g., oracle_database, host, weblogic_j2eeserver).
+      schema:
+        type: string
+    targetIdPath:
+      name: targetId
+      in: path
+      required: true
+      description: Unique identifier of the target.
+      schema:
+        type: string
+    offsetQuery:
+      name: offset
+      in: query
+      description: Number of items to skip for pagination.
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+  schemas:
+    TargetCollection:
+      type: object
+      description: Paginated collection of targets.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Target'
+          example: []
+        totalCount:
+          type: integer
+          description: Total number of targets matching the query.
+          example: 10
+        limit:
+          type: integer
+          description: Maximum items per page.
+          example: 10
+        offset:
+          type: integer
+          description: Current offset in the result set.
+          example: 10
+        hasMore:
+          type: boolean
+          description: Whether more results are available.
+          example: true
+    Error:
+      type: object
+      description: Error response returned by the API.
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+        details:
+          type: string
+          description: Additional details about the error.
+          example: example_value
+        httpStatusCode:
+          type: integer
+          description: HTTP status code.
+          example: 10
+    TargetCreateRequest:
+      type: object
+      description: Request body for creating a new target.
+      required:
+      - targetName
+      - targetType
+      - hostName
+      properties:
+        targetName:
+          type: string
+          description: Display name for the target.
+          example: example_value
+        targetType:
+          type: string
+          description: Target type identifier defining the monitoring template.
+          examples:
+          - oracle_database
+          - host
+          - weblogic_j2eeserver
+        hostName:
+          type: string
+          description: The hostname where the target resides.
+          example: example_value
+        properties:
+          type: object
+          description: Target-type-specific properties required for monitoring.
+          additionalProperties:
+            type: string
+          example: example_value
+        credentials:
+          type: object
+          description: Monitoring credentials for the target.
+          properties:
+            credentialName:
+              type: string
+              description: Name of a named credential to use.
+            credentialType:
+              type: string
+              description: Type of credential.
+          example: example_value
+    Target:
+      type: object
+      description: Represents a monitored target in Enterprise Manager. A target is any managed entity such as a database, host, middleware instance, or application.
+      properties:
+        targetId:
+          type: string
+          description: Unique identifier of the target.
+          example: '500123'
+        targetName:
+          type: string
+          description: Display name of the target.
+          example: example_value
+        targetType:
+          type: string
+          description: The type of the target, defining its monitoring template and available metrics.
+          examples:
+          - oracle_database
+          - host
+          - weblogic_j2eeserver
+          - oracle_pdb
+          - rac_database
+        targetDisplayType:
+          type: string
+          description: Human-readable target type display name.
+          examples:
+          - Oracle Database
+          - Host
+          - WebLogic Server
+        hostName:
+          type: string
+          description: The hostname where the target resides.
+          example: example_value
+        lifecycleStatus:
+          type: string
+          description: Current lifecycle status of the target.
+          enum:
+          - MONITORED
+          - BLACKOUT
+          - PENDING
+          - DELETED
+          example: MONITORED
+        availabilityStatus:
+          type: string
+          description: Current availability status reported by monitoring.
+          enum:
+          - UP
+          - DOWN
+          - UNKNOWN
+          - UNREACHABLE
+          - BLACKOUT
+          - NOT_MONITORED
+          - ERROR
+          - AGENT_UNREACHABLE
+          - PENDING
+          example: UP
+        agentUrl:
+          type: string
+          description: URL of the management agent monitoring this target.
+          example: https://www.example.com
+        oracleHome:
+          type: string
+          description: Oracle home directory path, applicable to Oracle targets.
+          example: example_value
+        machineName:
+          type: string
+          description: Machine name where the target is deployed.
+          example: example_value
+        installLocation:
+          type: string
+          description: Installation directory path for the target software.
+          example: example_value
+        timezone:
+          type: string
+          description: Time zone of the target.
+          example: example_value
+        owner:
+          type: string
+          description: Enterprise Manager user who owns this target.
+          example: example_value
+        timeCreated:
+          type: string
+          format: date-time
+          description: Timestamp when the target was added to Enterprise Manager.
+          example: '2026-01-15T10:30:00Z'
+        timeUpdated:
+          type: string
+          format: date-time
+          description: Timestamp of the last target configuration update.
+          example: '2026-01-15T10:30:00Z'
+        properties:
+          type: object
+          description: Additional target-type-specific configuration properties.
+          additionalProperties:
+            type: string
+          example: example_value
+        canonicalLink:
+          type: string
+          format: uri
+          description: Canonical URI for this target resource.
+          example: https://www.example.com
+    BulkPropertyUpdateRequest:
+      type: object
+      description: Request body for bulk property updates.
+      properties:
+        properties:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+          example: []
+    TargetProperty:
+      type: object
+      description: A configuration property of a target.
+      properties:
+        name:
+          type: string
+          description: Property name.
+          example: Example Title
+        value:
+          type: string
+          description: Property value.
+          example: example_value
+        isReadOnly:
+          type: boolean
+          description: Whether the property is read-only.
+          example: true
+    TargetUpdateRequest:
+      type: object
+      description: Request body for updating an existing target.
+      properties:
+        properties:
+          type: object
+          description: Properties to update on the target.
+          additionalProperties:
+            type: string
+          example: example_value
+    TargetPropertyCollection:
+      type: object
+      description: Collection of target properties.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetProperty'
+          example: []
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: An unexpected error occurred on the server.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Provide valid Enterprise Manager credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: The request conflicts with the current state of the resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was invalid. Check the request body and parameters for errors.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication using Enterprise Manager administrator credentials. All API requests must include valid credentials.
+externalDocs:
+  description: Oracle Enterprise Manager Cloud Control REST API Documentation
+  url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/APIOverview.html

@@ -1,0 +1,422 @@
+openapi: 3.1.0
+info:
+  title: Oracle Enterprise Manager Cloud Control REST Blackouts Global Target Properties API
+  description: REST API for Oracle Enterprise Manager Cloud Control providing programmatic access to monitoring, configuration, and administration capabilities. This specification covers core resources including targets, metrics, incidents, and blackouts for managing Oracle IT infrastructure and applications.
+  version: 13.5.0.23
+  contact:
+    name: Oracle Support
+    url: https://www.oracle.com/support/
+    email: support@oracle.com
+  license:
+    name: Oracle Technology Network License
+    url: https://www.oracle.com/legal/terms.html
+  x-logo:
+    url: https://www.oracle.com/a/ocom/img/oracle-enterprise-manager.jpg
+servers:
+- url: https://{emHost}:{emPort}/em/api
+  description: Enterprise Manager Cloud Control server
+  variables:
+    emHost:
+      default: localhost
+      description: Enterprise Manager OMS hostname
+    emPort:
+      default: '7803'
+      description: Enterprise Manager HTTPS console port
+security:
+- basicAuth: []
+tags:
+- name: Global Target Properties
+  description: Manage global properties that can be applied across targets for classification, grouping, and reporting purposes.
+  externalDocs:
+    url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
+paths:
+  /globalTargetProperties:
+    get:
+      operationId: listGlobalTargetProperties
+      summary: Oracle Enterprise Manager List Global Target Properties
+      description: Returns a list of global target properties that are defined for classifying and organizing targets.
+      tags:
+      - Global Target Properties
+      responses:
+        '200':
+          description: A list of global target properties.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalTargetPropertyCollection'
+              examples:
+                Listglobaltargetproperties200Example:
+                  summary: Default listGlobalTargetProperties 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - globalTargetPropertyId: '500123'
+                      propertyName: example_value
+                      propertyDisplayName: example_value
+                      description: A sample description.
+                      propertyType: STRING
+                      hasValidValues: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createGlobalTargetProperty
+      summary: Oracle Enterprise Manager Create a Global Target Property
+      description: Creates a new global target property definition. Global properties provide a way to classify targets with custom metadata.
+      tags:
+      - Global Target Properties
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalTargetPropertyCreateRequest'
+            examples:
+              CreateglobaltargetpropertyRequestExample:
+                summary: Default createGlobalTargetProperty request
+                x-microcks-default: true
+                value:
+                  propertyName: example_value
+                  propertyDisplayName: example_value
+                  description: A sample description.
+                  propertyType: STRING
+                  validValues:
+                  - example_value
+      responses:
+        '201':
+          description: Global target property created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalTargetProperty'
+              examples:
+                Createglobaltargetproperty201Example:
+                  summary: Default createGlobalTargetProperty 201 response
+                  x-microcks-default: true
+                  value:
+                    globalTargetPropertyId: '500123'
+                    propertyName: example_value
+                    propertyDisplayName: example_value
+                    description: A sample description.
+                    propertyType: STRING
+                    hasValidValues: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /globalTargetProperties/{globalTargetPropertyId}:
+    get:
+      operationId: getGlobalTargetProperty
+      summary: Oracle Enterprise Manager Get Global Target Property Details
+      description: Returns details of a specific global target property.
+      tags:
+      - Global Target Properties
+      parameters:
+      - name: globalTargetPropertyId
+        in: path
+        required: true
+        description: Unique identifier of the global target property.
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: Global target property details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalTargetProperty'
+              examples:
+                Getglobaltargetproperty200Example:
+                  summary: Default getGlobalTargetProperty 200 response
+                  x-microcks-default: true
+                  value:
+                    globalTargetPropertyId: '500123'
+                    propertyName: example_value
+                    propertyDisplayName: example_value
+                    description: A sample description.
+                    propertyType: STRING
+                    hasValidValues: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: modifyGlobalTargetProperty
+      summary: Oracle Enterprise Manager Modify a Global Target Property
+      description: Updates a global target property definition.
+      tags:
+      - Global Target Properties
+      parameters:
+      - name: globalTargetPropertyId
+        in: path
+        required: true
+        description: Unique identifier of the global target property.
+        schema:
+          type: string
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalTargetPropertyUpdateRequest'
+            examples:
+              ModifyglobaltargetpropertyRequestExample:
+                summary: Default modifyGlobalTargetProperty request
+                x-microcks-default: true
+                value:
+                  propertyDisplayName: example_value
+                  description: A sample description.
+                  validValues:
+                  - example_value
+      responses:
+        '200':
+          description: Global target property updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalTargetProperty'
+              examples:
+                Modifyglobaltargetproperty200Example:
+                  summary: Default modifyGlobalTargetProperty 200 response
+                  x-microcks-default: true
+                  value:
+                    globalTargetPropertyId: '500123'
+                    propertyName: example_value
+                    propertyDisplayName: example_value
+                    description: A sample description.
+                    propertyType: STRING
+                    hasValidValues: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteGlobalTargetProperty
+      summary: Oracle Enterprise Manager Delete a Global Target Property
+      description: Deletes a global target property definition.
+      tags:
+      - Global Target Properties
+      parameters:
+      - name: globalTargetPropertyId
+        in: path
+        required: true
+        description: Unique identifier of the global target property.
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '204':
+          description: Global target property deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /globalTargetProperties/{globalTargetPropertyId}/validValues:
+    get:
+      operationId: getGlobalTargetPropertyValidValues
+      summary: Oracle Enterprise Manager Get Valid Values for a Global Target Property
+      description: Returns the list of valid values defined for a global target property, if the property has a constrained value set.
+      tags:
+      - Global Target Properties
+      parameters:
+      - name: globalTargetPropertyId
+        in: path
+        required: true
+        description: Unique identifier of the global target property.
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: List of valid values.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Getglobaltargetpropertyvalidvalues200Example:
+                  summary: Default getGlobalTargetPropertyValidValues 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    GlobalTargetPropertyCreateRequest:
+      type: object
+      description: Request body for creating a global target property.
+      required:
+      - propertyName
+      properties:
+        propertyName:
+          type: string
+          example: example_value
+        propertyDisplayName:
+          type: string
+          example: example_value
+        description:
+          type: string
+          example: A sample description.
+        propertyType:
+          type: string
+          enum:
+          - STRING
+          - NUMBER
+          - BOOLEAN
+          example: STRING
+        validValues:
+          type: array
+          items:
+            type: string
+          example: []
+    GlobalTargetPropertyUpdateRequest:
+      type: object
+      description: Request body for updating a global target property.
+      properties:
+        propertyDisplayName:
+          type: string
+          example: example_value
+        description:
+          type: string
+          example: A sample description.
+        validValues:
+          type: array
+          items:
+            type: string
+          example: []
+    GlobalTargetProperty:
+      type: object
+      description: A global property definition for classifying targets.
+      properties:
+        globalTargetPropertyId:
+          type: string
+          description: Unique identifier for the property.
+          example: '500123'
+        propertyName:
+          type: string
+          description: Name of the property.
+          example: example_value
+        propertyDisplayName:
+          type: string
+          description: Human-readable display name.
+          example: example_value
+        description:
+          type: string
+          description: Description of the property.
+          example: A sample description.
+        propertyType:
+          type: string
+          description: Data type of the property.
+          enum:
+          - STRING
+          - NUMBER
+          - BOOLEAN
+          example: STRING
+        hasValidValues:
+          type: boolean
+          description: Whether the property has a constrained value set.
+          example: true
+    Error:
+      type: object
+      description: Error response returned by the API.
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+        details:
+          type: string
+          description: Additional details about the error.
+          example: example_value
+        httpStatusCode:
+          type: integer
+          description: HTTP status code.
+          example: 10
+    GlobalTargetPropertyCollection:
+      type: object
+      description: Collection of global target properties.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalTargetProperty'
+          example: []
+  responses:
+    Unauthorized:
+      description: Authentication failed. Provide valid Enterprise Manager credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was invalid. Check the request body and parameters for errors.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: An unexpected error occurred on the server.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication using Enterprise Manager administrator credentials. All API requests must include valid credentials.
+externalDocs:
+  description: Oracle Enterprise Manager Cloud Control REST API Documentation
+  url: https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/APIOverview.html
