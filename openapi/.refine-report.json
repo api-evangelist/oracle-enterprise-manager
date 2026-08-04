@@ -1,0 +1,24 @@
+{
+  "provider": "oracle-enterprise-manager",
+  "sources": [
+    "oracle-enterprise-manager-blackouts-api-openapi.yml",
+    "oracle-enterprise-manager-events-api-openapi.yml",
+    "oracle-enterprise-manager-global-target-properties-api-openapi.yml",
+    "oracle-enterprise-manager-incidents-api-openapi.yml",
+    "oracle-enterprise-manager-metrics-api-openapi.yml",
+    "oracle-enterprise-manager-targets-api-openapi.yml"
+  ],
+  "outputs": [
+    "oracle-enterprise-manager-blackouts-api-openapi.yml",
+    "oracle-enterprise-manager-events-api-openapi.yml",
+    "oracle-enterprise-manager-global-target-properties-api-openapi.yml",
+    "oracle-enterprise-manager-incidents-api-openapi.yml",
+    "oracle-enterprise-manager-metrics-api-openapi.yml",
+    "oracle-enterprise-manager-targets-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
