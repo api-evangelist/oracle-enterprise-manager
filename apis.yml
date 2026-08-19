@@ -23,7 +23,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/oracle-ent
 url: https://raw.githubusercontent.com/api-evangelist/oracle-enterprise-manager/refs/heads/main/apis.yml
 created: '2024-01-01'
 modified: '2026-06-20'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 tags:
   - Cloud Management
   - Database Management
