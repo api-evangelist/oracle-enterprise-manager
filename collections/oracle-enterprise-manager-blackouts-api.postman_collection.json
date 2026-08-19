@@ -1,0 +1,3644 @@
+{
+  "item": [
+    {
+      "id": "3fe7a308-63d9-4195-9932-414fb1c89328",
+      "name": "Blackouts",
+      "description": {
+        "content": "Manage blackout windows for maintenance activities. Blackouts suppress monitoring and alerting during scheduled maintenance periods, preventing false alerts.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7fb62fcb-5b69-43ef-8cab-261a9effbda1",
+          "name": "Oracle Enterprise Manager List Blackouts",
+          "request": {
+            "name": "Oracle Enterprise Manager List Blackouts",
+            "description": {
+              "content": "Returns a list of blackouts (maintenance windows) configured in Enterprise Manager. Supports filtering by status and associated target.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blackouts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by blackout status."
+                },
+                {
+                  "disabled": false,
+                  "key": "targetName",
+                  "value": "<string>",
+                  "description": "Filter by associated target name."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Maximum number of items to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of items to skip for pagination."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9debae5e-dc30-4220-9e0c-97d9ccb13237",
+              "name": "A paginated list of blackouts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "SCHEDULED"
+                    },
+                    {
+                      "key": "targetName",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"blackoutId\": \"500123\",\n      \"blackoutName\": \"example_value\",\n      \"description\": \"A sample description.\",\n      \"status\": \"SCHEDULED\",\n      \"reason\": \"example_value\",\n      \"createdBy\": \"example_value\",\n      \"targets\": {},\n      \"timeCreated\": \"2026-01-15T10:30:00Z\",\n      \"timeUpdated\": \"2026-01-15T10:30:00Z\",\n      \"canonicalLink\": \"https://www.example.com\"\n    }\n  ],\n  \"totalCount\": 10,\n  \"limit\": 10,\n  \"offset\": 10,\n  \"hasMore\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7352da8b-95d1-4b16-803c-a54f477983f6",
+              "name": "The request was invalid. Check the request body and parameters for errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "SCHEDULED"
+                    },
+                    {
+                      "key": "targetName",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af0542a2-be91-48c5-baaf-a5bacdcaa9b5",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "SCHEDULED"
+                    },
+                    {
+                      "key": "targetName",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f0f0ee1-c821-47f4-9960-0fd298454c92",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "SCHEDULED"
+                    },
+                    {
+                      "key": "targetName",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4e832e5-a8dd-4ade-8e8d-a6b3738ebaf8",
+          "name": "Oracle Enterprise Manager Create a Blackout",
+          "request": {
+            "name": "Oracle Enterprise Manager Create a Blackout",
+            "description": {
+              "content": "Creates a new blackout (maintenance window) for one or more targets. During a blackout, monitoring data is still collected but alerts and notifications are suppressed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blackouts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"blackoutName\": \"<string>\",\n  \"schedule\": {\n    \"startTime\": \"<dateTime>\",\n    \"endTime\": \"<dateTime>\",\n    \"duration\": \"<integer>\",\n    \"timezone\": \"<string>\",\n    \"frequency\": \"<string>\",\n    \"repeatInterval\": \"<integer>\",\n    \"daysOfWeek\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"targets\": [\n    {\n      \"targetName\": \"<string>\",\n      \"targetType\": \"<string>\",\n      \"includeMembers\": \"<boolean>\"\n    },\n    {\n      \"targetName\": \"<string>\",\n      \"targetType\": \"<string>\",\n      \"includeMembers\": \"<boolean>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8282d297-08b3-42cb-990d-e4ca0c85acd2",
+              "name": "Blackout created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"blackoutName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"reason\": \"example_value\",\n  \"schedule\": {\n    \"startTime\": \"2026-01-15T10:30:00Z\",\n    \"endTime\": \"2026-01-15T10:30:00Z\",\n    \"duration\": 10,\n    \"timezone\": \"example_value\",\n    \"frequency\": \"ONCE\",\n    \"repeatInterval\": 10,\n    \"daysOfWeek\": [\n      {}\n    ]\n  },\n  \"targets\": [\n    {\n      \"targetName\": \"example_value\",\n      \"targetType\": \"example_value\",\n      \"includeMembers\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "URI of the newly created blackout resource.",
+                  "key": "Location",
+                  "value": "https://LaIozhNWiOKnmXJUFVKhDraoLUCi.paG-tItTf0uY1ZOVmRHhmKJJ.a5TvSpeRLl7TuqmMXqPgAIUbP9Ez"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"blackoutId\": \"500123\",\n  \"blackoutName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"status\": \"SCHEDULED\",\n  \"reason\": \"example_value\",\n  \"createdBy\": \"example_value\",\n  \"schedule\": {\n    \"startTime\": \"2026-01-15T10:30:00Z\",\n    \"endTime\": \"2026-01-15T10:30:00Z\",\n    \"duration\": 10,\n    \"timezone\": \"example_value\",\n    \"frequency\": \"ONCE\",\n    \"repeatInterval\": 10,\n    \"daysOfWeek\": [\n      {}\n    ]\n  },\n  \"targets\": [\n    {\n      \"targetName\": \"example_value\",\n      \"targetType\": \"example_value\",\n      \"includeMembers\": true\n    }\n  ],\n  \"timeCreated\": \"2026-01-15T10:30:00Z\",\n  \"timeUpdated\": \"2026-01-15T10:30:00Z\",\n  \"canonicalLink\": \"https://www.example.com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0bdd7e5-2be2-41c6-a882-6d380b3460ed",
+              "name": "The request was invalid. Check the request body and parameters for errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"blackoutName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"reason\": \"example_value\",\n  \"schedule\": {\n    \"startTime\": \"2026-01-15T10:30:00Z\",\n    \"endTime\": \"2026-01-15T10:30:00Z\",\n    \"duration\": 10,\n    \"timezone\": \"example_value\",\n    \"frequency\": \"ONCE\",\n    \"repeatInterval\": 10,\n    \"daysOfWeek\": [\n      {}\n    ]\n  },\n  \"targets\": [\n    {\n      \"targetName\": \"example_value\",\n      \"targetType\": \"example_value\",\n      \"includeMembers\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9cb2cc73-19e3-4b06-b4cd-a4a5b6c6e353",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"blackoutName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"reason\": \"example_value\",\n  \"schedule\": {\n    \"startTime\": \"2026-01-15T10:30:00Z\",\n    \"endTime\": \"2026-01-15T10:30:00Z\",\n    \"duration\": 10,\n    \"timezone\": \"example_value\",\n    \"frequency\": \"ONCE\",\n    \"repeatInterval\": 10,\n    \"daysOfWeek\": [\n      {}\n    ]\n  },\n  \"targets\": [\n    {\n      \"targetName\": \"example_value\",\n      \"targetType\": \"example_value\",\n      \"includeMembers\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43224590-b32a-42c6-8b12-21e06793c034",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"blackoutName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"reason\": \"example_value\",\n  \"schedule\": {\n    \"startTime\": \"2026-01-15T10:30:00Z\",\n    \"endTime\": \"2026-01-15T10:30:00Z\",\n    \"duration\": 10,\n    \"timezone\": \"example_value\",\n    \"frequency\": \"ONCE\",\n    \"repeatInterval\": 10,\n    \"daysOfWeek\": [\n      {}\n    ]\n  },\n  \"targets\": [\n    {\n      \"targetName\": \"example_value\",\n      \"targetType\": \"example_value\",\n      \"includeMembers\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16a27c09-8959-4d47-b840-561c0d989fc3",
+          "name": "Oracle Enterprise Manager Get Blackout Details",
+          "request": {
+            "name": "Oracle Enterprise Manager Get Blackout Details",
+            "description": {
+              "content": "Returns detailed information about a specific blackout including its schedule, affected targets, status, and reason.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blackouts",
+                ":blackoutId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "blackoutId",
+                  "description": "(Required) Unique identifier of the blackout."
+                },
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "54abb690-2367-43d0-ba27-cc6127aa29d0",
+              "name": "Blackout details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"blackoutId\": \"500123\",\n  \"blackoutName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"status\": \"SCHEDULED\",\n  \"reason\": \"example_value\",\n  \"createdBy\": \"example_value\",\n  \"schedule\": {\n    \"startTime\": \"2026-01-15T10:30:00Z\",\n    \"endTime\": \"2026-01-15T10:30:00Z\",\n    \"duration\": 10,\n    \"timezone\": \"example_value\",\n    \"frequency\": \"ONCE\",\n    \"repeatInterval\": 10,\n    \"daysOfWeek\": [\n      {}\n    ]\n  },\n  \"targets\": [\n    {\n      \"targetName\": \"example_value\",\n      \"targetType\": \"example_value\",\n      \"includeMembers\": true\n    }\n  ],\n  \"timeCreated\": \"2026-01-15T10:30:00Z\",\n  \"timeUpdated\": \"2026-01-15T10:30:00Z\",\n  \"canonicalLink\": \"https://www.example.com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c713cc5-8d5a-4964-9c8a-c57b6bd769cc",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24f4bedd-9262-4fa1-a237-482ef8e3adc5",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ff21e98-1679-4189-87c0-5dace99c13f9",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd1c9e15-3467-4dc4-be33-b0d37655621c",
+          "name": "Oracle Enterprise Manager Edit a Blackout",
+          "request": {
+            "name": "Oracle Enterprise Manager Edit a Blackout",
+            "description": {
+              "content": "Modifies an existing blackout. Can update the schedule, targets, reason, or other properties. Only scheduled or started blackouts can be edited.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blackouts",
+                ":blackoutId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "blackoutId",
+                  "description": "(Required) Unique identifier of the blackout."
+                },
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"schedule\": {\n    \"startTime\": \"<dateTime>\",\n    \"endTime\": \"<dateTime>\",\n    \"duration\": \"<integer>\",\n    \"timezone\": \"<string>\",\n    \"frequency\": \"<string>\",\n    \"repeatInterval\": \"<integer>\",\n    \"daysOfWeek\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"targets\": [\n    {\n      \"targetName\": \"<string>\",\n      \"targetType\": \"<string>\",\n      \"includeMembers\": \"<boolean>\"\n    },\n    {\n      \"targetName\": \"<string>\",\n      \"targetType\": \"<string>\",\n      \"includeMembers\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "637c39e9-94ca-4639-baee-3c98569651ec",
+              "name": "Blackout updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"A sample description.\",\n  \"reason\": \"example_value\",\n  \"schedule\": {\n    \"startTime\": \"2026-01-15T10:30:00Z\",\n    \"endTime\": \"2026-01-15T10:30:00Z\",\n    \"duration\": 10,\n    \"timezone\": \"example_value\",\n    \"frequency\": \"ONCE\",\n    \"repeatInterval\": 10,\n    \"daysOfWeek\": [\n      {}\n    ]\n  },\n  \"targets\": [\n    {\n      \"targetName\": \"example_value\",\n      \"targetType\": \"example_value\",\n      \"includeMembers\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"blackoutId\": \"500123\",\n  \"blackoutName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"status\": \"SCHEDULED\",\n  \"reason\": \"example_value\",\n  \"createdBy\": \"example_value\",\n  \"schedule\": {\n    \"startTime\": \"2026-01-15T10:30:00Z\",\n    \"endTime\": \"2026-01-15T10:30:00Z\",\n    \"duration\": 10,\n    \"timezone\": \"example_value\",\n    \"frequency\": \"ONCE\",\n    \"repeatInterval\": 10,\n    \"daysOfWeek\": [\n      {}\n    ]\n  },\n  \"targets\": [\n    {\n      \"targetName\": \"example_value\",\n      \"targetType\": \"example_value\",\n      \"includeMembers\": true\n    }\n  ],\n  \"timeCreated\": \"2026-01-15T10:30:00Z\",\n  \"timeUpdated\": \"2026-01-15T10:30:00Z\",\n  \"canonicalLink\": \"https://www.example.com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1880aed3-6af0-45a6-a9d7-159334f7dd5f",
+              "name": "The request was invalid. Check the request body and parameters for errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"A sample description.\",\n  \"reason\": \"example_value\",\n  \"schedule\": {\n    \"startTime\": \"2026-01-15T10:30:00Z\",\n    \"endTime\": \"2026-01-15T10:30:00Z\",\n    \"duration\": 10,\n    \"timezone\": \"example_value\",\n    \"frequency\": \"ONCE\",\n    \"repeatInterval\": 10,\n    \"daysOfWeek\": [\n      {}\n    ]\n  },\n  \"targets\": [\n    {\n      \"targetName\": \"example_value\",\n      \"targetType\": \"example_value\",\n      \"includeMembers\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e67a725-122e-4115-b162-37497630e12b",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"A sample description.\",\n  \"reason\": \"example_value\",\n  \"schedule\": {\n    \"startTime\": \"2026-01-15T10:30:00Z\",\n    \"endTime\": \"2026-01-15T10:30:00Z\",\n    \"duration\": 10,\n    \"timezone\": \"example_value\",\n    \"frequency\": \"ONCE\",\n    \"repeatInterval\": 10,\n    \"daysOfWeek\": [\n      {}\n    ]\n  },\n  \"targets\": [\n    {\n      \"targetName\": \"example_value\",\n      \"targetType\": \"example_value\",\n      \"includeMembers\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abe03fb8-470a-4a92-b61d-f5f0595b1d06",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"A sample description.\",\n  \"reason\": \"example_value\",\n  \"schedule\": {\n    \"startTime\": \"2026-01-15T10:30:00Z\",\n    \"endTime\": \"2026-01-15T10:30:00Z\",\n    \"duration\": 10,\n    \"timezone\": \"example_value\",\n    \"frequency\": \"ONCE\",\n    \"repeatInterval\": 10,\n    \"daysOfWeek\": [\n      {}\n    ]\n  },\n  \"targets\": [\n    {\n      \"targetName\": \"example_value\",\n      \"targetType\": \"example_value\",\n      \"includeMembers\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cec85cec-6c1b-4ecd-80a9-0d93d3f7b846",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"A sample description.\",\n  \"reason\": \"example_value\",\n  \"schedule\": {\n    \"startTime\": \"2026-01-15T10:30:00Z\",\n    \"endTime\": \"2026-01-15T10:30:00Z\",\n    \"duration\": 10,\n    \"timezone\": \"example_value\",\n    \"frequency\": \"ONCE\",\n    \"repeatInterval\": 10,\n    \"daysOfWeek\": [\n      {}\n    ]\n  },\n  \"targets\": [\n    {\n      \"targetName\": \"example_value\",\n      \"targetType\": \"example_value\",\n      \"includeMembers\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2de6fa72-8835-4bf6-8f88-327f7006ebf5",
+          "name": "Oracle Enterprise Manager Delete a Blackout",
+          "request": {
+            "name": "Oracle Enterprise Manager Delete a Blackout",
+            "description": {
+              "content": "Deletes a blackout. Only scheduled (not yet started) blackouts can be deleted. Use the stop action to end an active blackout.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blackouts",
+                ":blackoutId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "blackoutId",
+                  "description": "(Required) Unique identifier of the blackout."
+                },
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e79484f2-ba87-4ea5-8587-4bca128df7c4",
+              "name": "Blackout deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aabf1986-8fef-4c13-b12e-0af5835338b8",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4dc338df-24a8-4ef3-81bc-f8e7aaab69be",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e24058f-6088-4cd8-8ea4-b48995077d37",
+              "name": "The request conflicts with the current state of the resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83b1a370-afae-45ee-8fbe-b25cd528c4d6",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed297841-09c0-4768-8459-de5fc4586ff7",
+          "name": "Oracle Enterprise Manager Stop a Blackout",
+          "request": {
+            "name": "Oracle Enterprise Manager Stop a Blackout",
+            "description": {
+              "content": "Stops an active blackout before its scheduled end time. Monitoring and alerting resume immediately for all affected targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blackouts",
+                ":blackoutId",
+                "actions",
+                "stop"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "blackoutId",
+                  "description": "(Required) Unique identifier of the blackout."
+                },
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "36ce9f8e-4068-4049-b5e7-b0e362effcb3",
+              "name": "Blackout stopped successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId",
+                    "actions",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"blackoutId\": \"500123\",\n  \"blackoutName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"status\": \"SCHEDULED\",\n  \"reason\": \"example_value\",\n  \"createdBy\": \"example_value\",\n  \"schedule\": {\n    \"startTime\": \"2026-01-15T10:30:00Z\",\n    \"endTime\": \"2026-01-15T10:30:00Z\",\n    \"duration\": 10,\n    \"timezone\": \"example_value\",\n    \"frequency\": \"ONCE\",\n    \"repeatInterval\": 10,\n    \"daysOfWeek\": [\n      {}\n    ]\n  },\n  \"targets\": [\n    {\n      \"targetName\": \"example_value\",\n      \"targetType\": \"example_value\",\n      \"includeMembers\": true\n    }\n  ],\n  \"timeCreated\": \"2026-01-15T10:30:00Z\",\n  \"timeUpdated\": \"2026-01-15T10:30:00Z\",\n  \"canonicalLink\": \"https://www.example.com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65c38979-c32e-4b27-bd02-3d9c1011930e",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId",
+                    "actions",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08e8d249-8c4a-45d1-88e3-ce1402841091",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId",
+                    "actions",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7b7f40e-4edf-4a1f-86eb-b56ad185636a",
+              "name": "Blackout is not in a stoppable state.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId",
+                    "actions",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e17bbcea-0577-4b0f-8201-7be5aab11828",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId",
+                    "actions",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0ede53b-2cce-4e3e-842d-0e4f47c6e8f0",
+          "name": "Oracle Enterprise Manager Get Blackout Targets",
+          "request": {
+            "name": "Oracle Enterprise Manager Get Blackout Targets",
+            "description": {
+              "content": "Returns the list of targets affected by a specific blackout, including both directly specified targets and targets included via group membership.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blackouts",
+                ":blackoutId",
+                "targets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "blackoutId",
+                  "description": "(Required) Unique identifier of the blackout."
+                },
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "58c8e4cb-1844-49b1-8833-fb5b7175ee3f",
+              "name": "A list of targets in the blackout.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId",
+                    "targets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"targetName\": \"example_value\",\n      \"targetType\": \"example_value\",\n      \"includeMembers\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8a1841f-98a9-4dad-8e61-5bd0a58ea1d8",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId",
+                    "targets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "500d2ace-f364-4ea0-a010-e9f2b6456bc7",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId",
+                    "targets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab4c139e-6ff2-4ddc-a0bf-9486d285253e",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    ":blackoutId",
+                    "targets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "blackoutId",
+                      "description": "(Required) Unique identifier of the blackout."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc5f9f74-815d-49e6-b0b9-11a5919e04b6",
+          "name": "Oracle Enterprise Manager Get Blackout Statistics",
+          "request": {
+            "name": "Oracle Enterprise Manager Get Blackout Statistics",
+            "description": {
+              "content": "Returns summary statistics about blackouts including counts by status, upcoming blackouts, and recently ended blackouts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blackouts",
+                "dashboard"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8100a3e4-dc41-4bf7-8855-cb0138ce284e",
+              "name": "Blackout dashboard statistics.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    "dashboard"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalBlackouts\": 10,\n  \"activeBlackouts\": 10,\n  \"scheduledBlackouts\": 10,\n  \"endedBlackouts\": 10,\n  \"targetsInBlackout\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "445263e2-079b-459a-b725-e242d48365ed",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    "dashboard"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d64e1a4d-f2a6-429e-9899-173688aeacdb",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    "dashboard"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36fc20ca-7d20-4bc1-b230-d07715bb2264",
+          "name": "Oracle Enterprise Manager List Blackout Reasons",
+          "request": {
+            "name": "Oracle Enterprise Manager List Blackout Reasons",
+            "description": {
+              "content": "Returns a list of predefined blackout reasons that can be associated with blackouts for categorization and reporting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blackouts",
+                "reasons"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b7f3cc9-4825-4db3-8bb6-2854e732cc4f",
+              "name": "A list of blackout reasons.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    "reasons"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"reasonId\": \"500123\",\n      \"reason\": \"example_value\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ff184b3-a749-45ec-89e0-7016bb75efb2",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    "reasons"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10066143-080f-43e1-9791-eb6c0d5d2146",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    "reasons"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d32d7de-5302-4a61-82c4-9f2ba0379ef9",
+          "name": "Oracle Enterprise Manager Create a Blackout Reason",
+          "request": {
+            "name": "Oracle Enterprise Manager Create a Blackout Reason",
+            "description": {
+              "content": "Creates a new blackout reason that can be used when creating or editing blackouts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blackouts",
+                "reasons"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cd678800-6cfe-446e-bcdb-392acca2130a",
+              "name": "Blackout reason created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    "reasons"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reasonId\": \"500123\",\n  \"reason\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fcea0fa-d746-498b-9d1e-2ac46a0e8a88",
+              "name": "The request was invalid. Check the request body and parameters for errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    "reasons"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6723d3c-459b-4b3e-8f79-4dfa4fc902ec",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    "reasons"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "695dce03-de76-4424-a111-0c83a07412aa",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    "reasons"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ddf57024-7c1b-4ce7-9f64-030bae7cc46a",
+          "name": "Oracle Enterprise Manager Delete a Blackout Reason",
+          "request": {
+            "name": "Oracle Enterprise Manager Delete a Blackout Reason",
+            "description": {
+              "content": "Deletes a blackout reason by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blackouts",
+                "reasons",
+                ":reasonId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reasonId",
+                  "description": "(Required) Unique identifier of the blackout reason."
+                },
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85167d4a-45cd-4f03-af0f-7cdf24d2dc9a",
+              "name": "Blackout reason deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    "reasons",
+                    ":reasonId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reasonId",
+                      "description": "(Required) Unique identifier of the blackout reason."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a69c45c3-df65-4f1a-bfe4-778bd8f59337",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    "reasons",
+                    ":reasonId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reasonId",
+                      "description": "(Required) Unique identifier of the blackout reason."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "081abf9a-1b29-4ff8-9ecf-46ebf1249cdc",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    "reasons",
+                    ":reasonId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reasonId",
+                      "description": "(Required) Unique identifier of the blackout reason."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b0bbed0-a2e3-42e4-88f4-71a3f8edf146",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blackouts",
+                    "reasons",
+                    ":reasonId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reasonId",
+                      "description": "(Required) Unique identifier of the blackout reason."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Enterprise Manager OMS hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "emHost"
+    },
+    {
+      "description": {
+        "content": "Enterprise Manager HTTPS console port",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "7803",
+      "key": "emPort"
+    },
+    {
+      "type": "string",
+      "value": "https://{{emHost}}:{{emPort}}/em/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a4a34974-cdfb-407b-8534-07748ba1ad41",
+    "name": "Oracle Enterprise Manager Cloud Control REST Blackouts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Oracle Enterprise Manager Cloud Control providing programmatic access to monitoring, configuration, and administration capabilities. This specification covers core resources including targets, metrics, incidents, and blackouts for managing Oracle IT infrastructure and applications.\n\nContact Support:\n Name: Oracle Support\n Email: support@oracle.com",
+      "type": "text/plain"
+    }
+  }
+}

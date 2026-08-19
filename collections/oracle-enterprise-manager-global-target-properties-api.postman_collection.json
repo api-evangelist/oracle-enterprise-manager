@@ -1,0 +1,1962 @@
+{
+  "item": [
+    {
+      "id": "1a8c7f07-d8b6-413f-a62a-9d1d60346547",
+      "name": "Global Target Properties",
+      "description": {
+        "content": "Manage global properties that can be applied across targets for classification, grouping, and reporting purposes.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "61d726dd-4c71-4f30-b35b-5dfb98fe5140",
+          "name": "Oracle Enterprise Manager List Global Target Properties",
+          "request": {
+            "name": "Oracle Enterprise Manager List Global Target Properties",
+            "description": {
+              "content": "Returns a list of global target properties that are defined for classifying and organizing targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "globalTargetProperties"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "998f1ed7-e634-46c7-85bb-9d049be5b930",
+              "name": "A list of global target properties.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"globalTargetPropertyId\": \"500123\",\n      \"propertyName\": \"example_value\",\n      \"propertyDisplayName\": \"example_value\",\n      \"description\": \"A sample description.\",\n      \"propertyType\": \"STRING\",\n      \"hasValidValues\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "839c88c6-c70c-410d-846c-904963484699",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2184f5ff-c972-4056-b211-76f4b4d860a5",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fee0ad05-d1a2-4ade-9ef0-154ac7e75118",
+          "name": "Oracle Enterprise Manager Create a Global Target Property",
+          "request": {
+            "name": "Oracle Enterprise Manager Create a Global Target Property",
+            "description": {
+              "content": "Creates a new global target property definition. Global properties provide a way to classify targets with custom metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "globalTargetProperties"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"propertyName\": \"<string>\",\n  \"propertyDisplayName\": \"<string>\",\n  \"description\": \"<string>\",\n  \"propertyType\": \"<string>\",\n  \"validValues\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d554a6c4-66bf-4acd-bf48-f0fd7471f2f3",
+              "name": "Global target property created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"propertyName\": \"example_value\",\n  \"propertyDisplayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"propertyType\": \"STRING\",\n  \"validValues\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"globalTargetPropertyId\": \"500123\",\n  \"propertyName\": \"example_value\",\n  \"propertyDisplayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"propertyType\": \"STRING\",\n  \"hasValidValues\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09789262-4833-45ec-9e3a-4a69857fd98f",
+              "name": "The request was invalid. Check the request body and parameters for errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"propertyName\": \"example_value\",\n  \"propertyDisplayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"propertyType\": \"STRING\",\n  \"validValues\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5458e8e7-a229-45db-ba94-6fb06b5bc6bd",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"propertyName\": \"example_value\",\n  \"propertyDisplayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"propertyType\": \"STRING\",\n  \"validValues\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae97dffb-22f8-46be-b5f6-491c75417763",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"propertyName\": \"example_value\",\n  \"propertyDisplayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"propertyType\": \"STRING\",\n  \"validValues\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8896bb57-5517-4e48-bf02-583f0a3cda6b",
+          "name": "Oracle Enterprise Manager Get Global Target Property Details",
+          "request": {
+            "name": "Oracle Enterprise Manager Get Global Target Property Details",
+            "description": {
+              "content": "Returns details of a specific global target property.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "globalTargetProperties",
+                ":globalTargetPropertyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "globalTargetPropertyId",
+                  "description": "(Required) Unique identifier of the global target property."
+                },
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3599c0d6-fba3-4ee3-b598-ed32703874ea",
+              "name": "Global target property details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties",
+                    ":globalTargetPropertyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "globalTargetPropertyId",
+                      "description": "(Required) Unique identifier of the global target property."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"globalTargetPropertyId\": \"500123\",\n  \"propertyName\": \"example_value\",\n  \"propertyDisplayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"propertyType\": \"STRING\",\n  \"hasValidValues\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc09abb3-25df-4673-af39-5fb96af2b6aa",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties",
+                    ":globalTargetPropertyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "globalTargetPropertyId",
+                      "description": "(Required) Unique identifier of the global target property."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "898fdc61-5f08-4423-8264-d0002058b3c9",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties",
+                    ":globalTargetPropertyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "globalTargetPropertyId",
+                      "description": "(Required) Unique identifier of the global target property."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7129e280-dcbe-481c-93ad-122ba20fe31a",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties",
+                    ":globalTargetPropertyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "globalTargetPropertyId",
+                      "description": "(Required) Unique identifier of the global target property."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac107006-d2a8-48d6-a01d-efb8f81af9e2",
+          "name": "Oracle Enterprise Manager Modify a Global Target Property",
+          "request": {
+            "name": "Oracle Enterprise Manager Modify a Global Target Property",
+            "description": {
+              "content": "Updates a global target property definition.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "globalTargetProperties",
+                ":globalTargetPropertyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "globalTargetPropertyId",
+                  "description": "(Required) Unique identifier of the global target property."
+                },
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"propertyDisplayName\": \"<string>\",\n  \"description\": \"<string>\",\n  \"validValues\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "12a599dc-b6d9-4911-b4ef-bf2c4cd4e2c6",
+              "name": "Global target property updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties",
+                    ":globalTargetPropertyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "globalTargetPropertyId",
+                      "description": "(Required) Unique identifier of the global target property."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"propertyDisplayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"validValues\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"globalTargetPropertyId\": \"500123\",\n  \"propertyName\": \"example_value\",\n  \"propertyDisplayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"propertyType\": \"STRING\",\n  \"hasValidValues\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b47fe4e5-abef-4432-b792-33ac621e58ff",
+              "name": "The request was invalid. Check the request body and parameters for errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties",
+                    ":globalTargetPropertyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "globalTargetPropertyId",
+                      "description": "(Required) Unique identifier of the global target property."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"propertyDisplayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"validValues\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56231ad5-3b82-46fe-98c6-36160e8156e3",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties",
+                    ":globalTargetPropertyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "globalTargetPropertyId",
+                      "description": "(Required) Unique identifier of the global target property."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"propertyDisplayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"validValues\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a46f7a0a-4dee-4810-a185-d3eb55f911fc",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties",
+                    ":globalTargetPropertyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "globalTargetPropertyId",
+                      "description": "(Required) Unique identifier of the global target property."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"propertyDisplayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"validValues\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40e6b984-6fdb-43e9-93e1-33d42e2ab49c",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties",
+                    ":globalTargetPropertyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "globalTargetPropertyId",
+                      "description": "(Required) Unique identifier of the global target property."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"propertyDisplayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"validValues\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "17dfa923-945f-48c1-bf13-d2eb367cc9c1",
+          "name": "Oracle Enterprise Manager Delete a Global Target Property",
+          "request": {
+            "name": "Oracle Enterprise Manager Delete a Global Target Property",
+            "description": {
+              "content": "Deletes a global target property definition.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "globalTargetProperties",
+                ":globalTargetPropertyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "globalTargetPropertyId",
+                  "description": "(Required) Unique identifier of the global target property."
+                },
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87070290-3595-4cb8-9aec-ad73eb961afc",
+              "name": "Global target property deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties",
+                    ":globalTargetPropertyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "globalTargetPropertyId",
+                      "description": "(Required) Unique identifier of the global target property."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c462cfc3-900a-4cc9-ba21-506c04bb65c3",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties",
+                    ":globalTargetPropertyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "globalTargetPropertyId",
+                      "description": "(Required) Unique identifier of the global target property."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c14f72c0-d209-460a-bcab-ef32c6ed2b94",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties",
+                    ":globalTargetPropertyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "globalTargetPropertyId",
+                      "description": "(Required) Unique identifier of the global target property."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e30ea19-4731-43f7-9cab-132077440a7f",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties",
+                    ":globalTargetPropertyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "globalTargetPropertyId",
+                      "description": "(Required) Unique identifier of the global target property."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49dd4ad9-737c-426e-a523-cd4b8d9292c4",
+          "name": "Oracle Enterprise Manager Get Valid Values for a Global Target Property",
+          "request": {
+            "name": "Oracle Enterprise Manager Get Valid Values for a Global Target Property",
+            "description": {
+              "content": "Returns the list of valid values defined for a global target property, if the property has a constrained value set.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "globalTargetProperties",
+                ":globalTargetPropertyId",
+                "validValues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "globalTargetPropertyId",
+                  "description": "(Required) Unique identifier of the global target property."
+                },
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9bb80f4-5bda-470a-8f1c-66d1f3a52738",
+              "name": "List of valid values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties",
+                    ":globalTargetPropertyId",
+                    "validValues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "globalTargetPropertyId",
+                      "description": "(Required) Unique identifier of the global target property."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    \"example_value\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7685184-2c52-44d4-93d0-0e9ce158b73e",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties",
+                    ":globalTargetPropertyId",
+                    "validValues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "globalTargetPropertyId",
+                      "description": "(Required) Unique identifier of the global target property."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03afe807-2689-47a8-8043-ed1e813f6a03",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties",
+                    ":globalTargetPropertyId",
+                    "validValues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "globalTargetPropertyId",
+                      "description": "(Required) Unique identifier of the global target property."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1c5712a-9e4f-4e81-9b3b-7a31722dc7a4",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "globalTargetProperties",
+                    ":globalTargetPropertyId",
+                    "validValues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "globalTargetPropertyId",
+                      "description": "(Required) Unique identifier of the global target property."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Enterprise Manager OMS hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "emHost"
+    },
+    {
+      "description": {
+        "content": "Enterprise Manager HTTPS console port",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "7803",
+      "key": "emPort"
+    },
+    {
+      "type": "string",
+      "value": "https://{{emHost}}:{{emPort}}/em/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "565953ab-508e-4d9b-b4b9-d49e6c1b7056",
+    "name": "Oracle Enterprise Manager Cloud Control REST Blackouts Global Target Properties API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Oracle Enterprise Manager Cloud Control providing programmatic access to monitoring, configuration, and administration capabilities. This specification covers core resources including targets, metrics, incidents, and blackouts for managing Oracle IT infrastructure and applications.\n\nContact Support:\n Name: Oracle Support\n Email: support@oracle.com",
+      "type": "text/plain"
+    }
+  }
+}

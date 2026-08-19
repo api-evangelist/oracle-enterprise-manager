@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Enterprise Manager Cloud Control REST Blackouts Events API",
+    "version": "13.5.0.23"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Event Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/events/:eventId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the event."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific event, including its type, severity, message, target association, and timestamps."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

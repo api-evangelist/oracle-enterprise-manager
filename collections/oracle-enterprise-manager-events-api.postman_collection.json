@@ -1,0 +1,375 @@
+{
+  "item": [
+    {
+      "id": "f0aa53dc-e23e-479e-a824-3aa81cda722a",
+      "name": "Events",
+      "description": {
+        "content": "Access individual event details. Events are the underlying occurrences that are correlated into incidents.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9652000a-56c1-485d-997c-f4d4490baaa4",
+          "name": "Oracle Enterprise Manager Get Event Details",
+          "request": {
+            "name": "Oracle Enterprise Manager Get Event Details",
+            "description": {
+              "content": "Returns detailed information about a specific event, including its type, severity, message, target association, and timestamps.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                ":eventId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) Unique identifier of the event."
+                },
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "625d9bd1-81fe-4c6c-a32a-58ba5388a84c",
+              "name": "Event details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Unique identifier of the event."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"eventId\": \"500123\",\n  \"eventType\": \"METRIC_ALERT\",\n  \"severity\": \"FATAL\",\n  \"message\": \"example_value\",\n  \"targetName\": \"example_value\",\n  \"targetType\": \"example_value\",\n  \"metricGroupName\": \"example_value\",\n  \"metricColumnName\": \"example_value\",\n  \"metricValue\": 42.5,\n  \"timeRaised\": \"2026-01-15T10:30:00Z\",\n  \"timeResolved\": \"2026-01-15T10:30:00Z\",\n  \"canonicalLink\": \"https://www.example.com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3bea4e9-4c1e-46ac-a875-f4aeee136059",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Unique identifier of the event."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87b4d59e-8292-4775-9bdf-8d643bdaa715",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Unique identifier of the event."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ea4d8d7-43f6-413d-b1c0-98620372dcf4",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Unique identifier of the event."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Enterprise Manager OMS hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "emHost"
+    },
+    {
+      "description": {
+        "content": "Enterprise Manager HTTPS console port",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "7803",
+      "key": "emPort"
+    },
+    {
+      "type": "string",
+      "value": "https://{{emHost}}:{{emPort}}/em/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "be34b83a-9677-4ef6-b786-7743155aa6b5",
+    "name": "Oracle Enterprise Manager Cloud Control REST Blackouts Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Oracle Enterprise Manager Cloud Control providing programmatic access to monitoring, configuration, and administration capabilities. This specification covers core resources including targets, metrics, incidents, and blackouts for managing Oracle IT infrastructure and applications.\n\nContact Support:\n Name: Oracle Support\n Email: support@oracle.com",
+      "type": "text/plain"
+    }
+  }
+}

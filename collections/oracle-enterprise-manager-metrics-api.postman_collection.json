@@ -1,0 +1,1530 @@
+{
+  "item": [
+    {
+      "id": "43538072-eecb-4982-86de-741a8745bcb4",
+      "name": "Metrics",
+      "description": {
+        "content": "Query metric data and metadata for monitored targets. Access time-series performance data, latest metric values, and metric group definitions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d60847c6-bc52-4941-a002-958c7226c1f8",
+          "name": "Oracle Enterprise Manager List Metric Groups for a Target",
+          "request": {
+            "name": "Oracle Enterprise Manager List Metric Groups for a Target",
+            "description": {
+              "content": "Returns a list of all metric groups available for a specific target. Metric groups organize related metrics and define the collection schedule and columns.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "targets",
+                ":targetId",
+                "metricGroups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "targetId",
+                  "description": "(Required) Unique identifier of the target."
+                },
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "360742d2-e999-4f1a-a564-ea452f847ec0",
+              "name": "A list of metric groups.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "targets",
+                    ":targetId",
+                    "metricGroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetId",
+                      "description": "(Required) Unique identifier of the target."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"metricGroupName\": \"example_value\",\n      \"displayName\": \"example_value\",\n      \"description\": \"A sample description.\",\n      \"collectionFrequency\": 10,\n      \"metricColumns\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82a36d06-fb6a-452d-b118-1a03b2161484",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "targets",
+                    ":targetId",
+                    "metricGroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetId",
+                      "description": "(Required) Unique identifier of the target."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fc128ae-58c1-4a84-846e-a24c1cd89062",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "targets",
+                    ":targetId",
+                    "metricGroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetId",
+                      "description": "(Required) Unique identifier of the target."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "026d1909-93be-494d-b55f-00861415fd38",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "targets",
+                    ":targetId",
+                    "metricGroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetId",
+                      "description": "(Required) Unique identifier of the target."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "269e0dce-886c-4fa5-9286-6824cc235c6a",
+          "name": "Oracle Enterprise Manager Get Metric Group Details",
+          "request": {
+            "name": "Oracle Enterprise Manager Get Metric Group Details",
+            "description": {
+              "content": "Returns detailed information about a specific metric group for a target, including metric column definitions, collection frequency, and thresholds.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "targets",
+                ":targetId",
+                "metricGroups",
+                ":metricGroupName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "targetId",
+                  "description": "(Required) Unique identifier of the target."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "metricGroupName",
+                  "description": "(Required) Name of the metric group."
+                },
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52657eae-8c66-4660-8176-99a60442ca6b",
+              "name": "Metric group details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "targets",
+                    ":targetId",
+                    "metricGroups",
+                    ":metricGroupName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetId",
+                      "description": "(Required) Unique identifier of the target."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metricGroupName",
+                      "description": "(Required) Name of the metric group."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metricGroupName\": \"example_value\",\n  \"displayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"collectionFrequency\": 10,\n  \"metricColumns\": [\n    {\n      \"columnName\": \"example_value\",\n      \"displayName\": \"example_value\",\n      \"columnType\": \"NUMBER\",\n      \"isKey\": true,\n      \"unit\": \"example_value\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "033bbca3-dda1-46b2-aea2-8fdb705fb12a",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "targets",
+                    ":targetId",
+                    "metricGroups",
+                    ":metricGroupName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetId",
+                      "description": "(Required) Unique identifier of the target."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metricGroupName",
+                      "description": "(Required) Name of the metric group."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b270bf2-0fde-4740-b6fa-e8d657c7e7f9",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "targets",
+                    ":targetId",
+                    "metricGroups",
+                    ":metricGroupName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetId",
+                      "description": "(Required) Unique identifier of the target."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metricGroupName",
+                      "description": "(Required) Name of the metric group."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a4d8c56-c4ee-45b2-8ac0-22eb1493947a",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "targets",
+                    ":targetId",
+                    "metricGroups",
+                    ":metricGroupName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetId",
+                      "description": "(Required) Unique identifier of the target."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metricGroupName",
+                      "description": "(Required) Name of the metric group."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13d3f56b-f584-4b1a-bd0a-5779d33fe812",
+          "name": "Oracle Enterprise Manager Get Latest Metric Data",
+          "request": {
+            "name": "Oracle Enterprise Manager Get Latest Metric Data",
+            "description": {
+              "content": "Returns the most recently collected metric data for a specific metric group on a target. Provides the latest snapshot of performance values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "targets",
+                ":targetId",
+                "metricGroups",
+                ":metricGroupName",
+                "latestData"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "targetId",
+                  "description": "(Required) Unique identifier of the target."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "metricGroupName",
+                  "description": "(Required) Name of the metric group."
+                },
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53e1f4a5-9800-44e9-b8ed-80598ddd23de",
+              "name": "Latest metric data for the group.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "targets",
+                    ":targetId",
+                    "metricGroups",
+                    ":metricGroupName",
+                    "latestData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetId",
+                      "description": "(Required) Unique identifier of the target."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metricGroupName",
+                      "description": "(Required) Name of the metric group."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"metricColumn\": \"example_value\",\n      \"value\": 42.5,\n      \"key\": \"example_value\",\n      \"collectionTime\": \"2026-01-15T10:30:00Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1f4c56a-866f-44bb-8152-d0dd6c6a5719",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "targets",
+                    ":targetId",
+                    "metricGroups",
+                    ":metricGroupName",
+                    "latestData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetId",
+                      "description": "(Required) Unique identifier of the target."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metricGroupName",
+                      "description": "(Required) Name of the metric group."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5c3e291-d9f5-43cf-8611-d4ba0d13e969",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "targets",
+                    ":targetId",
+                    "metricGroups",
+                    ":metricGroupName",
+                    "latestData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetId",
+                      "description": "(Required) Unique identifier of the target."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metricGroupName",
+                      "description": "(Required) Name of the metric group."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07bbee33-f11e-426a-9985-37d68295baf4",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "targets",
+                    ":targetId",
+                    "metricGroups",
+                    ":metricGroupName",
+                    "latestData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetId",
+                      "description": "(Required) Unique identifier of the target."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metricGroupName",
+                      "description": "(Required) Name of the metric group."
+                    },
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a539857-6e0a-4f3a-bfdd-d942c55b1613",
+          "name": "Oracle Enterprise Manager Get Metric Time Series Data",
+          "request": {
+            "name": "Oracle Enterprise Manager Get Metric Time Series Data",
+            "description": {
+              "content": "Returns numeric metric data points over a specified time range for one or more targets. Supports filtering by target, metric group, metric column, and time range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metricTimeSeries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "targetNames",
+                  "value": "<string>",
+                  "description": "Comma-separated list of target names to retrieve metric data for."
+                },
+                {
+                  "disabled": false,
+                  "key": "targetTypes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of target types to filter by."
+                },
+                {
+                  "disabled": false,
+                  "key": "metricGroups",
+                  "value": "<string>",
+                  "description": "Comma-separated list of metric group names."
+                },
+                {
+                  "disabled": false,
+                  "key": "metricColumns",
+                  "value": "<string>",
+                  "description": "Comma-separated list of metric column names."
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<dateTime>",
+                  "description": "Start of the time range in ISO 8601 format."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<dateTime>",
+                  "description": "End of the time range in ISO 8601 format."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Maximum number of items to return per page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Enterprise Manager OMS hostname",
+                  "type": "any",
+                  "value": "{{emHost}}",
+                  "key": "emHost"
+                },
+                {
+                  "description": "Enterprise Manager HTTPS console port",
+                  "type": "any",
+                  "value": "{{emPort}}",
+                  "key": "emPort"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "670d6751-3eb4-40ec-b28e-c2a93253c27b",
+              "name": "Metric time series data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metricTimeSeries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "targetNames",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "targetTypes",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "metricGroups",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "metricColumns",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"targetName\": \"example_value\",\n      \"targetType\": \"example_value\",\n      \"metricGroupName\": \"example_value\",\n      \"metricColumnName\": \"example_value\",\n      \"key\": \"example_value\",\n      \"dataPoints\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b2fb852-bae7-40bd-ac2a-936f029a40cb",
+              "name": "The request was invalid. Check the request body and parameters for errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metricTimeSeries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "targetNames",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "targetTypes",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "metricGroups",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "metricColumns",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93b41aeb-a8c6-467e-b503-8ffc4588eb36",
+              "name": "Authentication failed. Provide valid Enterprise Manager credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metricTimeSeries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "targetNames",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "targetTypes",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "metricGroups",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "metricColumns",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b272799e-3f76-4c7d-82bb-ea3d73bcb82b",
+              "name": "An unexpected error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metricTimeSeries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "targetNames",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "targetTypes",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "metricGroups",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "metricColumns",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Enterprise Manager OMS hostname",
+                      "type": "any",
+                      "value": "{{emHost}}",
+                      "key": "emHost"
+                    },
+                    {
+                      "description": "Enterprise Manager HTTPS console port",
+                      "type": "any",
+                      "value": "{{emPort}}",
+                      "key": "emPort"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"message\": \"example_value\",\n  \"details\": \"example_value\",\n  \"httpStatusCode\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Enterprise Manager OMS hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "emHost"
+    },
+    {
+      "description": {
+        "content": "Enterprise Manager HTTPS console port",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "7803",
+      "key": "emPort"
+    },
+    {
+      "type": "string",
+      "value": "https://{{emHost}}:{{emPort}}/em/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1f8c3712-455a-485a-8f39-5a538fd538c2",
+    "name": "Oracle Enterprise Manager Cloud Control REST Blackouts Metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Oracle Enterprise Manager Cloud Control providing programmatic access to monitoring, configuration, and administration capabilities. This specification covers core resources including targets, metrics, incidents, and blackouts for managing Oracle IT infrastructure and applications.\n\nContact Support:\n Name: Oracle Support\n Email: support@oracle.com",
+      "type": "text/plain"
+    }
+  }
+}

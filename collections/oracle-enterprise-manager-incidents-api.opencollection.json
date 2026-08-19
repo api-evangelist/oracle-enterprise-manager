@@ -1,0 +1,200 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Enterprise Manager Cloud Control REST Blackouts Incidents API",
+    "version": "13.5.0.23"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Incidents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager List Incidents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/incidents",
+            "params": [
+              {
+                "name": "severity",
+                "value": "FATAL",
+                "type": "query",
+                "description": "Filter by incident severity level."
+              },
+              {
+                "name": "priority",
+                "value": "URGENT",
+                "type": "query",
+                "description": "Filter by incident priority."
+              },
+              {
+                "name": "status",
+                "value": "NEW",
+                "type": "query",
+                "description": "Filter by incident status."
+              },
+              {
+                "name": "targetName",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter incidents by target name."
+              },
+              {
+                "name": "targetType",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter incidents by target type."
+              },
+              {
+                "name": "sinceTime",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "Return incidents created after this time in ISO 8601 format."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip for pagination."
+              }
+            ]
+          },
+          "docs": "Returns a list of incidents in Enterprise Manager. Supports filtering by severity, priority, status, target, and time range. Incidents represent actionable issues detected by monitoring rules."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Incident Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/incidents/:incidentId",
+            "params": [
+              {
+                "name": "incidentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the incident."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific incident including severity, priority, status, associated target, timeline, and resolution information."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Clear an Incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{emHost}:{emPort}/em/api/incidents/:incidentId/actions/clear",
+            "params": [
+              {
+                "name": "incidentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the incident."
+              }
+            ]
+          },
+          "docs": "Clears an incident, indicating that the issue has been resolved. The incident status is set to CLOSED."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Suppress an Incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{emHost}:{emPort}/em/api/incidents/:incidentId/actions/suppress",
+            "params": [
+              {
+                "name": "incidentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the incident."
+              }
+            ]
+          },
+          "docs": "Suppresses an incident so it does not appear in active incident views or trigger notifications. Useful for known issues under investigation."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Unsuppress an Incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{emHost}:{emPort}/em/api/incidents/:incidentId/actions/unsuppress",
+            "params": [
+              {
+                "name": "incidentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the incident."
+              }
+            ]
+          },
+          "docs": "Reverses the suppression of an incident, restoring it to active visibility and notification eligibility."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Incident Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/incidents/:incidentId/events",
+            "params": [
+              {
+                "name": "incidentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the incident."
+              }
+            ]
+          },
+          "docs": "Returns the list of events associated with an incident. Events are the underlying monitoring detections that were correlated to form the incident."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Incident Annotations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/incidents/:incidentId/annotations",
+            "params": [
+              {
+                "name": "incidentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the incident."
+              }
+            ]
+          },
+          "docs": "Returns annotations (comments and notes) associated with an incident. Annotations provide a record of investigation and remediation steps."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

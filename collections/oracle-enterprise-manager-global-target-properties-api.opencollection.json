@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Enterprise Manager Cloud Control REST Blackouts Global Target Properties API",
+    "version": "13.5.0.23"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Global Target Properties",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager List Global Target Properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/globalTargetProperties"
+          },
+          "docs": "Returns a list of global target properties that are defined for classifying and organizing targets."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Create a Global Target Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{emHost}:{emPort}/em/api/globalTargetProperties",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new global target property definition. Global properties provide a way to classify targets with custom metadata."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Global Target Property Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/globalTargetProperties/:globalTargetPropertyId",
+            "params": [
+              {
+                "name": "globalTargetPropertyId",
+                "value": "500123",
+                "type": "path",
+                "description": "Unique identifier of the global target property."
+              }
+            ]
+          },
+          "docs": "Returns details of a specific global target property."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Modify a Global Target Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{emHost}:{emPort}/em/api/globalTargetProperties/:globalTargetPropertyId",
+            "params": [
+              {
+                "name": "globalTargetPropertyId",
+                "value": "500123",
+                "type": "path",
+                "description": "Unique identifier of the global target property."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a global target property definition."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Delete a Global Target Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{emHost}:{emPort}/em/api/globalTargetProperties/:globalTargetPropertyId",
+            "params": [
+              {
+                "name": "globalTargetPropertyId",
+                "value": "500123",
+                "type": "path",
+                "description": "Unique identifier of the global target property."
+              }
+            ]
+          },
+          "docs": "Deletes a global target property definition."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Valid Values for a Global Target Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/globalTargetProperties/:globalTargetPropertyId/validValues",
+            "params": [
+              {
+                "name": "globalTargetPropertyId",
+                "value": "500123",
+                "type": "path",
+                "description": "Unique identifier of the global target property."
+              }
+            ]
+          },
+          "docs": "Returns the list of valid values defined for a global target property, if the property has a constrained value set."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

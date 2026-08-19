@@ -1,0 +1,186 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Enterprise Manager Cloud Control REST Blackouts Targets API",
+    "version": "13.5.0.23"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Targets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager List Targets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/targets",
+            "params": [
+              {
+                "name": "targetName",
+                "value": "",
+                "type": "query",
+                "description": "Filter targets by name. Supports partial matching."
+              },
+              {
+                "name": "targetType",
+                "value": "",
+                "type": "query",
+                "description": "Filter targets by type (e.g., oracle_database, host, weblogic_j2eeserver)."
+              },
+              {
+                "name": "lifecycleStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filter targets by lifecycle status."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip for pagination."
+              }
+            ]
+          },
+          "docs": "Returns a list of monitored targets in Enterprise Manager. Supports filtering by target name, target type, and lifecycle status. Results are paginated."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Create a Target",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{emHost}:{emPort}/em/api/targets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new monitored target in Enterprise Manager. Requires target name, target type, and host information. Additional properties can be specified depending on the target type."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Target Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/targets/:targetId",
+            "params": [
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the target."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific target including its configuration properties, monitoring status, and associated metadata."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Update a Target",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{emHost}:{emPort}/em/api/targets/:targetId",
+            "params": [
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the target."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates properties of an existing target. Only the specified fields are modified; unspecified fields remain unchanged."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Delete a Target",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{emHost}:{emPort}/em/api/targets/:targetId",
+            "params": [
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the target."
+              }
+            ]
+          },
+          "docs": "Removes a monitored target from Enterprise Manager. This stops all monitoring, removes collected data associations, and deletes the target configuration."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Target Properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/targets/:targetId/properties",
+            "params": [
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the target."
+              }
+            ]
+          },
+          "docs": "Returns the configuration and monitoring properties of a specific target, including instance properties, dynamic properties, and any custom properties defined for the target type."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Bulk Update Target Properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{emHost}:{emPort}/em/api/targets/:targetId/actions/bulkUpdateProperties",
+            "params": [
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the target."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates multiple properties of a target in a single request. Useful for batch configuration changes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

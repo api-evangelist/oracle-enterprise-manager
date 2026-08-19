@@ -1,0 +1,232 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Enterprise Manager Cloud Control REST Blackouts API",
+    "version": "13.5.0.23"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Blackouts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager List Blackouts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts",
+            "params": [
+              {
+                "name": "status",
+                "value": "SCHEDULED",
+                "type": "query",
+                "description": "Filter by blackout status."
+              },
+              {
+                "name": "targetName",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter by associated target name."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip for pagination."
+              }
+            ]
+          },
+          "docs": "Returns a list of blackouts (maintenance windows) configured in Enterprise Manager. Supports filtering by status and associated target."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Create a Blackout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new blackout (maintenance window) for one or more targets. During a blackout, monitoring data is still collected but alerts and notifications are suppressed."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Blackout Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts/:blackoutId",
+            "params": [
+              {
+                "name": "blackoutId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the blackout."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific blackout including its schedule, affected targets, status, and reason."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Edit a Blackout",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts/:blackoutId",
+            "params": [
+              {
+                "name": "blackoutId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the blackout."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies an existing blackout. Can update the schedule, targets, reason, or other properties. Only scheduled or started blackouts can be edited."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Delete a Blackout",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts/:blackoutId",
+            "params": [
+              {
+                "name": "blackoutId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the blackout."
+              }
+            ]
+          },
+          "docs": "Deletes a blackout. Only scheduled (not yet started) blackouts can be deleted. Use the stop action to end an active blackout."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Stop a Blackout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts/:blackoutId/actions/stop",
+            "params": [
+              {
+                "name": "blackoutId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the blackout."
+              }
+            ]
+          },
+          "docs": "Stops an active blackout before its scheduled end time. Monitoring and alerting resume immediately for all affected targets."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Blackout Targets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts/:blackoutId/targets",
+            "params": [
+              {
+                "name": "blackoutId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the blackout."
+              }
+            ]
+          },
+          "docs": "Returns the list of targets affected by a specific blackout, including both directly specified targets and targets included via group membership."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Get Blackout Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts/dashboard"
+          },
+          "docs": "Returns summary statistics about blackouts including counts by status, upcoming blackouts, and recently ended blackouts."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager List Blackout Reasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts/reasons"
+          },
+          "docs": "Returns a list of predefined blackout reasons that can be associated with blackouts for categorization and reporting."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Create a Blackout Reason",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts/reasons",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new blackout reason that can be used when creating or editing blackouts."
+        },
+        {
+          "info": {
+            "name": "Oracle Enterprise Manager Delete a Blackout Reason",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{emHost}:{emPort}/em/api/blackouts/reasons/:reasonId",
+            "params": [
+              {
+                "name": "reasonId",
+                "value": "500123",
+                "type": "path",
+                "description": "Unique identifier of the blackout reason."
+              }
+            ]
+          },
+          "docs": "Deletes a blackout reason by its identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
