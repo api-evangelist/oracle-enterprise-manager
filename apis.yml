@@ -69,6 +69,11 @@ apis:
   baseURL: https://<em-host>:<port>/em/websvcs/restful/emws/job
   tags:
   - Automation
+  - Job
+  - Scheduling
+  - Task Management
+  tags_raw:
+  - Automation
   - Jobs
   - Scheduling
   - Task Management
@@ -128,6 +133,11 @@ apis:
     https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/rest-endpoints.html
   baseURL: https://<em-host>:<port>/em/api/incidents
   tags:
+  - Alerting
+  - Event
+  - Incidents
+  - Troubleshooting
+  tags_raw:
   - Alerting
   - Events
   - Incidents
@@ -334,6 +344,11 @@ apis:
   baseURL: https://<em-host>:<port>/em/cloud
   tags:
   - Cloud
+  - Database-as-a-Service
+  - Provisioning
+  - Self-Service
+  tags_raw:
+  - Cloud
   - Database as a Service
   - DBaaS
   - Provisioning
@@ -401,6 +416,8 @@ apis:
     https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emrest/APIOverview.html
   baseURL: https://<em-host>:<port>/em/api
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
