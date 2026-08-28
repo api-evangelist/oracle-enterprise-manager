@@ -11,8 +11,11 @@ info:
     incident actually carries events, chaining three real read operations.
   version: 1.0.0
 sourceDescriptions:
-- name: emCloudControl
-  url: ../openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+- name: eventsApi
+  url: ../openapi/oracle-enterprise-manager-events-api-openapi.yml
+  type: openapi
+- name: incidentsApi
+  url: ../openapi/oracle-enterprise-manager-incidents-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: trace-incident-event

@@ -11,8 +11,11 @@ info:
     understand its monitoring footprint without opening the OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: emCloudControl
-  url: ../openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+- name: metricsApi
+  url: ../openapi/oracle-enterprise-manager-metrics-api-openapi.yml
+  type: openapi
+- name: targetsApi
+  url: ../openapi/oracle-enterprise-manager-targets-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: inspect-target

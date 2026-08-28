@@ -11,8 +11,8 @@ info:
     the suppress action is always preceded by the context that justifies it.
   version: 1.0.0
 sourceDescriptions:
-- name: emCloudControl
-  url: ../openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+- name: incidentsApi
+  url: ../openapi/oracle-enterprise-manager-incidents-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: investigate-suppress-incident

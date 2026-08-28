@@ -11,8 +11,8 @@ info:
     the stop step documents the 409 "not stoppable" outcome.
   version: 1.0.0
 sourceDescriptions:
-- name: emCloudControl
-  url: ../openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+- name: blackoutsApi
+  url: ../openapi/oracle-enterprise-manager-blackouts-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: end-active-blackout

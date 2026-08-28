@@ -11,8 +11,8 @@ info:
     by verification of the target and its existing configuration.
   version: 1.0.0
 sourceDescriptions:
-- name: emCloudControl
-  url: ../openapi/oracle-enterprise-manager-cloud-control-openapi.yml
+- name: targetsApi
+  url: ../openapi/oracle-enterprise-manager-targets-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: bulk-configure-target
