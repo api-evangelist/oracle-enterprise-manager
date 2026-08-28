@@ -1,0 +1,56 @@
+slug: oracle-enterprise-manager
+provider: Oracle Enterprise Manager
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Incidents
+  spec_file: oracle-enterprise-manager-incidents-api-openapi.yml
+  capability_id: BC-600.30
+  capability_id_l1: BC-600
+  capability_name: IT Service Management
+  confidence: 0.8
+  evidence: GET /incidents  listIncidents; POST /incidents/{incidentId}/actions/clear  Clear an Incident;
+    POST .../actions/suppress
+  reason: IT incident lifecycle handling (list, clear, suppress, annotate) over monitored infrastructure
+    — IT Service Management incident handling. Could also read as IT operations monitoring; chose ITSM
+    incident.
+- tag: Blackouts
+  spec_file: oracle-enterprise-manager-blackouts-api-openapi.yml
+  capability_id: BC-600.40
+  capability_id_l1: BC-600
+  capability_name: IT Operations Management
+  confidence: 0.75
+  evidence: 'POST /blackouts  createBlackout; GET /blackouts/{blackoutId}/targets  Get Blackout Targets;
+    description: ''programmatic access to monitoring, configuration, and administration capabilities'''
+  reason: Monitoring blackout (maintenance suppression) windows for managed IT targets in Oracle Enterprise
+    Manager — IT operations monitoring administration. Not business continuity or outage of business services.
+- tag: Metrics
+  spec_file: oracle-enterprise-manager-metrics-api-openapi.yml
+  capability_id: BC-600.40
+  capability_id_l1: BC-600
+  capability_name: IT Operations Management
+  confidence: 0.75
+  evidence: GET /targets/{targetId}/metricGroups/{metricGroupName}/latestData  Get Latest Metric Data;
+    GET /metricTimeSeries  Get Metric Time Series Data
+  reason: Infrastructure metric collection and time-series retrieval for monitored Oracle targets — IT
+    operations monitoring, not business analytics.
+- tag: Global Target Properties
+  spec_file: oracle-enterprise-manager-global-target-properties-api-openapi.yml
+  capability_id: BC-600.40
+  capability_id_l1: BC-600
+  capability_name: IT Operations Management
+  confidence: 0.7
+  evidence: POST /globalTargetProperties  createGlobalTargetProperty; GET /globalTargetProperties/{globalTargetPropertyId}/validValues
+  reason: Configuration metadata for managed IT targets (properties and valid values) in OEM — IT operations/monitoring
+    configuration, not a business capability elsewhere.

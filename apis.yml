@@ -4,6 +4,18 @@ description: >-
   Oracle Enterprise Manager (OEM) provides a comprehensive management platform for managing Oracle IT infrastructure and
   applications. The APIs enable programmatic access to monitoring, administration, and automation capabilities.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
@@ -559,6 +571,9 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: CapabilityMap
+    url: capabilities/oracle-enterprise-manager-capability-edges.yml
+    name: Oracle Enterprise Manager Business Capability Map
   - type: AgenticAccess
     url: agentic-access/oracle-enterprise-manager-agentic-access.yml
   - type: DomainSecurity
