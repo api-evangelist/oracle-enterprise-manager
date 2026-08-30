@@ -356,7 +356,8 @@ apis:
   baseURL: https://<em-host>:<port>/em/cloud
   tags:
   - Cloud
-  - Database-as-a-Service
+  - Database as a Service
+  - DBaaS
   - Provisioning
   - Self-Service
   tags_raw:
