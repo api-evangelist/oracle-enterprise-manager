@@ -1,12 +1,7 @@
 {
   "provider": "oracle-enterprise-manager",
   "sources": [
-    "oracle-enterprise-manager-blackouts-api-openapi.yml",
-    "oracle-enterprise-manager-events-api-openapi.yml",
-    "oracle-enterprise-manager-global-target-properties-api-openapi.yml",
-    "oracle-enterprise-manager-incidents-api-openapi.yml",
-    "oracle-enterprise-manager-metrics-api-openapi.yml",
-    "oracle-enterprise-manager-targets-api-openapi.yml"
+    "_original/oracle-enterprise-manager-cloud-control-openapi.yml"
   ],
   "outputs": [
     "oracle-enterprise-manager-blackouts-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "oracle-enterprise-manager-cloud-control-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "oracle-enterprise-manager-blackouts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "oracle-enterprise-manager-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "oracle-enterprise-manager-global-target-properties-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "oracle-enterprise-manager-incidents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "oracle-enterprise-manager-metrics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "oracle-enterprise-manager-targets-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
