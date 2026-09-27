@@ -368,26 +368,42 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    Conflict:
+      description: The request conflicts with the current state of the resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was invalid. Check the request body and parameters for errors.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: An unexpected error occurred on the server.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Provide valid Enterprise Manager credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    offsetQuery:
-      name: offset
+    targetNameQuery:
+      name: targetName
       in: query
-      description: Number of items to skip for pagination.
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    targetTypeQuery:
-      name: targetType
-      in: query
-      description: Filter targets by type (e.g., oracle_database, host, weblogic_j2eeserver).
-      schema:
-        type: string
-    targetIdPath:
-      name: targetId
-      in: path
-      required: true
-      description: Unique identifier of the target.
+      description: Filter targets by name. Supports partial matching.
       schema:
         type: string
     lifecycleStatusQuery:
@@ -401,10 +417,25 @@ components:
         - BLACKOUT
         - PENDING
         - DELETED
-    targetNameQuery:
-      name: targetName
+    offsetQuery:
+      name: offset
       in: query
-      description: Filter targets by name. Supports partial matching.
+      description: Number of items to skip for pagination.
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    targetIdPath:
+      name: targetId
+      in: path
+      required: true
+      description: Unique identifier of the target.
+      schema:
+        type: string
+    targetTypeQuery:
+      name: targetType
+      in: query
+      description: Filter targets by type (e.g., oracle_database, host, weblogic_j2eeserver).
       schema:
         type: string
     limitQuery:
@@ -417,110 +448,6 @@ components:
         minimum: 1
         maximum: 1000
   schemas:
-    TargetProperty:
-      type: object
-      description: A configuration property of a target.
-      properties:
-        name:
-          type: string
-          description: Property name.
-          example: Example Title
-        value:
-          type: string
-          description: Property value.
-          example: example_value
-        isReadOnly:
-          type: boolean
-          description: Whether the property is read-only.
-          example: true
-    TargetCollection:
-      type: object
-      description: Paginated collection of targets.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Target'
-          example: []
-        totalCount:
-          type: integer
-          description: Total number of targets matching the query.
-          example: 10
-        limit:
-          type: integer
-          description: Maximum items per page.
-          example: 10
-        offset:
-          type: integer
-          description: Current offset in the result set.
-          example: 10
-        hasMore:
-          type: boolean
-          description: Whether more results are available.
-          example: true
-    TargetCreateRequest:
-      type: object
-      description: Request body for creating a new target.
-      required:
-      - targetName
-      - targetType
-      - hostName
-      properties:
-        targetName:
-          type: string
-          description: Display name for the target.
-          example: example_value
-        targetType:
-          type: string
-          description: Target type identifier defining the monitoring template.
-          examples:
-          - oracle_database
-          - host
-          - weblogic_j2eeserver
-        hostName:
-          type: string
-          description: The hostname where the target resides.
-          example: example_value
-        properties:
-          type: object
-          description: Target-type-specific properties required for monitoring.
-          additionalProperties:
-            type: string
-          example: example_value
-        credentials:
-          type: object
-          description: Monitoring credentials for the target.
-          properties:
-            credentialName:
-              type: string
-              description: Name of a named credential to use.
-            credentialType:
-              type: string
-              description: Type of credential.
-          example: example_value
-    BulkPropertyUpdateRequest:
-      type: object
-      description: Request body for bulk property updates.
-      properties:
-        properties:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              value:
-                type: string
-          example: []
-    TargetPropertyCollection:
-      type: object
-      description: Collection of target properties.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TargetProperty'
-          example: []
     Target:
       type: object
       description: Represents a monitored target in Enterprise Manager. A target is any managed entity such as a database, host, middleware instance, or application.
@@ -621,6 +548,96 @@ components:
           format: uri
           description: Canonical URI for this target resource.
           example: https://www.example.com
+    TargetCollection:
+      type: object
+      description: Paginated collection of targets.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Target'
+          example: []
+        totalCount:
+          type: integer
+          description: Total number of targets matching the query.
+          example: 10
+        limit:
+          type: integer
+          description: Maximum items per page.
+          example: 10
+        offset:
+          type: integer
+          description: Current offset in the result set.
+          example: 10
+        hasMore:
+          type: boolean
+          description: Whether more results are available.
+          example: true
+    TargetPropertyCollection:
+      type: object
+      description: Collection of target properties.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetProperty'
+          example: []
+    TargetProperty:
+      type: object
+      description: A configuration property of a target.
+      properties:
+        name:
+          type: string
+          description: Property name.
+          example: Example Title
+        value:
+          type: string
+          description: Property value.
+          example: example_value
+        isReadOnly:
+          type: boolean
+          description: Whether the property is read-only.
+          example: true
+    TargetCreateRequest:
+      type: object
+      description: Request body for creating a new target.
+      required:
+      - targetName
+      - targetType
+      - hostName
+      properties:
+        targetName:
+          type: string
+          description: Display name for the target.
+          example: example_value
+        targetType:
+          type: string
+          description: Target type identifier defining the monitoring template.
+          examples:
+          - oracle_database
+          - host
+          - weblogic_j2eeserver
+        hostName:
+          type: string
+          description: The hostname where the target resides.
+          example: example_value
+        properties:
+          type: object
+          description: Target-type-specific properties required for monitoring.
+          additionalProperties:
+            type: string
+          example: example_value
+        credentials:
+          type: object
+          description: Monitoring credentials for the target.
+          properties:
+            credentialName:
+              type: string
+              description: Name of a named credential to use.
+            credentialType:
+              type: string
+              description: Type of credential.
+          example: example_value
     Error:
       type: object
       description: Error response returned by the API.
@@ -641,6 +658,20 @@ components:
           type: integer
           description: HTTP status code.
           example: 10
+    BulkPropertyUpdateRequest:
+      type: object
+      description: Request body for bulk property updates.
+      properties:
+        properties:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+          example: []
     TargetUpdateRequest:
       type: object
       description: Request body for updating an existing target.
@@ -651,37 +682,6 @@ components:
           additionalProperties:
             type: string
           example: example_value
-  responses:
-    Conflict:
-      description: The request conflicts with the current state of the resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Provide valid Enterprise Manager credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InternalServerError:
-      description: An unexpected error occurred on the server.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was invalid. Check the request body and parameters for errors.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

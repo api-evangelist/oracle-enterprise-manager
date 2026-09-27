@@ -74,8 +74,8 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication failed. Provide valid Enterprise Manager credentials.
       content:
         application/json:
           schema:
@@ -86,20 +86,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Provide valid Enterprise Manager credentials.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    eventIdPath:
-      name: eventId
-      in: path
-      required: true
-      description: Unique identifier of the event.
-      schema:
-        type: string
   schemas:
     Error:
       type: object
@@ -189,6 +181,14 @@ components:
           format: uri
           description: Canonical URI for this event resource.
           example: https://www.example.com
+  parameters:
+    eventIdPath:
+      name: eventId
+      in: path
+      required: true
+      description: Unique identifier of the event.
+      schema:
+        type: string
   securitySchemes:
     basicAuth:
       type: http
