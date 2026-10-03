@@ -412,6 +412,18 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: An unexpected error occurred on the server.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     BadRequest:
       description: The request was invalid. Check the request body and parameters for errors.
       content:
@@ -424,172 +436,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    InternalServerError:
-      description: An unexpected error occurred on the server.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      description: Error response returned by the API.
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code.
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message.
-          example: example_value
-        details:
-          type: string
-          description: Additional details about the error.
-          example: example_value
-        httpStatusCode:
-          type: integer
-          description: HTTP status code.
-          example: 10
-    Event:
-      type: object
-      description: Represents a monitoring event detected by Enterprise Manager. Events are the atomic detections that are correlated into incidents.
-      properties:
-        eventId:
-          type: string
-          description: Unique identifier of the event.
-          example: '500123'
-        eventType:
-          type: string
-          description: Type of the event.
-          enum:
-          - METRIC_ALERT
-          - TARGET_AVAILABILITY
-          - JOB_STATUS_CHANGE
-          - COMPLIANCE_VIOLATION
-          - USER_REPORTED
-          example: METRIC_ALERT
-        severity:
-          type: string
-          description: Severity of the event.
-          enum:
-          - FATAL
-          - CRITICAL
-          - WARNING
-          - ADVISORY
-          - INFORMATIONAL
-          - CLEAR
-          example: FATAL
-        message:
-          type: string
-          description: Descriptive message for the event.
-          example: example_value
-        targetName:
-          type: string
-          description: Name of the target that generated this event.
-          example: example_value
-        targetType:
-          type: string
-          description: Type of the target that generated this event.
-          example: example_value
-        metricGroupName:
-          type: string
-          description: Name of the metric group, if this is a metric alert event.
-          example: example_value
-        metricColumnName:
-          type: string
-          description: Name of the metric column, if this is a metric alert event.
-          example: example_value
-        metricValue:
-          type: number
-          description: Metric value that triggered the event.
-          example: 42.5
-        timeRaised:
-          type: string
-          format: date-time
-          description: Timestamp when the event was raised.
-          example: '2026-01-15T10:30:00Z'
-        timeResolved:
-          type: string
-          format: date-time
-          description: Timestamp when the event was resolved.
-          example: '2026-01-15T10:30:00Z'
-        canonicalLink:
-          type: string
-          format: uri
-          description: Canonical URI for this event resource.
-          example: https://www.example.com
-    EventCollection:
-      type: object
-      description: Collection of events.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
-          example: []
-    AnnotationCollection:
-      type: object
-      description: Collection of annotations.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Annotation'
-          example: []
-    IncidentCollection:
-      type: object
-      description: Paginated collection of incidents.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Incident'
-          example: []
-        totalCount:
-          type: integer
-          description: Total number of incidents matching the query.
-          example: 10
-        limit:
-          type: integer
-          example: 10
-        offset:
-          type: integer
-          example: 10
-        hasMore:
-          type: boolean
-          example: true
-    Annotation:
-      type: object
-      description: A comment or note attached to an incident, providing investigation details or remediation notes.
-      properties:
-        annotationId:
-          type: string
-          description: Unique identifier of the annotation.
-          example: '500123'
-        summary:
-          type: string
-          description: Summary text of the annotation.
-          example: example_value
-        details:
-          type: string
-          description: Detailed content of the annotation.
-          example: example_value
-        author:
-          type: string
-          description: Username of the annotation author.
-          example: example_value
-        timeCreated:
-          type: string
-          format: date-time
-          description: Timestamp when the annotation was created.
-          example: '2026-01-15T10:30:00Z'
     Incident:
       type: object
       description: Represents an incident in Enterprise Manager. Incidents are actionable issues detected by monitoring rules, correlated from one or more events.
@@ -696,15 +543,160 @@ components:
           format: uri
           description: Canonical URI for this incident resource.
           example: https://www.example.com
+    AnnotationCollection:
+      type: object
+      description: Collection of annotations.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+          example: []
+    Event:
+      type: object
+      description: Represents a monitoring event detected by Enterprise Manager. Events are the atomic detections that are correlated into incidents.
+      properties:
+        eventId:
+          type: string
+          description: Unique identifier of the event.
+          example: '500123'
+        eventType:
+          type: string
+          description: Type of the event.
+          enum:
+          - METRIC_ALERT
+          - TARGET_AVAILABILITY
+          - JOB_STATUS_CHANGE
+          - COMPLIANCE_VIOLATION
+          - USER_REPORTED
+          example: METRIC_ALERT
+        severity:
+          type: string
+          description: Severity of the event.
+          enum:
+          - FATAL
+          - CRITICAL
+          - WARNING
+          - ADVISORY
+          - INFORMATIONAL
+          - CLEAR
+          example: FATAL
+        message:
+          type: string
+          description: Descriptive message for the event.
+          example: example_value
+        targetName:
+          type: string
+          description: Name of the target that generated this event.
+          example: example_value
+        targetType:
+          type: string
+          description: Type of the target that generated this event.
+          example: example_value
+        metricGroupName:
+          type: string
+          description: Name of the metric group, if this is a metric alert event.
+          example: example_value
+        metricColumnName:
+          type: string
+          description: Name of the metric column, if this is a metric alert event.
+          example: example_value
+        metricValue:
+          type: number
+          description: Metric value that triggered the event.
+          example: 42.5
+        timeRaised:
+          type: string
+          format: date-time
+          description: Timestamp when the event was raised.
+          example: '2026-01-15T10:30:00Z'
+        timeResolved:
+          type: string
+          format: date-time
+          description: Timestamp when the event was resolved.
+          example: '2026-01-15T10:30:00Z'
+        canonicalLink:
+          type: string
+          format: uri
+          description: Canonical URI for this event resource.
+          example: https://www.example.com
+    EventCollection:
+      type: object
+      description: Collection of events.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+          example: []
+    Error:
+      type: object
+      description: Error response returned by the API.
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+        details:
+          type: string
+          description: Additional details about the error.
+          example: example_value
+        httpStatusCode:
+          type: integer
+          description: HTTP status code.
+          example: 10
+    Annotation:
+      type: object
+      description: A comment or note attached to an incident, providing investigation details or remediation notes.
+      properties:
+        annotationId:
+          type: string
+          description: Unique identifier of the annotation.
+          example: '500123'
+        summary:
+          type: string
+          description: Summary text of the annotation.
+          example: example_value
+        details:
+          type: string
+          description: Detailed content of the annotation.
+          example: example_value
+        author:
+          type: string
+          description: Username of the annotation author.
+          example: example_value
+        timeCreated:
+          type: string
+          format: date-time
+          description: Timestamp when the annotation was created.
+          example: '2026-01-15T10:30:00Z'
+    IncidentCollection:
+      type: object
+      description: Paginated collection of incidents.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Incident'
+          example: []
+        totalCount:
+          type: integer
+          description: Total number of incidents matching the query.
+          example: 10
+        limit:
+          type: integer
+          example: 10
+        offset:
+          type: integer
+          example: 10
+        hasMore:
+          type: boolean
+          example: true
   parameters:
-    offsetQuery:
-      name: offset
-      in: query
-      description: Number of items to skip for pagination.
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
     incidentIdPath:
       name: incidentId
       in: path
@@ -721,6 +713,14 @@ components:
         default: 25
         minimum: 1
         maximum: 1000
+    offsetQuery:
+      name: offset
+      in: query
+      description: Number of items to skip for pagination.
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
   securitySchemes:
     basicAuth:
       type: http

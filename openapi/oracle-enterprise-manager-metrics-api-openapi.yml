@@ -219,19 +219,31 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    limitQuery:
+      name: limit
+      in: query
+      description: Maximum number of items to return per page.
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 1000
+    metricGroupNamePath:
+      name: metricGroupName
+      in: path
+      required: true
+      description: Name of the metric group.
+      schema:
+        type: string
+    targetIdPath:
+      name: targetId
+      in: path
+      required: true
+      description: Unique identifier of the target.
+      schema:
+        type: string
   responses:
-    BadRequest:
-      description: The request was invalid. Check the request body and parameters for errors.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Provide valid Enterprise Manager credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     InternalServerError:
       description: An unexpected error occurred on the server.
       content:
@@ -240,6 +252,18 @@ components:
             $ref: '#/components/schemas/Error'
     NotFound:
       description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was invalid. Check the request body and parameters for errors.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Provide valid Enterprise Manager credentials.
       content:
         application/json:
           schema:
@@ -270,65 +294,6 @@ components:
           description: List of metric columns in this group.
           items:
             $ref: '#/components/schemas/MetricColumn'
-          example: []
-    MetricDataCollection:
-      type: object
-      description: Collection of metric data points.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetricDataPoint'
-          example: []
-    Error:
-      type: object
-      description: Error response returned by the API.
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code.
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message.
-          example: example_value
-        details:
-          type: string
-          description: Additional details about the error.
-          example: example_value
-        httpStatusCode:
-          type: integer
-          description: HTTP status code.
-          example: 10
-    MetricDataPoint:
-      type: object
-      description: A single metric data point.
-      properties:
-        metricColumn:
-          type: string
-          description: Name of the metric column.
-          example: example_value
-        value:
-          type: number
-          description: Numeric metric value.
-          example: 42.5
-        key:
-          type: string
-          description: Key value identifying the metric row.
-          example: example_value
-        collectionTime:
-          type: string
-          format: date-time
-          description: Timestamp when the metric was collected.
-          example: '2026-01-15T10:30:00Z'
-    MetricGroupCollection:
-      type: object
-      description: Collection of metric groups.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetricGroup'
           example: []
     MetricTimeSeriesCollection:
       type: object
@@ -374,6 +339,65 @@ components:
               value:
                 type: number
           example: []
+    Error:
+      type: object
+      description: Error response returned by the API.
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+        details:
+          type: string
+          description: Additional details about the error.
+          example: example_value
+        httpStatusCode:
+          type: integer
+          description: HTTP status code.
+          example: 10
+    MetricGroupCollection:
+      type: object
+      description: Collection of metric groups.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricGroup'
+          example: []
+    MetricDataPoint:
+      type: object
+      description: A single metric data point.
+      properties:
+        metricColumn:
+          type: string
+          description: Name of the metric column.
+          example: example_value
+        value:
+          type: number
+          description: Numeric metric value.
+          example: 42.5
+        key:
+          type: string
+          description: Key value identifying the metric row.
+          example: example_value
+        collectionTime:
+          type: string
+          format: date-time
+          description: Timestamp when the metric was collected.
+          example: '2026-01-15T10:30:00Z'
+    MetricDataCollection:
+      type: object
+      description: Collection of metric data points.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricDataPoint'
+          example: []
     MetricColumn:
       type: object
       description: A single metric column within a metric group.
@@ -401,30 +425,6 @@ components:
           type: string
           description: Unit of measurement for the metric.
           example: example_value
-  parameters:
-    limitQuery:
-      name: limit
-      in: query
-      description: Maximum number of items to return per page.
-      schema:
-        type: integer
-        default: 25
-        minimum: 1
-        maximum: 1000
-    metricGroupNamePath:
-      name: metricGroupName
-      in: path
-      required: true
-      description: Name of the metric group.
-      schema:
-        type: string
-    targetIdPath:
-      name: targetId
-      in: path
-      required: true
-      description: Unique identifier of the target.
-      schema:
-        type: string
   securitySchemes:
     basicAuth:
       type: http

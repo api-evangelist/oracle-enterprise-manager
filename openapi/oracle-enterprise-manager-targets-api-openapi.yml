@@ -369,6 +369,18 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: An unexpected error occurred on the server.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Conflict:
       description: The request conflicts with the current state of the resource.
       content:
@@ -381,73 +393,91 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    InternalServerError:
-      description: An unexpected error occurred on the server.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Authentication failed. Provide valid Enterprise Manager credentials.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    targetNameQuery:
-      name: targetName
-      in: query
-      description: Filter targets by name. Supports partial matching.
-      schema:
-        type: string
-    lifecycleStatusQuery:
-      name: lifecycleStatus
-      in: query
-      description: Filter targets by lifecycle status.
-      schema:
-        type: string
-        enum:
-        - MONITORED
-        - BLACKOUT
-        - PENDING
-        - DELETED
-    offsetQuery:
-      name: offset
-      in: query
-      description: Number of items to skip for pagination.
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    targetIdPath:
-      name: targetId
-      in: path
-      required: true
-      description: Unique identifier of the target.
-      schema:
-        type: string
-    targetTypeQuery:
-      name: targetType
-      in: query
-      description: Filter targets by type (e.g., oracle_database, host, weblogic_j2eeserver).
-      schema:
-        type: string
-    limitQuery:
-      name: limit
-      in: query
-      description: Maximum number of items to return per page.
-      schema:
-        type: integer
-        default: 25
-        minimum: 1
-        maximum: 1000
   schemas:
+    TargetUpdateRequest:
+      type: object
+      description: Request body for updating an existing target.
+      properties:
+        properties:
+          type: object
+          description: Properties to update on the target.
+          additionalProperties:
+            type: string
+          example: example_value
+    Error:
+      type: object
+      description: Error response returned by the API.
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+        details:
+          type: string
+          description: Additional details about the error.
+          example: example_value
+        httpStatusCode:
+          type: integer
+          description: HTTP status code.
+          example: 10
+    TargetCollection:
+      type: object
+      description: Paginated collection of targets.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Target'
+          example: []
+        totalCount:
+          type: integer
+          description: Total number of targets matching the query.
+          example: 10
+        limit:
+          type: integer
+          description: Maximum items per page.
+          example: 10
+        offset:
+          type: integer
+          description: Current offset in the result set.
+          example: 10
+        hasMore:
+          type: boolean
+          description: Whether more results are available.
+          example: true
+    BulkPropertyUpdateRequest:
+      type: object
+      description: Request body for bulk property updates.
+      properties:
+        properties:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+          example: []
+    TargetPropertyCollection:
+      type: object
+      description: Collection of target properties.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetProperty'
+          example: []
     Target:
       type: object
       description: Represents a monitored target in Enterprise Manager. A target is any managed entity such as a database, host, middleware instance, or application.
@@ -548,40 +578,6 @@ components:
           format: uri
           description: Canonical URI for this target resource.
           example: https://www.example.com
-    TargetCollection:
-      type: object
-      description: Paginated collection of targets.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Target'
-          example: []
-        totalCount:
-          type: integer
-          description: Total number of targets matching the query.
-          example: 10
-        limit:
-          type: integer
-          description: Maximum items per page.
-          example: 10
-        offset:
-          type: integer
-          description: Current offset in the result set.
-          example: 10
-        hasMore:
-          type: boolean
-          description: Whether more results are available.
-          example: true
-    TargetPropertyCollection:
-      type: object
-      description: Collection of target properties.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TargetProperty'
-          example: []
     TargetProperty:
       type: object
       description: A configuration property of a target.
@@ -638,50 +634,54 @@ components:
               type: string
               description: Type of credential.
           example: example_value
-    Error:
-      type: object
-      description: Error response returned by the API.
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code.
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message.
-          example: example_value
-        details:
-          type: string
-          description: Additional details about the error.
-          example: example_value
-        httpStatusCode:
-          type: integer
-          description: HTTP status code.
-          example: 10
-    BulkPropertyUpdateRequest:
-      type: object
-      description: Request body for bulk property updates.
-      properties:
-        properties:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              value:
-                type: string
-          example: []
-    TargetUpdateRequest:
-      type: object
-      description: Request body for updating an existing target.
-      properties:
-        properties:
-          type: object
-          description: Properties to update on the target.
-          additionalProperties:
-            type: string
-          example: example_value
+  parameters:
+    targetIdPath:
+      name: targetId
+      in: path
+      required: true
+      description: Unique identifier of the target.
+      schema:
+        type: string
+    offsetQuery:
+      name: offset
+      in: query
+      description: Number of items to skip for pagination.
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    targetNameQuery:
+      name: targetName
+      in: query
+      description: Filter targets by name. Supports partial matching.
+      schema:
+        type: string
+    limitQuery:
+      name: limit
+      in: query
+      description: Maximum number of items to return per page.
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 1000
+    targetTypeQuery:
+      name: targetType
+      in: query
+      description: Filter targets by type (e.g., oracle_database, host, weblogic_j2eeserver).
+      schema:
+        type: string
+    lifecycleStatusQuery:
+      name: lifecycleStatus
+      in: query
+      description: Filter targets by lifecycle status.
+      schema:
+        type: string
+        enum:
+        - MONITORED
+        - BLACKOUT
+        - PENDING
+        - DELETED
   securitySchemes:
     basicAuth:
       type: http

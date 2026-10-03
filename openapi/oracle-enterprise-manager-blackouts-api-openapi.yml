@@ -560,6 +560,18 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: An unexpected error occurred on the server.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Conflict:
       description: The request conflicts with the current state of the resource.
       content:
@@ -572,25 +584,33 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    InternalServerError:
-      description: An unexpected error occurred on the server.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Authentication failed. Provide valid Enterprise Manager credentials.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      description: Error response returned by the API.
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+        details:
+          type: string
+          description: Additional details about the error.
+          example: example_value
+        httpStatusCode:
+          type: integer
+          description: HTTP status code.
+          example: 10
     BlackoutSchedule:
       type: object
       description: Schedule definition for a blackout.
@@ -641,6 +661,74 @@ components:
             - FRIDAY
             - SATURDAY
           example: []
+    BlackoutTargetCollection:
+      type: object
+      description: Collection of targets in a blackout.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/BlackoutTarget'
+          example: []
+    BlackoutReason:
+      type: object
+      description: A predefined reason for blackouts.
+      properties:
+        reasonId:
+          type: string
+          description: Unique identifier for the reason.
+          example: '500123'
+        reason:
+          type: string
+          description: Text of the blackout reason.
+          example: example_value
+    BlackoutCollection:
+      type: object
+      description: Paginated collection of blackouts.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Blackout'
+          example: []
+        totalCount:
+          type: integer
+          example: 10
+        limit:
+          type: integer
+          example: 10
+        offset:
+          type: integer
+          example: 10
+        hasMore:
+          type: boolean
+          example: true
+    BlackoutUpdateRequest:
+      type: object
+      description: Request body for updating a blackout.
+      properties:
+        description:
+          type: string
+          example: A sample description.
+        reason:
+          type: string
+          example: example_value
+        schedule:
+          $ref: '#/components/schemas/BlackoutSchedule'
+        targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/BlackoutTarget'
+          example: []
+    BlackoutReasonCollection:
+      type: object
+      description: Collection of blackout reasons.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/BlackoutReason'
+          example: []
     BlackoutCreateRequest:
       type: object
       description: Request body for creating a new blackout.
@@ -668,111 +756,6 @@ components:
           description: List of targets to include in the blackout.
           items:
             $ref: '#/components/schemas/BlackoutTarget'
-          example: []
-    BlackoutTargetCollection:
-      type: object
-      description: Collection of targets in a blackout.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/BlackoutTarget'
-          example: []
-    BlackoutDashboard:
-      type: object
-      description: Summary statistics for blackouts.
-      properties:
-        totalBlackouts:
-          type: integer
-          description: Total number of blackouts.
-          example: 10
-        activeBlackouts:
-          type: integer
-          description: Number of currently active blackouts.
-          example: 10
-        scheduledBlackouts:
-          type: integer
-          description: Number of scheduled future blackouts.
-          example: 10
-        endedBlackouts:
-          type: integer
-          description: Number of ended blackouts.
-          example: 10
-        targetsInBlackout:
-          type: integer
-          description: Total number of targets currently in blackout.
-          example: 10
-    BlackoutCollection:
-      type: object
-      description: Paginated collection of blackouts.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Blackout'
-          example: []
-        totalCount:
-          type: integer
-          example: 10
-        limit:
-          type: integer
-          example: 10
-        offset:
-          type: integer
-          example: 10
-        hasMore:
-          type: boolean
-          example: true
-    BlackoutReason:
-      type: object
-      description: A predefined reason for blackouts.
-      properties:
-        reasonId:
-          type: string
-          description: Unique identifier for the reason.
-          example: '500123'
-        reason:
-          type: string
-          description: Text of the blackout reason.
-          example: example_value
-    Error:
-      type: object
-      description: Error response returned by the API.
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code.
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message.
-          example: example_value
-        details:
-          type: string
-          description: Additional details about the error.
-          example: example_value
-        httpStatusCode:
-          type: integer
-          description: HTTP status code.
-          example: 10
-    BlackoutReasonCreateRequest:
-      type: object
-      description: Request body for creating a blackout reason.
-      required:
-      - reason
-      properties:
-        reason:
-          type: string
-          description: Text of the blackout reason.
-          example: example_value
-    BlackoutReasonCollection:
-      type: object
-      description: Collection of blackout reasons.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/BlackoutReason'
           example: []
     Blackout:
       type: object
@@ -831,6 +814,16 @@ components:
           format: uri
           description: Canonical URI for this blackout resource.
           example: https://www.example.com
+    BlackoutReasonCreateRequest:
+      type: object
+      description: Request body for creating a blackout reason.
+      required:
+      - reason
+      properties:
+        reason:
+          type: string
+          description: Text of the blackout reason.
+          example: example_value
     BlackoutTarget:
       type: object
       description: A target included in a blackout.
@@ -847,23 +840,30 @@ components:
           type: boolean
           description: Whether to include member targets (for composite targets and groups).
           example: true
-    BlackoutUpdateRequest:
+    BlackoutDashboard:
       type: object
-      description: Request body for updating a blackout.
+      description: Summary statistics for blackouts.
       properties:
-        description:
-          type: string
-          example: A sample description.
-        reason:
-          type: string
-          example: example_value
-        schedule:
-          $ref: '#/components/schemas/BlackoutSchedule'
-        targets:
-          type: array
-          items:
-            $ref: '#/components/schemas/BlackoutTarget'
-          example: []
+        totalBlackouts:
+          type: integer
+          description: Total number of blackouts.
+          example: 10
+        activeBlackouts:
+          type: integer
+          description: Number of currently active blackouts.
+          example: 10
+        scheduledBlackouts:
+          type: integer
+          description: Number of scheduled future blackouts.
+          example: 10
+        endedBlackouts:
+          type: integer
+          description: Number of ended blackouts.
+          example: 10
+        targetsInBlackout:
+          type: integer
+          description: Total number of targets currently in blackout.
+          example: 10
   parameters:
     offsetQuery:
       name: offset
