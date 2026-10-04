@@ -283,41 +283,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InternalServerError:
-      description: An unexpected error occurred on the server.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was invalid. Check the request body and parameters for errors.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Provide valid Enterprise Manager credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    GlobalTargetPropertyCollection:
-      type: object
-      description: Collection of global target properties.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/GlobalTargetProperty'
-          example: []
     Error:
       type: object
       description: Error response returned by the API.
@@ -338,6 +304,38 @@ components:
           type: integer
           description: HTTP status code.
           example: 10
+    GlobalTargetProperty:
+      type: object
+      description: A global property definition for classifying targets.
+      properties:
+        globalTargetPropertyId:
+          type: string
+          description: Unique identifier for the property.
+          example: '500123'
+        propertyName:
+          type: string
+          description: Name of the property.
+          example: example_value
+        propertyDisplayName:
+          type: string
+          description: Human-readable display name.
+          example: example_value
+        description:
+          type: string
+          description: Description of the property.
+          example: A sample description.
+        propertyType:
+          type: string
+          description: Data type of the property.
+          enum:
+          - STRING
+          - NUMBER
+          - BOOLEAN
+          example: STRING
+        hasValidValues:
+          type: boolean
+          description: Whether the property has a constrained value set.
+          example: true
     GlobalTargetPropertyCreateRequest:
       type: object
       description: Request body for creating a global target property.
@@ -380,38 +378,40 @@ components:
           items:
             type: string
           example: []
-    GlobalTargetProperty:
+    GlobalTargetPropertyCollection:
       type: object
-      description: A global property definition for classifying targets.
+      description: Collection of global target properties.
       properties:
-        globalTargetPropertyId:
-          type: string
-          description: Unique identifier for the property.
-          example: '500123'
-        propertyName:
-          type: string
-          description: Name of the property.
-          example: example_value
-        propertyDisplayName:
-          type: string
-          description: Human-readable display name.
-          example: example_value
-        description:
-          type: string
-          description: Description of the property.
-          example: A sample description.
-        propertyType:
-          type: string
-          description: Data type of the property.
-          enum:
-          - STRING
-          - NUMBER
-          - BOOLEAN
-          example: STRING
-        hasValidValues:
-          type: boolean
-          description: Whether the property has a constrained value set.
-          example: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalTargetProperty'
+          example: []
+  responses:
+    BadRequest:
+      description: The request was invalid. Check the request body and parameters for errors.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Provide valid Enterprise Manager credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: An unexpected error occurred on the server.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

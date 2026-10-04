@@ -368,37 +368,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InternalServerError:
-      description: An unexpected error occurred on the server.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Conflict:
-      description: The request conflicts with the current state of the resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was invalid. Check the request body and parameters for errors.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Provide valid Enterprise Manager credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     TargetUpdateRequest:
       type: object
@@ -468,15 +437,6 @@ components:
                 type: string
               value:
                 type: string
-          example: []
-    TargetPropertyCollection:
-      type: object
-      description: Collection of target properties.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TargetProperty'
           example: []
     Target:
       type: object
@@ -578,22 +538,6 @@ components:
           format: uri
           description: Canonical URI for this target resource.
           example: https://www.example.com
-    TargetProperty:
-      type: object
-      description: A configuration property of a target.
-      properties:
-        name:
-          type: string
-          description: Property name.
-          example: Example Title
-        value:
-          type: string
-          description: Property value.
-          example: example_value
-        isReadOnly:
-          type: boolean
-          description: Whether the property is read-only.
-          example: true
     TargetCreateRequest:
       type: object
       description: Request body for creating a new target.
@@ -634,14 +578,63 @@ components:
               type: string
               description: Type of credential.
           example: example_value
+    TargetPropertyCollection:
+      type: object
+      description: Collection of target properties.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetProperty'
+          example: []
+    TargetProperty:
+      type: object
+      description: A configuration property of a target.
+      properties:
+        name:
+          type: string
+          description: Property name.
+          example: Example Title
+        value:
+          type: string
+          description: Property value.
+          example: example_value
+        isReadOnly:
+          type: boolean
+          description: Whether the property is read-only.
+          example: true
+  responses:
+    BadRequest:
+      description: The request was invalid. Check the request body and parameters for errors.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: An unexpected error occurred on the server.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Provide valid Enterprise Manager credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: The request conflicts with the current state of the resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    targetIdPath:
-      name: targetId
-      in: path
-      required: true
-      description: Unique identifier of the target.
-      schema:
-        type: string
     offsetQuery:
       name: offset
       in: query
@@ -650,10 +643,28 @@ components:
         type: integer
         default: 0
         minimum: 0
+    lifecycleStatusQuery:
+      name: lifecycleStatus
+      in: query
+      description: Filter targets by lifecycle status.
+      schema:
+        type: string
+        enum:
+        - MONITORED
+        - BLACKOUT
+        - PENDING
+        - DELETED
     targetNameQuery:
       name: targetName
       in: query
       description: Filter targets by name. Supports partial matching.
+      schema:
+        type: string
+    targetIdPath:
+      name: targetId
+      in: path
+      required: true
+      description: Unique identifier of the target.
       schema:
         type: string
     limitQuery:
@@ -671,17 +682,6 @@ components:
       description: Filter targets by type (e.g., oracle_database, host, weblogic_j2eeserver).
       schema:
         type: string
-    lifecycleStatusQuery:
-      name: lifecycleStatus
-      in: query
-      description: Filter targets by lifecycle status.
-      schema:
-        type: string
-        enum:
-        - MONITORED
-        - BLACKOUT
-        - PENDING
-        - DELETED
   securitySchemes:
     basicAuth:
       type: http
