@@ -211,3 +211,66 @@ plans:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  - subscription
+  units:
+  - compute
+  - negotiated
+  - object
+  - seat
+  plans:
+  - name: Enterprise Manager Cloud Control (base)
+    access: freemium
+    model: subscription
+    model_how: derived
+    units:
+    - object
+    periods:
+    - per-use
+  - name: Diagnostics Pack
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - compute
+    - seat
+    periods:
+    - year
+  - name: Tuning Pack
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - compute
+    - seat
+    periods:
+    - year
+  - name: Database Lifecycle Management Pack
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - compute
+    - seat
+    periods:
+    - year
+  - name: Other Management Packs
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - negotiated
+    periods:
+    - year
+  - name: OCI Observability and Management (alternative)
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - negotiated
+    periods:
+    - per-use
