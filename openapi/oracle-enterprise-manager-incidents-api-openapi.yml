@@ -411,27 +411,57 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was invalid. Check the request body and parameters for errors.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: An unexpected error occurred on the server.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Provide valid Enterprise Manager credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    incidentIdPath:
+      name: incidentId
+      in: path
+      required: true
+      description: Unique identifier of the incident.
+      schema:
+        type: string
+    offsetQuery:
+      name: offset
+      in: query
+      description: Number of items to skip for pagination.
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    limitQuery:
+      name: limit
+      in: query
+      description: Maximum number of items to return per page.
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 1000
   schemas:
-    Error:
-      type: object
-      description: Error response returned by the API.
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code.
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message.
-          example: example_value
-        details:
-          type: string
-          description: Additional details about the error.
-          example: example_value
-        httpStatusCode:
-          type: integer
-          description: HTTP status code.
-          example: 10
     Incident:
       type: object
       description: Represents an incident in Enterprise Manager. Incidents are actionable issues detected by monitoring rules, correlated from one or more events.
@@ -606,6 +636,15 @@ components:
           format: uri
           description: Canonical URI for this event resource.
           example: https://www.example.com
+    EventCollection:
+      type: object
+      description: Collection of events.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+          example: []
     AnnotationCollection:
       type: object
       description: Collection of annotations.
@@ -615,28 +654,26 @@ components:
           items:
             $ref: '#/components/schemas/Annotation'
           example: []
-    IncidentCollection:
+    Error:
       type: object
-      description: Paginated collection of incidents.
+      description: Error response returned by the API.
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Incident'
-          example: []
-        totalCount:
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+        details:
+          type: string
+          description: Additional details about the error.
+          example: example_value
+        httpStatusCode:
           type: integer
-          description: Total number of incidents matching the query.
+          description: HTTP status code.
           example: 10
-        limit:
-          type: integer
-          example: 10
-        offset:
-          type: integer
-          example: 10
-        hasMore:
-          type: boolean
-          example: true
     Annotation:
       type: object
       description: A comment or note attached to an incident, providing investigation details or remediation notes.
@@ -662,65 +699,28 @@ components:
           format: date-time
           description: Timestamp when the annotation was created.
           example: '2026-01-15T10:30:00Z'
-    EventCollection:
+    IncidentCollection:
       type: object
-      description: Collection of events.
+      description: Paginated collection of incidents.
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/Event'
+            $ref: '#/components/schemas/Incident'
           example: []
-  parameters:
-    incidentIdPath:
-      name: incidentId
-      in: path
-      required: true
-      description: Unique identifier of the incident.
-      schema:
-        type: string
-    limitQuery:
-      name: limit
-      in: query
-      description: Maximum number of items to return per page.
-      schema:
-        type: integer
-        default: 25
-        minimum: 1
-        maximum: 1000
-    offsetQuery:
-      name: offset
-      in: query
-      description: Number of items to skip for pagination.
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-  responses:
-    BadRequest:
-      description: The request was invalid. Check the request body and parameters for errors.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Provide valid Enterprise Manager credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InternalServerError:
-      description: An unexpected error occurred on the server.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        totalCount:
+          type: integer
+          description: Total number of incidents matching the query.
+          example: 10
+        limit:
+          type: integer
+          example: 10
+        offset:
+          type: integer
+          example: 10
+        hasMore:
+          type: boolean
+          example: true
   securitySchemes:
     basicAuth:
       type: http

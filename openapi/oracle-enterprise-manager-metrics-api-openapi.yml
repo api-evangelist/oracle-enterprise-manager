@@ -219,7 +219,106 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed. Provide valid Enterprise Manager credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was invalid. Check the request body and parameters for errors.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: An unexpected error occurred on the server.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    MetricDataCollection:
+      type: object
+      description: Collection of metric data points.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricDataPoint'
+          example: []
+    MetricGroup:
+      type: object
+      description: Defines a group of related metrics collected for a target. Each metric group has a name, collection frequency, and a set of metric columns.
+      properties:
+        metricGroupName:
+          type: string
+          description: Unique name of the metric group.
+          example: example_value
+        displayName:
+          type: string
+          description: Human-readable display name.
+          example: example_value
+        description:
+          type: string
+          description: Description of what this metric group measures.
+          example: A sample description.
+        collectionFrequency:
+          type: integer
+          description: Collection interval in seconds.
+          example: 10
+        metricColumns:
+          type: array
+          description: List of metric columns in this group.
+          items:
+            $ref: '#/components/schemas/MetricColumn'
+          example: []
+    MetricGroupCollection:
+      type: object
+      description: Collection of metric groups.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricGroup'
+          example: []
+    MetricTimeSeriesCollection:
+      type: object
+      description: Collection of metric time series.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricTimeSeries'
+          example: []
+    MetricDataPoint:
+      type: object
+      description: A single metric data point.
+      properties:
+        metricColumn:
+          type: string
+          description: Name of the metric column.
+          example: example_value
+        value:
+          type: number
+          description: Numeric metric value.
+          example: 42.5
+        key:
+          type: string
+          description: Key value identifying the metric row.
+          example: example_value
+        collectionTime:
+          type: string
+          format: date-time
+          description: Timestamp when the metric was collected.
+          example: '2026-01-15T10:30:00Z'
     Error:
       type: object
       description: Error response returned by the API.
@@ -267,41 +366,6 @@ components:
           type: string
           description: Unit of measurement for the metric.
           example: example_value
-    MetricGroup:
-      type: object
-      description: Defines a group of related metrics collected for a target. Each metric group has a name, collection frequency, and a set of metric columns.
-      properties:
-        metricGroupName:
-          type: string
-          description: Unique name of the metric group.
-          example: example_value
-        displayName:
-          type: string
-          description: Human-readable display name.
-          example: example_value
-        description:
-          type: string
-          description: Description of what this metric group measures.
-          example: A sample description.
-        collectionFrequency:
-          type: integer
-          description: Collection interval in seconds.
-          example: 10
-        metricColumns:
-          type: array
-          description: List of metric columns in this group.
-          items:
-            $ref: '#/components/schemas/MetricColumn'
-          example: []
-    MetricTimeSeriesCollection:
-      type: object
-      description: Collection of metric time series.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetricTimeSeries'
-          example: []
     MetricTimeSeries:
       type: object
       description: Time series data for a single metric.
@@ -337,46 +401,16 @@ components:
               value:
                 type: number
           example: []
-    MetricDataPoint:
-      type: object
-      description: A single metric data point.
-      properties:
-        metricColumn:
-          type: string
-          description: Name of the metric column.
-          example: example_value
-        value:
-          type: number
-          description: Numeric metric value.
-          example: 42.5
-        key:
-          type: string
-          description: Key value identifying the metric row.
-          example: example_value
-        collectionTime:
-          type: string
-          format: date-time
-          description: Timestamp when the metric was collected.
-          example: '2026-01-15T10:30:00Z'
-    MetricDataCollection:
-      type: object
-      description: Collection of metric data points.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetricDataPoint'
-          example: []
-    MetricGroupCollection:
-      type: object
-      description: Collection of metric groups.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetricGroup'
-          example: []
   parameters:
+    limitQuery:
+      name: limit
+      in: query
+      description: Maximum number of items to return per page.
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 1000
     metricGroupNamePath:
       name: metricGroupName
       in: path
@@ -391,40 +425,6 @@ components:
       description: Unique identifier of the target.
       schema:
         type: string
-    limitQuery:
-      name: limit
-      in: query
-      description: Maximum number of items to return per page.
-      schema:
-        type: integer
-        default: 25
-        minimum: 1
-        maximum: 1000
-  responses:
-    BadRequest:
-      description: The request was invalid. Check the request body and parameters for errors.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Provide valid Enterprise Manager credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InternalServerError:
-      description: An unexpected error occurred on the server.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

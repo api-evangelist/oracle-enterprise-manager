@@ -283,7 +283,56 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was invalid. Check the request body and parameters for errors.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: An unexpected error occurred on the server.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. Provide valid Enterprise Manager credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    GlobalTargetPropertyCollection:
+      type: object
+      description: Collection of global target properties.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalTargetProperty'
+          example: []
+    GlobalTargetPropertyUpdateRequest:
+      type: object
+      description: Request body for updating a global target property.
+      properties:
+        propertyDisplayName:
+          type: string
+          example: example_value
+        description:
+          type: string
+          example: A sample description.
+        validValues:
+          type: array
+          items:
+            type: string
+          example: []
     Error:
       type: object
       description: Error response returned by the API.
@@ -304,6 +353,33 @@ components:
           type: integer
           description: HTTP status code.
           example: 10
+    GlobalTargetPropertyCreateRequest:
+      type: object
+      description: Request body for creating a global target property.
+      required:
+      - propertyName
+      properties:
+        propertyName:
+          type: string
+          example: example_value
+        propertyDisplayName:
+          type: string
+          example: example_value
+        description:
+          type: string
+          example: A sample description.
+        propertyType:
+          type: string
+          enum:
+          - STRING
+          - NUMBER
+          - BOOLEAN
+          example: STRING
+        validValues:
+          type: array
+          items:
+            type: string
+          example: []
     GlobalTargetProperty:
       type: object
       description: A global property definition for classifying targets.
@@ -336,82 +412,6 @@ components:
           type: boolean
           description: Whether the property has a constrained value set.
           example: true
-    GlobalTargetPropertyCreateRequest:
-      type: object
-      description: Request body for creating a global target property.
-      required:
-      - propertyName
-      properties:
-        propertyName:
-          type: string
-          example: example_value
-        propertyDisplayName:
-          type: string
-          example: example_value
-        description:
-          type: string
-          example: A sample description.
-        propertyType:
-          type: string
-          enum:
-          - STRING
-          - NUMBER
-          - BOOLEAN
-          example: STRING
-        validValues:
-          type: array
-          items:
-            type: string
-          example: []
-    GlobalTargetPropertyUpdateRequest:
-      type: object
-      description: Request body for updating a global target property.
-      properties:
-        propertyDisplayName:
-          type: string
-          example: example_value
-        description:
-          type: string
-          example: A sample description.
-        validValues:
-          type: array
-          items:
-            type: string
-          example: []
-    GlobalTargetPropertyCollection:
-      type: object
-      description: Collection of global target properties.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/GlobalTargetProperty'
-          example: []
-  responses:
-    BadRequest:
-      description: The request was invalid. Check the request body and parameters for errors.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. Provide valid Enterprise Manager credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InternalServerError:
-      description: An unexpected error occurred on the server.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
